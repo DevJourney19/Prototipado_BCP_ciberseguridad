@@ -1,0 +1,427 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: "Libre Franklin", sans-serif;
+}
+
+nav {
+    display: flex;
+    background-color: #011844;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #032f80;
+    padding: 20px;
+}
+
+nav>img {
+    width: 180px
+}
+
+nav>i {
+    color: white;
+}
+
+nav>i:hover {
+    cursor: pointer;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---- Activación ----*/
+/*Notificación*/
+.notificacion {
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 20px;
+    position: absolute;
+    font-size: 0.8em;
+    width: 70%;
+    top: 0px;
+    max-width: 500px;
+}
+
+.bcp_alerta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bcp_alerta>img {
+    width: 80px;
+}
+
+.notificacion>span {
+    color: #032f80;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+.bcp_alerta>div>span {
+    color: #ae0c0c;
+}
+
+.notificacion>h3 {
+    color: #ff7900;
+    font-weight: 700;
+}
+
+
+/*primer cuadro*/
+.primer_cuadro {
+    margin: 20px auto;
+    width: 300px;
+}
+
+.primer_cuadro>p {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 20px;
+    background: lightgray;
+    border-radius: 14px;
+    padding: 10px;
+}
+
+.primer_cuadro li {
+    font-weight: 600;
+    color: #011844;
+}
+
+/*segundo cuadro*/
+.plan_seguro {
+    background: #ffffff;
+    display: flex;
+    padding: 5px 30px 5px 10px;
+    border-radius: 10px;
+    width: fit-content;
+    box-shadow: 2px 2px 5px;
+    margin-bottom: 20px;
+}
+
+.plan_seguro h4 {
+    color: #ff7900;
+}
+
+.plan_seguro>img {
+    width: 50px;
+    margin: 0px 10px;
+}
+
+.segundo_cuadro>form a {
+    text-decoration: none;
+}
+
+.segundo_cuadro {
+    margin: 30px auto;
+    width: 350px;
+    text-align: center;
+}
+
+.segundo_cuadro>p {
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.segundo_cuadro input {
+    width: 100%;
+    font-size: 14px;
+    border: 2px solid lightgray;
+    border-radius: 4px;
+    padding: 4px;
+    margin: 3px 0px;
+}
+
+.segundo_cuadro .checkbox {
+    width: 10%;
+}
+
+.segundo_cuadro .button {
+    padding: 6px 30px;
+    background: #ff7900;
+    color: #ffff;
+    border: transparent;
+    width: 150px;
+    border-radius: 20px;
+}
+
+.segundo_cuadro .button:hover {
+    cursor: pointer;
+}
+
+/* --- Principal ---*/
+.cuadro_superior {
+    background-color: #011844;
+    padding: 40px 30px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.derecha {
+    padding-top: 30px;
+    color: white;
+    font-weight: 600;
+}
+
+.derecha>span {
+    display: block;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.izquierda .hola {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.6em;
+}
+
+.izquierda span {
+    color: #ff7900;
+    font-weight: 600;
+    font-size: 1.6em;
+}
+
+.circulo {
+    border: 2px solid black;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background: lightgray;
+    margin-top: 10px;
+}
+
+.cuenta_1 {
+    background-color: #ffffff;
+    color: #011844;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+}
+
+.cuenta_2 {
+    background-color: #ff7900;
+    padding: 16px;
+    width: 80%;
+    margin: auto;
+    font-size: 0.8em;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 0px 0px 10px 10px;
+}
+
+/*Segunda seccion*/
+.fila {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.fila div {
+    margin: auto;
+    text-align: center;
+}
+
+/*Circulos anaranjados*/
+.circulo_naranja {
+    background-color: #ff7900;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+/*Donaciones y Seguridad Mejorada*/
+.tarjeta {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.donaciones {
+    display: flex;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 20px 0px 20px;
+    align-items: center;
+}
+
+.donaciones>div>span {
+    font-weight: 600;
+    color: #032f80;
+}
+
+.seguridad_mejorada {
+    display: flex;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px 20px 20px 20px;
+    align-items: center;
+
+}
+
+.seguridad_mejorada>div>span {
+    font-weight: 600;
+    color: #032f80;
+}
+
+/*Dashboard*/
+.h1_dashboard {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ffffff;
+    padding: 0px 30px 30px 30px;
+}
+
+.main_dashboard {
+    padding: 20px;
+}
+
+.body_dashboard {
+    background: linear-gradient(#001743, #00236f, #001743);
+    color: #ffffff;
+}
+
+.main_dashboard>p {
+    margin-bottom: 20px;
+}
+
+canvas {
+    background-color: transparent;
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px;
+}
+
+.col {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.col>h5 {
+    margin-bottom: 10px;
+    color: gray;
+    font-weight: 500;
+}
+
+.fila_gr {
+    display: grid;
+}
+
+.fila_gr .col {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    background: #02173f;
+    padding: 20px 30px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.fila_gr .col > div {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+}
+
+@media(min-width: 576px) {
+    .fila_gr {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .flex {
+        flex-direction: row;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    .segundo_cuadro input {
+        width: 350px;
+    }
+
+    .fila {
+        margin: 30px auto;
+        width: 75%;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .tarjeta {
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 30px;
+    }
+
+    .seguridad_mejorada {
+        margin: 20px;
+    }
+
+    .cuadro_superior {
+        gap: 30%;
+    }
+
+    .cuentas {
+        display: flex;
+    }
+
+    .cuenta_1 {
+        padding: 25px 10px 25px 10px;
+    }
+
+    .cuenta_2 {
+        width: 130px;
+        border-radius: 0px 10px 10px 0px;
+    }
+
+    .notificacion>span {
+        font-size: 1.1em;
+    }
+}
+
+@media(min-width: 992px) {}
+
+@media (min-width: 1200px) {
+    .fila {
+        width: 50%;
+    }
+
+    nav {
+        padding: 10px 80px;
+    }
+    .main_dashboard {
+        padding: 20px 60px;
+    }
+}
+
+@media(min-width: 1400px) {
+    canvas {
+        width: 70%;
+    }
+    #grafico_2{
+        
+        width: 90%;
+        padding: 20px;
+    }
+}

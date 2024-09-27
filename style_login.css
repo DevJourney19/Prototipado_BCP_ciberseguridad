@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: "Libre Franklin", sans-serif;
+
+}
+
+body {
+    height: 100vh;
+    background: linear-gradient(#00102e, #002d8e, #00102e);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.flex {
+    display: flex;
+
+    flex-direction: column;
+}
+
+body>img {
+    width: 150px;
+    padding: 10px 20px;
+}
+
+.flex>img {
+    display: none;
+    background-image: none;
+}
+
+.iniciar_sesion {
+    text-align: center;
+}
+
+.flex h1 {
+    color: #ffff;
+    margin-bottom: 20px;
+}
+
+.iniciar_sesion table {
+    display: flex;
+    justify-content: center;
+}
+
+.iniciar_sesion input {
+    margin: 5px 0px;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 10px;
+    background: transparent;
+    border: 2px solid #ffff;
+    color: white;
+    width: 280px;
+}
+
+.iniciar_sesion input::placeholder {
+    color: #ffff;
+}
+
+.iniciar_sesion .button {
+    padding: 10px 30px;
+    background: #ff7900;
+    color: #ffff;
+    border: transparent;
+    width: 180px;
+}
+
+.iniciar_sesion .button:hover {
+    cursor: pointer;
+}
+
+
+@media (min-width: 992px) {
+    .flex {
+        flex-direction: row;
+        justify-content: space-evenly;
+        padding: 20px;
+    }
+
+    .iniciar_sesion {
+        align-content: center;
+        padding: 20px;
+    }
+
+    .flex .img_trabajador {
+        width: 50%;
+        display: block;
+        mask-image: linear-gradient(black 80%, transparent);
+       
+        position:relative;
+        filter: contrast(1.2);
+    }
+    
+
+    table {
+        width: 100%;
+    }
+
+    .iniciar_sesion input {
+        width: 350px;
+    }
+
+    .iniciar_sesion .button {
+        width: 200px;
+    }
+
+    body>img {
+        width: 150px;
+        margin: 20px 90px 0px 90px;
+    }
+}
