@@ -10,7 +10,7 @@
     <header>
         <?php include 'fragmentos/nav.php' ?>
     </header>
-    <div class="notificacion">
+    <!-- <div class="notificacion">
         <div class="bcp_alerta">
             <img src="img/bcp_logo.png" alt="img_bcp.png">
             <div><span class="fa-solid fa-triangle-exclamation fa-xl"></span> Hace 1 min</div>
@@ -18,10 +18,10 @@
 
         <span>Alguien ha intentado ingresar a tu cuenta con las restricciones activadas.</span>
         <h3>¡¡ALERTA!! SE BLOQUEARÁ LAS TRANSACCIONES</h3>
-    </div>
+    </div> -->
     <div class="cuadro_superior">
         <div class="izquierda">
-            <span class="hola">Hola, </span><span>Yoshua</span>
+            <div><span class="hola">Hola, </span><span>Yoshua</span></div>
             <div class="circulo">
             </div>
         </div>
@@ -30,12 +30,12 @@
             <div class="cuentas">
                 <div class="cuenta_1">
                     <span>Cuentas de Ahorro</span>
-                    <span>S/. 120.40</span>
+                    <span class="amount">S/. 120.40</span>
                     <span>**** 2030</span>
                 </div>
                 <div class="cuenta_2">
                     <span>Cuentas de Ahorro</span>
-                    <span>S/. 120.40</span>
+                    <span class="amount">S/. 120.40</span>
                     <span>**** 2030</span>
                 </div>
             </div>
@@ -69,16 +69,16 @@
                     <span>Donaciones</span>
                     <p>Transforma vidas y sé parte del cambio</p>
                 </div>
-                <i class="fa-solid fa-heart fa-2xl"></i>
-                <span class="fa-solid fa-chevron-right fa-xl"></span>
+               <div> <i class="fa-solid fa-heart fa-2xl"></i>
+               <span class="fa-solid fa-chevron-right fa-xl"></span></div>
             </div>
             <div class="seguridad_mejorada">
                 <div>
                     <span>Seguridad Mejorada</span>
                     <p>Introduce nuevas funcionalidades y controla tus datos</p>
                 </div>
-                <i class="fa-solid fa-shield-halved fa-2xl"></i>
-                <span class="fa-solid fa-chevron-right fa-xl"></span>
+                <div><i class="fa-solid fa-shield-halved fa-2xl"></i>
+                <span class="fa-solid fa-chevron-right fa-xl"></span></div>
             </div>
         </div>
     </section>

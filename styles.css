@@ -9,33 +9,40 @@
 
 nav {
     display: flex;
-    background-color: #011844;
+    background-color: #001843;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 20px;
 }
 
 h1 {
     text-align: center;
     color: #032f80;
-    padding: 20px;
+    padding: 10px;
 }
 
 nav>img {
-    width: 180px
+    width: 120px;
 }
 
-nav>i {
+nav a i {
     color: white;
+    cursor: pointer;
 }
 
-nav>i:hover {
-    cursor: pointer;
+main{
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
 }
 
 .flex {
     display: flex;
     flex-direction: column;
+    gap:20px;
 }
 
 /* ---- Activación ----*/
@@ -81,17 +88,18 @@ nav>i:hover {
 
 /*primer cuadro*/
 .primer_cuadro {
+    width: 90%;
     margin: 20px auto;
-    width: 300px;
+    padding: 0 20px;
 }
 
 .primer_cuadro>p {
+    padding: 10px;
     text-align: center;
     font-weight: 600;
-    margin-bottom: 20px;
     background: lightgray;
     border-radius: 14px;
-    padding: 10px;
+    margin-bottom: 20px;
 }
 
 .primer_cuadro li {
@@ -100,9 +108,19 @@ nav>i:hover {
 }
 
 /*segundo cuadro*/
+.segundo_cuadro {
+    margin: 20px auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .plan_seguro {
     background: #ffffff;
     display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 5px 30px 5px 10px;
     border-radius: 10px;
     width: fit-content;
@@ -123,10 +141,15 @@ nav>i:hover {
     text-decoration: none;
 }
 
-.segundo_cuadro {
-    margin: 30px auto;
-    width: 350px;
-    text-align: center;
+.segundo_cuadro .button{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.segundo_cuadro>form  {
+    width: 100%;
 }
 
 .segundo_cuadro>p {
@@ -137,7 +160,6 @@ nav>i:hover {
 
 .segundo_cuadro input {
     width: 100%;
-    font-size: 14px;
     border: 2px solid lightgray;
     border-radius: 4px;
     padding: 4px;
@@ -148,16 +170,13 @@ nav>i:hover {
     width: 10%;
 }
 
-.segundo_cuadro .button {
+.segundo_cuadro button {
     padding: 6px 30px;
     background: #ff7900;
     color: #ffff;
     border: transparent;
     width: 150px;
     border-radius: 20px;
-}
-
-.segundo_cuadro .button:hover {
     cursor: pointer;
 }
 
@@ -166,6 +185,7 @@ nav>i:hover {
     background-color: #011844;
     padding: 40px 30px;
     display: flex;
+    flex-direction: column;
     gap: 20px;
     justify-content: center;
 }
@@ -177,9 +197,17 @@ nav>i:hover {
 }
 
 .derecha>span {
+    font-size: 1.2rem;
     display: block;
     text-align: center;
     margin-bottom: 16px;
+}
+
+.izquierda{
+    display: flex;
+    gap:30px;
+    justify-content: center;
+    align-items: center;
 }
 
 .izquierda .hola {
@@ -200,7 +228,6 @@ nav>i:hover {
     width: 100px;
     height: 100px;
     background: lightgray;
-    margin-top: 10px;
 }
 
 .cuenta_1 {
@@ -209,7 +236,9 @@ nav>i:hover {
     padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
     border-radius: 10px;
 }
 
@@ -221,9 +250,16 @@ nav>i:hover {
     font-size: 0.8em;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 20px;
     padding: 10px 16px;
     border-radius: 0px 0px 10px 10px;
+}
+
+.amount{
+    font-size: 1.5rem;
+    font-weight: 600;
 }
 
 /*Segunda seccion*/
@@ -249,37 +285,30 @@ nav>i:hover {
 
 /*Donaciones y Seguridad Mejorada*/
 .tarjeta {
+    padding: 30px;
     display: flex;
+    justify-content: center;
     flex-direction: column;
-    margin-top: 20px;
+    gap: 20px;
+}
+
+.tarjeta>div  {
+    display: flex;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    padding: 20px;
+    align-items: center;
+    justify-content: space-between;
+    gap:10px;
+}
+
+.tarjeta>div>div:nth-last-child(1) {
+    display: flex;
     gap: 10px;
-}
-
-.donaciones {
-    display: flex;
-    border: 2px solid lightgray;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px 20px 0px 20px;
     align-items: center;
 }
 
-.donaciones>div>span {
-    font-weight: 600;
-    color: #032f80;
-}
-
-.seguridad_mejorada {
-    display: flex;
-    border: 2px solid lightgray;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 10px 20px 20px 20px;
-    align-items: center;
-
-}
-
-.seguridad_mejorada>div>span {
+.donaciones>div>span, .seguridad_mejorada>div>span {
     font-weight: 600;
     color: #032f80;
 }
@@ -345,6 +374,14 @@ canvas {
 }
 
 @media(min-width: 576px) {
+    nav{
+        padding: 30px;
+    }
+
+    .primer_cuadro{
+        width: 70%;
+    }
+
     .fila_gr {
         grid-template-columns: 1fr 1fr;
     }
@@ -352,14 +389,8 @@ canvas {
 
 
 @media (min-width: 768px) {
-    .flex {
-        flex-direction: row;
-        width: 80%;
-        margin: 0 auto;
-    }
-
-    .segundo_cuadro input {
-        width: 350px;
+    .primer_cuadro, .segundo_cuadro, button, input{
+        font-size: 1.3rem;
     }
 
     .fila {
@@ -368,10 +399,21 @@ canvas {
         grid-template-columns: repeat(4, 1fr);
     }
 
+    .izquierda{
+        font-size: 1.5rem;
+        align-items:flex-start;
+        flex-direction: column;
+    }
+
     .tarjeta {
+        align-items: center;
         flex-direction: row;
-        justify-content: center;
-        margin-top: 30px;
+        font-size: 1.2rem;
+    }
+
+    .tarjeta > div {
+        width: 520px;
+        height: 120px;
     }
 
     .seguridad_mejorada {
@@ -379,6 +421,8 @@ canvas {
     }
 
     .cuadro_superior {
+        padding: 40px 60px;
+        flex-direction: row;
         gap: 30%;
     }
 
@@ -386,12 +430,15 @@ canvas {
         display: flex;
     }
 
-    .cuenta_1 {
-        padding: 25px 10px 25px 10px;
+    .cuenta_1{
+        height: 200px;
+        width: 200px;
     }
 
+
     .cuenta_2 {
-        width: 130px;
+        height: 150px;
+        width: 150px;
         border-radius: 0px 10px 10px 0px;
     }
 
@@ -400,15 +447,40 @@ canvas {
     }
 }
 
-@media(min-width: 992px) {}
+@media(min-width: 992px) {
 
-@media (min-width: 1200px) {
-    .fila {
-        width: 50%;
+    main{
+        gap:30px;
     }
 
-    nav {
-        padding: 10px 80px;
+    main h1{
+        font-size: 2.5rem;
+    }
+
+    .flex {
+        flex-direction: row;
+        width: 80%;
+        margin: 0 auto;
+        gap: 5rem;
+    }
+}
+
+@media (min-width: 1200px) {
+
+    nav{
+        padding: 40px 60px;
+    }
+
+    nav>img {
+        width: 200px;
+    }
+
+    .primer_cuadro {
+        width: 40%;
+    }
+
+    .fila {
+        width: 50%;
     }
     .main_dashboard {
         padding: 20px 60px;

@@ -48,7 +48,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script src="js.js"></script>
+    <script src="index.js"></script>
 </body>
 
 </html>
