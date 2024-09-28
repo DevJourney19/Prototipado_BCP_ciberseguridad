@@ -13,7 +13,7 @@
 
     <main class="main_dashboard">
         <h1 class="h1_dashboard">Dashboard</h1>
-        <p>Aquí puede visualizar las métricas del rendimiento dle sistema.</p>
+        <p class="description">Aquí puede visualizar las métricas del rendimiento dle sistema.</p>
         <div class="fila_gr">
             <div class="col">
                 <h3>Nivel de Satisfacción</h3>

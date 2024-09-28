@@ -318,11 +318,10 @@ main{
     font-size: 2.5rem;
     font-weight: 800;
     color: #ffffff;
-    padding: 0px 30px 30px 30px;
 }
 
-.main_dashboard {
-    padding: 20px;
+.description{
+    margin-bottom: 20px;
 }
 
 .body_dashboard {
@@ -435,7 +434,6 @@ canvas {
         width: 200px;
     }
 
-
     .cuenta_2 {
         height: 150px;
         width: 150px;
@@ -451,6 +449,10 @@ canvas {
 
     main{
         gap:30px;
+    }
+
+    .main_dashboard {
+        gap: 10px;
     }
 
     main h1{
@@ -482,9 +484,6 @@ canvas {
     .fila {
         width: 50%;
     }
-    .main_dashboard {
-        padding: 20px 60px;
-    }
 }
 
 @media(min-width: 1400px) {
@@ -492,7 +491,6 @@ canvas {
         width: 70%;
     }
     #grafico_2{
-        
         width: 90%;
         padding: 20px;
     }
