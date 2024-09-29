@@ -10,6 +10,10 @@
     <header>
         <?php include 'fragmentos/nav.php' ?>
     </header>
+    <div id="alerta_exito_activacion" class="notificacion close">
+        <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>
+        <span>El cargo se ha realizado exitosamente</span>
+    </div>
     <main>
         <h1>Activación de Nuevo Sistema Seguridad</h1>
         <div class="flex">
@@ -28,20 +32,26 @@
                     <img src="img/caja_fuerte.png" alt="plan_seguro.jpg">
                     <div>
                         <h4>Plan Seguro</h4>
-                        <h3>S/300/mes</h3>
+                        <h3>S/10/mes</h3>
                     </div>
                 </div>
                 <p>Ingrese sus datos para realizar el cargo a la cuenta</p>
                 <form action="#">
-                    <div><input type="text" placeholder="Nombre Completo"></div>
-                    <div><input type="text" placeholder="Teléfono"></div>
-                    <div><input type="password" placeholder="Correo"></div>
-                    <div><input class="checkbox" type="checkbox" data-required="1"> <span>Acepto los <a href="#">Términos y Condiciones</a></span></div>
-                    <div class="button"><button type="submit">Ingresar</button></div>
+                    <div><input id="nombre_activacion" type="text" placeholder="Nombre Completo"></div>
+                    <div><input id="telefono_activacion" type="text" placeholder="Teléfono"></div>
+                    <div><input id="correo_activacion" type="text" placeholder="Correo"></div>
+                    <div><input id="checkbox_activacion" class="checkbox" type="checkbox" data-required="1"> <span>Acepto los <a href="#">Términos y Condiciones</a></span></div>
+                    <span id="error_activacion"></span>
+                    <div class="button"><button id="button_activacion" type="submit" onclick="controlarFormulario()">Ingresar</button></div>
                 </form>
             </div>
         </div>
     </main>
+    <footer>
+        <?php include 'fragmentos/menubar.php' ?>
+    </footer>
+    <script src="js/index.js"></script>
+    <script src="js/utils.js"></script>
 </body>
 
 </html>

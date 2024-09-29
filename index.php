@@ -10,6 +10,7 @@
 
 <body>
   <main>
+    <!-- <?php // include 'modals/alerta_dispositivo.php' ?> -->
     <div class="logo"><img src="img/loguito.png" alt="logo_bcp.jpg"></div>
     <div class="flex">
       <!--Cambiar image-->
