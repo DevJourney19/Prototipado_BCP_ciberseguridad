@@ -1,37 +1,19 @@
 .contenido-principal {
     width: 600px;
-    height: 24px;
-    top: 200px;
-    left: 464px;
-    gap: 0px;
-    opacity: 0px;
-
+    margin: 0 auto 0;
+    text-align: center;
 }
 
-.contenido-principal>.titulo {
+.contenido-principal .titulo h4 {
     font-family: Inter;
     font-size: 20px;
     font-weight: 600;
     line-height: 24.2px;
-    text-align: center;
     color: #001843;
-    width: 580px;
-    height: 24px;
-    top: 365px;
-    left: 464px;
-    gap: 0px;
-    opacity: 0px;
-
+    margin-bottom: 0.8rem;
 }
 
-.contenido-principal>.subtitulo {
-    width: 580px;
-    height: 24px;
-    top: 365px;
-    left: 464px;
-    gap: 0px;
-    opacity: 0px;
-    text-align: center;
+.contenido-principal .subtitulo p {
     font-family: Inter;
     font-size: 16px;
     font-weight: 400;
@@ -42,66 +24,130 @@
 .tabla {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    gap: 6rem;
 }
 
-.tabla>.contenido-izq {
-    flex-direction: column;
-}
-
-.tabla>.contenido-der {
-    flex-direction: column;
+.contenido-izq {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 900px;
+    justify-content: space-between;
 }
 
 .caja {
-    width: Fixed (419px)px;
-    height: Fixed (87px)px;
-    top: 428px;
-    left: 104px;
-    padding: 10px 20px 10px 20px;
-    gap: 0px;
-    justify-content: space-between;
-    opacity: 0px;
-
-}
-
-.caja>.primero>.imagen>img {
-    width: 90%;
-
-
-}
-
-.caja>.primero {
+    width: calc(50% - 20px);
+    padding: 10px 20px;
     display: flex;
-    justify-content: center;
+    gap: 6rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+}
 
+.caja .primero {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.caja .primero .imagen img {
+    width: 90%;
 }
 
 .seccion {
     width: 142px;
-    height: 19px;
-    opacity: 0px;
 }
 
-.titulo-caja>h4 {
+.titulo-caja h4 {
     font-family: Inter;
     font-size: 16px;
     font-weight: 600;
     line-height: 19.36px;
-    text-align: left;
     color: #001843;
-    margin-top: 7px;
-    margin-bottom: 5px;
+    margin: 7px 0 5px;
 }
-.descripcion-caja>p {
 
+.descripcion-caja p {
     font-family: Inter;
     font-size: 12px;
     font-weight: 400;
     line-height: 12.1px;
-    text-align: left;
     color: #ABAAAA;
+}
 
+.caja .segundo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    display: none;
+}
+
+.radio-button {
+    width: 28px;
+    height: 28px;
+    background-color: white;
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid #ABAAAA;
+    box-shadow: 0 0 5px rgb(0, 0, 0, .2);
+    cursor: pointer;
+    position: relative;
+}
+
+.radio-button::after {
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    background-color: #ABAAAA;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+input:checked + label .radio-button::after {
+    opacity: 1;
+}
+
+input:checked + label .radio-button {
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.4);
+}
+
+.opciones {
+    display: flex;
+    justify-content: center;
+    gap: 4.3rem;
+}
+
+.opciones button {
+    width: 200px;
+    height: 50px;
+    border-radius: 30px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.36px;
+    text-align: center;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.boton-primario button {
+    background-color: #FF7900;
+}
+
+.boton-primario button:active {
+    background-color: #d16201;
+}
+
+.boton-secundario button {
+    background-color: #001843;
+}
+
+.boton-secundario button:active {
+    background-color: #002d80;
 }
