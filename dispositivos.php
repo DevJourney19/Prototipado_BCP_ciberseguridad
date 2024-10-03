@@ -17,10 +17,7 @@
     <header>
         <?php include 'fragmentos/nav.php' ?>
     </header>
-    <div id="alerta_exito_activacion" class="notificacion close">
-        <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>
-        <span>El cargo se ha realizado exitosamente</span>
-    </div>
+
     <main>
         <div class="contenido-principal">
             <div class="titulo">
@@ -181,19 +178,52 @@
             </div>
         </div>
         <div class="opciones">
-                <div class="boton-primario">
-                        <button type="button">Dispositivo Principal</button>
-                </div>
-                <div class="boton-secundario">
-                        <button type="button">Desvincular</button>
-                </div>
+            <div class="boton-primario">
+                <button type="button" onclick="openModal()">Dispositivo Principal</button>
+            </div>
+            <div class="boton-secundario">
+                <button type="button" onclick="openModalDos()" >Desvincular</button>
+            </div>
         </div>
     </main>
     <footer>
         <?php include 'fragmentos/menubar.php' ?>
     </footer>
+    <dialog class="dispositivo-vinculados" id="vinculo">
+        <div class="imagen">
+            <img src="img/touch.png" alt="touch">
+        </div>
+        <div class="texto">
+            <p>¿Estas seguro que deseas establecer el dispositivo como principal?</p>
+        </div>
+        <div class="opciones-modal">
+            <div class="boton-primario-modal">
+                <button type="button" onclick="closeModal()">Aceptar</button>
+            </div>
+            <div class="boton-secundario-modal">
+                <button type="button" onclick="closeModal()">Cancelar</button>
+            </div>
+        </div>
+    </dialog>
+    <dialog class="dispositivo-vinculados" id="desvinculo">
+        <div class="imagen">
+            <img src="img/desvincular.png" alt="desvinular">
+        </div>
+        <div class="texto">
+            <p>¿Estas seguro que deseas desvincular este dispositivo?</p>
+        </div>
+        <div class="opciones-modal">
+            <div class="boton-primario-modal">
+                <button type="button" onclick="closeModalDos()">Aceptar</button>
+            </div>
+            <div class="boton-secundario-modal">
+                <button type="button" onclick="closeModalDos()">Cancelar</button>
+            </div>
+        </div>
+    </dialog>
     <script src="js/index.js"></script>
     <script src="js/utils.js"></script>
+    <script src="js/dispositivos.js"></script>
 </body>
 
 </html>
