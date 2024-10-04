@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: "Libre Franklin", sans-serif;
+}
+nav{
+    display: flex;
+    background-color: #011844;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    
+}
+nav > img{
+    width: 180px
+}
+nav > i{
+    color: white;
+}
+nav > i:hover{
+    cursor: pointer;
+}
