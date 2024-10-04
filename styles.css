@@ -456,6 +456,437 @@ canvas {
     display: none;
 }
 
+/*INICIO DE ESTILOS YAPE SEGURO*/
+.encabezado, .navegacion {
+    background: linear-gradient(to right, #0b3d91, #1e5799);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.encabezado img {
+    height: 40px;
+}
+
+.encabezado i {
+    color: white;
+    font-size: 24px;
+}
+
+.navegacion span {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navegacion i {
+    color: white;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.navegacion .interrupto {
+    display: flex;
+    align-items: center;
+}
+
+.navegacion .interrupto span {
+    color: white;
+    margin-right: 10px;
+}
+
+.navegacion .interrupto .cambiar {
+    background-color: white;
+    border-radius: 9999px;
+    width: 40px;
+    height: 20px;
+    position: relative;
+}
+
+.navegacion .interrupto .cambiar::before {
+    content: '';
+    background-color: #ff6600;
+    border-radius: 9999px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 20px;
+}
+
+.boton-encabezado {
+    background: linear-gradient(to right, #0b3d91, #1e5799);
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.boton-encabezado button {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.boton-encabezado .activo {
+    background-color: white;
+    color: #0b3d91;
+}
+
+.contenedor-yape-seguro {
+    text-align: center;
+    margin-top: 100px;
+    padding: 0 20px;
+}
+
+.contenedor-yape-seguro .icono-fila {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.contenedor-yape-seguro .icono-fila i {
+    color: #0b3d91;
+    font-size: 48px;
+    margin-right: 10px;
+}
+
+.contenedor-yape-seguro .icono-fila h2 {
+    color: #0b3d91;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.contenedor-yape-seguro .contenedor-texto {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contenedor-texto p {
+    color: #666666;
+    margin-bottom: 40px;
+    line-height: 1.5;
+}
+
+.contenedor-texto button {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    white-space: pre-line;
+}
+
+@media (max-width: 768px) {
+    .navegacion span {
+        font-size: 18px;
+    }
+    .interrupto span {
+        font-size: 14px;
+    }
+    .contenedor-yape-seguro .icono-fila i {
+        font-size: 36px;
+    }
+    .contenedor-yape-seguro .icono-fila h2 {
+        font-size: 20px;
+    }
+    .contenedor-texto p {
+        font-size: 14px;
+    }
+    .contenedor-texto button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navegacion span {
+        font-size: 16px;
+    }
+    .interrupto span {
+        font-size: 12px;
+    }
+    .contenedor-yape-seguro .icono-fila i {
+        font-size: 24px;
+    }
+    .contenedor-yape-seguro .icono-fila h2 {
+        font-size: 18px;
+    }
+    .contenedor-texto p {
+        font-size: 12px;
+    }
+    .contenedor-texto button {
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+}
+/*FIN DE ESTILOS YAPE SEGURO*/
+
+/*ESTILOS DE LA SIMULACIÓN DE YAPE*/
+.fondo-yape {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.contenedor-yape {
+    background-color: #990099;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    width: 90%; 
+    height: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.contenedor-datos {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.logo-yape {
+    display: block;
+    text-align: center;
+    margin: 0 auto 20px;
+}
+
+.contenedor-datos h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.nombre-yape {
+    color: #700070;
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.monto-yape {
+    font-size: 48px;
+    font-weight: bold;
+    color: #700070;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.monto-yape span {
+    font-size: 24px;
+    color: #d7a7e2;
+    vertical-align: super;
+    margin-right: 5px;
+    display: flex;
+    align-self: flex-start;
+    margin-top: 10px;
+}
+
+.digitar-monto {
+    font-size: 48px;
+    color: #700070;
+    font-weight: bold;
+    width: 120px;
+    text-align: center;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.mensaje-fijo {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 20px;
+    background-color: #f2f2f2;
+    padding: 8px 16px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+.mensaje-yape {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid #ccc;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.contenedor-botones {
+    display: flex;
+    justify-content: space-between;
+}
+
+.contenedor-botones button {
+    padding: 12px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 12px;
+}
+
+.btn-otros {
+    background-color: #ffffff;
+    color: #24c7b1;
+    border: 1px solid #24c7b1;
+}
+
+.btn-yapear {
+    background-color: #24c7b1;
+    color: #fff;
+    border: none;
+}
+/*FIN DE ESTILOS YAPE*/
+
+/*INICIO ESTILOS MODAL TOKEN*/
+.modal-yape {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    height: 30%;
+    background-color: white;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 20px 20px 0 0;
+    animation: slideIn 0.4s;
+}
+
+@keyframes slideIn {
+    from {
+        bottom: -40%;
+    }
+    to {
+        bottom: 0;
+    }
+}
+
+.contenedor-modal {
+    padding: 20px;
+    text-align: center;
+}
+
+.contenedor-modal h3 {
+    color: #700070;
+    font-size: 16px;
+}
+
+.contenedor-token {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.input-token {
+    width: 40px;
+    height: 50px;
+    font-size: 24px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 0 5px;
+}
+
+.input-token:focus {
+    border-color: #700070;
+    outline: none;
+    box-shadow: 0 0 5px rgba(153, 0, 153, 0.5);
+}
+
+.botones-modal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-cancelar {
+    background-color: #ffffff;
+    color: #990099;
+    padding: 10px 20px;
+    border: 2px solid #990099;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.btn-aceptar {
+    background-color: #990099;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.modal-yape.active {
+    display: block;
+}
+/*FIN ESTILOS MODAL TOKEN*/
+
+/*INICIO CÓDIGO YAPE*/
+.contenedor-codigo-yape {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.codigo-yape {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.encabezado-codigo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.encabezado-codigo span {
+    color: #b0b0b0;
+    font-size: 12px;
+}
+
+.titulo-notificacion {
+    margin-top: 15px;
+    color: #001843;
+    font-weight: bold;
+    font-size: 14px;
+
+}
+
+.codigo-temporal {
+    margin-top: 15px;
+    color: #ff6600;
+    font-weight: bold;
+
+}
+/*FIN CÓDIGO YAPE*/
+
 @media(min-width: 576px) {
     nav{
         padding: 30px;
