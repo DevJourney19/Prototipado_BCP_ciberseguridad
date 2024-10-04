@@ -21,9 +21,7 @@ try {
 <html lang="en">
 
 <head>
-
     <?php include 'fragmentos/head.php' ?>
-
     <title>Activacion</title>
 </head>
 

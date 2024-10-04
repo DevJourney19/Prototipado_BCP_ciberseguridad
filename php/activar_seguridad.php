@@ -16,6 +16,10 @@ try {
   // Ejecutar la consulta
   if (ejecutar($query)) {
     $response = ['status' => 'registrado'];
+    $query = "SELECT * FROM seguridad WHERE id_usuario = '$id'";
+    $result = consultar($query);
+    $_SESSION['id_seguridad'] = $result[0]['id_seguridad'];
+    unset($result);
   } else {
     $response = ['status' => 'no registrado'];
   }
