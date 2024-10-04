@@ -196,6 +196,13 @@ input.only_text{
   cursor: pointer;
 }
 
+
+.error{
+  font-weight: 600;
+  color: rgb(160, 56, 56);
+  font-size: 1.2rem;
+}
+
 @media (max-width: 992px) {
   .img_trabajador {
     width: 100%;

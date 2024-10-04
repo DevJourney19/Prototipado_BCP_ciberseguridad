@@ -1,3 +1,9 @@
+<?php
+include_once 'php/util/validar_entradas.php';
+include 'php/util/connection.php';
+validar_entrada('login_admi.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
