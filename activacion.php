@@ -1,3 +1,22 @@
+<?php
+include_once 'php/util/validar_entradas.php';
+include 'php/util/connection.php';
+validar_entrada('index.php');
+// verificar si ya ha sido contratado el servicio
+
+$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'];
+try {
+    conectar();
+    $resultado = consultar($sql);
+    $datos = $resultado;
+    unset($resultado);
+    desconectar();
+} catch (Exception $exc) {
+    die($exc->getMessage());
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,12 +58,14 @@
                 </div>
                 <p>Ingrese sus datos para realizar el cargo a la cuenta</p>
                 <form action="#">
-                    <div><input id="nombre_activacion" type="text" placeholder="Nombre Completo"></div>
+                    <div><input id="nombre_activacion" type="text" placeholder="Nombre Completo de la tarjeta"></div>
                     <div><input id="telefono_activacion" type="text" placeholder="Teléfono"></div>
                     <div><input id="correo_activacion" type="text" placeholder="Correo"></div>
                     <div><input id="checkbox_activacion" class="checkbox" type="checkbox" data-required="1"> <span>Acepto los <a href="#">Términos y Condiciones</a></span></div>
                     <span id="error_activacion"></span>
-                    <div class="button"><button id="button_activacion" type="submit" onclick="controlarFormulario()">Ingresar</button></div>
+                    <div class="button"><button id="button_activacion" type="submit" onclick="controlarFormulario(event)"
+                    <?php if ($datos != null) echo 'disabled'; ?>>
+                        Registrar</button></div>
                 </form>
             </div>
         </div>

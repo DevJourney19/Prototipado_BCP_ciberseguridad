@@ -1,4 +1,5 @@
-const controlarFormulario = () => {
+const controlarFormulario = async (event) => {
+  event.preventDefault();
   const nombre = document.getElementById('nombre_activacion').value;
   const correo = document.getElementById('correo_activacion').value;
   const telefono = document.getElementById('telefono_activacion').value;
@@ -19,6 +20,37 @@ const controlarFormulario = () => {
   }
 
   document.getElementById("button_activacion").disabled = true;
+
+  await fetch("./php/util/verify_session.php")
+      .then((response) => response.json())
+      .then(async (data) => {
+        //Si la sesion esta activa
+        if (data.status === true) {
+          // obtener el id del usuario
+          const userId = data.id;
+          // enviar los datos al servidor
+          await fetch ('./php/activar_seguridad.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              userId
+            }),
+          }).then((response) => response.json())
+          .then((data) => {
+            console.log("Datos enviados:", data);
+          })
+          .catch((error) => {
+            console.error("Error al enviar los datos:", error);
+          });
+        } else{
+          console.log("No hay sesion activa");
+        }
+      })
+      .catch((error) => {
+        console.error("Error al verificar la sesión:", error);
+      });
 
   alertaExito.classList.remove('close');
 
