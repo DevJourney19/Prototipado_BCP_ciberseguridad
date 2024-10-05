@@ -1,13 +1,14 @@
 <?php
-$inc = include_once("fragmentos/conexion.php");
+$inc = include_once("php/util/connection.php");
 if ($inc) {
-    $consulta = "Select tipo_dispositivo, direccion_ip, pais, ciudad, fecha_registro from dispositivos";
-    $resultado = mysqli_query($enlace, $consulta);
+    conectar();
+    $consulta = consultar("Select dispositivo_seguro, tipo_dispositivo, direccion_ip, 
+    pais, ciudad, fecha_registro from dispositivos where dispositivo_seguro= 0");
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <?php include 'fragmentos/head.php' ?>
@@ -36,38 +37,55 @@ if ($inc) {
 
             </div>
         </div>
+        <div class="tabla_responsiva">
+            <table border="1" class="tablita_equipos_no_deseados">
+                <tr>
+                    <th>Dispositivo seguro</th>
+                    <th>Dispositivo</th>
+                    <th>Direccion IP</th>
+                    <th>Pais</th>
+                    <th>Ciudad</th>
+                    <th>Fecha de Registro</th>
+                    <th colspan="2">Acciones</th>
+                    
 
-        <table>
-            <tr>
-                <th>Dispositivo</th>
-                <th>Direccion IP</th>
-                <th>Pais</th>
-                <th>Ciudad</th>
-                <th>Fecha de Registro</th>
-            </tr>
-            <?php if ($resultado) {
-                //Se va a guardar los datos en cada posicion de un array
-                while ($row = $resultado->fetch_array()) {
-                    $tipo_dispositivo = $row["tipo_dispositivo"];
-                    $direccion_ip = $row["direccion_ip"];
-                    $pais = $row["pais"];
-                    $ciudad = $row["ciudad"];
-                    $fecha_registro = $row["fecha_registro"];
-                    ?>
-                    <tr>
-                        <td><?= $tipo_dispositivo ?></td>
-                        <td><?= $direccion_ip ?></td>
-                        <td><?= $pais ?></td>
-                        <td><?= $ciudad ?></td>
-                        <td><?= $fecha_registro ?></td>
-                    </tr>
-                <?php }
-            } ?>
-        </table>
-
-        <script src="js/index.js"></script>
-        <script src="js/utils.js"></script>
-        <script src="js/dispositivos.js"></script>
+                </tr>
+                <form action="#">
+                    <?php if ($consulta) {
+                        //Se va a guardar los datos en cada posicion de un array
+                        //al hacer la consulta te retorna ya con el array.
+                        foreach ($consulta as $row) {
+                            $dispo_seguro = $row["dispositivo_seguro"];
+                            $tipo_dispositivo = $row["tipo_dispositivo"];
+                            $direccion_ip = $row["direccion_ip"];
+                            $pais = $row["pais"];
+                            $ciudad = $row["ciudad"];
+                            $fecha_registro = $row["fecha_registro"];
+                            ?>
+                            <tr>
+                                <td><?= $dispo_seguro ?></td>
+                                <td><?= $tipo_dispositivo ?></td>
+                                <td><?= $direccion_ip ?></td>
+                                <td><?= $pais ?></td>
+                                <td><?= $ciudad ?></td>
+                                <td><?= $fecha_registro ?></td>
+                                <td><button class="botoncito_accion_vincular">Vincular <i class="fa-solid fa-link"></i></button></td>
+                                <td><button class="botoncito_accion_bloquear">Bloquear <i class="fa-solid fa-ban"></i></button></td>
+                            </tr>
+                        <?php }
+                    } ?>
+                </form>
+            </table>
+           
+        </div>
+        <a class="botoncito" href="dispositivos.php">Regresar</a>
+    </main>
+    <footer>
+        <?php include 'fragmentos/menubar.php' ?>
+    </footer>
+    <script src="js/index.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/dispositivos.js"></script>
 </body>
 
 </html>
