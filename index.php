@@ -11,7 +11,7 @@ if (isset($_GET["error"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Banca en Linea BCP</title>
-    <link href="style_login.css" rel="stylesheet">
+    <link href="css/style_login.css" rel="stylesheet">
 </head>
 
 <body>
