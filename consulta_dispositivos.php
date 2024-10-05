@@ -12,7 +12,7 @@ if ($inc) {
 
 <head>
     <?php include 'fragmentos/head.php' ?>
-    <link href="dispositivos.css" rel="stylesheet">
+    <link href="css/dispositivos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -47,7 +47,7 @@ if ($inc) {
                     <th>Ciudad</th>
                     <th>Fecha de Registro</th>
                     <th colspan="2">Acciones</th>
-                    
+
 
                 </tr>
                 <form action="#">
@@ -69,14 +69,16 @@ if ($inc) {
                                 <td><?= $pais ?></td>
                                 <td><?= $ciudad ?></td>
                                 <td><?= $fecha_registro ?></td>
-                                <td><button class="botoncito_accion_vincular">Vincular <i class="fa-solid fa-link"></i></button></td>
-                                <td><button class="botoncito_accion_bloquear">Bloquear <i class="fa-solid fa-ban"></i></button></td>
+                                <td><button class="botoncito_accion_eliminar">Eliminar <i class="fa-solid fa-link"></i></button>
+                                </td>
+                                <td><button class="botoncito_accion_bloquear">Bloquear <i class="fa-solid fa-ban"></i></button>
+                                </td>
                             </tr>
                         <?php }
                     } ?>
                 </form>
             </table>
-           
+
         </div>
         <a class="botoncito" href="dispositivos.php">Regresar</a>
     </main>

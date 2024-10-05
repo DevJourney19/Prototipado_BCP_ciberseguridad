@@ -1,5 +1,5 @@
 <?php
-include 'php/util/connection.php';
+include 'util/connection.php';
 
 conectar();
 $listaa = consultar("select * from dispositivos inner join seguridad on dispositivos.id_seguridad = seguridad.id_seguridad ");

@@ -1,6 +1,6 @@
 <?php
 
-include './util/connection.php';
+include 'util/connection.php';
 
 $tarjeta = $_POST['tarjeta'];
 $dni = $_POST['dni'];

@@ -11,7 +11,7 @@ if (isset($_GET["error"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Administrador</title>
-    <link href="style_login.css" rel="stylesheet">
+    <link href="css/style_login.css" rel="stylesheet">
 </head>
 
 <body>
@@ -21,11 +21,11 @@ if (isset($_GET["error"])) {
             <div class="img_trabajador"><img src="img/trabajador_bcp.jpg" alt="imagen_login.jpg"></img></div>
             <div class="iniciar_sesion">
                 <h1>Ingresa tus datos de Administrador</h1>
-                <form action="php/admi_login.php" method="POST" autocomplete="off">
+                <form action="php/admin_login.php" method="POST" autocomplete="off">
                     <div><input type="text" placeholder="Email" name="email"></div>
                     <div><input type="text" placeholder="Nombre Completo" name="nombre"></div>
                     <div><input type="password" placeholder="Contraseña" name="password"></div>
-                    <?php if ($error != null) : ?>
+                    <?php if ($error != null): ?>
                         <p class="error"><?= $error ?></p>
                     <?php endif; ?>
                     <button type="submit">Ingresar</button>

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <?php include 'fragmentos/head.php' ?>
     <title>Rango de Horario y Ubicacion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="horario_ubicacion.css">
+    <link rel="stylesheet" href="css/horario_ubicacion.css">
 </head>
 
 <body>
@@ -79,6 +79,9 @@
             <button class="boton-naranja">Cerrar</button>
         </div>
     </div>
+    <footer style="positon: absolute; bottom:0px;">
+        <?php include 'fragmentos/menubar.php' ?>
+    </footer>
     <script src="js/horario_ubicacion.js"></script>
 </body>
 

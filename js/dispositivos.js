@@ -24,6 +24,6 @@ const closeModalDos = () => {
 const historial = document.getElementById("historial");
 if (historial) {
     historial.addEventListener('click', function () {
-        window.location.href = 'consulta_dispositivos.php';
+        window.location.href = './consulta_dispositivos.php';
     });
 }

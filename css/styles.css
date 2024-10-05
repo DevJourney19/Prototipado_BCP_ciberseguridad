@@ -418,6 +418,9 @@ canvas {
 /**Footer**/
 .footer_bar {
     border-top: 2px solid #ABAAAA;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
 }
 
 .footer_bar ul {
@@ -458,7 +461,7 @@ canvas {
 
 /*INICIO DE ESTILOS YAPE SEGURO*/
 .encabezado, .navegacion {
-    background: linear-gradient(to right, #0b3d91, #1e5799);
+    background: #001843;
     padding: 10px 20px;
     display: flex;
     align-items: center;
@@ -515,14 +518,14 @@ canvas {
 }
 
 .boton-encabezado {
-    background: linear-gradient(to right, #0b3d91, #1e5799);
-    padding: 10px 0;
+    background: linear-gradient(#001743, #00236f, #001743);
+    padding: 20px 0;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.boton-encabezado button {
+.boton-encabezado a {
     background-color: #ff6600;
     color: white;
     border: none;
@@ -531,6 +534,7 @@ canvas {
     margin: 5px;
     cursor: pointer;
     white-space: nowrap;
+    font-weight: 500;
 }
 
 .boton-encabezado .activo {
@@ -873,7 +877,7 @@ canvas {
 
 .titulo-notificacion {
     margin-top: 15px;
-    color: #001843;
+    color: #001743;
     font-weight: bold;
     font-size: 14px;
 
