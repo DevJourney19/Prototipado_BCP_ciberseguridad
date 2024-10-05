@@ -1,5 +1,15 @@
 <?php
+include 'php/util/connection.php';
 
+conectar();
+$listaa = consultar("select * from dispositivos inner join seguridad on dispositivos.id_seguridad = seguridad.id_seguridad ");
+$id_usuario_no_permitido= null;
+if (count($listaa) > 0) {
+    //id del usuario en lo que quieren atacar
+    $_SESSION["id_del_usuario"] = $listaa[0]["id_usuario"];
+    $id_usuario_no_permitido = $_SESSION["id_del_usuario"];
+}
+desconectar();
 function obtener_info_ip($ip)
 {
     //Se construye la url utilizando la dirección ip a consultar 
@@ -22,7 +32,12 @@ function obtener_info_ip($ip)
 //Se obtiene la dirección ip del usuario
 //$ip_usuario= $_SERVER['REMOTE_ADDR'];
 $ip_usuario = "63.246.135.89";
-function obtener_dispositivo() {
+$resultado = obtener_info_ip($ip_usuario);
+//----------------------------------------
+$dispositivo = obtener_dispositivo();
+
+function obtener_dispositivo()
+{
     $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
     if (strpos($userAgent, 'Mobile') !== false) {
@@ -33,16 +48,15 @@ function obtener_dispositivo() {
         return 'Ordenador de escritorio';
     }
 }
-$dispositivo = obtener_dispositivo();
-//Llamamos a la función
-$resultado = obtener_info_ip($ip_usuario);
 
-if ($resultado !== null) {
-    echo "Tu ip es: " . $ip_usuario . "\n";
-    echo "Tu pais es: " . $resultado['country'] . "\n";
-    echo "Tu ciudad es: " . $resultado['city'] . "\n";
-    echo "Tu latitud es: " . $resultado['lat'] . "\n";
-    echo "Tu equipo es: ". $dispositivo;
+$fecha_registro = date('Y-m-d H:i:s');
+//Agregamos los equipos no deseados a la base de datos
+conectar();
+/*ejecutar("insert into dispositivos(dispositivo_seguro, tipo_dispositivo, direccion_ip, pais, ciudad, 
+fecha_registro) values ('0', '$dispositivo', '$ip_usuario', '$pais', '$ciudad', '$fecha_registro')");*/
+//Se tiene que agregar el where id del usuario
+if (ejecutar("INSERT INTO dispositivos (dispositivo_seguro, tipo_dispositivo, direccion_ip, pais, ciudad, 
+fecha_registro, id_seguridad) VALUES (0, '$dispositivo', '$ip_usuario', '{$resultado['country']}', '{$resultado['city']}', '$fecha_registro', 1)")) {
 } else {
-    echo "No se pudo obtener la información";
+    echo "Error al insertar datos: " . mysqli_error($conexion); // Cambia $conexion por tu variable de conexión
 }
