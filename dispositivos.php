@@ -186,6 +186,9 @@
             <div class="boton-secundario">
                 <button type="button" onclick="openModalDos()" >Desvincular</button>
             </div>
+            <div class="boton-primario">
+                <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
+            </div>
         </div>
     </main>
     <footer>
