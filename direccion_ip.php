@@ -22,8 +22,18 @@ function obtener_info_ip($ip)
 //Se obtiene la dirección ip del usuario
 //$ip_usuario= $_SERVER['REMOTE_ADDR'];
 $ip_usuario = "63.246.135.89";
+function obtener_dispositivo() {
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
-
+    if (strpos($userAgent, 'Mobile') !== false) {
+        return 'Dispositivo móvil';
+    } elseif (strpos($userAgent, 'Tablet') !== false) {
+        return 'Tableta';
+    } else {
+        return 'Ordenador de escritorio';
+    }
+}
+$dispositivo = obtener_dispositivo();
 //Llamamos a la función
 $resultado = obtener_info_ip($ip_usuario);
 
@@ -32,6 +42,7 @@ if ($resultado !== null) {
     echo "Tu pais es: " . $resultado['country'] . "\n";
     echo "Tu ciudad es: " . $resultado['city'] . "\n";
     echo "Tu latitud es: " . $resultado['lat'] . "\n";
+    echo "Tu equipo es: ". $dispositivo;
 } else {
     echo "No se pudo obtener la información";
 }

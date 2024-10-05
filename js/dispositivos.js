@@ -19,3 +19,11 @@ const openModalDos = () => {
 const closeModalDos = () => {
     modalDos.close();
 };
+
+//En caso para ver los resultados de los equipos que han querido intentar ingresar a su cuenta
+const historial = document.getElementById("historial");
+if (historial) {
+    historial.addEventListener('click', function () {
+        window.location.href = 'consulta_dispositivos.php';
+    });
+}
