@@ -243,6 +243,69 @@ input:checked+label .radio-button {
     text-align: center;
 }
 
+/*consulta_dispositivos.php*/
+.tabla_responsiva {
+    width: 100%;
+    overflow-x: auto;
+    text-align: center;
+}
+
+.tablita_equipos_no_deseados {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin: auto;
+    padding: 20px;
+}
+
+.tablita_equipos_no_deseados td,
+th {
+    padding: 25px;
+}
+
+.botoncito {
+    background-color: #001843;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    color: white;
+    font-weight: 400;
+    border-radius: 20px;
+    transition: all 0.3s;
+    margin-top:4px;
+    margin-bottom:14px;
+}
+
+.botoncito_accion_vincular {
+    background-color: #0ad514;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    color: white;
+    font-weight: 400;
+    border-radius: 20px;
+    transition: all 0.3s;
+    border: 0px;
+}
+
+.botoncito_accion_bloquear {
+    background-color: #b10000;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    color: white;
+    font-weight: 400;
+    border-radius: 20px;
+    transition: all 0.3s;
+    border: 0px;
+}
+
+.botoncito:hover,.botoncito_accion_vincular:hover,.botoncito_accion_bloquear:hover {
+    cursor: pointer;
+    scale: 1.1;
+}
+
+th{
+    background: #001843;
+    color: white;
+}
+
 @media (max-width: 900px) {
     .contenido-principal {
         width: 90%;
@@ -342,7 +405,6 @@ input:checked+label .radio-button {
     }
 
     .opciones-modal {
-
         margin: 1rem;
     }
 }
@@ -373,29 +435,34 @@ input:checked+label .radio-button {
         font-size: 1.5rem;
         margin: 0.3rem 0rem;
     }
+
     .descripcion-caja p {
         font-size: 14px;
         line-height: 1.1rem;
     }
+
     .opciones button {
         width: 246px;
         height: 59px;
         font-size: 1.3rem;
         margin-top: 1.6rem;
     }
+
     .dispositivo-vinculados>.imagen>img {
         width: 30%;
         height: 30%;
         margin: 1rem;
     }
+
     .opciones-modal button {
         width: 8rem;
         height: 3rem;
         margin: 0rem;
         font-size: 1rem;
     }
+
     .dispositivo-vinculados>.texto {
         font-size: 1.3rem;
     }
-   
+
 }
