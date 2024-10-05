@@ -41,9 +41,11 @@
                                 </h4>
                             </div>
                             <div class="descripcion-caja">
-                                <p>Lugar: Av Lomas - SMP
+                                <p>
+                                    Lugar: Av Lomas - SMP
                                     IP: 192.168.769
-                                    Ingreso: 05/09/2024</p>
+                                    Ingreso: 05/09/2024
+                                </p>
 
                             </div>
                         </div>
@@ -56,18 +58,18 @@
                 <div class="caja">
                     <div class="primero">
                         <div class="imagen">
-                            <img src="img/icono_cel.png" alt="Imagen de celular">
+                            <img src="img/laptop.png" alt="Imagen de celular">
                         </div>
                         <div class="seccion">
                             <div class="titulo-caja">
                                 <h4>
-                                    iPhone
+                                    Laptop
                                 </h4>
                             </div>
                             <div class="descripcion-caja">
-                                <p>Lugar: Av Lomas - SMP
-                                    IP: 192.168.769
-                                    Ingreso: 05/09/2024</p>
+                                <p>
+                                Lugar: Av Lomas - SMP IP: 192.168.769 Ingreso: 05/09/2024
+                                </p>
 
                             </div>
                         </div>
@@ -82,12 +84,12 @@
                 <div class="caja">
                     <div class="primero">
                         <div class="imagen">
-                            <img src="img/icono_cel.png" alt="Imagen de celular">
+                            <img src="img/computadora.png" alt="Imagen de celular">
                         </div>
                         <div class="seccion">
                             <div class="titulo-caja">
                                 <h4>
-                                    iPhone
+                                    Computadora
                                 </h4>
                             </div>
                             <div class="descripcion-caja">
@@ -130,12 +132,12 @@
                 <div class="caja">
                     <div class="primero">
                         <div class="imagen">
-                            <img src="img/icono_cel.png" alt="Imagen de celular">
+                            <img src="img/laptop.png" alt="Imagen de celular">
                         </div>
                         <div class="seccion">
                             <div class="titulo-caja">
                                 <h4>
-                                    iPhone
+                                    Laptop
                                 </h4>
                             </div>
                             <div class="descripcion-caja">
@@ -154,12 +156,12 @@
                 <div class="caja">
                     <div class="primero">
                         <div class="imagen">
-                            <img src="img/icono_cel.png" alt="Imagen de celular">
+                            <img src="img/computadora.png" alt="Imagen de celular">
                         </div>
                         <div class="seccion">
                             <div class="titulo-caja">
                                 <h4>
-                                    iPhone
+                                    Computadora
                                 </h4>
                             </div>
                             <div class="descripcion-caja">
