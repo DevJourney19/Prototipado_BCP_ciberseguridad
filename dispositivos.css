@@ -1,0 +1,401 @@
+.contenido-principal {
+    width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contenido-principal .titulo h4 {
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24.2px;
+    color: #001843;
+    margin-bottom: 0.8rem;
+}
+
+.contenido-principal .subtitulo p {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.36px;
+    color: #7E7A7A;
+}
+
+.tabla {
+    display: flex;
+    justify-content: center;
+}
+
+.contenido-izq {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 900px;
+    justify-content: space-between;
+}
+
+.caja {
+    width: calc(50% - 20px);
+    padding: 10px 20px;
+    display: flex;
+    gap: 6rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+}
+
+.caja .primero {
+    display: flex;
+    gap: 1rem;
+}
+
+.caja .primero .imagen img {
+    width: 90%;
+}
+
+.seccion {
+    width: 142px;
+}
+
+.titulo-caja h4 {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.36px;
+    color: #001843;
+    margin: 7px 0 5px;
+}
+
+.descripcion-caja p {
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 12.1px;
+    color: #ABAAAA;
+}
+
+.caja .segundo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    display: none;
+}
+
+.radio-button {
+    width: 28px;
+    height: 28px;
+    background-color: white;
+    display: inline-block;
+    border-radius: 50%;
+    border: 1px solid #ABAAAA;
+    box-shadow: 0 0 5px rgb(0, 0, 0, .2);
+    cursor: pointer;
+    position: relative;
+}
+
+.radio-button::after {
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    background-color: #ABAAAA;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+input:checked+label .radio-button::after {
+    opacity: 1;
+}
+
+input:checked+label .radio-button {
+    box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.4);
+}
+
+.opciones {
+    display: flex;
+    justify-content: center;
+    gap: 4.3rem;
+}
+
+.opciones button {
+    width: 200px;
+    height: 50px;
+    border-radius: 30px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.36px;
+    text-align: center;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.boton-primario button {
+    background-color: #FF7900;
+}
+
+.boton-primario button:active {
+    background-color: #d16201;
+}
+
+.boton-secundario button {
+    background-color: #001843;
+}
+
+.boton-secundario button:active {
+    background-color: #002d80;
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.opciones-modal {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.opciones-modal button {
+    width: 130px;
+    height: 40px;
+    border-radius: 30px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.36px;
+    text-align: center;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.boton-primario-modal button {
+    background-color: #FF7900;
+}
+
+.boton-primario-modal button:active {
+    background-color: #d16201;
+}
+
+.boton-secundario-modal button {
+    background-color: #001843;
+}
+
+.boton-secundario-modal button:active {
+    background-color: #002d80;
+}
+
+.dispositivo-vinculados {
+    width: 375px;
+    height: 313px;
+    max-height: 90vh;
+    /* Máxima altura */
+    padding: 0;
+    border-radius: 20px;
+    text-align: center;
+    margin: 0;
+    /* Elimina margen */
+    position: fixed;
+    /* Para posicionar el modal */
+    top: 50%;
+    /* Centro vertical */
+    left: 50%;
+    /* Centro horizontal */
+    transform: translate(-50%, -50%);
+    /* Centra el modal */
+    border: none;
+    /* Elimina borde */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    /* Sombra opcional */
+    z-index: 1000;
+    /* Asegúrate de que el modal esté por encima de otros elementos */
+}
+
+.dispositivo-vinculados>.imagen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 15px;
+}
+
+.dispositivo-vinculados>.imagen>img {
+    width: 120px;
+    height: 120px;
+    margin: 5px;
+}
+
+.dispositivo-vinculados>.texto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 39px;
+    padding-bottom: 26px;
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24.2px;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .contenido-principal {
+        width: 90%;
+    }
+
+    .tabla {
+        width: 2px;
+    }
+
+    .caja {
+        width: 448px;
+        height: 130px;
+        gap: 2rem;
+        margin: 1rem;
+    }
+
+    .opciones button {
+        width: 150px;
+    }
+
+    .seccion {
+        width: 191px;
+    }
+
+    .titulo-caja h4 {
+        font-size: 1.9rem;
+        margin: 9px 0;
+    }
+
+    .caja .primero .imagen img {
+        width: 100%;
+        height: 110px;
+    }
+
+    .descripcion-caja p {
+        font-size: 1rem;
+        line-height: 1.2rem;
+
+
+    }
+
+    .contenido-principal .titulo h4 {
+        font-family: Inter;
+        font-size: 1.7rem;
+        font-weight: 600;
+        line-height: 24.2px;
+        color: #001843;
+        margin: 1.8rem;
+    }
+
+    .contenido-principal .subtitulo p {
+        font-family: Inter;
+        font-size: 1.2rem;
+        font-weight: 400;
+        line-height: 19.36px;
+        color: #7E7A7A;
+        margin: 1rem;
+    }
+
+    .opciones {
+        margin: 2rem 0rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .opciones button {
+        width: 298px;
+        height: 77px;
+        font-size: 1.2rem;
+        margin-top: 2rem;
+    }
+
+    .dispositivo-vinculados {
+        width: 83%;
+        height: auto;
+        max-height: none;
+    }
+
+    .dispositivo-vinculados>.imagen>img {
+        width: 10rem;
+        height: 10rem;
+        margin: 3.5rem;
+    }
+
+    .dispositivo-vinculados>.texto {
+        padding: 2rem 3rem;
+        font-size: 2rem;
+        line-height: 2rem;
+    }
+
+    .opciones-modal button {
+        width: 15.6rem;
+        height: 4rem;
+        margin: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .opciones-modal {
+
+        margin: 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .contenido-principal .titulo h4 {
+        font-size: 1.5rem;
+    }
+
+    .contenido-principal .subtitulo p {
+        font-size: 1.2rem;
+    }
+
+    .caja {
+        width: 330px;
+        height: 116px;
+        gap: 2rem;
+        margin: 1rem;
+    }
+
+    .caja .primero .imagen img {
+        width: 100%;
+        height: 78px;
+        object-fit: cover;
+    }
+
+    .titulo-caja h4 {
+        font-size: 1.5rem;
+        margin: 0.3rem 0rem;
+    }
+    .descripcion-caja p {
+        font-size: 14px;
+        line-height: 1.1rem;
+    }
+    .opciones button {
+        width: 246px;
+        height: 59px;
+        font-size: 1.3rem;
+        margin-top: 1.6rem;
+    }
+    .dispositivo-vinculados>.imagen>img {
+        width: 30%;
+        height: 30%;
+        margin: 1rem;
+    }
+    .opciones-modal button {
+        width: 8rem;
+        height: 3rem;
+        margin: 0rem;
+        font-size: 1rem;
+    }
+    .dispositivo-vinculados>.texto {
+        font-size: 1.3rem;
+    }
+   
+}
