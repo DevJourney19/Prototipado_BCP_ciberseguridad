@@ -1,3 +1,9 @@
+<?php
+$error = null;
+if (isset($_GET["error"])) {
+    $error = "Credenciales incorrectas";
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -15,10 +21,13 @@
             <div class="img_trabajador"><img src="img/trabajador_bcp.jpg" alt="imagen_login.jpg"></img></div>
             <div class="iniciar_sesion">
                 <h1>Ingresa tus datos de Administrador</h1>
-                <form action="#">
-                    <div><input type="text" placeholder="Email"></div>
-                    <div><input type="text" placeholder="Usuario"></div>
-                    <div><input type="password" placeholder="Contraseña"></div>
+                <form action="php/admi_login.php" method="POST" autocomplete="off">
+                    <div><input type="text" placeholder="Email" name="email"></div>
+                    <div><input type="text" placeholder="Nombre Completo" name="nombre"></div>
+                    <div><input type="password" placeholder="Contraseña" name="password"></div>
+                    <?php if ($error != null) : ?>
+                        <p class="error"><?= $error ?></p>
+                    <?php endif; ?>
                     <button type="submit">Ingresar</button>
                 </form>
             </div>
