@@ -20,12 +20,15 @@ try {
         $_SESSION['security'] = '12345';
         $_SESSION['id'] = $registro[0]['id_usuario'];
         header("Location: ../principal.php");
+        
+        //AQUI ->
     } else if(count($entrada_no_deseada) == 1) {
         session_start();
-        
-        $_SESSION['id_no_permitido'] = $registro[0]['id_usuario'];
-        header("Location: ../index.php?error=true");
-        header("Location: ../direccion_ip.php");
+        $_SESSION['id_no_permitido'] = $entrada_no_deseada[0]['id_usuario'];
+        //header("Location: ../index.php?error=true");
+
+        //Como puedo hacer para que no me lleve a esa direccion solo que ejecute codigo?
+        echo "<script>window.location.href = 'direccion_ip.php';</script>";
     }else{
         session_destroy();
         header("Location: ../index.php?error=true");

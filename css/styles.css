@@ -125,7 +125,7 @@ main{
     font-size: 14px;
     font-weight: 600;
     color: red;
-    padding: 20px 0;
+    padding:0px;
 }
 
 
@@ -324,6 +324,9 @@ main{
     width: 80px;
     height: 80px;
     border-radius: 50%;
+}
+.circulo_naranja:hover{
+    cursor: pointer;
 }
 
 /*Donaciones y Seguridad Mejorada*/

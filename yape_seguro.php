@@ -39,7 +39,7 @@
             <button>Sí, deseo utilizar Yapeo Seguro</button>
         </div>
     </div>
-    <footer style="positon: absolute; bottom:0px;">
+    <footer">
         <?php include 'fragmentos/menubar.php' ?>
     </footer>
     <script>
