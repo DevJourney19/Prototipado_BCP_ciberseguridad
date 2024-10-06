@@ -27,6 +27,7 @@ try {
   // Desconectar de la base de datos
   desconectar();
 } catch (Exception $e) {
+  echo "Error: ".$e;
   $response = [
     'status' => 'Datos incompletos',
     'message' => 'error'
