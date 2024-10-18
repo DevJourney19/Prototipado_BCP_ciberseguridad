@@ -79,6 +79,9 @@
             <button class="boton-naranja">Cerrar</button>
         </div>
     </div>
+    <footer>
+        <?php include 'fragmentos/menubar.php' ?>
+    </footer>
     <script src="js/horario_ubicacion.js"></script>
 </body>
 

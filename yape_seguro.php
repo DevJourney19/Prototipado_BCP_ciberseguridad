@@ -3,9 +3,10 @@
     <?php include 'fragmentos/head.php' ?>
     <title>Yape Seguro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="encabezado">
+    <!-- <div class="encabezado">
         <img src="img/loguito.png" alt="Logo BCP">
         <i class="fas fa-sign-out-alt"></i>
     </div>
@@ -25,7 +26,10 @@
         <button>Dispositivos Vinculados</button>
         <button class="activo">Yapeo Seguro</button>
         <button>Cancelar Servicio</button>
-    </div>
+    </div> -->
+    <header>
+        <?php include 'fragmentos/nav.php' ?>
+    </header>
     <div class="contenedor-yape-seguro">
         <div class="icono-fila">
             <i class="fas fa-shield-alt"></i>
@@ -36,6 +40,10 @@
             <button>Sí, deseo utilizar Yapeo Seguro</button>
         </div>
     </div>
+    
+    <footer>
+        <?php include 'fragmentos/menubar.php' ?>
+    </footer>
     <script>
         let yapeSeguroActivado = true;
 

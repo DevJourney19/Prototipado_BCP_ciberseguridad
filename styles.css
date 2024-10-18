@@ -540,8 +540,12 @@ canvas {
 
 .contenedor-yape-seguro {
     text-align: center;
-    margin-top: 100px;
+    height: 75vh;
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .contenedor-yape-seguro .icono-fila {
@@ -553,13 +557,13 @@ canvas {
 }
 
 .contenedor-yape-seguro .icono-fila i {
-    color: #0b3d91;
+    color: #001843;
     font-size: 48px;
     margin-right: 10px;
 }
 
 .contenedor-yape-seguro .icono-fila h2 {
-    color: #0b3d91;
+    color: #001843;
     font-size: 24px;
     font-weight: bold;
 }
@@ -571,7 +575,7 @@ canvas {
 
 .contenedor-texto p {
     color: #666666;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     line-height: 1.5;
 }
 
