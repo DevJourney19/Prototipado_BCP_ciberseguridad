@@ -1,58 +1,88 @@
+<?php
+include_once 'php/util/validar_entradas.php';
+include 'php/util/connection.php';
+validar_entrada('index.php');
+// verificar si ya ha sido contratado el servicio
+validar_servicio('principal.php');
+
+$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'] . " AND estado_yape= true";
+try {
+    conectar();
+    $resultado = consultar($sql);
+    $datos = $resultado;
+    unset($resultado);
+    desconectar();
+} catch (Exception $exc) {
+    die($exc->getMessage());
+}
+
+?>
+
 <html lang="es">
+
 <head>
     <?php include 'fragmentos/head.php' ?>
     <title>Yape Seguro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-    <div class="encabezado">
-        <img src="img/loguito.png" alt="Logo BCP">
-        <i class="fas fa-sign-out-alt"></i>
-    </div>
-    <div class="navegacion">
-        <div>
-            <i class="fas fa-arrow-left"></i>
-            <span>Seguridad</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="interrupto">
-            <span>ON</span>
-            <div class="cambiar"></div>
-        </div>
-    </div>
-    <div class="boton-encabezado">
-        <button>Rango Horario y Ubicación</button>
-        <button>Dispositivos Vinculados</button>
-        <button class="activo">Yapeo Seguro</button>
-        <button>Cancelar Servicio</button>
-    </div>
-    <div class="contenedor-yape-seguro">
+    <header>
+        <?php include 'fragmentos/nav.php' ?>
+        <?php include 'fragmentos/tabs.php' ?>
+    </header>
+    <main class="contenedor-yape-seguro">
         <div class="icono-fila">
-            <i class="fas fa-shield-alt"></i>
+            <i class="fa-solid fa-money-bill-transfer"></i>
             <h2>Yapeo Seguro</h2>
         </div>
         <div class="contenedor-texto">
-            <p>Al darle aceptar cuando realices un yapeo, recibirás un código de un solo uso para comprobar la veracidad de la transacción.</p>
-            <button>Sí, deseo utilizar Yapeo Seguro</button>
+            <?php if (count($datos) == 0) { ?>
+                <p>Al darle aceptar cuando realices un yapeo, recibirás un código de un solo uso para comprobar la veracidad
+                    de la transacción.</p>
+                <button id="activar">Sí, deseo utilizar Yapeo Seguro</button>
+            <?php } else { ?>
+                <p>Ya cuentas con Yapeo Seguro, puedes deshabilitarlo pero ya no obtendrás el código de verificación.</p>
+                <button id="activar">Ya no deseo Yape Seguro</button>
+            <?php } ?>
+
         </div>
-    </div>
+    </main>
+
+    <footer>
+        <?php include 'fragmentos/menubar.php' ?>
+    </footer>
     <script>
-        let yapeSeguroActivado = true;
-
-        const boton = document.querySelector('.contenedor-texto button');
-        const parrafo = document.querySelector('.contenedor-texto p');
-
-        boton.addEventListener('click', () => {
-            if (yapeSeguroActivado) {
-                boton.textContent = 'Ya no deseo Yape Seguro';
-                parrafo.textContent = 'Ya cuentas con Yapeo Seguro, puedes deshabilitarlo pero ya no obtendrás el código de verificación.';
-                yapeSeguroActivado = false;
-            } else {
-                boton.textContent = 'Sí, deseo utilizar Yapeo Seguro';
-                parrafo.textContent = 'Al darle aceptar cuando realices un yapeo, recibirás un código de un solo uso para comprobar la veracidad de la transacción.';
-                yapeSeguroActivado = true;
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            const boton = document.querySelector('#activar');
+            const estado = <?php echo count($datos) == 0 ? 'false' : 'true' ?>;
+            boton.addEventListener('click', async () => {
+                await fetch("./php/estado_funcionalidades.php", {
+                        method: "POST",
+                        body: JSON.stringify({
+                            estado: !estado,
+                            funcion: "estado_yape"
+                        }),
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log("Resultado:", data);
+                        if (data.status == "activado") {
+                            alert("Yapeo seguro activado");
+                            location.reload();
+                        } else {
+                            alert("Yapeo seguro desactivado");
+                            location.reload();
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error al enviar los datos:", error);
+                    });
+            })
         })
     </script>
+    <script src="js/utils.js"></script>
 </body>
+
 </html>

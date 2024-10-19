@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <?php include 'fragmentos/head.php' ?>
-    <link href="dispositivos.css" rel="stylesheet">
+    <link href="css/dispositivos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -16,6 +16,7 @@
 <body>
     <header>
         <?php include 'fragmentos/nav.php' ?>
+        <?php include 'fragmentos/tabs.php' ?>
     </header>
 
     <main>

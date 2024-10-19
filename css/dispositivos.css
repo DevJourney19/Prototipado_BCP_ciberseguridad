@@ -245,7 +245,7 @@ input:checked+label .radio-button {
 
 /*consulta_dispositivos.php*/
 .tabla_responsiva {
-    width: 100%;
+    width: 80%;
     overflow-x: auto;
     text-align: center;
 }
@@ -259,7 +259,7 @@ input:checked+label .radio-button {
 
 .tablita_equipos_no_deseados td,
 th {
-    padding: 25px;
+    padding: 10px;
 }
 
 .botoncito {
@@ -274,9 +274,9 @@ th {
     margin-bottom:14px;
 }
 
-.botoncito_accion_vincular {
-    background-color: #0ad514;
-    padding: 10px 20px;
+.botoncito_accion_eliminar {
+    background-color:#b10000 ;
+    padding: 8px 10px;
     font-size: 1.1em;
     color: white;
     font-weight: 400;
@@ -286,8 +286,8 @@ th {
 }
 
 .botoncito_accion_bloquear {
-    background-color: #b10000;
-    padding: 10px 20px;
+    background-color: #707070;
+    padding: 8px 10px;
     font-size: 1.1em;
     color: white;
     font-weight: 400;
@@ -296,7 +296,7 @@ th {
     border: 0px;
 }
 
-.botoncito:hover,.botoncito_accion_vincular:hover,.botoncito_accion_bloquear:hover {
+.botoncito:hover,.botoncito_accion_eliminar:hover,.botoncito_accion_bloquear:hover {
     cursor: pointer;
     scale: 1.1;
 }
