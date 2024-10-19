@@ -16,6 +16,7 @@
 <body>
     <header>
         <?php include 'fragmentos/nav.php' ?>
+        <?php include 'fragmentos/tabs.php' ?>
     </header>
 
     <main>

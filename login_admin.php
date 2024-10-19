@@ -12,6 +12,7 @@ if (isset($_GET["error"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Administrador</title>
     <link href="css/style_login.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/bcp_logo.png" type="image/x-icon">
 </head>
 
 <body>

@@ -56,10 +56,14 @@ try {
                 </div>
                 <p>Ingrese sus datos para realizar el cargo a la cuenta</p>
                 <form action="#">
-                    <div><input id="nombre_activacion" type="text" placeholder="Nombre Completo de la tarjeta"></div>
-                    <div><input id="telefono_activacion" type="text" placeholder="Teléfono"></div>
-                    <div><input id="correo_activacion" type="text" placeholder="Correo"></div>
-                    <div><input id="checkbox_activacion" class="checkbox" type="checkbox" data-required="1">
+                    <div><input id="nombre_activacion" type="text" placeholder="Nombre Completo de la tarjeta" <?php if ($datos != null)
+                                echo 'disabled'; ?>></div>
+                    <div><input id="telefono_activacion" type="text" placeholder="Teléfono" <?php if ($datos != null)
+                                echo 'disabled'; ?>></div>
+                    <div><input id="correo_activacion" type="text" placeholder="Correo" <?php if ($datos != null)
+                                echo 'disabled'; ?>></div>
+                    <div><input id="checkbox_activacion" class="checkbox" type="checkbox" data-required="1" <?php if ($datos != null)
+                                echo 'disabled'; ?>>
                         <span>Acepto los <a href="#">Términos y Condiciones</a></span>
                     </div>
                     <span id="error_activacion"></span>

