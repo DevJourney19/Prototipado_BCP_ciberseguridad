@@ -5,7 +5,7 @@ validar_entrada('index.php');
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <?php include 'fragmentos/head.php' ?>
@@ -51,19 +51,27 @@ validar_entrada('index.php');
         <div class="fila">
 
             <div>
-                <div class="circulo_naranja"></div>
+                <a href="#">
+                    <div class="circulo_naranja"></div>
+                </a>
                 <span>Transferir Dinero</span>
             </div>
             <div>
-                <div class="circulo_naranja"></div>
+                <a href="yape_seguro.php">
+                    <div class="circulo_naranja"></div>
+                </a>
                 <span>Yapear Seguro</span>
             </div>
             <div>
-                <div class="circulo_naranja"></div>
-                <span>Pagar con QR</span>
+                <a href="dispositivos.php">
+                    <div class="circulo_naranja"></div>
+                </a>
+                <span>Gestionar dispositivos</span>
             </div>
             <div>
-                <div class="circulo_naranja"></div>
+                <a href="#">
+                    <div class="circulo_naranja"></div>
+                </a>
                 <span>Pagar a Servicios</span>
             </div>
 

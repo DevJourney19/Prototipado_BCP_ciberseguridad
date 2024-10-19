@@ -5,7 +5,7 @@ validar_entrada('login_admi.php');
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <?php include 'fragmentos/head.php' ?>

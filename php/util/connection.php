@@ -6,7 +6,11 @@ function conectar() {
   global $cnx;
   $cnx = mysqli_connect(HOST, USER, PASS, DATABASE, PORT);
   mysqli_query($cnx, "set names utf8");
+  if ($cnx->connect_error) {
+    die("Conexión fallida: " . $cnx->connect_error);
+  }
 }
+
 #Desconexión de la base de datos
 function desconectar(){
   global $cnx;

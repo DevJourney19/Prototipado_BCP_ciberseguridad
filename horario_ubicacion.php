@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <?php include 'fragmentos/head.php' ?>
     <title>Rango de Horario y Ubicacion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="horario_ubicacion.css">
+    <link rel="stylesheet" href="css/horario_ubicacion.css">
 </head>
 
 <body>
     <header>
         <?php include 'fragmentos/nav.php' ?>
+        <?php include 'fragmentos/tabs.php' ?>
     </header>
     <main class="contenedor">
         <div class="secciones">
@@ -83,6 +84,7 @@
         <?php include 'fragmentos/menubar.php' ?>
     </footer>
     <script src="js/horario_ubicacion.js"></script>
+    <script src="js/utils.js"></script>
 </body>
 
 </html>

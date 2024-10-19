@@ -1,6 +1,6 @@
 <?php
 
-include './util/connection.php';
+include 'util/connection.php';
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -20,7 +20,7 @@ try {
     } else {
         session_start();
         session_destroy();
-        header("Location: ../login_admi.php?error=true");
+        header("Location: ../login_admin.php?error=true");
     }
 } catch (Exception $exc) {
     die($exc->getMessage());
