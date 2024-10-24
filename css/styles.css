@@ -129,6 +129,31 @@ main {
   padding: 0px;
 }
 
+/*alerta otp yape*/
+
+#alerta_codigo_otp {
+  font-size: 16px;
+  text-align: left;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+#alerta_codigo_otp i {
+  font-size: 2.5rem;
+}
+
+#alerta_codigo_otp span {
+  font-size: 16px;
+  color: black;
+  font-weight: 600;
+}
+
+#alerta_codigo_otp #codigoOTP{
+  font-size: 1.2rem;
+}
+
 /*primer cuadro*/
 .primer_cuadro {
   width: 90%;
@@ -545,6 +570,76 @@ canvas {
   color: #0b3d91;
 }
 
+/**Cancelar Servicio**/
+.contenedor-cancelar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedor-cancelar > div {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contenedor-cancelar .contenedor-texto {
+  color: #626262;
+  font-weight: 500;
+  text-align: left;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #a9a9a9;
+}
+
+.contenedor-cancelar .contenedor-info {
+  color: #001843;
+  font-weight: 600;
+  text-align: left;
+  padding: 20px 0;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.contenedor-cancelar .contenedor-info i {
+  color: #ff6600;
+  border: 2px solid #ff6600;
+  border-radius: 50%;
+  padding: 5px 10px;
+}
+
+.contenedor-cancelar .options {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.contenedor-cancelar .options a {
+  border: 2px solid #818181;
+  color: #818181;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.contenedor-cancelar .options button {
+  border: none;
+  color: white;
+  background-color: #ff6600;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/**Yape Seguro**/
 .contenedor-yape-seguro {
   text-align: center;
   display: flex;
@@ -553,7 +648,7 @@ canvas {
   align-items: center;
 }
 
-.contenedor-yape-seguro .icono-fila {
+.icono-fila {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -561,13 +656,13 @@ canvas {
   flex-wrap: wrap;
 }
 
-.contenedor-yape-seguro .icono-fila i {
+.icono-fila i {
   color: #001843;
   font-size: 48px;
   margin-right: 10px;
 }
 
-.contenedor-yape-seguro .icono-fila h2 {
+.icono-fila h2 {
   color: #001843;
   font-size: 24px;
   font-weight: bold;
@@ -578,13 +673,13 @@ canvas {
   margin: 0 auto;
 }
 
-.contenedor-texto p {
+.contenedor-yape-seguro .contenedor-texto p {
   color: #666666;
   margin-bottom: 20px;
   line-height: 1.5;
 }
 
-.contenedor-texto button {
+.contenedor-yape-seguro .contenedor-texto button {
   background-color: #ff6600;
   color: white;
   border: none;
@@ -622,39 +717,39 @@ canvas {
   font-weight: 600;
   .tab_title {
     display: flex;
-  align-items: center;
+    align-items: center;
     align-items: center;
     gap: 20px;
   }
 }
 
-.tabs_body{
-    overflow: auto;
-    display: flex;
-    gap:20px;
+.tabs_body {
+  overflow: auto;
+  display: flex;
+  gap: 20px;
 }
 
-.tab-link{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex:none;
-    background-color: #ff6600;
-    width: 150px;
-    text-align: center;
-    color: white;
-    border: none;
-    border-radius: 9999px;
-    padding: 10px;
-    cursor: pointer;
-    white-space: pre-line;
-    font-weight: 600;
-    font-size: 12px;
+.tab-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  background-color: #ff6600;
+  width: 150px;
+  text-align: center;
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  padding: 10px;
+  cursor: pointer;
+  white-space: pre-line;
+  font-weight: 600;
+  font-size: 12px;
 }
 
-.tab-link.active{
-    background-color: white;
-    color: #001843;
+.tab-link.active {
+  background-color: white;
+  color: #001843;
 }
 
 /**Toggle Switch**/
@@ -665,7 +760,7 @@ canvas {
   height: 34px;
 }
 
-.switch input { 
+.switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -685,7 +780,7 @@ canvas {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 34px;
 }
 
@@ -698,8 +793,8 @@ canvas {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
@@ -752,6 +847,7 @@ input:checked + .slider:before {
 }
 
 .contenedor-yape {
+  position: relative;
   background-color: #990099;
   border-radius: 10px;
   padding: 20px;
@@ -995,6 +1091,10 @@ input:checked + .slider:before {
 /*FIN CÓDIGO YAPE*/
 
 @media (min-width: 576px) {
+  .contenedor-cancelar > div {
+    width: 500px;
+  }
+
   nav {
     padding: 30px;
   }
@@ -1068,22 +1168,22 @@ input:checked + .slider:before {
     font-size: 1.1em;
   }
 
-  .tabs{
+  .tabs {
     padding: 20px 80px;
   }
 
-  .tabs_encabezado{
+  .tabs_encabezado {
     font-size: 2rem;
     gap: 50px;
     padding-bottom: 20px;
   }
 
-  .tabs_body{
+  .tabs_body {
     overflow: none;
     gap: 30px;
   }
 
-  .tab-link{
+  .tab-link {
     width: 200px;
   }
 
@@ -1091,13 +1191,18 @@ input:checked + .slider:before {
     display: block;
   }
 
-  .tab-link{
+  .tab-link {
     font-size: 16px;
   }
-
 }
 
 @media (min-width: 992px) {
+  body {
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+
   main {
     gap: 30px;
   }
@@ -1116,7 +1221,6 @@ input:checked + .slider:before {
     margin: 0 auto;
     gap: 5rem;
   }
-
 }
 
 @media (min-width: 1200px) {
@@ -1136,10 +1240,9 @@ input:checked + .slider:before {
     width: 50%;
   }
 
-  .tabs_body{
+  .tabs_body {
     justify-content: center;
   }
-
 }
 
 @media (min-width: 1400px) {

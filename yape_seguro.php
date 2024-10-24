@@ -1,16 +1,21 @@
 <?php
 include_once 'php/util/validar_entradas.php';
-include 'php/util/connection.php';
+include_once 'php/util/connection.php';
 validar_entrada('index.php');
 // verificar si ya ha sido contratado el servicio
 validar_servicio('principal.php');
 
-$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'] . " AND estado_yape= true";
+$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'];
 try {
     conectar();
-    $resultado = consultar($sql);
-    $datos = $resultado;
-    unset($resultado);
+    $resultado2 = consultar($sql);
+    if ($resultado2) {
+        $datos2 = $resultado2[0];
+    } else {
+        $datos2 = null;
+    }
+
+    unset($resultado2);
     desconectar();
 } catch (Exception $exc) {
     die($exc->getMessage());
@@ -21,7 +26,7 @@ try {
 <html lang="es">
 
 <head>
-    <?php include 'fragmentos/head.php' ?>
+    <?php include_once 'fragmentos/head.php' ?>
     <title>Yape Seguro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
@@ -29,8 +34,8 @@ try {
 
 <body>
     <header>
-        <?php include 'fragmentos/nav.php' ?>
-        <?php include 'fragmentos/tabs.php' ?>
+        <?php include_once 'fragmentos/nav.php' ?>
+        <?php include_once 'fragmentos/tabs.php' ?>
     </header>
     <main class="contenedor-yape-seguro">
         <div class="icono-fila">
@@ -38,7 +43,7 @@ try {
             <h2>Yapeo Seguro</h2>
         </div>
         <div class="contenedor-texto">
-            <?php if (count($datos) == 0) { ?>
+            <?php if (!$datos2["estado_yape"]) { ?>
                 <p>Al darle aceptar cuando realices un yapeo, recibirás un código de un solo uso para comprobar la veracidad
                     de la transacción.</p>
                 <button id="activar">Sí, deseo utilizar Yapeo Seguro</button>
@@ -51,17 +56,17 @@ try {
     </main>
 
     <footer>
-        <?php include 'fragmentos/menubar.php' ?>
+        <?php include_once 'fragmentos/menubar.php' ?>
     </footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const boton = document.querySelector('#activar');
-            const estado = <?php echo count($datos) == 0 ? 'false' : 'true' ?>;
+            const estado = <?php echo $datos2["estado_yape"] ? 'false' : 'true' ?>;
             boton.addEventListener('click', async () => {
                 await fetch("./php/estado_funcionalidades.php", {
                         method: "POST",
                         body: JSON.stringify({
-                            estado: !estado,
+                            estado: estado,
                             funcion: "estado_yape"
                         }),
                     })
@@ -83,6 +88,7 @@ try {
         })
     </script>
     <script src="js/utils.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>

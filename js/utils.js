@@ -19,7 +19,11 @@ const controlarFormulario = async (event) => {
 		return;
 	}
 
+	document.getElementById("telefono_activacion").disabled = true;
+	document.getElementById("nombre_activacion").disabled = true;
+	document.getElementById("correo_activacion").disabled = true;
 	document.getElementById("button_activacion").disabled = true;
+
 
 	await fetch("./php/util/verify_session.php")
 		.then((response) => response.json())
@@ -64,6 +68,9 @@ const controlarFormulario = async (event) => {
 	document.getElementById("telefono_activacion").value = "";
 	document.getElementById("checkbox_activacion").checked = false;
 };
+
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
 	const elems = document.querySelectorAll(".tab-link");

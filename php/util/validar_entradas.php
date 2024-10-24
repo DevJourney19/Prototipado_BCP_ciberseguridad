@@ -9,7 +9,7 @@ function validar_entrada($location) {
 }
 
 function validar_servicio($location) {
-    $sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'];
+    $sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'] . " AND activacion_seguridad = 1";
     try {
         conectar();
         $resultado = consultar($sql);
@@ -21,7 +21,7 @@ function validar_servicio($location) {
     }
 
     if (count($datos) == 0) {
-        exit("<script>alert('No ha contratado el servicio de Yape Seguro');
+        exit("<script>alert('No ha contratado el servicio de seguridad');
             window.location.href = '$location';</script>");
     }
 }

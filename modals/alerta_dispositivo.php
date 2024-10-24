@@ -10,10 +10,10 @@
           <span>Tipo: Laptop</span>
           <span>Ubicacion: Lima, Peru</span>
         </div>
-        <p>Para tu seguridad, te hemos enviado un codigo de verificacion a tu correo electronico. Por favor, ingresalo para continuar.</p>
+        <p>Para tu seguridad, te hemos enviado un codigo a tu correo electronico y sms. Por favor, ingresalo para continuar.</p>
       </div>
       <form action="#" class="form_verificacion">
-        <input type="text" placeholder="Codigo de verificacion">
+        <input type="number" placeholder="Codigo de verificacion">
         <div>
           <button type="button">Cancelar</button>
           <button type="submit">Verificar</button>

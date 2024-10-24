@@ -20,14 +20,18 @@ try {
   }
   $seguridad = $_SESSION['id_seguridad'];
   // Construir la consulta
-  $query = "UPDATE seguridad set $funcion  = '$estado' where id_seguridad='$seguridad'";
-
-  // Ejecutar la consulta
-  if (ejecutar($query)) {
-    $response = ['status' => $estado ? 'activado' : 'desactivado'];
-  } else {
-    $response = ['status' => 'no activado'];
+  if($funcion != 'activacion_seguridad') {
+    $query = "UPDATE seguridad set $funcion  = '$estado' where id_seguridad='$seguridad'";
+  } else{
+    $query = "UPDATE seguridad set activacion_seguridad  = '$estado', estado_horas_direcciones = '$estado', estado_yape = '$estado' where id_seguridad='$seguridad'";
+    unset($_SESSION['id_seguridad']);
   }
+      // Ejecutar la consulta
+      if (ejecutar($query)) {
+        $response = ['status' => $estado ? 'activado' : 'desactivado'];
+      } else {
+        $response = ['status' => 'no activado'];
+      }
 
   // Desconectar de la base de datos
   desconectar();

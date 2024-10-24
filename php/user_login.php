@@ -20,10 +20,10 @@ try {
         $_SESSION['security'] = '12345';
         $_SESSION['id'] = $registro[0]['id_usuario'];
         header("Location: ../principal.php");
-    } else if(count($entrada_no_deseada) == 1) {
-        session_start();
-        $_SESSION['id_no_permitido'] = $entrada_no_deseada[0]['id_usuario'];
-        header("Location: ../index.php?error=true");
+    // } else if(count($entrada_no_deseada) == 1) {
+    //     session_start();
+    //     $_SESSION['id_no_permitido'] = $entrada_no_deseada[0]['id_usuario'];
+    //     header("Location: ../index.php?error=true");
     } else {
         session_destroy();
         header("Location: ../index.php?error=true");

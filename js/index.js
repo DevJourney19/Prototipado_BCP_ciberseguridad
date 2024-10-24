@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
       elems[3].classList.add('active');
       break;
     default:
-      elems[0].classList.add('active');
+      elems[3].classList.add('active');
       break;
   }
 });

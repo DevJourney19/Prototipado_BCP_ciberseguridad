@@ -1,3 +1,17 @@
+<?php
+include_once 'php/util/connection.php';
+$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'];
+try {
+  conectar();
+  $resultado = consultar($sql);
+  $datos = $resultado[0]['estado_horas_direcciones'];
+  desconectar();
+} catch (Exception $exc) {
+  die($exc->getMessage());
+}
+
+?>
+
 <div class="tabs">
   <div class="tabs_encabezado">
     <div class=><a href="principal.php"><i class="fa-solid fa-arrow-left"></i></a>
@@ -7,7 +21,8 @@
       </div>
     </div>
     <label class="switch">
-      <input type="checkbox">
+      <input id="switchCheckbox" type="checkbox" <?php if ($datos)
+                                                    echo 'checked'; ?>>
       <span class="slider"></span>
     </label>
   </div>
@@ -18,3 +33,31 @@
     <a class="tab-link" href="cancelar_servicio.php">Cancelar Servicio</a>
   </div>
 </div>
+
+<script>
+  const switchCheckbox = document.getElementById('switchCheckbox');
+  const estado = <?php echo $datos ? 'false' : 'true' ?>;
+  switchCheckbox.addEventListener('change', async () => {
+    const response = await fetch("./php/estado_funcionalidades.php", {
+        method: "POST",
+        body: JSON.stringify({
+          estado: estado,
+          funcion: "estado_horas_direcciones",
+        }),
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Resultado:", data);
+        if (data.status == "activado") {
+          alert("Restricciones activadas");
+          location.reload();
+        } else {
+          alert("Restricciones desactivadas");
+          location.reload();
+        }
+      })
+      .catch((error) => {
+        console.error("Error al enviar los datos:", error);
+      });
+  });
+</script>
