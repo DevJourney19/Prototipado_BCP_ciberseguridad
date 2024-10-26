@@ -19,7 +19,7 @@ if (isset($_GET["error"])) {
 
 <body>
     <main>
-        <!-- <?php include 'modals/alerta_dispositivo.php' ?> -->
+        <?php include 'modals/alerta_dispositivo.php' ?>
         <div class="logo"><img src="img/loguito.png" alt="logo_bcp.jpg"></div>
         <div class="flex">
             <!--Cambiar image-->
@@ -47,7 +47,6 @@ if (isset($_GET["error"])) {
             </div>
         </div>
     </main>
-    <script src="js/"></script>
     <script src="keyboard/keyboard.js"></script>
     <script src="js/limite_clave_internet.js"></script>
 </body>

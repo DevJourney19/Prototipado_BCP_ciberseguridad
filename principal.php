@@ -2,6 +2,18 @@
 include_once 'php/util/validar_entradas.php';
 include 'php/util/connection.php';
 validar_entrada('index.php');
+
+$sql = "SELECT * FROM usuario WHERE id_usuario = " . $_SESSION['id'];
+try {
+    conectar();
+    $resultado = consultar($sql);
+    $nombre = $resultado[0]["nombre"];
+    unset($resultado);
+    desconectar();
+} catch (Exception $exc) {
+    die($exc->getMessage());
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +39,7 @@ validar_entrada('index.php');
     </div>
     <div class="cuadro_superior">
         <div class="izquierda">
-            <div><span class="hola">Hola, </span><span>Yoshua</span></div>
+            <div><span class="hola">Hola, </span><span><?=$nombre?></span></div>
             <div class="circulo">
             </div>
         </div>
@@ -57,7 +69,7 @@ validar_entrada('index.php');
                 <span>Transferir Dinero</span>
             </div>
             <div>
-                <a href="yape_seguro.php">
+                <a href="yape.php">
                     <div class="circulo_naranja"></div>
                 </a>
                 <span>Yapear Seguro</span>

@@ -4,12 +4,11 @@ include 'php/util/connection.php';
 validar_entrada('index.php');
 // verificar si ya ha sido contratado el servicio
 
-$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'];
+$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'] . " AND activacion_seguridad = 1";
 try {
     conectar();
     $resultado = consultar($sql);
     $datos = $resultado;
-
     desconectar();
 } catch (Exception $exc) {
     die($exc->getMessage());

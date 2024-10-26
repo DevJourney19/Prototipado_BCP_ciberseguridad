@@ -132,7 +132,7 @@ input.only_text{
   border-radius: 20px;
   box-shadow: 2px 2px 10px;
   z-index: 100;
-  width: 320px;
+  width: 350px;
 }
 
 .modal i {
@@ -149,15 +149,12 @@ input.only_text{
 .modal .description{
   color: #ABAAAA;
   text-align: center;
-  margin-bottom: 20px;
-}
-
-.modal .description div{
+  font-size: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding:10px 0;
+  padding:10px 20px;
 }
 
 .form_verificacion input{
@@ -178,8 +175,7 @@ input.only_text{
   gap: 10px;
 }
 
-.form_verificacion button:nth-child(1){
-  background: #ff7900;
+.modal button{
   color: #ffff;
   border: transparent;
   padding: 10px 30px;
@@ -187,21 +183,62 @@ input.only_text{
   cursor: pointer;
 }
 
-.form_verificacion button:nth-child(2){
+.modal button.bloquear{
   background: #001843;
-  color: #ffff;
-  border: transparent;
-  padding: 10px 30px;
-  border-radius: 30px;
-  cursor: pointer;
 }
 
+.modal button.aceptar{
+  background: #ff7900;
+}
+
+.modal .button_modal{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.close{
+  display: none;
+}
 
 .error{
   font-weight: 600;
   color: rgb(160, 56, 56);
   font-size: 1.2rem;
 }
+
+.contenedor-token{
+  width: 100%;
+}
+
+.contenedor-token input{
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.contenedor-token input:focus{
+  border-color: #001843;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 024, 67, 0.5);
+}
+
+@media (min-width: 768px) {
+
+  .contenedor-token{
+    width: 350px;
+  }
+
+  .modal{
+    width: 500px;
+  }
+
+  .modal .button_modal{
+    flex-direction: row;
+    gap: 20px;
+  }
+}
+
 
 @media (max-width: 992px) {
   .img_trabajador {
