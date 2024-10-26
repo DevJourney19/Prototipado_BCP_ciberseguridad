@@ -55,6 +55,7 @@
                         <label for="dispositivo1"><span class="radio-button"></span></label>
                     </div>
                 </div>
+                <!--
                 <div class="caja">
                     <div class="primero">
                         <div class="imagen">
@@ -177,19 +178,21 @@
                         <label for="dispositivo6"><span class="radio-button"></span></label>
                     </div>
                 </div>
+
             </div>
         </div>
-        <div class="opciones">
-            <div class="boton-primario">
-                <button type="button" onclick="openModal()">Dispositivo Principal</button>
-            </div>
-            <div class="boton-secundario">
-                <button type="button" onclick="openModalDos()" >Desvincular</button>
-            </div>
-            <div class="boton-primario">
-                <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
-            </div>
-        </div>
+        -->
+                <div class="opciones">
+                    <div class="boton-primario">
+                        <button type="button" onclick="openModal()">Dispositivo Principal</button>
+                    </div>
+                    <div class="boton-secundario">
+                        <button type="button" onclick="openModalDos()">Desvincular</button>
+                    </div>
+                    <div class="boton-primario">
+                        <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
+                    </div>
+                </div>
     </main>
     <footer>
         <?php include 'fragmentos/menubar.php' ?>
@@ -230,5 +233,4 @@
     <script src="js/utils.js"></script>
     <script src="js/dispositivos.js"></script>
 </body>
-
 </html>
