@@ -1,0 +1,78 @@
+.keyboard{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 5px 0;
+    background: #04247c;
+    box-shadow: 0 0 50 rgba(0, 0, 0, 0.5);
+    user-select: none;
+    transition: botom 0.4s;
+    /* probando */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+}
+.keyboard--hidden{
+    bottom: -100%;
+    /* porsiacaso */
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+}
+.keyboard--visible {
+    opacity: 1; /* Mostrar el teclado */
+    transform: translateY(0); /* Restablecer posición */
+}
+.keyboard_keys{
+    text-align: center;
+}
+.keyboard_key{
+    height: 45px;
+    width: 6%;
+    max-width: 90px;
+    margin: 3px;
+    border-radius: 4px;
+    border: none;
+    background: rgba(180, 175, 175, 0.3);
+    color: #ffffff;
+    font-size: 1.05rem;
+    outline: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+}
+.keyboard_key:active{
+    background: rgba(255, 255, 255, 0.12);
+
+}
+.keyboard_key--wide{
+    width: 12%;
+}
+/* mas adelante lo borro */
+.keyboard_key--extra-wide{
+    width: 36%;
+    max-width: 500px;
+}
+.keyboard_key--activatable::after{
+    content: '';
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+}
+.keyboard_key--active::after{
+    background: #08ff00;
+}
+.keyboard_key--dark{
+    background: rgba(0, 0, 0, 0.25);
+}

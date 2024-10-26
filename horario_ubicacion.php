@@ -1,8 +1,16 @@
+<?php
+include_once 'php/util/validar_entradas.php';
+include_once 'php/util/connection.php';
+validar_entrada('index.php');
+// verificar si ya ha sido contratado el servicio
+validar_servicio('principal.php');
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <?php include 'fragmentos/head.php' ?>
+    <?php include_once 'fragmentos/head.php' ?>
     <title>Rango de Horario y Ubicacion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="css/horario_ubicacion.css">
@@ -10,7 +18,8 @@
 
 <body>
     <header>
-        <?php include 'fragmentos/nav.php' ?>
+        <?php include_once 'fragmentos/nav.php' ?>
+        <?php include_once 'fragmentos/tabs.php' ?>
     </header>
     <main class="contenedor">
         <div class="secciones">
@@ -79,10 +88,12 @@
             <button class="boton-naranja">Cerrar</button>
         </div>
     </div>
-    <footer style="positon: absolute; bottom:0px;">
-        <?php include 'fragmentos/menubar.php' ?>
+    <footer>
+        <?php include_once 'fragmentos/menubar.php' ?>
     </footer>
     <script src="js/horario_ubicacion.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>

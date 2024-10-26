@@ -10,8 +10,15 @@ try {
   conectar();
 
   $id = $_SESSION['id'];
-  // Construir la consulta
-  $query = "INSERT INTO seguridad(id_usuario) VALUES('$id')";
+
+  // verificar si ya ha sido contratado el servicio
+  $sql = "SELECT * FROM seguridad WHERE id_usuario = '$id'";
+  $resultadoVerificacion = consultar($sql);
+  if ($resultadoVerificacion) {
+    $query = "UPDATE seguridad set activacion_seguridad  = '1' where id_usuario='$id'";
+  } else {
+    $query = "INSERT INTO seguridad(id_usuario) VALUES('$id')";
+  }
 
   // Ejecutar la consulta
   if (ejecutar($query)) {
@@ -27,7 +34,7 @@ try {
   // Desconectar de la base de datos
   desconectar();
 } catch (Exception $e) {
-  echo "Error: ".$e;
+  echo "Error: " . $e;
   $response = [
     'status' => 'Datos incompletos',
     'message' => 'error'

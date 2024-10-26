@@ -1,8 +1,16 @@
+<?php
+include_once 'php/util/validar_entradas.php';
+include_once 'php/util/connection.php';
+validar_entrada('index.php');
+// verificar si ya ha sido contratado el servicio
+validar_servicio('principal.php');
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <?php include 'fragmentos/head.php' ?>
+    <?php include_once 'fragmentos/head.php' ?>
     <link href="css/dispositivos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +23,8 @@
 
 <body>
     <header>
-        <?php include 'fragmentos/nav.php' ?>
+        <?php include_once 'fragmentos/nav.php' ?>
+        <?php include_once 'fragmentos/tabs.php' ?>
     </header>
 
     <main>
@@ -195,7 +204,7 @@
                 </div>
     </main>
     <footer>
-        <?php include 'fragmentos/menubar.php' ?>
+        <?php include_once 'fragmentos/menubar.php' ?>
     </footer>
     <dialog class="dispositivo-vinculados" id="vinculo">
         <div class="imagen">

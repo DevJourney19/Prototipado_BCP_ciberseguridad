@@ -34,6 +34,7 @@
             <button class="boton-azul">Salir</button>
         </div>
     </main>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
