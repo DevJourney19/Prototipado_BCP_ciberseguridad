@@ -9,6 +9,8 @@ try {
     conectar();
     $resultado = consultar($sql);
     $datos = $resultado;
+    unset($resultado);
+
     desconectar();
 } catch (Exception $exc) {
     die($exc->getMessage());
