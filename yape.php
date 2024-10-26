@@ -53,13 +53,12 @@
     <script src="https://unpkg.com/@otplib/preset-browser@^12.0.0/index.js"></script>
     <script type="text/javascript">
         function generarToken() {
-
             document.getElementById('alerta_codigo_otp').classList.remove('close');
             if (window.otplib) {
                 const {
                     authenticator
                 } = window.otplib;
-                const secret = 'KVKFKRCPNZQUYMLXOVYDSQKJKZDTSRLD';
+                const secret = authenticator.generateSecret();
                 const token = authenticator.generate(secret);
                 document.getElementById('codigoOTP').innerText = token;
             } else {
@@ -75,6 +74,20 @@
                 inputs[i].value = token[i];
             }
             document.getElementById('modal-token').classList.add('active');
+            // si no se presiona en 30 segundos, cerrar el modal y borrar el código
+            setTimeout(() => {
+                cerrarModal();
+            }, 30000);
+        }
+        
+        function cerrarModal() {
+            document.getElementById('alerta_codigo_otp').classList.add('close');
+            document.getElementById('modal-token').classList.remove('active');
+            document.getElementById('codigoOTP').innerText = '';
+            const inputs = document.getElementsByClassName('input-token');
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].value = '';
+            }
         }
 
         function verificarCodigo(){
@@ -92,11 +105,6 @@
             }else{
                 alert('Código incorrecto');
             }
-        }
-
-        function cerrarModal() {
-            document.getElementById('alerta_codigo_otp').classList.add('close');
-            document.getElementById('modal-token').classList.remove('active');
         }
     </script>
 </body>
