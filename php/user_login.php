@@ -6,7 +6,7 @@ $tarjeta = $_POST['tarjeta'];
 $dni = $_POST['dni'];
 $pin = $_POST['pin'];
 
-$validar_login = "SELECT * FROM usuario WHERE numero_tarjeta = '$tarjeta' AND dni = '$dni' ; #AND AES_DECRYPT(password, '$pin') = '$pin'";
+$validar_login = "SELECT * FROM usuario WHERE numero_tarjeta = '$tarjeta' AND dni = '$dni' AND AES_DECRYPT(password, '$pin') = '$pin'";
 //Haciendo pruebas en todo caso antes de implementar la verificación (confirmación) por correo
 $verificar_entradas = "SELECT * FROM usuario WHERE numero_tarjeta = '$tarjeta' OR dni = '$dni'";
 

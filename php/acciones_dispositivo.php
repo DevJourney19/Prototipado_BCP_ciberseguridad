@@ -11,7 +11,6 @@ $validar_login = "SELECT * FROM usuario WHERE numero_tarjeta = '$tarjeta' AND dn
 
 $id_dispositivo = $_POST['id_dispositivo'];
 
-
 session_start();
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $accion = $_POST['accion'] ?? '';
