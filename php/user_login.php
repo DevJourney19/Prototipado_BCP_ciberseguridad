@@ -19,6 +19,14 @@ try {
         session_start();
         $_SESSION['security'] = '12345';
         $_SESSION['id'] = $registro[0]['id_usuario'];
+        $sqlSeguridad = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'];
+        conectar();
+        $resultado = consultar($sqlSeguridad);
+        desconectar();
+        $idSeguridad = $resultado[0]['id_seguridad'];
+        if($resultado[0]['activacion_seguridad'] == 1) {
+            $_SESSION['id_seguridad'] = $idSeguridad;
+        } 
         header("Location: ../principal.php");
     // } else if(count($entrada_no_deseada) == 1) {
     //     session_start();
