@@ -1,5 +1,5 @@
 <?php
-include 'util/connection.php';
+include '../php/util/connection.php';
 session_start();
 conectar();
 //Se va a obtener el id del usuario, en caso coincida su DNI o su tarjeta de crédito

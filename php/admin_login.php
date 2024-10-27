@@ -1,6 +1,6 @@
 <?php
 
-include 'util/connection.php';
+include '../php/util/connection.php';
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -16,11 +16,11 @@ try {
         session_start();
         $_SESSION['security'] = '12345';
         $_SESSION['id'] = $registro[0]['id_usuario'];
-        header("Location: ../dashboard.php");
+        header("Location: ../view/dashboard.php");
     } else {
         session_start();
         session_destroy();
-        header("Location: ../login_admin.php?error=true");
+        header("Location: ../view/login_admin.php?error=true");
     }
 } catch (Exception $exc) {
     die($exc->getMessage());

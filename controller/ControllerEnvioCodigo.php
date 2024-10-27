@@ -5,9 +5,21 @@ header('Content-Type: application/json');
 require '../vendor/autoload.php';
 session_start();
 
+require __DIR__ . '/../vendor/autoload.php';
+
+use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+use Infobip\Configuration;
+use Infobip\Api\SmsApi;
+use Infobip\Model\SmsDestination;
+use Infobip\Model\SmsTextualMessage;
+use Infobip\Model\SmsAdvancedTextualRequest;
 
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
+// Configuración del servidor de correo
 $mail = new PHPMailer(true);
 
 $mail->SMTPDebug = SMTP::DEBUG_SERVER;
@@ -18,8 +30,13 @@ $mail->Host = 'smtp.gmail.com';
 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 $mail->Port = 587;
 
-$mail->Username = 'bcp83584@gmail.com';
-$mail->Password = 'fclf uyik umrb fxae';
+$mail->Username = $_ENV['EMAIL'];
+$mail->Password = $_ENV['PASSWORD'];
+
+// Configuración del sms
+$base_url = $_ENV['URL'];
+$api_key = $_ENV['API_KEY'];
+$configuration = new Configuration(host: $base_url, apiKey: $api_key);
 
 try {
   $response = [];
@@ -53,6 +70,19 @@ try {
   $mail->Body = 'El codigo de verificacion es: ' . $codigo;
 
   $mail->send();
+
+
+  $api = new SmsApi(config: $configuration);
+  $destination = new SmsDestination(to: $telefono);
+  $message = new SmsTextualMessage(
+    destinations: [$destination],
+    text: 'El codigo de verificacion es: ' . $codigo
+  );
+
+  $request = new SmsAdvancedTextualRequest(messages: [$message]);
+  $responseSms = $api->sendSmsMessage($request);
+
+
   $response = ['status' => 'enviado'];
 } catch (Exception $e) {
   $response = ['status' => 'error', 'message' => $e->getMessage()];

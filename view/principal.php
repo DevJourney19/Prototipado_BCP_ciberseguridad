@@ -104,7 +104,7 @@ try {
                     <span>Seguridad Mejorada</span>
                     <p>Introduce nuevas funcionalidades y controla tus datos</p>
                 </div>
-                <div><i class="fa-solid fa-user-lock"></i>
+                <div><i class="fa-solid fa-user-lock fa-2xl"></i>
                     <a href="activacion.php" class="fa-solid fa-chevron-right fa-xl"></a>
                 </div>
             </div>

