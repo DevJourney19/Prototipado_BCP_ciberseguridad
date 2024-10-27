@@ -7,7 +7,7 @@ $password = $_POST['password'];
 $nombre = $_POST['nombre'];
 
 
-$validar_login = "SELECT * FROM usuario WHERE correo = '$email' AND nombre='$nombre' AND AES_DECRYPT(password, '$password') = '$password'";
+$validar_login = "SELECT * FROM usuario WHERE correo = '$email' AND nombre='$nombre' AND AES_DECRYPT(password, 'D9u#F5h8*Z3kB9!nL7^mQ4') = '$password'";
 try {
     conectar();
     $registro = consultar($validar_login);
