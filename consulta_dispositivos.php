@@ -15,7 +15,7 @@ if ($inc) {
     $id_seguridad = $array_seguridad[0]['id_seguridad'] ?? "";
     /*Se va a filtrar todos los dispositivos almacenados de la base de datos con parametros si estan establecidos 
     como inseguros y por el id de seguridad activado, el cual está relacionado de 1 a 1 con la información del cliente.*/
-    $consulta = consultar("Select dispositivo_seguro, tipo_dispositivo, direccion_ip, 
+    $consulta = consultar("Select id_dispositivo, dispositivo_seguro, tipo_dispositivo, direccion_ip, 
     pais, ciudad, fecha_registro from dispositivos where dispositivo_seguro=0 and id_seguridad='$id_seguridad'");
     desconectar();
 }

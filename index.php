@@ -45,7 +45,7 @@ if (isset($_GET["error"])) {
             </div>
         </div>
     </main>
-    <script src="js/"></script>
+    <!--<script src="js/"></script>-->
 </body>
 
 </html>

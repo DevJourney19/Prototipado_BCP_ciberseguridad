@@ -25,7 +25,6 @@ function consultar($query) {
   $lista = array();
   while ($registro = mysqli_fetch_assoc($result)) {
       $lista[] = $registro;
-      
   }
   mysqli_free_result($result);
   unset($registro);

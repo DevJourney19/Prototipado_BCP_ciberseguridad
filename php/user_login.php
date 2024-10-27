@@ -6,7 +6,7 @@ $tarjeta = $_POST['tarjeta'];
 $dni = $_POST['dni'];
 $pin = $_POST['pin'];
 
-$validar_login = "SELECT * FROM usuario WHERE numero_tarjeta = '$tarjeta' AND dni = '$dni' AND AES_DECRYPT(password, '$pin') = '$pin'";
+$validar_login = "SELECT * FROM usuario WHERE numero_tarjeta = '$tarjeta' AND dni = '$dni' AND AES_DECRYPT(clave_internet, '$pin') = '$pin'";
 //Haciendo pruebas en todo caso antes de implementar la verificación (confirmación) por correo
 $verificar_entradas = "SELECT * FROM usuario WHERE numero_tarjeta = '$tarjeta' OR dni = '$dni'";
 
@@ -16,7 +16,7 @@ try {
     $entrada_no_deseada = consultar($verificar_entradas);
     desconectar();
     
-    if (count($registro) == 1) {
+    if (count($registro) = 1) {
         session_start();
         $_SESSION['security'] = '12345';
         $_SESSION['id'] = $registro[0]['id_usuario'];
