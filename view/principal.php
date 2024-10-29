@@ -3,7 +3,7 @@ include_once '../php/util/validar_entradas.php';
 include '../php/util/connection.php';
 validar_entrada('index.php');
 
-$sql = "SELECT * FROM usuario WHERE id_usuario = " . $_SESSION['id'];
+$sql = "SELECT * FROM usuario WHERE id_usuario = " . $_SESSION['id_usuario'];
 try {
     conectar();
     $resultado = consultar($sql);
@@ -39,7 +39,7 @@ try {
     </div>
     <div class="cuadro_superior">
         <div class="izquierda">
-            <div><span class="hola">Hola, </span><span><?=$nombre?></span></div>
+            <div><span class="hola">Hola, </span><span><?= $nombre ?></span></div>
             <div class="circulo">
             </div>
         </div>

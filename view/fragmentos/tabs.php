@@ -1,6 +1,6 @@
 <?php
 include_once '../php/util/connection.php';
-$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'];
+$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id_usuario'];
 try {
   conectar();
   $resultado = consultar($sql);

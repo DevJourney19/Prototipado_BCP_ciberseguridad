@@ -17,9 +17,11 @@ try {
   if ($resultadoVerificacion) {
     $query = "UPDATE seguridad set activacion_seguridad  = '1' where id_usuario='$id'";
   } else {
-    $query = "INSERT INTO seguridad(id_usuario) VALUES('$id')";
+    //Se obtiene la dirección pública que posteriormente se almacenará en la base de datos
+    $public_ip = getPublicIp();
+    $query = "INSERT INTO seguridad(id_usuario, ip_activacion) VALUES('$id', '$public_ip')";
   }
-
+ 
   // Ejecutar la consulta
   if (ejecutar($query)) {
     $response = ['status' => 'registrado'];
@@ -40,6 +42,11 @@ try {
     'message' => 'error'
   ];
 }
-
+function getPublicIp()
+{
+  //Hacer una solicitud a ipify.org para obtener la IP pública
+  $ip = file_get_contents('https://api.ipify.org');
+  return $ip;
+}
 // Enviar la respuesta en formato JSON
 echo json_encode($response);

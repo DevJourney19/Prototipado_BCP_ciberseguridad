@@ -4,7 +4,7 @@ $inc = include_once("../php/util/connection.php");
 if ($inc) {
     session_start();
     //Obtenemos el id del usuario que ingreso a la cuenta
-    $id_usuario = $_SESSION['id'];
+    $id_usuario = $_SESSION['id_usuario'];
     conectar();
     /*Quiero mostrar la información almacenada de la tabla dispositivos, para ello necesito el id del usuario, y 
     de ahi el id de seguridad, para recien llegar al dispositivo, el cual su llave foranea es el id_seguro*/
@@ -16,7 +16,7 @@ if ($inc) {
     /*Se va a filtrar todos los dispositivos almacenados de la base de datos con parametros si estan establecidos 
     como inseguros y por el id de seguridad activado, el cual está relacionado de 1 a 1 con la información del cliente.*/
     $consulta = consultar("Select id_dispositivo, dispositivo_seguro, tipo_dispositivo, direccion_ip, 
-    pais, ciudad, fecha_registro from dispositivos where dispositivo_seguro=0 and id_seguridad='$id_seguridad'");
+    pais, ciudad, verificado, fecha_registro from dispositivos where dispositivo_seguro=0 and id_seguridad='$id_seguridad'");
     desconectar();
 }
 ?>
@@ -59,6 +59,7 @@ if ($inc) {
                     <th>Direccion IP</th>
                     <th>Pais</th>
                     <th>Ciudad</th>
+                    <th>Verificado?</th>
                     <th>Fecha de Registro</th>
                     <th colspan="2">Acciones</th>
                 </tr>
@@ -70,6 +71,7 @@ if ($inc) {
                         $direccion_ip = $row["direccion_ip"];
                         $pais = $row["pais"];
                         $ciudad = $row["ciudad"];
+                        $verificado = $row['verificado'];
                         $fecha_registro = $row["fecha_registro"];
                         $id_dispositivo = $row["id_dispositivo"];
                         ?>
@@ -79,22 +81,27 @@ if ($inc) {
                             <td><?= htmlspecialchars($direccion_ip) ?></td>
                             <td><?= htmlspecialchars($pais) ?></td>
                             <td><?= htmlspecialchars($ciudad) ?></td>
+                            <?php if ($verificado == 1) { ?>
+                                <td>Si</td>
+                            <?php } else { ?>
+                                <td>No</td>
+                            <?php } ?>
                             <td><?= htmlspecialchars($fecha_registro) ?></td>
-                            <form action="php/acciones_dispositivo">
-                            <input type="hidden" name="id_dispositivo" value="<?= htmlspecialchars($id_dispositivo) ?>">
-                                <td><button type="submit" class="botoncito_accion_eliminar" name="accion" value="eliminar">Eliminar <i
-                                            class="fa-solid fa-x"></i></button>
+                            <form action="../php/acciones_dispositivo.php" method="POST">
+                                <input type="hidden" name="id_dispositivo" value="<?= htmlspecialchars($id_dispositivo) ?>">
+                                <td><button type="submit" class="botoncito_accion_eliminar" name="accion"
+                                        value="eliminar">Eliminar <i class="fa-solid fa-x"></i></button>
                                 </td>
 
 
-                                <td><button type="submit" class="botoncito_accion_bloquear" name="accion" value="bloquear">Bloquear <i
-                                            class="fa-solid fa-ban"></i></button>
+                                <td><button type="submit" class="botoncito_accion_bloquear" name="accion"
+                                        value="bloquear">Bloquear <i class="fa-solid fa-ban"></i></button>
                                 </td>
                             </form>
                         </tr>
                     <?php }
                 } ?>
-                
+
             </table>
 
         </div>

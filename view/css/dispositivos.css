@@ -34,7 +34,7 @@
 }
 
 .caja {
-    width: calc(50% - 20px);
+    /*width: calc(50% - 20px);*/
     padding: 10px 20px;
     display: flex;
     gap: 6rem;

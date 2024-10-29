@@ -1,10 +1,10 @@
 <?php
-include_once 'php/util/validar_entradas.php';
-include 'php/util/connection.php';
+include '../php/util/validar_entradas.php';
+include '../php/util/connection.php';
 validar_entrada('index.php');
 // verificar si ya ha sido contratado el servicio
 
-$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'] . " AND activacion_seguridad = 1";
+$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id_usuario'] . " AND activacion_seguridad = 1";
 try {
     conectar();
     $resultado = consultar($sql);

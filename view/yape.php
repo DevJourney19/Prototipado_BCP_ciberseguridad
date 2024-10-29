@@ -5,7 +5,16 @@ validar_entrada('index.php');
 // verificar si ya ha sido contratado el servicio
 validar_servicio('principal.php');
 // verificar si la funcion de yape ha sido activada
-$sql = "SELECT * FROM seguridad WHERE id_seguridad = " . $_SESSION['id_seguridad'] . " AND estado_yape = 1";
+
+$id_seguridad = $_SESSION['id_seguridad'] ?? null; // Usando coalescencia nula
+
+if ($id_seguridad === null) {
+    return null; // Maneja el caso donde id_seguridad no está definido
+}
+
+
+
+$sql = "SELECT * FROM seguridad WHERE id_seguridad = '" . $id_seguridad . "' AND estado_yape = 1";
 try {
     conectar();
     $resultadoYape = consultar($sql);
@@ -52,9 +61,7 @@ try {
                 <button class="btn-otros">Otros Bancos</button>
                 <button class="btn-yapear" <?php
                 if ($estado == 1) {
-                ?>
-                    onclick="abrirModal()"
-                <?php }?>>Yapear</button>
+                    ?> onclick="abrirModal()" <?php } ?>>Yapear</button>
             </div>
         </div>
     </div>
@@ -105,7 +112,7 @@ try {
                 cerrarModal();
             }, 30000);
         }
-        
+
         function cerrarModal() {
             document.getElementById('alerta_codigo_otp').classList.add('close');
             document.getElementById('modal-token').classList.remove('active');
@@ -116,19 +123,19 @@ try {
             }
         }
 
-        function verificarCodigo(){
+        function verificarCodigo() {
             const token = document.getElementById('codigoOTP').innerText;
             const tokenElements = document.getElementsByClassName('input-token');
             let tokenIngresado = '';
             Array.from(tokenElements).forEach((element) => {
                 tokenIngresado += element.value;
             });
-            if(token === tokenIngresado){
+            if (token === tokenIngresado) {
                 alert('Yapeo exitoso');
                 cerrarModal();
                 document.getElementsByClassName('digitar-monto')[0].value = 0;
                 document.getElementsByClassName('mensaje-yape')[0].value = '';
-            }else{
+            } else {
                 alert('Código incorrecto');
             }
         }

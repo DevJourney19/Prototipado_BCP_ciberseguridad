@@ -5,7 +5,7 @@ validar_entrada('index.php');
 // verificar si ya ha sido contratado el servicio
 validar_servicio('principal.php');
 
-$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'];
+$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id_usuario'];
 try {
     conectar();
     $resultado2 = consultar($sql);

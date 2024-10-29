@@ -2,14 +2,14 @@
 
 function validar_entrada($location) {
     session_start();
-    if (!isset($_SESSION['id'])) {
+    if (!isset($_SESSION['id_usuario'])) {
         exit("<script>alert('Inicie Sesion para poder continuar');
             window.location.href = '$location';</script>");
     }
 }
 
 function validar_servicio($location) {
-    $sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'] . " AND activacion_seguridad = 1";
+    $sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id_usuario'] . " AND activacion_seguridad = 1";
     try {
         conectar();
         $resultado = consultar($sql);
