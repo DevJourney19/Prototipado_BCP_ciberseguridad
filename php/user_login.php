@@ -18,7 +18,6 @@ $_SESSION['ciudad'] = $info['city'];
 $hora_actual = date("h:i:s");
 $_SESSION['hora'] = $hora_actual;
 
-
 // Corregir la consulta para desencriptar el pin almacenado y compararlo con el ingresado
 $validar_login = "SELECT * FROM usuario WHERE numero_tarjeta = '$tarjeta' AND dni = '$dni' AND AES_DECRYPT(clave_internet, 'D9u#F5h8*Z3kB9!nL7^mQ4') = '$clave_internet'";
 
@@ -29,21 +28,18 @@ $verificar_ip_activada = "SELECT * FROM usuario WHERE ip_principal= '$dir_ip'";
 
 //2. Entrar a dispositivos por el id de seguridad
 
+
 try {
     conectar();
     $direccion_ip_deseada = consultar($verificar_ip_activada);
 
     $registro = consultar($validar_login);
-    //$direccion_seguridad = "SELECT * FROM seguridad WHERE id_usuario= " . $registro['id_usuario'];
-    //$valores = consultar($direccion_seguridad);
-    //$entrada_no_deseada = consultar($verificar_entradas);
 
     desconectar();
 
     if (count($registro) == 1) {
         
         $_SESSION['security'] = '12345';
-
         $_SESSION['id_usuario'] = $registro[0]['id_usuario'];
         $id_usuario = $_SESSION['id_usuario'];
 
@@ -76,6 +72,7 @@ try {
             header("Location: ../view/principal.php");
         }
     } else {
+
         session_destroy();
         header("Location: ../view/index.php?error=true");
     }
@@ -83,16 +80,3 @@ try {
 } catch (Exception $exc) {
     die($exc->getMessage());
 }
-
-/*
-} else if (count($entrada_no_deseada) == 1) {
-session_start();
-$_SESSION['id_no_permitido'] = $entrada_no_deseada[0]['id_usuario'];
-
-//Como puedo hacer para que no me lleve a esa direccion solo que ejecute codigo?
-//echo "<script>window.location.href = 'direccion_ip.php';</script>";
-
-} else {
-session_destroy();
-header("Location: ../index.php?error=true");
-}*/
