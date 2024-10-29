@@ -7,9 +7,9 @@
     </div>
     <div>
       <div class="description">
-        <span>Tipo: <?= $_SESSION['dispositivo']?></span>
-        <span>Ubicacion: <?= $_SESSION['ciudad']?>, <?= $_SESSION['pais']?></span>
-        <span>Hora: <?= $_SESSION['hora']?></span>
+        <span>Tipo: <?= $_SESSION['dispositivo'] ?></span>
+        <span>Ubicacion: <?= $_SESSION['ciudad'] ?>, <?= $_SESSION['pais'] ?></span>
+        <span>Hora: <?= $_SESSION['hora'] ?></span>
       </div>
       <div class="button_modal">
         <button type="button" id="envioCodigo" class="aceptar" onclick="enviarCodigo()">Si, enviar codigo</button>
@@ -53,6 +53,21 @@
   let secret;
   let token;
   let timeoutHandle = 0;
+
+  const inputs = document.querySelectorAll('input[type=number]');
+
+  inputs.forEach((input, index) => {
+    input.addEventListener('input', function () {
+      // Si la longitud del valor del input es igual a su máximo
+      if (this.value.length >= this.max) {
+        // Mueve el foco al siguiente input
+        if (index + 1 < inputs.length) {
+          inputs[index + 1].focus();
+        }
+      }
+    });
+  });
+
   function resetTimeout() {
     clearTimeout(timeoutHandle);
     timeoutHandle = setTimeout(() => {
@@ -132,10 +147,27 @@
         console.error('Error al establecer la sesión: ', error);
       };
 
-
-
-    } else {
+    } else { //Que se cree un registro pero con el verificado en 0
       alert('Código incorrecto');
+      try {
+        const response = await fetch('../php/set_session.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ token_validado: false })
+        });
+        const textResponse = await response.text(); // Obtener la respuesta como texto
+        console.log(textResponse); // Imprimir la respuesta para depuración
+
+        const data = JSON.parse(textResponse);
+        //const data = await response.json();
+
+        window.location.href = "./index.php";
+
+      } catch (error) {
+        console.error('Error al establecer la sesión: ', error);
+      };
     }
     resetTimeout();
   }

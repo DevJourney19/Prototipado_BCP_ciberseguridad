@@ -38,7 +38,7 @@ try {
     desconectar();
 
     if (count($registro) == 1) {
-        
+
         $_SESSION['security'] = '12345';
         $_SESSION['id_usuario'] = $registro[0]['id_usuario'];
         $id_usuario = $_SESSION['id_usuario'];
@@ -72,7 +72,6 @@ try {
             header("Location: ../view/principal.php");
         }
     } else {
-
         session_destroy();
         header("Location: ../view/index.php?error=true");
     }
