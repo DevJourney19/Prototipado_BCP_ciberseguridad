@@ -5,6 +5,7 @@ validar_entrada('index.php');
 // verificar si ya ha sido contratado el servicio
 
 $sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id_usuario'] . " AND activacion_seguridad = 1";
+
 try {
     conectar();
     $resultado = consultar($sql);

@@ -1,10 +1,9 @@
 <?php
 include_once '../php/util/validar_entradas.php';
 include_once '../php/util/connection.php';
-include_once 'direccion_ip.php';
+include_once 'util/direccion_ip.php';
 
 validar_entrada('index.php');
-
 
 header('Content-Type: application/json');
 $data = json_decode(file_get_contents("php://input"), true);
@@ -12,11 +11,11 @@ $data = json_decode(file_get_contents("php://input"), true);
 
 if (isset($data['token_validado'])) {
     $_SESSION['token_validado'] = $data['token_validado'];
-    $verificado = $data['token_validado'] === true ? 1 : 0;
-    registrar_dispositivo($verificado);
+    $estado = $data['token_validado'] === true ? 'en_proceso_si' : 'en_proceso_no';
+    registrar_dispositivo($estado);
 }
 
-function registrar_dispositivo($verificado)
+function registrar_dispositivo($estado)
 {
     global $conexion;
     try {
@@ -26,9 +25,9 @@ function registrar_dispositivo($verificado)
         $dispositivo = obtener_dispositivo();
         $fecha_registro = date('Y-m-d H:i:s');
 
-        $query = "INSERT INTO dispositivos (dispositivo_seguro, tipo_dispositivo, direccion_ip, 
-    pais, ciudad, fecha_registro, id_seguridad, verificado) VALUES (0, '$dispositivo', '$ip_usuario', 
-    '{$resultado['country']}', '{$resultado['city']}', '$fecha_registro', '$id_seguridad', $verificado)";
+        $query = "INSERT INTO dispositivo (id_seguridad, tipo_dispositivo, direccion_ip, 
+    pais, ciudad, fecha_registro, estado_dispositivo, ultima_conexion) VALUES ('$id_seguridad', '$dispositivo', '$ip_usuario', 
+    '{$resultado['country']}', '{$resultado['city']}', '$fecha_registro', '$estado', NOW())";
 
         //Agregamos los equipos no deseados a la base de datos
         conectar();

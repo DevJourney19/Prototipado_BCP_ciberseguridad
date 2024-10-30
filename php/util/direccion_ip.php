@@ -1,5 +1,4 @@
 <?php
-//FUNCIONES----------------------------------------
 function getPublicIp()
 {
     //Hacer una solicitud a ipify.org para obtener la IP pública
@@ -38,7 +37,3 @@ function obtener_dispositivo()
         return 'Ordenador de escritorio';
     }
 }
-
-//Obtener la direccion publica
-
-

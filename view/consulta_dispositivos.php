@@ -15,8 +15,8 @@ if ($inc) {
     $id_seguridad = $array_seguridad[0]['id_seguridad'] ?? "";
     /*Se va a filtrar todos los dispositivos almacenados de la base de datos con parametros si estan establecidos 
     como inseguros y por el id de seguridad activado, el cual está relacionado de 1 a 1 con la información del cliente.*/
-    $consulta = consultar("Select id_dispositivo, dispositivo_seguro, tipo_dispositivo, direccion_ip, 
-    pais, ciudad, verificado, fecha_registro from dispositivos where dispositivo_seguro=0 and id_seguridad='$id_seguridad'");
+    $consulta = consultar("Select id_dispositivo, tipo_dispositivo, direccion_ip, 
+    pais, ciudad, estado_dispositivio, fecha_registro, ultima_conexion from dispositivo where id_seguridad='$id_seguridad' || estado_dispositivo='en_proceso_si' || estado_dispositivo='en_proceso_no'");
     desconectar();
 }
 ?>
@@ -53,35 +53,33 @@ if ($inc) {
         </div>
         <div class="tabla_responsiva">
             <table border="1" class="tablita_equipos_no_deseados">
-                <tr>
-                    <th>Dispositivo seguro</th>
+                <tr> <!-- EN PROCESO SI ///// //EN PROCESO NO -->
                     <th>Dispositivo</th>
                     <th>Direccion IP</th>
                     <th>Pais</th>
                     <th>Ciudad</th>
-                    <th>Verificado?</th>
+                    <th>Valido el codigo?</th>
                     <th>Fecha de Registro</th>
                     <th colspan="2">Acciones</th>
                 </tr>
 
                 <?php if ($consulta) {
                     foreach ($consulta as $row) {
-                        $dispo_seguro = $row["dispositivo_seguro"];
                         $tipo_dispositivo = $row["tipo_dispositivo"];
                         $direccion_ip = $row["direccion_ip"];
                         $pais = $row["pais"];
                         $ciudad = $row["ciudad"];
-                        $verificado = $row['verificado'];
+                        $estado_dispositivo = $row["estado_dispositivo"];
                         $fecha_registro = $row["fecha_registro"];
                         $id_dispositivo = $row["id_dispositivo"];
                         ?>
                         <tr>
-                            <td><?= htmlspecialchars($dispo_seguro) ?></td>
+
                             <td><?= htmlspecialchars($tipo_dispositivo) ?></td>
                             <td><?= htmlspecialchars($direccion_ip) ?></td>
                             <td><?= htmlspecialchars($pais) ?></td>
                             <td><?= htmlspecialchars($ciudad) ?></td>
-                            <?php if ($verificado == 1) { ?>
+                            <?php if ($estado_dispositivo === 'en_proceso_si') { ?>
                                 <td>Si</td>
                             <?php } else { ?>
                                 <td>No</td>
