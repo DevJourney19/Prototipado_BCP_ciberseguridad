@@ -11,7 +11,7 @@ if ($inc) {
     $array_seguridad = consultar(query: "Select id_seguridad from seguridad where id_usuario='$id_usuario'");
     /*Necesito el id_seguridad porque de esta manera me relacionaría con la otra tabla dispositivos, teniendo 
     en cuenta que por cada usuario solo podrá tener 1 cuenta activada.*/
-    
+
     $id_seguridad = $array_seguridad[0]['id_seguridad'] ?? "";
     /*Se va a filtrar todos los dispositivos almacenados de la base de datos con parametros si estan establecidos 
     como inseguros y por el id de seguridad activado, el cual está relacionado de 1 a 1 con la información del cliente.*/
@@ -62,31 +62,39 @@ if ($inc) {
                     <th>Fecha de Registro</th>
                     <th colspan="2">Acciones</th>
                 </tr>
-                <form action="#">
-                    <?php if ($consulta) {
-                        foreach ($consulta as $row) {
-                            $dispo_seguro = $row["dispositivo_seguro"];
-                            $tipo_dispositivo = $row["tipo_dispositivo"];
-                            $direccion_ip = $row["direccion_ip"];
-                            $pais = $row["pais"];
-                            $ciudad = $row["ciudad"];
-                            $fecha_registro = $row["fecha_registro"];
-                            ?>
-                            <tr>
-                                <td><?= $dispo_seguro ?></td>
-                                <td><?= $tipo_dispositivo ?></td>
-                                <td><?= $direccion_ip ?></td>
-                                <td><?= $pais ?></td>
-                                <td><?= $ciudad ?></td>
-                                <td><?= $fecha_registro ?></td>
-                                <td><button class="botoncito_accion_eliminar">Eliminar <i class="fa-solid fa-x"></i></button>
+
+                <?php if ($consulta) {
+                    foreach ($consulta as $row) {
+                        $dispo_seguro = $row["dispositivo_seguro"];
+                        $tipo_dispositivo = $row["tipo_dispositivo"];
+                        $direccion_ip = $row["direccion_ip"];
+                        $pais = $row["pais"];
+                        $ciudad = $row["ciudad"];
+                        $fecha_registro = $row["fecha_registro"];
+                        $id_dispositivo = $row["id_dispositivo"];
+                        ?>
+                        <tr>
+                            <td><?= htmlspecialchars($dispo_seguro) ?></td>
+                            <td><?= htmlspecialchars($tipo_dispositivo) ?></td>
+                            <td><?= htmlspecialchars($direccion_ip) ?></td>
+                            <td><?= htmlspecialchars($pais) ?></td>
+                            <td><?= htmlspecialchars($ciudad) ?></td>
+                            <td><?= htmlspecialchars($fecha_registro) ?></td>
+                            <form action="php/acciones_dispositivo">
+                            <input type="hidden" name="id_dispositivo" value="<?= htmlspecialchars($id_dispositivo) ?>">
+                                <td><button type="submit" class="botoncito_accion_eliminar" name="accion" value="eliminar">Eliminar <i
+                                            class="fa-solid fa-x"></i></button>
                                 </td>
-                                <td><button class="botoncito_accion_bloquear">Bloquear <i class="fa-solid fa-ban"></i></button>
+
+
+                                <td><button type="submit" class="botoncito_accion_bloquear" name="accion" value="bloquear">Bloquear <i
+                                            class="fa-solid fa-ban"></i></button>
                                 </td>
-                            </tr>
-                        <?php }
-                    } ?>
-                </form>
+                            </form>
+                        </tr>
+                    <?php }
+                } ?>
+                
             </table>
 
         </div>

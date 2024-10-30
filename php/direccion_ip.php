@@ -5,8 +5,8 @@ conectar();
 //Se va a obtener el id del usuario, en caso coincida su DNI o su tarjeta de crédito
 $id_usuario_no_permitido = $_SESSION["id_no_permitido"];
 //Se va a obtener el campo id_seguridad que debe ser 1 por cada usuario
-$listaa = consultar("select id_seguridad from seguridad 
-where id_usuario='$id_usuario_no_permitido'");
+$listaa = consultar("SELECT id_seguridad from seguridad 
+WHERE id_usuario='$id_usuario_no_permitido'");
 /*Si en caso te salga una alerta del problema que es la variable $id_seguridad, debe 
 ser porque todavía no se ha activado el servicio de ciberseguridad.*/
 if (count($listaa) > 0) {
@@ -44,6 +44,7 @@ $dispositivo = obtener_dispositivo();
 
 function obtener_dispositivo()
 {
+    //Se detecta que dispositivo se está utilizando por medio de la página web
     $userAgent = $_SERVER['HTTP_USER_AGENT'];
 
     if (strpos($userAgent, 'Mobile') !== false) {
@@ -63,9 +64,11 @@ fecha_registro) values ('0', '$dispositivo', '$ip_usuario', '$pais', '$ciudad', 
 //Se tiene que agregar el where id del usuario
 if (
     
-    ejecutar("INSERT INTO dispositivos (dispositivo_seguro, tipo_dispositivo, direccion_ip, pais, ciudad, 
-fecha_registro, id_seguridad) VALUES (0, '$dispositivo', '$ip_usuario', '{$resultado['country']}', '{$resultado['city']}', '$fecha_registro', '$id_seguridad')")
+    ejecutar("INSERT INTO dispositivos (dispositivo_seguro, tipo_dispositivo, direccion_ip, 
+    pais, ciudad, fecha_registro, id_seguridad) VALUES (0, '$dispositivo', '$ip_usuario', 
+    '{$resultado['country']}', '{$resultado['city']}', '$fecha_registro', '$id_seguridad')")
 ) {
 } else {
     echo "Error al insertar datos: " . mysqli_error($conexion); // Cambia $conexion por tu variable de conexión
 }
+header("Location: ../index.php?error=true");
