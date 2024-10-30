@@ -1,5 +1,5 @@
 <?php
-include 'util/connection.php';
+include '../php/util/connection.php';
 
 $tarjeta = $_POST['tarjeta'];
 $dni = $_POST['dni'];
@@ -24,18 +24,20 @@ try {
 
         
         //AQUI ->
-    } else if(count($entrada_no_deseada) == 1) {
-        session_start();
-        $_SESSION['id_no_permitido'] = $entrada_no_deseada[0]['id_usuario'];
+    } 
+    // else if(count($entrada_no_deseada) == 1) {
+    //     session_start();
+    //     $_SESSION['id_no_permitido'] = $entrada_no_deseada[0]['id_usuario'];
         
         
-        //Como puedo hacer para que no me lleve a esa direccion solo que ejecute codigo?
-        echo "<script>window.location.href = 'direccion_ip.php';</script>";
-        //header("Location: ../index.php?error=true");
-    }else{
+    //     //Como puedo hacer para que no me lleve a esa direccion solo que ejecute codigo?
+    //     echo "<script>window.location.href = 'direccion_ip.php';</script>";
+    //     //header("Location: ../index.php?error=true");
+    // }
+    else{
 
         session_destroy();
-        header("Location: ../index.php?error=true");
+        header("Location: ../view/index.php?error=true");
     }
 } catch (Exception $exc) {
     die($exc->getMessage());
