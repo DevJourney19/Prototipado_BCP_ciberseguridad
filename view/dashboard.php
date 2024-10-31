@@ -1,7 +1,7 @@
 <?php
-include_once '../php/util/validar_entradas.php';
-include '../php/util/connection.php';
-validar_entrada('login_admi.php');
+include_once '../controller/ControllerEntradas.php';
+$entradas = new ControllerEntradas();
+$entradas->validarEntrada('login_admi.php');
 ?>
 
 <!DOCTYPE html>

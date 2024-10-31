@@ -1,8 +1,8 @@
 <?php
-include_once '../php/util/validar_entradas.php';
-include '../php/util/connection.php';
-validar_entrada('index.php');
-
+include_once '../controller/ControllerEntradas.php';
+include_once '../controller/ControllerSeguridad.php';
+$entradas = new ControllerEntradas();
+$entradas->validarEntrada('index.php');
 ?>
 
 <!DOCTYPE html>
@@ -129,8 +129,8 @@ validar_entrada('index.php');
       })
 
       const boton = document.querySelector('#envioEmocion');
-      const estado = document.querySelector('input[name="emotion"]:checked').value;
       boton.addEventListener('click', async () => {
+        const estado = document.querySelector('input[name="emotion"]:checked').value;
         await fetch("../controller/ControllerEmocion.php", {
             method: "POST",
             body: JSON.stringify({

@@ -1,19 +1,11 @@
 <?php
-include_once '../php/util/validar_entradas.php';
-include '../php/util/connection.php';
-validar_entrada('index.php');
+include_once '../controller/ControllerEntradas.php';
+include_once '../controller/ControllerUsuario.php';
+$entradas = new ControllerEntradas();
+$entradas->validarEntrada('index.php');
 
-$sql = "SELECT * FROM usuario WHERE id_usuario = " . $_SESSION['id'];
-try {
-    conectar();
-    $resultado = consultar($sql);
-    $nombre = $resultado[0]["nombre"];
-    unset($resultado);
-    desconectar();
-} catch (Exception $exc) {
-    die($exc->getMessage());
-}
-
+$usuario = new ControllerUsuario();
+$nombre = $usuario->obtenerUsuario($_SESSION['id']);
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +31,7 @@ try {
     </div>
     <div class="cuadro_superior">
         <div class="izquierda">
-            <div><span class="hola">Hola, </span><span><?=$nombre?></span></div>
+            <div><span class="hola">Hola, </span><span><?=$nombre["nombre"]?></span></div>
             <div class="circulo">
             </div>
         </div>

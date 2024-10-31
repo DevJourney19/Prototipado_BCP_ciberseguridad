@@ -1,9 +1,8 @@
 <?php
-include_once '../php/util/validar_entradas.php';
-include_once '../php/util/connection.php';
-validar_entrada('index.php');
-// verificar si ya ha sido contratado el servicio
-validar_servicio('principal.php');
+include_once '../controller/ControllerEntradas.php';
+$entradas = new ControllerEntradas();
+$entradas->validarEntrada('index.php');
+$entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
 ?>
 
 <!DOCTYPE html>

@@ -1,15 +1,9 @@
 <?php
-include_once '../php/util/connection.php';
-$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'];
-try {
-  conectar();
-  $resultado = consultar($sql);
-  $datos = $resultado[0]['estado_horas_direcciones'];
-  desconectar();
-} catch (Exception $exc) {
-  die($exc->getMessage());
-}
+include_once '../controller/ControllerSeguridad.php';
 
+$controllerSeguridad = new ControllerSeguridad();
+$resultado = $controllerSeguridad->obtenerUsuario($_SESSION['id']);
+$datos = $resultado[0]['estado_horas_direcciones'];
 ?>
 
 <div class="tabs">
@@ -38,7 +32,7 @@ try {
   const switchCheckbox = document.getElementById('switchCheckbox');
   const estado = <?php echo $datos ? 'false' : 'true' ?>;
   switchCheckbox.addEventListener('change', async () => {
-    const response = await fetch("../php/estado_funcionalidades.php", {
+    const response = await fetch("../controller/ControllerEstadoFunciones.php", {
         method: "POST",
         body: JSON.stringify({
           estado: estado,

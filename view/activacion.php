@@ -1,20 +1,11 @@
 <?php
-include_once 'php/util/validar_entradas.php';
-include 'php/util/connection.php';
-validar_entrada('index.php');
-// verificar si ya ha sido contratado el servicio
+include_once '../controller/ControllerEntradas.php';
+include_once '../controller/ControllerSeguridad.php';
+$entradas = new ControllerEntradas();
+$entradas->validarEntrada('index.php');
 
-$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id'] . " AND activacion_seguridad = 1";
-try {
-    conectar();
-    $resultado = consultar($sql);
-    $datos = $resultado;
-    unset($resultado);
-
-    desconectar();
-} catch (Exception $exc) {
-    die($exc->getMessage());
-}
+$seguridad = new ControllerSeguridad();
+$datos = $seguridad->verificarSeguridad($_SESSION['id']);
 
 ?>
 
