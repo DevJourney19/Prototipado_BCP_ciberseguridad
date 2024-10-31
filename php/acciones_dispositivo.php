@@ -1,6 +1,6 @@
 <?php
 
-include 'util/connection.php';
+include '../config/connection.php';
 conectar();
 $tarjeta = $_POST['eliminar_b'];
 $dni = $_POST['eliminar_b'];

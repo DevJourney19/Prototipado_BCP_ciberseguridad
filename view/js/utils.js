@@ -25,7 +25,7 @@ const controlarFormulario = async (event) => {
 	document.getElementById("button_activacion").disabled = true;
 
 
-	await fetch("../php/util/verify_session.php")
+	await fetch("../controller/ControllerVerifySession.php")
 		.then((response) => response.json())
 		.then(async (data) => {
 			//Si la sesion esta activa
@@ -33,7 +33,7 @@ const controlarFormulario = async (event) => {
 				// obtener el id del usuario
 				const userId = data.id;
 				// enviar los datos al servidor
-				await fetch("../php/activar_seguridad.php", {
+				await fetch("../controller/ControllerActivarSeguridad.php", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -89,9 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		case "cancelar_servicio.php":
 			switchElement.classList.add("disabled");
 			elems[3].classList.add("active");
-			break;
-		default:
-			elems[0].classList.add("active");
 			break;
 	}
 });

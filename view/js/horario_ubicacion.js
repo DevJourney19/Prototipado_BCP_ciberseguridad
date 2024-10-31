@@ -28,28 +28,4 @@ document.addEventListener('DOMContentLoaded', () => {
     botonCerrarModalUbicacion.addEventListener('click', () =>{
         modalUbicacion.classList.remove('show');
     });
-
-    const switchCheckbox = document.querySelector("#switchCheckbox");
-
-    switchCheckbox.addEventListener("change", async () => {
-        const isChecked = switchCheckbox.checked;
-
-        try {
-            const response = await fetch("../php/estado_funcionalidad.php", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    estado: !isChecked,
-                    funcion: "estado_horas_direcciones"
-                }),
-            });
-
-            const data = await response.json();
-            console.log("Response from server:", data);
-        } catch (error) {
-            console.error("Error sending request:", error);
-        }
-    });
 });

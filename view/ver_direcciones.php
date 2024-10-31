@@ -1,3 +1,9 @@
+<?php
+include_once '../controller/ControllerEntradas.php';
+$entradas = new ControllerEntradas();
+$entradas->validarEntrada('index.php');
+$entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -6,7 +12,6 @@
     <title>Rango de Horario y Ubicacion</title>
     <link rel="stylesheet" href="horario_ubicacion.css">
 </head>
-
 <body>
     <header>
         <?php include '../view/fragmentos/nav.php' ?>
