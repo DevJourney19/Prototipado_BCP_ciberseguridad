@@ -56,13 +56,21 @@ desconectar();
                 <!-- Aqui se va a generar, primero el activado, y de ahi por medio del permitir-->
             </div>
             <?php if (isset($resultado3)) { ?>
+
                 <div class="caja">
 
                     <div class="primero">
                         <div class="imagen">
+                            <p style="
+    color: darkorange;
+    font-weight: 800;
+    width: min-content;
+">Dispositivo activado</p>
+
                             <?php switch ($resultado3[0]['tipo_dispositivo']) {
                                 case 'Ordenador de escritorio': ?>
                                     <img src="img/computadora.png" alt="Imagen de celular">
+
                                     <?php break;
                                 case 'Portátil': ?>
                                     <img src="img/icono_portatil.png" alt="Imagen de portátil">
@@ -106,9 +114,9 @@ desconectar();
                             <div class="descripcion-caja">
                                 <p>
                                     Lugar: <?= $resultado3[0]['ciudad'] ?>- <?= $resultado3[0]['pais'] ?>
-                                    <br/>
+                                    <br />
                                     IP: <?= $resultado3[0]['direccion_ip'] ?>
-                                    <br/>
+                                    <br />
                                     Ingreso: <?= $resultado3[0]['fecha_registro'] ?>
                                 </p>
 

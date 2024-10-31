@@ -16,17 +16,7 @@ try {
 } catch (Exception $exc) {
     die($exc->getMessage());
 }
-switch ($variable) {
-    case 'value':
-        # code...
-        break;
-    case 'value2':
-        # code...
-        break;
-    default:
-        # code...
-        break;
-}
+
 ?>
 
 <!DOCTYPE html>

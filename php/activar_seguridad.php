@@ -27,7 +27,7 @@ try {
     // Ejecutar la consulta
     if (ejecutar($query)) {
       $response = ['status' => 'registrado'];
-      $query = "SELECT * FROM seguridad WHERE id_usuario = '$id'";
+      $query = "SELECT * FROM seguridad WHERE id_usuario = '$id_usuario'";
       $result = consultar($query);
       $_SESSION['id_seguridad'] = $result[0]['id_seguridad'];
 
@@ -56,15 +56,11 @@ try {
       VALUES('$id_seguridad', 'activado', '$tipo','$public_ip', '$pais','$ciudad',
       NOW(), NOW())";
       //No lo lee 
-      $_SESSION['tipo'] = $tipo;
-      $_SESSION['pais'] = $pais;
-      $_SESSION['ciudad'] = $ciudad;
-      $_SESSION['dir_ip'] = $public_ip;
-      $_SESSION['fecha'] = date('Y-m-d H:i:s');
+      
       ejecutar($query2);
       unset($result);
     } else {
-      $response = ['status' => 'no registrado'];
+      $response = ['status' => 'registrado'];
     }
   }
 
@@ -77,8 +73,8 @@ try {
     'message' => 'error'
   ];
 }
-header('Location: ../view/dispositivos.php');
+//header('Location: ../view/dispositivos.php');
 //echo "<script>window.location.href: '';</script>";
 
 // Enviar la respuesta en formato JSON
-//echo json_encode($response);
+echo json_encode($response);
