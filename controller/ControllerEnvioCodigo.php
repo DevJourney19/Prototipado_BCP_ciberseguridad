@@ -22,7 +22,7 @@ try {
   $mail->SMTPAuth = true;
   //DEBE SER CORREO DE LA CUENTA DEL CLIENTE EN EL QUE SE QUIERE INGRESAR
   $mail->Username = 'f4r3ver@gmail.com';
-  $mail->Password = 'tejs cshm rsly rjgc'; //Contraseña creada en la verficacion de 2 pasos de Google
+  $mail->Password = 'kcfz bjgu ydxl qqha'; //Contraseña creada en la verficacion de 2 pasos de Google
   $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
   $mail->Port = 587; //465 para la conexion encriptada
 

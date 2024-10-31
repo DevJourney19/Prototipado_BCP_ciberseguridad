@@ -4,6 +4,19 @@ include_once '../php/util/connection.php';
 validar_entrada('index.php');
 // verificar si ya ha sido contratado el servicio
 validar_servicio('principal.php');
+$id_usuario = $_SESSION['id_usuario'];
+conectar();
+$sql = "select * from usuario where id_usuario= '$id_usuario'";
+$resultado1 = consultar($sql);
+$sql2 = "Select * from seguridad where id_usuario='$id_usuario'";
+$resultado2 = consultar($sql2);
+$id_segu = $resultado2[0]['id_seguridad'];
+$sql3 = "Select * from dispositivo where id_seguridad='$id_segu' AND estado_dispositivo='activado'";
+$resultado3 = consultar($sql3);
+desconectar();
+
+//Si ese dispositivo tiene el estado activado entonces se mostrará
+
 ?>
 
 <!DOCTYPE html>
@@ -39,34 +52,75 @@ validar_servicio('principal.php');
 
         <div class="tabla">
             <!--Necesito crear esto por js -->
-
-            <div class="caja">
-                <div class="primero">
-                    <div class="imagen">
-                        <img src="img/icono_cel.png" alt="Imagen de celular">
-                    </div>
-                    <div class="seccion">
-                        <div class="titulo-caja">
-                            <h4>
-                                iPhone
-                            </h4>
-                        </div>
-                        <div class="descripcion-caja">
-                            <p>
-                                Lugar: Av Lomas - SMP
-                                IP: 192.168.769
-                                Ingreso: 05/09/2024
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="segundo">
-                    <input type="radio" name="vinculo" id="dispositivo1" checked>
-                    <label for="dispositivo1"><span class="radio-button"></span></label>
-                </div>
+            <div class="generation">
+                <!-- Aqui se va a generar, primero el activado, y de ahi por medio del permitir-->
             </div>
+            <?php if (isset($resultado3)) { ?>
+                <div class="caja">
 
+                    <div class="primero">
+                        <div class="imagen">
+                            <?php switch ($resultado3[0]['tipo_dispositivo']) {
+                                case 'Ordenador de escritorio': ?>
+                                    <img src="img/computadora.png" alt="Imagen de celular">
+                                    <?php break;
+                                case 'Portátil': ?>
+                                    <img src="img/icono_portatil.png" alt="Imagen de portátil">
+                                    <?php break;
+
+                                case 'Tableta': ?>
+                                    <img src="img/icono_tableta.png" alt="Imagen de tableta">
+                                    <?php break;
+
+                                case 'Teléfono móvil': ?>
+                                    <img src="img/icono_cel.png" alt="Imagen de teléfono móvil">
+                                    <?php break;
+
+                                case 'Smartwatch': ?>
+                                    <img src="img/icono_smartwatch.png" alt="Imagen de smartwatch">
+                                    <?php break;
+
+                                case 'Televisor inteligente': ?>
+                                    <img src="img/icono_televisor.png" alt="Imagen de televisor inteligente">
+                                    <?php break;
+
+                                case 'Consola de videojuegos': ?>
+                                    <img src="img/icono_consola.png" alt="Imagen de consola de videojuegos">
+                                    <?php break;
+
+                                case 'Dispositivo IoT': ?>
+                                    <img src="img/icono_iot.png" alt="Imagen de dispositivo IoT">
+                                    <?php break;
+
+                                default: ?>
+                                    <p>Tipo de dispositivo no reconocido.</p>
+                            <?php } ?>
+
+                        </div>
+                        <div class="seccion">
+                            <div class="titulo-caja">
+                                <h4>
+                                    <?= $resultado3[0]['tipo_dispositivo'] ?>
+                                </h4>
+                            </div>
+                            <div class="descripcion-caja">
+                                <p>
+                                    Lugar: <?= $resultado3[0]['ciudad'] ?>- <?= $resultado3[0]['pais'] ?>
+                                    <br/>
+                                    IP: <?= $resultado3[0]['direccion_ip'] ?>
+                                    <br/>
+                                    Ingreso: <?= $resultado3[0]['fecha_registro'] ?>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="segundo">
+                        <input type="radio" name="vinculo" id="dispositivo1" checked>
+                        <label for="dispositivo1"><span class="radio-button"></span></label>
+                    </div>
+                </div>
+            <?php } ?>
             <!--
             <div class="caja">
                 <div class="primero">

@@ -4,7 +4,7 @@ $sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id_usuario'];
 try {
   conectar();
   $resultado = consultar($sql);
-  $datos = $resultado[0]['estado_horas_direcciones'];
+  $datos = $resultado[0]['estado_hora_direccion'];
   desconectar();
 } catch (Exception $exc) {
   die($exc->getMessage());

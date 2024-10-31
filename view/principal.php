@@ -4,6 +4,11 @@ include '../php/util/connection.php';
 validar_entrada('index.php');
 
 $sql = "SELECT * FROM usuario WHERE id_usuario = " . $_SESSION['id_usuario'];
+if ($_SESSION['estado_dispositivo'] === 'seguro') {
+    echo 'Es un dispositivo seguro';
+} else if ($_SESSION['estado_dispositivo'] === 'activado') {
+    echo 'Es un dispositivo activado';
+}
 try {
     conectar();
     $resultado = consultar($sql);

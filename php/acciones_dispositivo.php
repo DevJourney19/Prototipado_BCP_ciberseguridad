@@ -13,10 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ejecutar($sql);
     } else if ($accion === 'bloquear') {
         //realizar el bloqueo
-        $sql = "delete from dispositivo where id_dispositivo = '$id_dispositivo'";
+        //$sql = "delete from dispositivo where id_dispositivo = '$id_dispositivo'";
+        //ejecutar($sql);
+    } else if ($accion === 'permitir') {
+        //Voy a traer el id de esa fila y procederé a cambiarle el estado
+        $sql = "UPDATE dispositivo SET estado_dispositivo='seguro' where id_dispositivo ='$id_dispositivo'";
         ejecutar($sql);
-    } else {
-        echo "Acción no válida";
     }
     header('Location: ../view/consulta_dispositivos.php');
 

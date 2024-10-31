@@ -45,9 +45,12 @@ try {
     $id_seguridad = $_SESSION['id_seguridad']; //Se desea la informacion de la seguridad para identificar los dispositivos
     desconectar();
     conectar();
-    $part2 = "SELECT * FROM dispositivo WHERE id_seguridad = '$id_seguridad' AND estado_dispositivo='activado' AND direccion_ip='$dir_ip'";
+    $part2 = "SELECT * FROM dispositivo WHERE id_seguridad = '$id_seguridad' AND (estado_dispositivo='activado' || estado_dispositivo='seguro') AND direccion_ip='$dir_ip'";
     $part2_consul = consultar($part2);
     $_SESSION['id_dispositivo'] = $part2_consul[0]['id_dispositivo'];
+    $valor_entrada = $part2_consul[0]['estado_dispositivo'];
+    $_SESSION['estado_dispositivo'] = $valor_entrada;
+    //Creo que se tiene que hacer un if para separar a los estados acitvados con los seguros
     $direccion_ip_deseada = $part2_consul[0]['direccion_ip'];
     $id_dispositivo = $_SESSION['id_dispositivo'];  //Se desea la informacion del dispositivo a mandar el mensaje
     desconectar();

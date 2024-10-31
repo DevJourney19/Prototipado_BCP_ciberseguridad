@@ -16,7 +16,7 @@ if ($inc) {
     /*Se va a filtrar todos los dispositivos almacenados de la base de datos con parametros si estan establecidos 
     como inseguros y por el id de seguridad activado, el cual está relacionado de 1 a 1 con la información del cliente.*/
     $consulta = consultar("Select id_dispositivo, tipo_dispositivo, direccion_ip, 
-    pais, ciudad, estado_dispositivio, fecha_registro, ultima_conexion from dispositivo where id_seguridad='$id_seguridad' || estado_dispositivo='en_proceso_si' || estado_dispositivo='en_proceso_no'");
+    pais, ciudad, estado_dispositivo, fecha_registro, ultima_conexion from dispositivo where id_seguridad='$id_seguridad' AND (estado_dispositivo='en_proceso_si' || estado_dispositivo='en_proceso_no')");
     desconectar();
 }
 ?>
@@ -60,7 +60,7 @@ if ($inc) {
                     <th>Ciudad</th>
                     <th>Valido el codigo?</th>
                     <th>Fecha de Registro</th>
-                    <th colspan="2">Acciones</th>
+                    <th colspan="3">Acciones</th>
                 </tr>
 
                 <?php if ($consulta) {
@@ -86,7 +86,12 @@ if ($inc) {
                             <?php } ?>
                             <td><?= htmlspecialchars($fecha_registro) ?></td>
                             <form action="../php/acciones_dispositivo.php" method="POST">
+                                <!-- Se obtiene el id por cada fila del dispositivo-->
                                 <input type="hidden" name="id_dispositivo" value="<?= htmlspecialchars($id_dispositivo) ?>">
+                                <td><button type="submit" class="botoncito_accion_permitir" name="accion"
+                                        value="permitir">Permitir <i class="fa-solid fa-check"></i></button>
+                                </td>
+
                                 <td><button type="submit" class="botoncito_accion_eliminar" name="accion"
                                         value="eliminar">Eliminar <i class="fa-solid fa-x"></i></button>
                                 </td>

@@ -270,12 +270,23 @@ th {
     font-weight: 400;
     border-radius: 20px;
     transition: all 0.3s;
-    margin-top:4px;
-    margin-bottom:14px;
+    margin-top: 4px;
+    margin-bottom: 14px;
+}
+
+.botoncito_accion_permitir {
+    background-color: #00c344;
+    padding: 8px 10px;
+    font-size: 1.1em;
+    color: white;
+    font-weight: 400;
+    border-radius: 20px;
+    transition: all 0.3s;
+    border: 0px;
 }
 
 .botoncito_accion_eliminar {
-    background-color:#b10000 ;
+    background-color: #b10000;
     padding: 8px 10px;
     font-size: 1.1em;
     color: white;
@@ -296,12 +307,15 @@ th {
     border: 0px;
 }
 
-.botoncito:hover,.botoncito_accion_eliminar:hover,.botoncito_accion_bloquear:hover {
+.botoncito:hover,
+.botoncito_accion_eliminar:hover,
+.botoncito_accion_bloquear:hover,
+.botoncito_accion_permitir:hover {
     cursor: pointer;
     scale: 1.1;
 }
 
-th{
+th {
     background: #001843;
     color: white;
 }

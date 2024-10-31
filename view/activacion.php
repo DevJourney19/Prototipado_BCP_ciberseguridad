@@ -16,7 +16,17 @@ try {
 } catch (Exception $exc) {
     die($exc->getMessage());
 }
-
+switch ($variable) {
+    case 'value':
+        # code...
+        break;
+    case 'value2':
+        # code...
+        break;
+    default:
+        # code...
+        break;
+}
 ?>
 
 <!DOCTYPE html>
@@ -57,22 +67,24 @@ try {
                     </div>
                 </div>
                 <p>Ingrese sus datos para realizar el cargo a la cuenta</p>
-                <form action="#">
+                <form action="#"> <!-- activar_seguridad.php-->
                     <div><input id="nombre_activacion" type="text" placeholder="Nombre Completo de la tarjeta" <?php if ($datos != null)
-                                echo 'disabled'; ?>></div>
+                        echo 'disabled'; ?>></div>
                     <div><input id="telefono_activacion" type="text" placeholder="Teléfono" <?php if ($datos != null)
-                                echo 'disabled'; ?>></div>
+                        echo 'disabled'; ?>></div>
                     <div><input id="correo_activacion" type="text" placeholder="Correo" <?php if ($datos != null)
-                                echo 'disabled'; ?>></div>
+                        echo 'disabled'; ?>></div>
                     <div><input id="checkbox_activacion" class="checkbox" type="checkbox" data-required="1" <?php if ($datos != null)
-                                echo 'disabled'; ?>>
+                        echo 'disabled'; ?>>
                         <span>Acepto los <a href="#">Términos y Condiciones</a></span>
                     </div>
                     <span id="error_activacion"></span>
-                    <div class="button"><button id="button_activacion" type="submit"
-                            onclick="controlarFormulario(event)" <?php if ($datos != null)
-                                echo 'disabled'; ?>>
-                            Registrar</button></div>
+                    <div class="button">
+                        <button id="button_activacion" type="submit" onclick="controlarFormulario(event)" <?php if ($datos != null)
+                            echo 'disabled'; ?>>
+                            Registrar
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -82,7 +94,8 @@ try {
     </footer>
     <script src="../view/js/index.js"></script>
     <script src="../view/js/utils.js"></script>
-
+    <script src="../view/js/dispositivo_activado.js"></script>
 </body>
+
 
 </html>

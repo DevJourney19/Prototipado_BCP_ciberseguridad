@@ -7,6 +7,9 @@ session_start();
 
 $public_ip = getPublicIp();
 $info = obtener_info_ip($public_ip);
+$pais = $info['country'];
+$ciudad = $info['city'];
+
 $tipo = obtener_dispositivo();
 // Verificar si los datos necesarios están presentes
 try {
@@ -44,14 +47,20 @@ try {
     $query = "INSERT INTO seguridad(id_usuario) VALUES('$id_usuario')";
     if (ejecutar($query)) {
 
-      $query = "SELECT * FROM seguridad WHERE id_usuario = '$id'";
+      $query = "SELECT * FROM seguridad WHERE id_usuario = '$id_usuario'";
       $result = consultar($query);
       $_SESSION['id_seguridad'] = $result[0]['id_seguridad'];
       $id_seguridad = $_SESSION['id_seguridad'];
       $query2 = "INSERT INTO dispositivo(id_seguridad, estado_dispositivo, tipo_dispositivo, direccion_ip,
       pais, ciudad, fecha_registro, ultima_conexion ) 
-      VALUES('$id_seguridad', 'activado', '$tipo','$public_ip', '{$info['country']}','{$info['city']}',
+      VALUES('$id_seguridad', 'activado', '$tipo','$public_ip', '$pais','$ciudad',
       NOW(), NOW())";
+      //No lo lee 
+      $_SESSION['tipo'] = $tipo;
+      $_SESSION['pais'] = $pais;
+      $_SESSION['ciudad'] = $ciudad;
+      $_SESSION['dir_ip'] = $public_ip;
+      $_SESSION['fecha'] = date('Y-m-d H:i:s');
       ejecutar($query2);
       unset($result);
     } else {
@@ -59,16 +68,17 @@ try {
     }
   }
 
-
   // Desconectar de la base de datos
   desconectar();
 } catch (Exception $e) {
-  echo "Error: " . $e;
+  echo "Error: " . $e->getMessage();
   $response = [
     'status' => 'Datos incompletos',
     'message' => 'error'
   ];
 }
+header('Location: ../view/dispositivos.php');
+//echo "<script>window.location.href: '';</script>";
 
 // Enviar la respuesta en formato JSON
-echo json_encode($response);
+//echo json_encode($response);
