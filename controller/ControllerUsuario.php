@@ -1,7 +1,7 @@
 <?php
 
 require_once '../dao/DaoUsuario.php';
-
+require_once '../model/Usuario.php';
 class ControllerUsuario {
     private $daoUsuario;
 
@@ -10,6 +10,11 @@ class ControllerUsuario {
     }
 
     public function obtenerUsuario($id) {
-        return $this->daoUsuario->readUser($id);
+        $result = $this->daoUsuario->read($id);
+        $usuario = new Usuario();
+        $usuario->setIdUsuario($result['id']);
+        $usuario->setNombre($result['nombre']);
+        $usuario->setTelefono($result['telefono']);
+        return $usuario;
     }
 }

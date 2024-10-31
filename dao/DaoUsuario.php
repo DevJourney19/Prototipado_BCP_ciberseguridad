@@ -1,21 +1,15 @@
 <?php
 
-include_once '../model/Usuario.php';
 include_once '../config/Connection.php';
-include_once 'DaoInterface.php';
+include_once './interfaces/DaoInterfaceUsuario.php';
 
-class DaoUsuario implements DaoInterface
+class DaoUsuario implements DaoInterfaceUsuario
 {
     private $db;
 
     public function __construct()
     {
         $this->db = new Connection();
-    }
-
-    public function create($emocion)
-    {
-        return false;
     }
 
     public function read($id_seguridad)
@@ -36,26 +30,11 @@ class DaoUsuario implements DaoInterface
         }
     }
 
-    public function update($emocion)
-    {
-        return false;
-    }
-
-    public function delete($id)
-    {
-        return false;
-    }
-
-    public function readAll()
-    {
-        return null;
-    }
-
-    public function readUser($id)
+    public function readUser($idUsuario)
     {
         try {
-            $query = "SELECT * FROM usuario WHERE id_usuario = :id";
-            $result = $this->db->consultar($query, ['id' => $id]);
+            $query = "SELECT * FROM usuario WHERE id_usuario = :idUsuario";
+            $result = $this->db->consultar($query, ['idUsuario' => $idUsuario]);
             if (count($result) > 0) {
                 return $result[0];
             } else {

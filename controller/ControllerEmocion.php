@@ -1,6 +1,7 @@
 <?php
 
 include_once '../dao/DaoEmocion.php';
+include_once '../model/Emocion.php';
 header('Content-Type: application/json');
 session_start();
 
@@ -10,7 +11,10 @@ try {
   $response = [];
   $data = json_decode(file_get_contents('php://input'), true);
   $estado = $data['estado'];
-  $result = $daoEmocion->guardarResultado($id_seguridad, $estado);
+  $emocion = new Emocion();
+  $emocion->setIdSeguridad($id_seguridad);
+  $emocion->setTipoEmocion($estado);
+  $result = $daoEmocion->guardarResultado($emocion);
   if ($result) {
       $response = ['status' => 'registrado'];
   } else {

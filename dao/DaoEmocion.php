@@ -2,8 +2,9 @@
 
 include_once '../model/Emocion.php';
 include_once '../config/Connection.php';
+include_once './interfaces/DaoInterfaceEmocion.php';
 
-class DaoEmocion
+class DaoEmocion implements DaoInterfaceEmocion
 {
   private $db;
 
@@ -11,13 +12,10 @@ class DaoEmocion
       $this->db = new Connection();
   }
 
-  public function guardarResultado($id_seguridad, $estado)
+  public function guardarResultado($emocion)
   {
     $response = false;
     try {
-      $emocion = new Emocion();
-      $emocion->setIdSeguridad($id_seguridad);
-      $emocion->setTipoEmocion($estado);
       $id_seguridad = $emocion->getIdSeguridad();
       $estado = $emocion->getTipoEmocion();
       $query = "INSERT INTO encuestas(id_seguridad, estado) VALUES(:id_seguridad, :estado)";

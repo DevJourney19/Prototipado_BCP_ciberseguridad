@@ -2,9 +2,9 @@
 
 include_once '../model/Seguridad.php';
 include_once '../config/Connection.php';
-include_once 'DaoInterface.php';
+include_once './interfaces/DaoInterfaceSeguridad.php';
 
-class DaoSeguridad implements DaoInterface
+class DaoSeguridad implements DaoInterfaceSeguridad
 {
   private $db;
 
@@ -12,8 +12,6 @@ class DaoSeguridad implements DaoInterface
   {
     $this->db = new Connection();
   }
-
-  public function create($seguridad) {}
 
   public function read($idSeguridad)
   {
@@ -47,12 +45,6 @@ class DaoSeguridad implements DaoInterface
       throw new Exception("Error: " . $e->getMessage());
     }
   }
-
-  public function delete($idSeguridad) {}
-
-  public function update($seguridad) {}
-
-  public function readAll() {}
 
   public function readByUser($idUsuario)
   {

@@ -4,8 +4,8 @@ include_once '../controller/ControllerUsuario.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 
-$usuario = new ControllerUsuario();
-$nombre = $usuario->obtenerUsuario($_SESSION['id']);
+$daoUsuario = new ControllerUsuario();
+$usuario = $daoUsuario->obtenerUsuario($_SESSION['id']);
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +31,7 @@ $nombre = $usuario->obtenerUsuario($_SESSION['id']);
     </div>
     <div class="cuadro_superior">
         <div class="izquierda">
-            <div><span class="hola">Hola, </span><span><?=$nombre["nombre"]?></span></div>
+            <div><span class="hola">Hola, </span><span><?=$usuario->getNombre()?></span></div>
             <div class="circulo">
             </div>
         </div>

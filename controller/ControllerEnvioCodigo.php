@@ -1,6 +1,7 @@
 <?php
 
 include_once '../dao/DaoUsuario.php';
+include_once '../model/Usuario.php';
 header('Content-Type: application/json');
 require '../vendor/autoload.php';
 session_start();
@@ -54,17 +55,17 @@ try {
   if (!$usuario) {
     throw new Exception('User not found');
   }
-
-  $nombre = $usuario['nombre'];
-  $correo = $usuario['correo'];
-  $telefono = $usuario['telefono'];
+  $modelUsuario = new Usuario();
+  $modelUsuario->setNombre($usuario['nombre']);
+  $modelUsuario->setTelefono($usuario['telefono']);
+  $modelUsuario->setCorreo($usuario['correo']);
 
   if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
     throw new Exception('Invalid email address');
   }
 
   $mail->setFrom("bcp83584@gmail.com", "Banca en Linea BCP");
-  $mail->addAddress($correo, $nombre);
+  $mail->addAddress($modelUsuario->getCorreo(), $modelUsuario->getNombre());
 
   $mail->Subject = 'Codigo de verificacion';
   $mail->Body = 'El codigo de verificacion es: ' . $codigo;
@@ -73,7 +74,7 @@ try {
 
 
   $api = new SmsApi(config: $configuration);
-  $destination = new SmsDestination(to: $telefono);
+  $destination = new SmsDestination(to: $modelUsuario->getTelefono());
   $message = new SmsTextualMessage(
     destinations: [$destination],
     text: 'El codigo de verificacion es: ' . $codigo

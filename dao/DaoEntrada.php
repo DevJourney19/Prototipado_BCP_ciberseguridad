@@ -1,8 +1,9 @@
 <?php
 
 include_once '../config/Connection.php';
+include_once './interfaces/DaoInterfaceEntrada.php';
 
-class DaoEntrada
+class DaoEntrada implements DaoInterfaceEntrada
 {
     private $db;
 
