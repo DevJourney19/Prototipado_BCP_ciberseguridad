@@ -29,8 +29,44 @@ if (historial) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    //Se puso así para cuando se reciba un mensaje de success se pueda volver a llamar a la función 
     actualizar_dispositivos();
+});
 
+
+async function actualizar_dispositivos() {
+    try {
+        const response = await fetch('../php/obtener_dispositivos.php');
+        const data = await response.json();
+
+        //Filtrar los dispositivos según el estado (de esta manera nos ahorramos usar el where de la bd, ahorrando lineas de codigo)
+        const dispositivos_filtrados = data.filter(dispositivo =>
+            dispositivo.estado === 'en_proceso_si' || dispositivo.estado === 'en_proceso_no'
+        );
+
+        const tabla_dis = document.getElementById('tabla_dispositivos');
+        tabla_dis.innerHTML = '';
+
+        dispositivos_filtrados.forEach(dispositivo => {
+            const estado_dis = dispositivo.estado === 'en_proceso_si' ? 'Si' : 'No';
+            tabla_dis.innerHTML += `
+                <tr>
+                    <td>${dispositivo.tipo}</td>
+                    <td>${dispositivo.dip}</td>
+                    <td>${dispositivo.pais}</td>
+                    <td>${dispositivo.ciudad}</td>
+                    <td>${estado_dis}</td>
+                    <td>${dispositivo.fecha}</td>
+                    <td><button class="botoncito_accion_permitir accion-boton" data-id="${dispositivo.id}" data-accion="permitir">Permitir</button></td>
+                    <td><button class="botoncito_accion_eliminar accion-boton" data-id="${dispositivo.id}" data-accion="eliminar">Eliminar</button></td>
+                    <td><button class="botoncito_accion_bloquear accion-boton" data-id="${dispositivo.id}" data-accion="bloquear">Bloquear</button></td>
+                </tr>`;
+        });
+
+    } catch (error) {
+        console.error('Error al obtener dispositivos:', error);
+    };
+    //Leer los botones para hacerlos asíncronos
     const botonesAccion = document.querySelectorAll('.accion-boton');
     botonesAccion.forEach(boton => {
         boton.addEventListener('click', async function () {
@@ -63,34 +99,7 @@ document.addEventListener('DOMContentLoaded', function () {
             };
         });
     })
-});
 
-
-async function actualizar_dispositivos() {
-    try {
-        const response = await fetch('../php/obtener_dispositivos.php');
-        const data = await response.json();
-        const tabla_dis = document.getElementById('tabla_dispositivos');
-        tabla_dis.innerHTML = '';
-
-        data.forEach(dispositivo => {
-            const estado_dis = dispositivo.estado === 'en_proceso_si' ? 'Si' : 'No';
-            tabla_dis.innerHTML += `
-                <tr>
-                    <td>${dispositivo.tipo}</td>
-                    <td>${dispositivo.dip}</td>
-                    <td>${dispositivo.pais}</td>
-                    <td>${dispositivo.ciudad}</td>
-                    <td>${estado_dis}</td>
-                    <td>${dispositivo.fecha}</td>
-                    <td><button class="botoncito_accion_permitir accion-boton" data-id="${dispositivo.id}" data-accion="permitir">Permitir</button></td>
-                    <td><button class="botoncito_accion_eliminar accion-boton" data-id="${dispositivo.id}" data-accion="eliminar">Eliminar</button></td>
-                    <td><button class="botoncito_accion_bloquear accion-boton" data-id="${dispositivo.id}" data-accion="bloquear">Bloquear</button></td>
-                </tr>`;
-        });
-    } catch (error) {
-        console.error('Error al obtener dispositivos:', error);
-    }
 };
 
 

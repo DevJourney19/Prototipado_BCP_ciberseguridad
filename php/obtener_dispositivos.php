@@ -7,9 +7,10 @@ conectar();
 
 $response = [];
 
+//Select para obtener los dispositivos que hayan accedido desde otro dispositivo 
+
 $query = "SELECT id_dispositivo, tipo_dispositivo, direccion_ip, 
-pais, ciudad, estado_dispositivo, fecha_registro FROM dispositivo WHERE id_seguridad='$id_seguridad'
-AND (estado_dispositivo='en_proceso_si' || estado_dispositivo='en_proceso_no')";
+pais, ciudad, estado_dispositivo, fecha_registro FROM dispositivo WHERE id_seguridad='$id_seguridad'";
 $resultado_total = consultar($query);
 
 if ($resultado_total) {

@@ -3,11 +3,11 @@
 include 'util/connection.php';
 conectar();
 
-$id_dispositivo = $_POST['id_dispositivo'];
 session_start();
 $response = ['status' => 'error', 'message' => '']; // Inicializa la respuesta
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id_dispositivo = $_POST['id_dispositivo'] ?? '';
     $accion = $_POST['accion'] ?? '';
 
     if ($accion === 'eliminar') {
@@ -30,6 +30,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //header('Location: ../view/consulta_dispositivos.php'); //evitar cargar la pagina
     header('Content-Type: application/json');
     echo json_encode($response);
-
-
 }

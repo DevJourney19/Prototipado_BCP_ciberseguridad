@@ -70,7 +70,6 @@ if ($inc) {
 
                 <tbody id="tabla_dispositivos"></tbody>
 
-
             </table>
 
         </div>
