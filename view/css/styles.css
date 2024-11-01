@@ -291,11 +291,19 @@ main {
 }
 
 .circulo {
-  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   width: 100px;
   height: 100px;
-  background: lightgray;
+  background: #011844;
+  overflow: hidden;
+}
+
+.circulo img {
+  width: 100%;
+  height: auto;
 }
 
 .cuenta_1 {
@@ -349,7 +357,16 @@ main {
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.circulo_naranja i {
+  font-size: 34px;
+  color: #ffffff;
+}
+
 .circulo_naranja:hover {
   cursor: pointer;
 }
@@ -745,6 +762,7 @@ canvas {
   white-space: pre-line;
   font-weight: 600;
   font-size: 12px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .tab-link.active {
