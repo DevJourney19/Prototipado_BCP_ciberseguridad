@@ -1,98 +1,137 @@
 <?php
+session_start();
 include_once '../controller/ControllerEntradas.php';
-$entradas = new ControllerEntradas();
-$entradas->validarEntrada('index.php');
-$entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
+include_once '../controller/ControllerHorario.php'; // Incluye el nuevo controlador
+include_once 'config/Connection.php';
+
+// Crear instancia del controlador
+$controllerEntradas = new ControllerEntradas();
+$controllerEntradas->validarEntrada('index.php');
+$controllerEntradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
+
+$controllerHorario = new ControllerHorario();
+
+// Obtener horarios restringidos
+$horarios = $controllerHorario->obtenerHorarios(); 
+
+date_default_timezone_set('America/Lima');
+$fechaHoy = date('d-m-Y');
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
-    <?php include_once '../view/fragmentos/head.php' ?>
-    <title>Rango de Horario y Ubicacion</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <?php include 'fragmentos/head.php'; ?>
+    <title>Rango de Horario y Ubicación</title>
     <link rel="stylesheet" href="css/horario_ubicacion.css">
 </head>
 
 <body>
     <header>
-        <?php include_once '../view/fragmentos/nav.php' ?>
-        <?php include_once '../view/fragmentos/tabs.php' ?>
+        <?php include 'fragmentos/nav.php'; ?>
+        <?php include 'fragmentos/tabs.php'; ?>
     </header>
+
     <main class="contenedor">
         <div class="secciones">
-            <h2>Rellena el formulario para indicar el rango de hora que tu cuenta se encontrará bloqueada</h2>
-            <div class="formulario">
-                <div class="grupo-formulario-horario">
-                    <label for="hora-inicio">
-                        <i class="fas fa-clock"></i>Hora Inicio
-                    </label>
-                    <input id="hora-inicio" placeholder="00:00" type="text" />
-                </div>
-                <div class="grupo-formulario-horario">
-                    <label for="hora-fin">
-                        <i class="fas fa-clock"></i></i>Hora Fin
-                    </label>
-                    <input id="hora-fin" placeholder="23:00" type="text" />
-                </div>
-            </div>
-            <small>* Recuerda que cada día debes registrar un rango de horario</small>
-            <div class="botones">
-                <button id="boton-editar-rango" class="boton-azul">Editar</button>
-                <button id="boton-registrar-rango" class="boton-naranja">Registrar</button>
-            </div>
+            <div id="avisoError" style="color: red;"></div>
+            <h2>Fecha de hoy: &nbsp;<?php echo $fechaHoy; ?></h2>
+
+            <?php if (empty($horarios)): ?>
+                <h4>No se han encontrado horarios restringidos. Puedes registrar uno nuevo.</h4>
+                <form action="../controllers/ControllerHorario.php?action=registrar" method="post">
+                    <div class="formulario">
+                        <input type="hidden" name="id_seguridad" value="<?php echo $_SESSION['id_seguridad']; ?>">
+                        <div class="grupo-formulario-horario">
+                            <label for="hora-inicio-nuevo">
+                                <i class="fas fa-clock"></i> Hora Inicio
+                            </label>
+                            <input id="hora-inicio-nuevo" type="time" name="txtHoraInicio" required />
+                        </div>
+                        <div class="grupo-formulario-horario">
+                            <label for="hora-fin-nuevo">
+                                <i class="fas fa-clock"></i> Hora Fin
+                            </label>
+                            <input id="hora-fin-nuevo" type="time" name="txtHoraFin" required />
+                        </div>
+                    </div>
+                    <small>* Recuerda que cada día debes registrar un rango de horario</small>
+                    <div class="botones">
+                        <button type="submit" class="boton-naranja" name="btnRegistrar">Registrar</button>
+                    </div>
+                </form>
+            <?php else: ?>
+                <?php foreach ($horarios as $datos): ?>
+                    <form action="../controllers/ControllerHorario.php?action=modificar" method="post">
+                        <div class="formulario">
+                            <input type="hidden" name="txtId" value="<?php echo htmlspecialchars($datos['id_hora']); ?>">
+                            <div class="grupo-formulario-horario">
+                                <label for="hora-inicio-nuevo">
+                                    <i class="fas fa-clock"></i> Hora Inicio
+                                </label>
+                                <input id="hora-inicio-nuevo" type="time" name="txtHoraInicio"
+                                    value="<?php echo htmlspecialchars($datos['hora_inicio']); ?>" required />
+                            </div>
+                            <div class="grupo-formulario-horario">
+                                <label for="hora-fin-nuevo">
+                                    <i class="fas fa-clock"></i> Hora Fin
+                                </label>
+                                <input id="hora-fin-nuevo" type="time" name="txtHoraFin"
+                                    value="<?php echo htmlspecialchars($datos['hora_final']); ?>" required />
+                            </div>
+                        </div>
+                        <small>* Recuerda que cada día debes registrar un rango de horario</small>
+                        <div class="botones">
+                            <button type="submit" class="boton-azul" name="btnModificar">Editar Cambios</button>
+                        </div>
+                    </form>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
+
         <div class="secciones">
-            <h2>Ingresa la Ubicación Segura</h2>
-            <div class="grupo-formulario">
-                <label for="direccion">
-                    <i class="fa-solid fa-map-location-dot"></i>Dirección Exacta (Calle y Distrito)
-                </label>
-                <input id="direccion" placeholder="Ejemplo: Calle Berlin 601, Miraflores" type="text" />
-            </div>
-            <div class="mapa">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7805.665578140945!2d-77.01171266362851!3d-11.986069441082716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c562b237b1ad%3A0x81b7bf88d50f89ff!2sUniversidad%20Tecnol%C3%B3gica%20Del%20Per%C3%BA!5e0!3m2!1ses-419!2spe!4v1727847322106!5m2!1ses-419!2spe" width="600" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <small>* Puedes ingresar varias ubicaciones, pero solo 2 al día</small>
-            <div class="botones">
-                <button id="boton-registrar-direccion" class="boton-naranja">Guardar</button>
-                <a href="ver_direcciones.php"><button class="boton-azul">Ver Direcciones</button></a>
-            </div>
+            <form action="" method="post">
+                <div>
+                    <?php include("php/controlador_registrar_direccion.php"); ?>
+                </div>
+                <h2>Ingresa la Ubicación Segura</h2>
+                <div class="grupo-formulario">
+                    <label for="direccion">
+                        <i class="fa-solid fa-map-location-dot"></i> Dirección Exacta (Calle y Distrito)
+                    </label>
+                    <div style="display: flex; align-items: center; position: relative;">
+                        <input type="text" id="locationInput" placeholder="Busca una dirección"
+                            oninput="autocompleteAddress(this.value)" name="txtdireccion"
+                            style="flex: 1; margin-right: 5px; width: 200px;" />
+                        <button type="button" onclick="getLocation()" class="boton-azulle">Ubicación Actual</button>
+                    </div>
+                    <ul id="suggestions"></ul>
+                </div>
+                <div style="display:flex; justify-content: center;">
+                    <iframe id="mapIframe"
+                        src="https://www.openstreetmap.org/export/embed.html?bbox=-77.009679,-11.983784,-77.006679,-11.981784&layer=mapnik"
+                        width="600" height="250" style="border:0;" allowfullscreen loading="lazy"></iframe>
+                </div>
+                <small>* Puedes ingresar varias ubicaciones, pero solo 2 al día</small>
+                <div class="botones">
+                    <button id="boton-registrar-direccion" class="boton-naranja" name="btnRegistrarDireccion"
+                        type="submit">Guardar</button>
+                    <button id="boton-editar-rango" type="button" class="boton-azul"
+                        onclick="window.location.href='ver_direcciones.php'">Ver direcciones</button>
+                </div>
+            </form>
         </div>
     </main>
 
-    <!-- Modal 1: Para el registro del horario -->
-    <div id="modal-horario" class="modal-overlay">
-        <div class="modal-guardar-rango">
-            <div class="icono">
-                <i class="fas fa-check"></i>
-            </div>
-            <div class="modal-mensaje">
-                Se ha registrado exitosamente el horario para el día de hoy.
-            </div>
-            <button class="boton-naranja">Cerrar</button>
-        </div>
-    </div>
-
-    <!-- Modal 2: Para el registro de la ubicación -->
-    <div id="modal-ubicacion" class="modal-overlay">
-        <div class="modal-guardar-rango">
-            <div class="icono">
-                <i class="fas fa-map-marker-alt"></i>
-            </div>
-            <div class="modal-mensaje">
-                Se ha registrado exitosamente la ubicación.
-            </div>
-            <button class="boton-naranja">Cerrar</button>
-        </div>
-    </div>
     <footer>
-        <?php include_once '../view/fragmentos/menubar.php' ?>
+        <?php include 'fragmentos/menubar.php'; ?>
     </footer>
-    <script src="../view/js/horario_ubicacion.js"></script>
-    <script src="../view/js/utils.js"></script>
-    <script src="../view/js/index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"
+        integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMrMC4gY5p5Y5B6mFfsZR/tD8d3B3h5uLTPGxW"
+        crossorigin="anonymous"></script>
+    <script src="js/validacionhora.js"></script>
+    <script src="js/Ubicacion_direccion.js"></script>
 </body>
 
 </html>
