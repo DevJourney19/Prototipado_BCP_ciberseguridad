@@ -2,7 +2,7 @@
 
 include_once '../model/Emocion.php';
 include_once '../config/Connection.php';
-include_once './interfaces/DaoInterfaceEmocion.php';
+include_once 'interfaces/DaoInterfaceEmocion.php';
 
 class DaoEmocion implements DaoInterfaceEmocion
 {

@@ -50,4 +50,5 @@ class Connection {
             die("Error en la ejecución: " . $e->getMessage());
         }
     }
+ 
 }

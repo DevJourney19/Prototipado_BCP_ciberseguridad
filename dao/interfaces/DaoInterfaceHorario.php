@@ -12,4 +12,3 @@ interface DaoInterfaceHorario {
 
     public function eliminarHorario($id);
 }
-?>

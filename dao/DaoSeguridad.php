@@ -2,7 +2,7 @@
 
 include_once '../model/Seguridad.php';
 include_once '../config/Connection.php';
-include_once './interfaces/DaoInterfaceSeguridad.php';
+include_once 'interfaces/DaoInterfaceSeguridad.php';
 
 class DaoSeguridad implements DaoInterfaceSeguridad
 {

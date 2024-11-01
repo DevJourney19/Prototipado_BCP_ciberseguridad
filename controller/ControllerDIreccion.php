@@ -20,18 +20,26 @@ class ControllerDireccion {
             $rango_gps = 10; // Valor fijo o puedes cambiarlo
             $fecha_configuracion = date('Y-m-d');
             $hora_configuracion = date('H:i:s');
-
+    
             if ($id_seguridad && $this->daoSeguridad->existeSeguridad($id_seguridad)) {
                 if (!empty($direccion_exacta)) {
+                    // Llamar al DAO para registrar la dirección
                     $this->daoDireccion->registrarDireccion($id_seguridad, $direccion_exacta, $rango_gps, $fecha_configuracion, $hora_configuracion);
-                    header('Location: /view/horario_ubicacion.php');
-                    exit; // Asegúrate de usar exit después de redirigir
+    
+                    // Almacenar mensaje de éxito en la sesión
+                    $_SESSION['mensaje'] = "Dirección registrada correctamente";
                 } else {
-                    echo "Error: Debes llenar todos los campos.";
+                    // Almacenar mensaje de error en la sesión
+                    $_SESSION['mensaje'] = "Error: Debes llenar todos los campos.";
                 }
             } else {
-                echo "Error: El id_seguridad no existe.";
+                // Almacenar mensaje de error en la sesión
+                $_SESSION['mensaje'] = "Error: El id_seguridad no existe.";
             }
+    
+            // Redirigir a la página después de procesar
+            header('Location: /view/horario_ubicacion.php');
+            exit; // Asegúrate de usar exit después de redirigir
         }
     }
 

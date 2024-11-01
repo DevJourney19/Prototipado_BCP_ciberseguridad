@@ -1,8 +1,8 @@
 <?php
 
 include_once '../config/Connection.php';
-include_once '../model/Direccion.php';
-include_once '../dao/DaoInterfaceDireccion.php';
+// include_once '../model/Direccion.php';
+include_once 'interfaces/DaoInterfaceDireccion.php';
 
 class DaoDireccion implements DaoInterfaceDireccion {
     private $connection;

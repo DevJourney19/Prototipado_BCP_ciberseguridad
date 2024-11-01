@@ -1,7 +1,9 @@
 <?php
-
+// Habilitar la visualización de errores
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include_once '../config/Connection.php';
-include_once './interfaces/DaoInterfaceHorario.php';
+include_once 'interfaces/DaoInterfaceHorario.php';
 
 class DaoHorario implements DaoInterfaceHorario {
     private $db;
@@ -12,11 +14,11 @@ class DaoHorario implements DaoInterfaceHorario {
 
     public function registrarHorario($idSeguridad, $horaInicio, $horaFin, $fecha) {
         try {
-            $query = "INSERT INTO horarios (id_seguridad, hora_inicio, hora_fin, created_at, updated_at) VALUES (:idSeguridad, :horaInicio, :horaFin, NOW(), NOW())";
+            $query = "INSERT INTO hora_restringida (id_seguridad, hora_inicio, hora_final, created_at, updated_at) VALUES (:idSeguridad, :horaInicio, :horaFin, NOW(), NOW())";
             return $this->db->ejecutar($query, [
                 'idSeguridad' => $idSeguridad,
                 'horaInicio' => $horaInicio,
-                'horaFin' => $horaFin
+                'horaFin' => $horaFin // Cambiar 'horaFinal' a 'horaFin'
             ]);
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -26,7 +28,7 @@ class DaoHorario implements DaoInterfaceHorario {
 
     public function obtenerHorariosRestringidos() {
         try {
-            $query = "SELECT * FROM horas_restringidas WHERE DATE(created_at) = CURDATE()";
+            $query = "SELECT * FROM hora_restringida WHERE DATE(created_at) = CURDATE()";
             return $this->db->consultar($query);
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -36,7 +38,7 @@ class DaoHorario implements DaoInterfaceHorario {
 
     public function obtenerTodosLosHorarios() {
         try {
-            $query = "SELECT * FROM horarios";
+            $query = "SELECT * FROM hora_restringida";
             return $this->db->consultar($query);
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -46,7 +48,7 @@ class DaoHorario implements DaoInterfaceHorario {
 
     public function modificarHorario($id, $idSeguridad, $horaInicio, $horaFin, $fecha) {
         try {
-            $query = "UPDATE horarios SET id_seguridad = :idSeguridad, hora_inicio = :horaInicio, hora_fin = :horaFin, updated_at = NOW() WHERE id = :id";
+            $query = "UPDATE hora_restringida SET id_seguridad = :idSeguridad, hora_inicio = :horaInicio, hora_fin = :horaFin, updated_at = NOW() WHERE id = :id";
             return $this->db->ejecutar($query, [
                 'id' => $id,
                 'idSeguridad' => $idSeguridad,
@@ -61,7 +63,7 @@ class DaoHorario implements DaoInterfaceHorario {
 
     public function eliminarHorario($id) {
         try {
-            $query = "DELETE FROM horarios WHERE id = :id";
+            $query = "DELETE FROM hora_restringida WHERE id = :id";
             return $this->db->ejecutar($query, ['id' => $id]);
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -69,4 +71,3 @@ class DaoHorario implements DaoInterfaceHorario {
         }
     }
 }
-?>

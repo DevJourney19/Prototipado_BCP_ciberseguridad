@@ -10,7 +10,10 @@ class ControllerEntradas {
     }
 
     public function validarEntrada($location) {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
         if (!isset($_SESSION['id'])) {
             echo "<script>alert('Inicie Sesion para poder continuar');
                 window.location.href = '$location';</script>";

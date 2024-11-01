@@ -1,7 +1,7 @@
 <?php
 include_once '../controller/ControllerEntradas.php';
-include_once 'config/Connection.php';
-include_once 'php/DaoDireccion.php'; 
+// include_once 'config/Connection.php';
+include_once '../dao/DaoDireccion.php'; 
 
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
@@ -64,39 +64,6 @@ $direcciones = $daoDireccion->obtenerTodasDirecciones();
                                         </div>
                                     </td>
                                 </tr>
-                                <!-- Modal para editar -->
-                                <div class="modal fade" id="editModal<?php echo $datos['id_direccion']; ?>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="editModalLabel">Editar Dirección</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form action="php/controlador_modificar_direccion.php" method="post">
-                                                    <input type="hidden" value="<?= $datos['id_direccion'] ?>" name="txtId">
-                                                    <div class="mb-3">
-                                                        <label for="direccion" class="form-label">Dirección Exacta</label>
-                                                        <input id="direccion" type="text" name="txtDireccion" value="<?php echo $datos['direccion_exacta']; ?>" required class="form-control" />
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="rango" class="form-label">Rango GPS</label>
-                                                        <select id="rango" name="txtRango" required class="form-select">
-                                                            <option value="" disabled>Seleccione un rango</option>
-                                                            <option value="10" <?php if($datos['rango_gps'] == 10) echo 'selected'; ?>>10 metros</option>
-                                                            <option value="20" <?php if($datos['rango_gps'] == 20) echo 'selected'; ?>>20 metros</option>
-                                                            <option value="30" <?php if($datos['rango_gps'] == 30) echo 'selected'; ?>>30 metros</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
-                                                        <button type="submit" class="btn btn-editar" name="btnModificar">Modificar</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <?php
                             }
                         }
@@ -106,6 +73,43 @@ $direcciones = $daoDireccion->obtenerTodasDirecciones();
             </div>
         </div>
 
+        <!-- Aquí se mueven los modales fuera del <tbody> -->
+        <?php foreach ($direcciones as $datos): ?>
+        <!-- Modal para editar -->
+        <div class="modal fade" id="editModal<?php echo $datos['id_direccion']; ?>" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="editModalLabel">Editar Dirección</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="php/controlador_modificar_direccion.php" method="post">
+                            <input type="hidden" value="<?= $datos['id_direccion'] ?>" name="txtId">
+                            <div class="mb-3">
+                                <label for="direccion" class="form-label">Dirección Exacta</label>
+                                <input id="direccion" type="text" name="txtDireccion" value="<?php echo $datos['direccion_exacta']; ?>" required class="form-control" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="rango" class="form-label">Rango GPS</label>
+                                <select id="rango" name="txtRango" required class="form-select">
+                                    <option value="" disabled>Seleccione un rango</option>
+                                    <option value="10" <?php if($datos['rango_gps'] == 10) echo 'selected'; ?>>10 metros</option>
+                                    <option value="20" <?php if($datos['rango_gps'] == 20) echo 'selected'; ?>>20 metros</option>
+                                    <option value="30" <?php if($datos['rango_gps'] == 30) echo 'selected'; ?>>30 metros</option>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="submit" class="btn btn-editar" name="btnModificar">Modificar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php endforeach; ?>
+        
         <div class="botones">
             <button class="btn btn-salir" onclick="window.location.href = 'horario_ubicacion.php'">Regresar</button>
         </div>

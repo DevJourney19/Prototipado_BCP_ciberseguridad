@@ -1,8 +1,13 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include_once '../controller/ControllerEntradas.php';
 include_once '../controller/ControllerHorario.php'; // Incluye el nuevo controlador
-include_once 'config/Connection.php';
+include_once '../dao/DaoHorario.php'; 
+
+// include_once '../config/Connection.php';
 
 // Crear instancia del controlador
 $controllerEntradas = new ControllerEntradas();
@@ -12,7 +17,7 @@ $controllerEntradas->validarServicio('principal.php', $_SESSION['id_seguridad'])
 $controllerHorario = new ControllerHorario();
 
 // Obtener horarios restringidos
-$horarios = $controllerHorario->obtenerHorarios(); 
+$horarios = $controllerHorario->obtenerHorarios();
 
 date_default_timezone_set('America/Lima');
 $fechaHoy = date('d-m-Y');
@@ -40,7 +45,7 @@ $fechaHoy = date('d-m-Y');
 
             <?php if (empty($horarios)): ?>
                 <h4>No se han encontrado horarios restringidos. Puedes registrar uno nuevo.</h4>
-                <form action="../controllers/ControllerHorario.php?action=registrar" method="post">
+                <form action="../controller/ControllerHorario.php?action=registrar" method="post">
                     <div class="formulario">
                         <input type="hidden" name="id_seguridad" value="<?php echo $_SESSION['id_seguridad']; ?>">
                         <div class="grupo-formulario-horario">
@@ -93,7 +98,12 @@ $fechaHoy = date('d-m-Y');
         <div class="secciones">
             <form action="" method="post">
                 <div>
-                    <?php include("php/controlador_registrar_direccion.php"); ?>
+                    <?php
+                    if (isset($_SESSION['mensaje'])) {
+                        echo "<div style='color: red;'>" . $_SESSION['mensaje'] . "</div>";
+                        unset($_SESSION['mensaje']); // Limpiar el mensaje de la sesión
+                    }
+                    ?>
                 </div>
                 <h2>Ingresa la Ubicación Segura</h2>
                 <div class="grupo-formulario">
