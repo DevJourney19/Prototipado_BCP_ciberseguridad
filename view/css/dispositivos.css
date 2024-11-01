@@ -139,12 +139,20 @@ input:checked+label .radio-button {
     background-color: #FF7900;
 }
 
+.boton-primario button:hover {
+    background-color: #f48728;
+}
+
 .boton-primario button:active {
     background-color: #d16201;
 }
 
 .boton-secundario button {
     background-color: #001843;
+}
+
+.boton-secundario button:hover {
+    background-color: #002d80;
 }
 
 .boton-secundario button:active {

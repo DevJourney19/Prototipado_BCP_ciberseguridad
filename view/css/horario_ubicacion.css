@@ -103,9 +103,23 @@
     cursor: pointer;
 }
 
+.botones .boton-azul:hover {
+    background:  #0a4c97;
+    color: #ffffff;
+    transition: background 0.3s, transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .botones .boton-naranja {
     background-color: #ff7f00;
     color: #fff;
+}
+
+.botones .boton-naranja:hover {
+    background: #f48728;
+    color: #ffffff;
+    transition: background 0.3s, transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .mapa {

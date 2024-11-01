@@ -26,7 +26,7 @@ $datos = $seguridad->verificarSeguridad($_SESSION['id']);
         <span>El cargo se ha realizado exitosamente</span>
     </div>
     <main>
-        <h1>Activación de Nuevo Sistema Seguridad</h1>
+        <h1>Activación del Nuevo Sistema Seguridad</h1>
         <div class="flex">
             <div class="primer_cuadro">
                 <p>
@@ -48,7 +48,7 @@ $datos = $seguridad->verificarSeguridad($_SESSION['id']);
                 </div>
                 <p>Ingrese sus datos para realizar el cargo a la cuenta</p>
                 <form action="#">
-                    <div><input id="nombre_activacion" type="text" placeholder="Nombre Completo de la tarjeta" <?php if ($datos != null)
+                    <div><input id="nombre_activacion" type="text" placeholder="Número completo de la tarjeta" <?php if ($datos != null)
                                 echo 'disabled'; ?>></div>
                     <div><input id="telefono_activacion" type="text" placeholder="Teléfono" <?php if ($datos != null)
                                 echo 'disabled'; ?>></div>

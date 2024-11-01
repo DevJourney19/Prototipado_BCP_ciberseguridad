@@ -85,7 +85,7 @@ $nombre = $usuario->obtenerUsuario($_SESSION['id']);
             <div class="donaciones">
                 <div>
                     <span>Donaciones</span>
-                    <p>Transforma vidas y sé parte del cambio</p>
+                    <p>Transforma vidas y se parte del cambio</p>
                 </div>
                 <div> <i class="fa-solid fa-heart fa-2xl"></i>
                     <span class="fa-solid fa-chevron-right fa-xl"></span>

