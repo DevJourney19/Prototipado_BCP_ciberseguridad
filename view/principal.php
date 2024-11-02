@@ -47,30 +47,26 @@ $usuario = $daoUsuario->obtenerUsuario($_SESSION['id']);
     </div>
     <div class="cuadro_superior">
         <div class="izquierda">
-            <<<<<<< HEAD <div><span class="hola">Hola, </span><span><?= $nombre ?></span>
-        </div>
-        =======
-        <div><span class="hola">Hola, </span><span><?= $usuario->getNombre() ?></span></div>
-        >>>>>>> 1530d48364483322a7de83750dc61148f72dacc4
-        <div class="circulo">
-            <img src="img/usuario.png" alt="Perfil Usuario">
-        </div>
-    </div>
-    <div class="derecha">
-        <span>Mis productos</span>
-        <div class="cuentas">
-            <div class="cuenta_1">
-                <span>Cuentas de Ahorro</span>
-                <span class="amount">S/. 120.40</span>
-                <span>**** 2030</span>
-            </div>
-            <div class="cuenta_2">
-                <span>Cuentas de Ahorro</span>
-                <span class="amount">S/. 120.40</span>
-                <span>**** 2030</span>
+            <div><span class="hola">Hola, </span><span><?= $usuario->getNombre() ?></span></div>
+            <div class="circulo">
+                <img src="img/usuario.png" alt="Perfil Usuario">
             </div>
         </div>
-    </div>
+        <div class="derecha">
+            <span>Mis productos</span>
+            <div class="cuentas">
+                <div class="cuenta_1">
+                    <span>Cuentas de Ahorro</span>
+                    <span class="amount">S/. 120.40</span>
+                    <span>**** 2030</span>
+                </div>
+                <div class="cuenta_2">
+                    <span>Cuentas de Ahorro</span>
+                    <span class="amount">S/. 120.40</span>
+                    <span>**** 2030</span>
+                </div>
+            </div>
+        </div>
     </div>
     <section>
         <div class="fila">
