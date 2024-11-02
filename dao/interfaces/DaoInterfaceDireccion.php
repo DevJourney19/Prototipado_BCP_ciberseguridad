@@ -6,4 +6,3 @@ interface DaoInterfaceDireccion {
     public function modificarDireccion($id, $direccion_exacta, $rango_gps);
     public function eliminarDireccion($id);
 }
-?>

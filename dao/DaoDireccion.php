@@ -1,7 +1,9 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 include_once '../config/Connection.php';
-// include_once '../model/Direccion.php';
 include_once 'interfaces/DaoInterfaceDireccion.php';
 
 class DaoDireccion implements DaoInterfaceDireccion {
@@ -22,14 +24,16 @@ class DaoDireccion implements DaoInterfaceDireccion {
         return $this->connection->consultar($query);
     }
 
-    public function modificarDireccion($id, $direccion_exacta, $rango_gps) {
-        $query = "UPDATE direccion SET direccion_exacta = ?, rango_gps = ? WHERE id = ?";
-        $this->connection->ejecutar($query, [$direccion_exacta, $rango_gps, $id]);
+    public function modificarDireccion($id_direccion, $direccion_exacta, $rango_gps) {
+        // Asegúrate de que la tabla sea "direccion" y el campo "id_direccion"
+        $sql = "UPDATE direccion SET direccion_exacta = ?, rango_gps = ? WHERE id_direccion = ?";
+        
+        // Usamos la conexión para ejecutar la consulta directamente
+        return $this->connection->ejecutar($sql, [$direccion_exacta, $rango_gps, $id_direccion]);
     }
 
     public function eliminarDireccion($id) {
-        $query = "DELETE FROM direccion WHERE id = ?";
+        $query = "DELETE FROM direccion WHERE id_direccion = ?";
         $this->connection->ejecutar($query, [$id]);
     }
 }
-?>

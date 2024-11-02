@@ -4,8 +4,10 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 include_once '../controller/ControllerEntradas.php';
-include_once '../controller/ControllerHorario.php'; // Incluye el nuevo controlador
-include_once '../dao/DaoHorario.php'; 
+include_once '../controller/ControllerHorario.php';
+include_once '../controller/ControllerDireccion.php'; // Incluir el controlador de dirección
+include_once '../dao/DaoHorario.php';
+include_once '../dao/DaoDireccion.php'; // Incluir el DAO de dirección
 
 // include_once '../config/Connection.php';
 
@@ -13,10 +15,10 @@ include_once '../dao/DaoHorario.php';
 $controllerEntradas = new ControllerEntradas();
 $controllerEntradas->validarEntrada('index.php');
 $controllerEntradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
+// Crear una instancia del DAO
 
 $controllerHorario = new ControllerHorario();
 
-// Obtener horarios restringidos
 $horarios = $controllerHorario->obtenerHorarios();
 
 date_default_timezone_set('America/Lima');
@@ -68,7 +70,7 @@ $fechaHoy = date('d-m-Y');
                 </form>
             <?php else: ?>
                 <?php foreach ($horarios as $datos): ?>
-                    <form action="../controllers/ControllerHorario.php?action=modificar" method="post">
+                    <form action="../controller/ControllerHorario.php?action=modificar" method="post">
                         <div class="formulario">
                             <input type="hidden" name="txtId" value="<?php echo htmlspecialchars($datos['id_hora']); ?>">
                             <div class="grupo-formulario-horario">
@@ -96,7 +98,7 @@ $fechaHoy = date('d-m-Y');
         </div>
 
         <div class="secciones">
-            <form action="" method="post">
+            <form action="../controller/ControllerDireccion.php?action=registrar" method="post">
                 <div>
                     <?php
                     if (isset($_SESSION['mensaje'])) {

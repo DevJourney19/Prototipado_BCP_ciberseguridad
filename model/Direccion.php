@@ -30,4 +30,3 @@ class Direccion {
     public function setRangoGps($rango_gps) { $this->rango_gps = $rango_gps; }
 }
 
-?>

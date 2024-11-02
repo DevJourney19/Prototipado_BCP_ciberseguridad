@@ -8,4 +8,3 @@ interface DaoInterface {
     public function readAll();
 }
 
-?>

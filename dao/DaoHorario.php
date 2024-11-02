@@ -48,7 +48,7 @@ class DaoHorario implements DaoInterfaceHorario {
 
     public function modificarHorario($id, $idSeguridad, $horaInicio, $horaFin, $fecha) {
         try {
-            $query = "UPDATE hora_restringida SET id_seguridad = :idSeguridad, hora_inicio = :horaInicio, hora_fin = :horaFin, updated_at = NOW() WHERE id = :id";
+            $query = "UPDATE hora_restringida SET id_seguridad = :idSeguridad, hora_inicio = :horaInicio, hora_final = :horaFin, updated_at = NOW() WHERE id_hora  = :id";
             return $this->db->ejecutar($query, [
                 'id' => $id,
                 'idSeguridad' => $idSeguridad,
@@ -63,7 +63,7 @@ class DaoHorario implements DaoInterfaceHorario {
 
     public function eliminarHorario($id) {
         try {
-            $query = "DELETE FROM hora_restringida WHERE id = :id";
+            $query = "DELETE FROM hora_restringida WHERE id_hora  = :id";
             return $this->db->ejecutar($query, ['id' => $id]);
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
