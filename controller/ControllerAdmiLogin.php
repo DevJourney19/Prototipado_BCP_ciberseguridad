@@ -1,9 +1,10 @@
 <?php
 include '../dao/DaoUsuario.php';
 
-$email = $_POST['email'];
-$password = $_POST['password'];
-$nombre = $_POST['nombre'];
+$email = filter_input(INPUT_POST,'email',FILTER_SANITIZE_NUMBER_INT);
+$password = filter_input(INPUT_POST,'password',FILTER_SANITIZE_NUMBER_INT);
+$nombre = filter_input(INPUT_POST,'nombre',FILTER_SANITIZE_STRING);
+
 
 $daoUsuario = new DaoUsuario();
 

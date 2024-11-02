@@ -3,9 +3,13 @@
 include_once '../controller/ControllerSeguridad.php';
 
 $controllerSeguridad = new ControllerSeguridad();
-$resultado = $controllerSeguridad->obtenerUsuario($_SESSION['id_usuario']);
 
-$datos = isset($resultado[0]['estado_horas_direcciones']) ? $resultado[0]['estado_horas_direcciones'] : false;
+$resultado = $controllerSeguridad->obtenerUsuario($_SESSION['id']);
+if (isset($resultado[0]['estado_horas_direcciones']) && $resultado[0]['estado_horas_direcciones'] !== null) {
+    $datos = $resultado[0]['estado_horas_direcciones'];
+} else {
+    $datos = false;
+}
 ?>
 
 <div class="tabs">
@@ -56,10 +60,7 @@ $datos = isset($resultado[0]['estado_horas_direcciones']) ? $resultado[0]['estad
       console.error("Error al enviar los datos:", error);
     });
   });
-</script>
 
-
-<script>
   const links = document.querySelectorAll('.tab-link');
 
   const activeTab = localStorage.getItem('activeTab');
@@ -76,3 +77,4 @@ $datos = isset($resultado[0]['estado_horas_direcciones']) ? $resultado[0]['estad
     });
   });
 </script>
+

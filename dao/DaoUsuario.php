@@ -12,13 +12,17 @@ class DaoUsuario implements DaoInterfaceUsuario
         $this->db = new Connection();
     }
 
-    public function read($id_seguridad)
+    public function read($id, $tipo)
     {
         try {
-            $query = "SELECT * FROM usuario 
+            if ($tipo == 'seguridad') {
+                $query = "SELECT * FROM usuario 
                       JOIN seguridad ON usuario.id_usuario = seguridad.id_usuario 
-                      WHERE seguridad.id_seguridad = :id_seguridad";
-            $result = $this->db->consultar($query, ['id_seguridad' => $id_seguridad]);
+                      WHERE seguridad.id_seguridad = :id";
+            } else {
+                $query = "SELECT * FROM usuario WHERE id_usuario = :id";
+            }
+            $result = $this->db->consultar($query, ['id' => $id]);
             if (count($result) > 0) {
                 return $result[0];
             } else {

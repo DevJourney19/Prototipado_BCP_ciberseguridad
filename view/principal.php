@@ -4,27 +4,13 @@ include_once '../controller/ControllerUsuario.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 
-//$usuario = new ControllerUsuario();
-//$usuario->obtenerUsuario($_SESSION['id_usuario']);
-
-//$sql = "SELECT * FROM usuario WHERE id_usuario = " . $_SESSION['id_usuario'];
-/*if ($_SESSION['estado_dispositivo'] === 'seguro') {
-    echo 'Es un dispositivo seguro';
-} else if ($_SESSION['estado_dispositivo'] === 'activado') {
-    echo 'Es un dispositivo activado';
-}
-try {
-    conectar();
-    $resultado = consultar($sql);
-    $nombre = $resultado[0]["nombre"];
-    unset($resultado);
-    desconectar();
-} catch (Exception $exc) {
-    die($exc->getMessage());
-}*/
 
 $daoUsuario = new ControllerUsuario();
-$usuario = $daoUsuario->obtenerUsuario($_SESSION['id_usuario']); //de donde es el id?
+if (isset($_SESSION['id_seguridad'])) {
+    $usuario = $daoUsuario->obtenerUsuario($_SESSION['id_seguridad'], "seguridad");
+} else {
+    $usuario = $daoUsuario->obtenerUsuario($_SESSION['id'], "usuario");
+}
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +36,9 @@ $usuario = $daoUsuario->obtenerUsuario($_SESSION['id_usuario']); //de donde es e
     </div>
     <div class="cuadro_superior">
         <div class="izquierda">
-            <div><span class="hola">Hola, </span><span><?= $usuario->getNombre() ?></span></div>
+
+            <div><span class="hola">Hola, </span><span><?=$usuario->getNombre()?></span></div>
+
             <div class="circulo">
                 <img src="img/usuario.png" alt="Perfil Usuario">
             </div>

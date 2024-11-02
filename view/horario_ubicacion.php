@@ -1,21 +1,11 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
 include_once '../controller/ControllerEntradas.php';
 include_once '../controller/ControllerHorario.php';
 include_once '../controller/ControllerDireccion.php'; // Incluir el controlador de dirección
-include_once '../dao/DaoHorario.php';
-include_once '../dao/DaoDireccion.php'; // Incluir el DAO de dirección
 
-// include_once '../config/Connection.php';
-
-// Crear instancia del controlador
 $controllerEntradas = new ControllerEntradas();
 $controllerEntradas->validarEntrada('index.php');
 $controllerEntradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
-// Crear una instancia del DAO
 
 $controllerHorario = new ControllerHorario();
 
@@ -23,6 +13,7 @@ $horarios = $controllerHorario->obtenerHorarios();
 
 date_default_timezone_set('America/Lima');
 $fechaHoy = date('d-m-Y');
+$error = null
 ?>
 
 <!DOCTYPE html>
@@ -48,9 +39,9 @@ $fechaHoy = date('d-m-Y');
 
             <?php if (empty($horarios)): ?>
                 <h4>No se han encontrado horarios restringidos. Puedes registrar uno nuevo.</h4>
-                <form action="../controller/ControllerHorario.php?action=registrar" method="post">
+                <form action="../controller/ControllerHorario.php?action=registrar&id_seguridad=<?= $_SESSION['id_seguridad'] ?>" method="post">
                     <div class="formulario">
-                        <input type="hidden" name="id_seguridad" value="<?php echo $_SESSION['id_seguridad']; ?>">
+                        <input type="hidden" name="id_seguridad" value="<?= $_SESSION['id_seguridad']?>">
                         <div class="grupo-formulario-horario">
                             <label for="hora-inicio-nuevo">
                                 <i class="fas fa-clock"></i> Hora Inicio
