@@ -336,8 +336,8 @@ th {
         width: 90%;
     }
 
-    .tabla {
-        width: 2px;
+    .grid {
+        grid-template-columns: 1fr;
     }
 
     .caja {
