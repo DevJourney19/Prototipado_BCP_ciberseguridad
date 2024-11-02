@@ -107,5 +107,4 @@ if (isset($_GET['action'])) {
             break;
     }
 } else {
-    echo "No se ha llamado a ninguna acción.";
 }

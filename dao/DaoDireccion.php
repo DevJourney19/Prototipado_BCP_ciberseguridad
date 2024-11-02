@@ -25,10 +25,8 @@ class DaoDireccion implements DaoInterfaceDireccion {
     }
 
     public function modificarDireccion($id_direccion, $direccion_exacta, $rango_gps) {
-        // Asegúrate de que la tabla sea "direccion" y el campo "id_direccion"
         $sql = "UPDATE direccion SET direccion_exacta = ?, rango_gps = ? WHERE id_direccion = ?";
         
-        // Usamos la conexión para ejecutar la consulta directamente
         return $this->connection->ejecutar($sql, [$direccion_exacta, $rango_gps, $id_direccion]);
     }
 

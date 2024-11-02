@@ -109,5 +109,4 @@ if (isset($_GET['action'])) {
         echo "Acción no válida.";
     }
 } else {
-    echo "No se ha llamado a ninguna acción.";
 }

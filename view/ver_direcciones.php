@@ -26,40 +26,31 @@ $direcciones = $daoDireccion->obtenerTodasDirecciones();
     <style>
         .modal {
             display: none;
-            /* No mostrar por defecto */
             position: fixed;
             top: 60%;
-            /* Ajusta este valor para subir o bajar el modal */
             left: 50%;
-            /* Centrar horizontalmente */
             transform: translate(-50%, -50%);
-            /* Ajustar el centro */
             z-index: 1055;
-            /* Z-index del modal */
             width: 500px;
-            /* Ancho del modal */
             max-width: 100%;
-            /* Ancho máximo para pantallas pequeñas */
+            height: auto !important; 
+
         }
 
         .modal-dialog {
             margin: 1.5rem auto;
-            /* Margen superior e inferior */
         }
 
         .modal-content {
             padding: 1.5rem;
-            /* Ajustar el padding para el contenido del modal */
         }
 
         .modal-header {
             margin-bottom: 1rem;
-            /* Espacio entre el encabezado y el contenido */
         }
 
         .mb-3 {
             margin-bottom: 1rem;
-            /* Espacio entre los elementos */
         }
     </style>
 </head>
