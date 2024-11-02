@@ -12,15 +12,15 @@ if (isset($resultado[0]['estado_horas_direcciones']) && $resultado[0]['estado_ho
 
 <div class="tabs">
   <div class="tabs_encabezado">
-    <div class=><a href="configuracion.php"><i class="fa-solid fa-arrow-left"></i></a>
+    <div>
+      <a href="configuracion.php"><i class="fa-solid fa-arrow-left"></i></a>
       <div class="tab_title">
         <span>Seguridad</span>
         <i class="fa-solid fa-shield"></i>
       </div>
     </div>
     <label class="switch">
-      <input id="switchCheckbox" type="checkbox" <?php if ($datos)
-                                                    echo 'checked'; ?>>
+      <input id="switchCheckbox" type="checkbox" <?php echo $datos ? 'checked' : ''; ?>>
       <span class="slider"></span>
     </label>
   </div>
@@ -34,46 +34,28 @@ if (isset($resultado[0]['estado_horas_direcciones']) && $resultado[0]['estado_ho
 
 <script>
   const switchCheckbox = document.getElementById('switchCheckbox');
-  const estado = <?php echo $datos ? 'false' : 'true' ?>;
+  const estado = <?php echo $datos ? 'true' : 'false' ?>;
+
   switchCheckbox.addEventListener('change', async () => {
     const response = await fetch("../controller/ControllerEstadoFunciones.php", {
-        method: "POST",
-        body: JSON.stringify({
-          estado: estado,
-          funcion: "estado_horas_direcciones",
-        }),
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Resultado:", data);
-        if (data.status == "activado") {
-          alert("Restricciones activadas");
-          location.reload();
-        } else {
-          alert("Restricciones desactivadas");
-          location.reload();
-        }
-      })
-      .catch((error) => {
-        console.error("Error al enviar los datos:", error);
-      });
-  });
-</script>
-
-<script>
-  const links = document.querySelectorAll('.tab-link');
-
-  const activeTab = localStorage.getItem('activeTab');
-  if (activeTab) {
-    document.querySelector(`a[href="${activeTab}"]`)?.classList.add('active');
-  }
-
-  links.forEach(link => {
-    link.addEventListener('click', function(event) {
-      links.forEach(link => link.classList.remove('active'));
-      event.currentTarget.classList.add('active');
-
-      localStorage.setItem('activeTab', event.currentTarget.getAttribute('href'));
+      method: "POST",
+      body: JSON.stringify({
+        estado: !estado, // Cambia el estado cuando se haga clic
+        funcion: "estado_horas_direcciones",
+      }),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Resultado:", data);
+      if (data.status == "activado") {
+        alert("Restricciones activadas");
+      } else {
+        alert("Restricciones desactivadas");
+      }
+      location.reload(); 
+    })
+    .catch((error) => {
+      console.error("Error al enviar los datos:", error);
     });
   });
 </script>

@@ -1,0 +1,39 @@
+.btn-editar {
+    background-color: #ff7f00;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-salir {
+    background-color: #002855;
+    color: white;
+    width: 130px;
+    height: 40px;
+    padding: 0.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn-salir:hover {
+    background-color: #011d3d;
+    color: white;
+}
+
+.btn-editar:hover {
+    background-color: #e67e22;
+    color: white;
+}
+
+thead {
+    background-color: #002855;
+    color: white;
+}
+
+.table-bordered> :not(caption)>*>* {
+    border-width: 0 !important;
+}
+
+.table> :not(caption)>*>* {
+    color: inherit;
+    background-color: transparent;
+}
