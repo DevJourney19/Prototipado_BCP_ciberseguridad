@@ -27,10 +27,10 @@ $datos2 = $seguridad->verificarSeguridad($_SESSION['id'])[0];
     <div>
       <div class="icono-fila">
         <i class="fa-solid fa-user-pen"></i>
-        <h2>Estas apunto de cancelar el servicio</h2>
+        <h2>Estás apunto de cancelar el servicio</h2>
       </div>
       <div class="contenedor-texto">
-        <p>Una vez que termine el mes, ya no se te cobrará el cargo del servicio y perderas el acceso a las funcionalidades inmediatamente.</p>
+        <p>Una vez que termine el mes, ya no se te cobrará el cargo del servicio y perderás el acceso a las funcionalidades inmediatamente.</p>
       </div>
       <div class="contenedor-info">
         <i class="fa-solid fa-info"></i>

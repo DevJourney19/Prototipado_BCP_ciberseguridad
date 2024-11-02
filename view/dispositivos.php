@@ -210,7 +210,7 @@ $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
             <img src="img/touch.png" alt="touch">
         </div>
         <div class="texto">
-            <p>¿Estas seguro que deseas establecer el dispositivo como principal?</p>
+            <p>¿Estás seguro que deseas establecer el dispositivo como principal?</p>
         </div>
         <div class="opciones-modal">
             <div class="boton-primario-modal">
@@ -226,7 +226,7 @@ $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
             <img src="img/desvincular.png" alt="desvinular">
         </div>
         <div class="texto">
-            <p>¿Estas seguro que deseas desvincular este dispositivo?</p>
+            <p>¿Estás seguro que deseas desvincular este dispositivo?</p>
         </div>
         <div class="opciones-modal">
             <div class="boton-primario-modal">
