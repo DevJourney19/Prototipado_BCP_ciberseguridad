@@ -1,24 +1,35 @@
 <?php
-include_once '../controller/ControllerEntradas.php';
-$entradas = new ControllerEntradas();
-$entradas->validarEntrada('index.php');
-$entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
-
+/*include_once '../controller/ControllerEntradas.php';
+include_once '../controller/ControllerEntradas.php';*/
+include '../config/Connection.php';
+session_start();
+$conexion = new Connection();
+$conexion->conectar();
 $id_usuario = $_SESSION['id_usuario'];
-conectar();
 $sql = "select * from usuario where id_usuario= '$id_usuario'";
-$resultado1 = consultar($sql);
+$resultado1 = $conexion->consultar($sql);
 $sql2 = "Select * from seguridad where id_usuario='$id_usuario'";
-$resultado2 = consultar($sql2);
+$resultado2 = $conexion->consultar($sql2);
 $id_segu = $resultado2[0]['id_seguridad'];
 $sql3 = "Select * from dispositivo where id_seguridad='$id_segu' AND estado_dispositivo='activado'";
-$resultado3 = consultar($sql3);
-desconectar();
+$resultado3 = $conexion->consultar($sql3);
+
 $seguro = null;
+/*
 if ($_SESSION['estado_dispositivo'] === 'seguro') {
     echo 'Es un dispositivo seguro';
     $seguro = true;
-}
+}*/
+//$entradas = new ControllerEntradas();
+/*$entradas->validarEntrada('index.php');
+$entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);*/
+
+//$dispositivo = new ControllerDispositivo();
+//$dispositivo->readById($id_usuario);
+/*$usuario = new ControllerUsuario();
+$info_usuario->obtener_info_usuario($id_usuario);
+$info_usuario->obtenerUsuario($entradas);
+$usuario->estado_activado($info_usuario);*/
 ?>
 
 <!DOCTYPE html>
@@ -102,7 +113,7 @@ if ($_SESSION['estado_dispositivo'] === 'seguro') {
                         </div>
                         <div class="seccion">
                             <div class="titulo-caja">
-                                <h4>
+                                <h4  style="color: darkorange; font-weight: 800;">
                                     <?= $resultado3[0]['tipo_dispositivo'] ?>
                                 </h4>
                             </div>
@@ -127,21 +138,7 @@ if ($_SESSION['estado_dispositivo'] === 'seguro') {
 
 
         </div>
-        <<<<<<< HEAD <?php if (!isset($seguro)) { ?>
-                <div class="opciones">
-                    <div class="boton-primario">
-                        <button type="button" onclick="openModal()">Dispositivo Principal</button>
-                    </div>
-                    <div class="boton-secundario">
-                        <button type="button" onclick="openModalDos()">Desvincular</button>
-                    </div>
-                    <div class="boton-primario">
-                        <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
-                    </div>
-                </div>
-            <?php } ?>
-            =======
-            -->
+        <?php if (!isset($seguro)) { ?>
             <div class="opciones">
                 <div class="boton-primario">
                     <button type="button" onclick="openModal()">Dispositivo Principal</button>
@@ -153,7 +150,8 @@ if ($_SESSION['estado_dispositivo'] === 'seguro') {
                     <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
                 </div>
             </div>
-            >>>>>>> 1530d48364483322a7de83750dc61148f72dacc4
+        <?php } ?>
+
     </main>
 
     <footer>
@@ -196,12 +194,12 @@ if ($_SESSION['estado_dispositivo'] === 'seguro') {
     <script src="js/dispositivos.js"></script>
     <script>
         const info = localStorage.getItem('nuevo_dispositivo'); //Retorna String
-        console.log(info);
+        //console.log(info);
         if (info) {
             try {
                 //Convertir la cadena JSON de nuevo a un objeto
                 const obj_info = JSON.parse(info);
-                console.log(obj_info);
+                //console.log(obj_info);
 
                 //Cambiar el contenido del div [ubicación referencial]
                 const mensajito = document.getElementById('mensajin');
@@ -233,10 +231,10 @@ if ($_SESSION['estado_dispositivo'] === 'seguro') {
                     </div>
                 </div>
                 <?php if (!isset($seguro)) { ?>
-                            <div class="segundo">
-                                <input type="radio" name="vinculo" id="dispositivo${index + 2}" />
-                                <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
-                            </div>
+                                                                                <div class="segundo">
+                                                                                    <input type="radio" name="vinculo" id="dispositivo${index + 2}" />
+                                                                                    <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
+                                                                                </div>
                 <?php } ?>
             `;
                     //localStorage.removeItem('nuevo_dispositivo');

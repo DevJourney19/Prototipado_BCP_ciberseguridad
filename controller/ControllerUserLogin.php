@@ -19,9 +19,9 @@ try {
     if (count($registro) == 1) {
         session_start();
         $_SESSION['security'] = '12345';
-        $_SESSION['id'] = $registro[0]['id_usuario'];
+        $_SESSION['id_usuario'] = $registro[0]['id_usuario']; //Se establece el id del usuario
 
-        $resultado = $daoSeguridad->readByUser($_SESSION['id']);
+        $resultado = $daoSeguridad->readByUser($_SESSION['id_usuario']);
         $idSeguridad = $resultado[0]['id_seguridad'];
         if ($resultado[0]['activacion_seguridad'] == 1) {
             $_SESSION['id_seguridad'] = $idSeguridad;

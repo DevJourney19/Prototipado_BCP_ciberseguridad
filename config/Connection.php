@@ -13,7 +13,7 @@ class Connection {
         $this->desconectar();
     }
 
-    private function conectar() {
+    public function conectar() {
         $dsn = "mysql:host=" . HOST . ";dbname=" . DATABASE . ";charset=utf8mb4";
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -28,7 +28,7 @@ class Connection {
         }
     }
 
-    private function desconectar() {
+    public function desconectar() {
         $this->pdo = null;
     }
 

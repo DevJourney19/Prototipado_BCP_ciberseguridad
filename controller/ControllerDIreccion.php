@@ -14,21 +14,24 @@ $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
 
-class ControllerDireccion {
+class ControllerDireccion
+{
     private $daoDireccion;
     private $daoSeguridad;
 
-    public function __construct() {
+    public function __construct()
+    {
         session_start(); // Iniciar sesión
         $this->daoDireccion = new DaoDireccion();
         $this->daoSeguridad = new DaoSeguridad();
     }
 
-    public function registrar() {
+    public function registrar()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnRegistrarDireccion'])) {
             $id_seguridad = $_SESSION['id_seguridad'] ?? null;
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
-            $rango_gps = 10; 
+            $rango_gps = 10;
             $fecha_configuracion = date('Y-m-d');
             $hora_configuracion = date('H:i:s');
 
@@ -50,25 +53,27 @@ class ControllerDireccion {
         }
     }
 
-    public function obtenerDirecciones() {
+    public function obtenerDirecciones()
+    {
         return $this->daoDireccion->obtenerTodasDirecciones();
     }
 
-    public function modificar() {
+    public function modificar()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnModificar'])) {
             $id_direccion = $_POST['txtId'] ?? null;
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
             $rango_gps = $_POST['txtRango'] ?? 10;
-    
-            if ($id_direccion && !empty($direccion_exacta)) { 
+
+            if ($id_direccion && !empty($direccion_exacta)) {
                 $this->daoDireccion->modificarDireccion($id_direccion, $direccion_exacta, $rango_gps);
                 $_SESSION['mensaje'] = "Dirección modificada correctamente";
-                $error = false; 
+                $error = false;
             } else {
                 $_SESSION['mensaje'] = "Error: Debes llenar todos los campos.";
-                $error = true; 
+                $error = true;
             }
-    
+
             header('Location: /view/ver_direcciones.php');
             exit;
         } else {
@@ -76,14 +81,15 @@ class ControllerDireccion {
         }
     }
 
-    public function eliminar($id) {
+    public function eliminar($id)
+    {
         if (is_numeric($id)) {
             $this->daoDireccion->eliminarDireccion($id);
             $_SESSION['mensaje'] = "Dirección eliminada correctamente";
         } else {
             $_SESSION['mensaje'] = "Error: El id de dirección no es válido.";
         }
-    
+
         header('Location: /view/horario_ubicacion.php');
         exit;
     }

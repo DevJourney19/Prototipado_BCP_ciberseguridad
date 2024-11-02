@@ -3,7 +3,7 @@
 include_once '../controller/ControllerSeguridad.php';
 
 $controllerSeguridad = new ControllerSeguridad();
-$resultado = $controllerSeguridad->obtenerUsuario($_SESSION['id']);
+$resultado = $controllerSeguridad->obtenerUsuario($_SESSION['id_usuario']);
 
 $datos = isset($resultado[0]['estado_horas_direcciones']) ? $resultado[0]['estado_horas_direcciones'] : false;
 ?>
@@ -57,8 +57,7 @@ $datos = isset($resultado[0]['estado_horas_direcciones']) ? $resultado[0]['estad
     });
   });
 </script>
-<<<<<<< HEAD
-=======
+
 
 <script>
   const links = document.querySelectorAll('.tab-link');
@@ -77,4 +76,3 @@ $datos = isset($resultado[0]['estado_horas_direcciones']) ? $resultado[0]['estad
     });
   });
 </script>
->>>>>>> 1530d48364483322a7de83750dc61148f72dacc4

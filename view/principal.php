@@ -4,8 +4,11 @@ include_once '../controller/ControllerUsuario.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 
-$sql = "SELECT * FROM usuario WHERE id_usuario = " . $_SESSION['id_usuario'];
-if ($_SESSION['estado_dispositivo'] === 'seguro') {
+//$usuario = new ControllerUsuario();
+//$usuario->obtenerUsuario($_SESSION['id_usuario']);
+
+//$sql = "SELECT * FROM usuario WHERE id_usuario = " . $_SESSION['id_usuario'];
+/*if ($_SESSION['estado_dispositivo'] === 'seguro') {
     echo 'Es un dispositivo seguro';
 } else if ($_SESSION['estado_dispositivo'] === 'activado') {
     echo 'Es un dispositivo activado';
@@ -18,10 +21,10 @@ try {
     desconectar();
 } catch (Exception $exc) {
     die($exc->getMessage());
-}
+}*/
 
 $daoUsuario = new ControllerUsuario();
-$usuario = $daoUsuario->obtenerUsuario($_SESSION['id']);
+$usuario = $daoUsuario->obtenerUsuario($_SESSION['id_usuario']); //de donde es el id?
 ?>
 
 <!DOCTYPE html>

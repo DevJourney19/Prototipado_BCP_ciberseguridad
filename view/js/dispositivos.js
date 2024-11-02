@@ -75,8 +75,6 @@ async function agregando_solicitudes_html() {
         console.error('Error al obtener dispositivos:', error);
     };
 
-    //Botones
-
     //Añadiendo los listeners a los botones | Para evitar bucles o reiteraciones del action event por cada botón realizado
     manejadorBoton();
 
@@ -101,14 +99,15 @@ async function manejadorBoton(event) {
                         accion: accion
                     })
                 });
-
-                const data = await response.json();
+                
+                const data = await response.json(); //problema detected
                 const resultado_div = document.getElementById('resultado');
-
+                
                 if (data.status === 'success') {
                     resultado_div.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
                     await agregando_solicitudes_html(); //Actualizar la tabla
                     //htmleando(accion);
+                    
                     if (accion === 'permitir') {
                         const id_comparar = this.getAttribute('data-id');
 

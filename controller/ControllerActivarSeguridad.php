@@ -8,7 +8,7 @@ session_start();
 try {
 
   $daoSeguridad = new DaoSeguridad();
-  $id = $_SESSION['id'];
+  $id = $_SESSION['id_usuario'];
 
   // Ejecutar la consulta
   if ($daoSeguridad->verificarActivaciones($id)) {
