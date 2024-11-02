@@ -1,5 +1,18 @@
 {
+    "name": "danie/prototipado_bcp_ciberseguridad",
+    "autoload": {
+        "psr-4": {
+            "Danie\\PrototipadoBcpCiberseguridad\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "DevJourney19",
+            "email": "F4r3ver@gmail.com"
+        }
+    ],
     "require": {
+        "twilio/sdk": "^8.3",
         "phpmailer/phpmailer": "*",
         "infobip/infobip-api-php-client": "^5.1",
         "vlucas/phpdotenv": "^5.6"

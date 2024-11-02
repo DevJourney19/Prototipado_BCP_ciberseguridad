@@ -10,7 +10,7 @@ $inc = include_once("../config/connection.php");
 if ($inc) {
     session_start();
     //Obtenemos el id del usuario que ingreso a la cuenta
-    $id_usuario = $_SESSION['id'];
+    $id_usuario = $_SESSION['id_usuario'];
     conectar();
     /*Quiero mostrar la información almacenada de la tabla dispositivos, para ello necesito el id del usuario, y 
     de ahi el id de seguridad, para recien llegar al dispositivo, el cual su llave foranea es el id_seguro*/
@@ -19,10 +19,11 @@ if ($inc) {
     en cuenta que por cada usuario solo podrá tener 1 cuenta activada.*/
 
     $id_seguridad = $array_seguridad[0]['id_seguridad'] ?? "";
+    $_SESSION['id_seguridad'] = $id_seguridad;
     /*Se va a filtrar todos los dispositivos almacenados de la base de datos con parametros si estan establecidos 
     como inseguros y por el id de seguridad activado, el cual está relacionado de 1 a 1 con la información del cliente.*/
-    $consulta = consultar("Select dispositivo_seguro, tipo_dispositivo, direccion_ip, 
-    pais, ciudad, fecha_registro from dispositivos where dispositivo_seguro=0 and id_seguridad='$id_seguridad'");
+    /*$consulta = consultar("Select id_dispositivo, tipo_dispositivo, direccion_ip, 
+    pais, ciudad, estado_dispositivo, fecha_registro, ultima_conexion from dispositivo where id_seguridad='$id_seguridad' AND (estado_dispositivo='en_proceso_si' || estado_dispositivo='en_proceso_no')");*/
     desconectar();
 }
 ?>
@@ -45,9 +46,11 @@ if ($inc) {
 <body>
     <header>
         <?php include '../view/fragmentos/nav.php' ?>
+        <div id="resultado"></div>
     </header>
 
     <main>
+
         <div class="contenido-principal">
             <div class="titulo">
                 <h4>Historial de intentos de acceso de dispositivos</h4>
@@ -59,48 +62,20 @@ if ($inc) {
         </div>
         <div class="tabla_responsiva">
             <table border="1" class="tablita_equipos_no_deseados">
-                <tr>
-                    <th>Dispositivo seguro</th>
-                    <th>Dispositivo</th>
-                    <th>Direccion IP</th>
-                    <th>Pais</th>
-                    <th>Ciudad</th>
-                    <th>Fecha de Registro</th>
-                    <th colspan="2">Acciones</th>
-                </tr>
+                <thead>
+                    <tr> <!-- EN PROCESO SI ///// //EN PROCESO NO -->
+                        <th>Dispositivo</th>
+                        <th>Direccion IP</th>
+                        <th>Pais</th>
+                        <th>Ciudad</th>
+                        <th>Valido el codigo?</th>
+                        <th>Fecha de Registro</th>
+                        <th colspan="3">Acciones</th>
+                    </tr>
+                </thead>
 
-                <?php if ($consulta) {
-                    foreach ($consulta as $row) {
-                        $dispo_seguro = $row["dispositivo_seguro"];
-                        $tipo_dispositivo = $row["tipo_dispositivo"];
-                        $direccion_ip = $row["direccion_ip"];
-                        $pais = $row["pais"];
-                        $ciudad = $row["ciudad"];
-                        $fecha_registro = $row["fecha_registro"];
-                        $id_dispositivo = $row["id_dispositivo"];
-                        ?>
-                        <tr>
-                            <td><?= htmlspecialchars($dispo_seguro) ?></td>
-                            <td><?= htmlspecialchars($tipo_dispositivo) ?></td>
-                            <td><?= htmlspecialchars($direccion_ip) ?></td>
-                            <td><?= htmlspecialchars($pais) ?></td>
-                            <td><?= htmlspecialchars($ciudad) ?></td>
-                            <td><?= htmlspecialchars($fecha_registro) ?></td>
-                            <form action="php/acciones_dispositivo">
-                            <input type="hidden" name="id_dispositivo" value="<?= htmlspecialchars($id_dispositivo) ?>">
-                                <td><button type="submit" class="botoncito_accion_eliminar" name="accion" value="eliminar">Eliminar <i
-                                            class="fa-solid fa-x"></i></button>
-                                </td>
+                <tbody id="tabla_dispositivos"></tbody>
 
-
-                                <td><button type="submit" class="botoncito_accion_bloquear" name="accion" value="bloquear">Bloquear <i
-                                            class="fa-solid fa-ban"></i></button>
-                                </td>
-                            </form>
-                        </tr>
-                    <?php }
-                } ?>
-                
             </table>
 
         </div>

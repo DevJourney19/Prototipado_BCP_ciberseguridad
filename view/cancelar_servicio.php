@@ -6,7 +6,7 @@ $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
 
 $seguridad = new ControllerSeguridad();
-$datos2 = $seguridad->verificarSeguridad($_SESSION['id'])[0]; 
+$datos2 = $seguridad->verificarSeguridad($_SESSION['id'])[0];
 
 ?>
 
@@ -30,15 +30,18 @@ $datos2 = $seguridad->verificarSeguridad($_SESSION['id'])[0];
         <h2>Estás apunto de cancelar el servicio</h2>
       </div>
       <div class="contenedor-texto">
-        <p>Una vez que termine el mes, ya no se te cobrará el cargo del servicio y perderás el acceso a las funcionalidades inmediatamente.</p>
+        <p>Una vez que termine el mes, ya no se te cobrará el cargo del servicio y perderás el acceso a las
+          funcionalidades inmediatamente.</p>
       </div>
       <div class="contenedor-info">
         <i class="fa-solid fa-info"></i>
-        <span>No te preocupes! La data que has registrado estará guardada cuando desees volver a activar el servicio</span>
+        <span>No te preocupes! La data que has registrado estará guardada cuando desees volver a activar el
+          servicio</span>
       </div>
       <div class="options">
         <a href="configuracion.php">Seguir subscrito</a>
-        <button id="cancelarSubscripcion"><span>Cancelar mi subscripción</span> <i class="fa-solid fa-angle-right"></i></button>
+        <button id="cancelarSubscripcion"><span>Cancelar mi subscripción</span> <i
+            class="fa-solid fa-angle-right"></i></button>
       </div>
     </div>
   </main>
@@ -52,12 +55,12 @@ $datos2 = $seguridad->verificarSeguridad($_SESSION['id'])[0];
       const estado = <?php echo $datos2["activacion_seguridad"] ? 'false' : 'true' ?>;
       boton.addEventListener('click', async () => {
         await fetch("../controller/ControllerEstadoFunciones.php", {
-            method: "POST",
-            body: JSON.stringify({
-              estado: estado,
-              funcion: "activacion_seguridad"
-            }),
-          })
+          method: "POST",
+          body: JSON.stringify({
+            estado: estado,
+            funcion: "activacion_seguridad"
+          }),
+        })
           .then((response) => response.json())
           .then((data) => {
             console.log("Resultado:", data);

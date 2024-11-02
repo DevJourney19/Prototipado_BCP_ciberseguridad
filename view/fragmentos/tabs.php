@@ -1,4 +1,5 @@
 <?php
+
 include_once '../controller/ControllerSeguridad.php';
 
 $controllerSeguridad = new ControllerSeguridad();
