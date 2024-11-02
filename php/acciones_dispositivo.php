@@ -2,31 +2,35 @@
 
 include '../config/connection.php';
 conectar();
-$tarjeta = $_POST['eliminar_b'];
-$dni = $_POST['eliminar_b'];
-
-
-$validar_login = "SELECT * FROM usuario WHERE numero_tarjeta = '$tarjeta' AND dni = '$dni'" ; 
-
-
-$id_dispositivo = $_POST['id_dispositivo'];
-
 
 session_start();
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+$response = ['status' => 'error', 'message' => '']; // Inicializa la respuesta
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id_dispositivo = $_POST['id_dispositivo'] ?? '';
     $accion = $_POST['accion'] ?? '';
 
-    if($accion === 'eliminar'){
-        $sql = "delete from dispositivos where id_dispositivo = '$id_dispositivo'";
-        $ejecutar($sql);
-    }else if($accion === 'bloquear'){
-        //realizar el bloqueo
-        $sql = "delete from dispositivos where id_dispositivo = '$id_dispositivo'";
-        $ejecutar($sql);
-    }else{
-        echo "Acción no válida";
+    if ($accion === 'eliminar') {
+        $sql = "delete from dispositivo where id_dispositivo = '$id_dispositivo'";
+        ejecutar($sql);
+        $response['status'] = 'success';
+        $response['message'] = 'Dispositivo eliminado con éxito.';
+
+    } else if ($accion === 'bloquear') {
+        $sql = "UPDATE dispositivo SET estado_dispositivo='bloqueado' where id_dispositivo ='$id_dispositivo'";
+        ejecutar($sql);
+        $response['status'] = 'success';
+        $response['message'] = 'Dispositivo bloqueado con éxito.';
+
+    } else if ($accion === 'permitir') {
+        //Voy a traer el id de esa fila y procederé a cambiarle el estado
+        $sql = "UPDATE dispositivo SET estado_dispositivo='seguro' where id_dispositivo ='$id_dispositivo'";
+        ejecutar($sql);
+        $response['status'] = 'success';
+        $response['message'] = 'Dispositivo permitido con éxito.';
+        
     }
-
-
-
+    //header('Location: ../view/consulta_dispositivos.php'); //evitar cargar la pagina
+    header('Content-Type: application/json');
+    echo json_encode($response);
 }

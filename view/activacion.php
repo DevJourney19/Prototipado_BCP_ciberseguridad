@@ -1,4 +1,22 @@
 <?php
+include '../php/util/validar_entradas.php';
+include '../php/util/connection.php';
+validar_entrada('index.php');
+// verificar si ya ha sido contratado el servicio
+
+$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id_usuario'] . " AND activacion_seguridad = 1";
+
+try {
+    conectar();
+    $resultado = consultar($sql);
+    $datos = $resultado;
+    unset($resultado);
+
+    desconectar();
+} catch (Exception $exc) {
+    die($exc->getMessage());
+}
+
 include_once '../controller/ControllerEntradas.php';
 include_once '../controller/ControllerSeguridad.php';
 $entradas = new ControllerEntradas();
@@ -49,20 +67,23 @@ $datos = $seguridad->verificarSeguridad($_SESSION['id']);
                 <p>Ingrese sus datos para realizar el cargo a la cuenta</p>
                 <form action="#">
                     <div><input id="nombre_activacion" type="text" placeholder="Número completo de la tarjeta" <?php if ($datos != null)
-                                echo 'disabled'; ?>></div>
+                        echo 'disabled'; ?>></div>
+
                     <div><input id="telefono_activacion" type="text" placeholder="Teléfono" <?php if ($datos != null)
-                                echo 'disabled'; ?>></div>
+                        echo 'disabled'; ?>></div>
                     <div><input id="correo_activacion" type="text" placeholder="Correo" <?php if ($datos != null)
-                                echo 'disabled'; ?>></div>
+                        echo 'disabled'; ?>></div>
                     <div><input id="checkbox_activacion" class="checkbox" type="checkbox" data-required="1" <?php if ($datos != null)
-                                echo 'disabled'; ?>>
+                        echo 'disabled'; ?>>
                         <span>Acepto los <a href="#">Términos y Condiciones</a></span>
                     </div>
                     <span id="error_activacion"></span>
-                    <div class="button"><button id="button_activacion" type="submit"
-                            onclick="controlarFormulario(event)" <?php if ($datos != null)
-                                echo 'disabled'; ?>>
-                            Registrar</button></div>
+                    <div class="button">
+                        <button id="button_activacion" type="submit" onclick="controlarFormulario(event)" <?php if ($datos != null)
+                            echo 'disabled'; ?>>
+                            Registrar
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -72,7 +93,8 @@ $datos = $seguridad->verificarSeguridad($_SESSION['id']);
     </footer>
     <script src="../view/js/index.js"></script>
     <script src="../view/js/utils.js"></script>
-
+    <script src="../view/js/dispositivo_activado.js"></script>
 </body>
+
 
 </html>
