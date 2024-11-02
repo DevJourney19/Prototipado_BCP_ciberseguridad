@@ -14,7 +14,11 @@ $id_segu = $resultado2[0]['id_seguridad'];
 $sql3 = "Select * from dispositivo where id_seguridad='$id_segu' AND estado_dispositivo='activado'";
 $resultado3 = consultar($sql3);
 desconectar();
-
+$seguro = null;
+if ($_SESSION['estado_dispositivo'] === 'seguro') {
+    echo 'Es un dispositivo seguro';
+    $seguro = true;
+}
 //Si ese dispositivo tiene el estado activado entonces se mostrará
 
 ?>
@@ -125,19 +129,19 @@ desconectar();
 
 
         </div>
-
-        <div class="opciones">
-            <div class="boton-primario">
-                <button type="button" onclick="openModal()">Dispositivo Principal</button>
+        <?php if (!isset($seguro)) { ?>
+            <div class="opciones">
+                <div class="boton-primario">
+                    <button type="button" onclick="openModal()">Dispositivo Principal</button>
+                </div>
+                <div class="boton-secundario">
+                    <button type="button" onclick="openModalDos()">Desvincular</button>
+                </div>
+                <div class="boton-primario">
+                    <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
+                </div>
             </div>
-            <div class="boton-secundario">
-                <button type="button" onclick="openModalDos()">Desvincular</button>
-            </div>
-            <div class="boton-primario">
-                <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
-            </div>
-        </div>
-
+        <?php } ?>
     </main>
 
     <footer>
@@ -216,11 +220,12 @@ desconectar();
                         </div>
                     </div>
                 </div>
-
-                <div class="segundo">
-                    <input type="radio" name="vinculo" id="dispositivo${index + 2}" />
-                    <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
-                </div>
+                <?php if (!isset($seguro)) { ?>
+                    <div class="segundo">
+                        <input type="radio" name="vinculo" id="dispositivo${index + 2}" />
+                        <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
+                    </div>
+                <?php } ?>
             `;
                     //localStorage.removeItem('nuevo_dispositivo');
                     mensajito.appendChild(nueva_caja);
