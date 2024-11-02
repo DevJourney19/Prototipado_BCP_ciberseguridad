@@ -247,7 +247,12 @@ main {
   border-radius: 20px;
   cursor: pointer;
 }
-
+.segundo_cuadro button:hover {
+  background: #f48728;
+  color: #ffffff;
+  transition: background 0.3s, transform 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 /* --- Principal ---*/
 .cuadro_superior {
   background-color: #011844;
@@ -291,11 +296,19 @@ main {
 }
 
 .circulo {
-  border: 2px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
   width: 100px;
   height: 100px;
-  background: lightgray;
+  background: #011844;
+  overflow: hidden;
+}
+
+.circulo img {
+  width: 100%;
+  height: auto;
 }
 
 .cuenta_1 {
@@ -349,7 +362,16 @@ main {
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+.circulo_naranja i {
+  font-size: 34px;
+  color: #ffffff;
+}
+
 .circulo_naranja:hover {
   cursor: pointer;
 }
@@ -745,6 +767,7 @@ canvas {
   white-space: pre-line;
   font-weight: 600;
   font-size: 12px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .tab-link.active {
@@ -1020,6 +1043,7 @@ section button{
   gap: 10px;
   align-items: center;
   justify-content: center;
+  margin-bottom: 30px;
 }
 
 .config.options > div label{
@@ -1207,11 +1231,17 @@ section button i{
 .modal button.bloquear{
   background: #001843;
 }
-
+.modal button.bloquear:hover {
+  background-color: #07317e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
 .modal button.aceptar{
   background: #ff7900;
 }
-
+.modal button.aceptar:hover {
+  background-color: #fd9335;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
 .modal .button_modal{
   display: flex;
   flex-direction: column;

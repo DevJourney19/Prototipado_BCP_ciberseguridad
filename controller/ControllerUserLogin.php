@@ -2,9 +2,14 @@
 include '../dao/DaoUsuario.php';
 include '../dao/DaoSeguridad.php';
 
-$tarjeta = $_POST['tarjeta'];
-$dni = $_POST['dni'];
-$clave_internet = $_POST['clave_internet']; 
+//Evitar ataque SQL INJECTION
+$tarjeta = filter_input(INPUT_POST,'tarjeta',FILTER_SANITIZE_NUMBER_INT);
+$dni = filter_input(INPUT_POST,'dni',FILTER_SANITIZE_NUMBER_INT);
+$clave_internet = filter_input(INPUT_POST,'clave_internet',FILTER_SANITIZE_STRING);
+
+// $tarjeta = $_POST['tarjeta'];
+// $dni = $_POST['dni'];
+// $clave_internet = $_POST['clave_internet']; 
 $daoUsuario = new DaoUsuario();
 $daoSeguridad = new DaoSeguridad();
 

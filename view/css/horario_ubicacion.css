@@ -101,19 +101,11 @@
     color: #fff;
     cursor: pointer;
 }
-.botones .boton-azul:hover{
-    background-color: #011d3d;
-    color: white;
-}
+
 .botones .boton-naranja {
     background-color: #ff7f00;
     color: #fff;
 }
-.botones .boton-naranja:hover {
-    background-color: #e67e22;
-    color: white;
-}
-
 
 .mapa {
     width: 100%;

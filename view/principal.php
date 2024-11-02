@@ -33,6 +33,7 @@ $usuario = $daoUsuario->obtenerUsuario($_SESSION['id']);
         <div class="izquierda">
             <div><span class="hola">Hola, </span><span><?=$usuario->getNombre()?></span></div>
             <div class="circulo">
+                <img src="img/usuario.png" alt="Perfil Usuario">
             </div>
         </div>
         <div class="derecha">
@@ -56,25 +57,25 @@ $usuario = $daoUsuario->obtenerUsuario($_SESSION['id']);
 
             <div>
                 <a href="#">
-                    <div class="circulo_naranja"></div>
+                    <div class="circulo_naranja"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
                 </a>
                 <span>Transferir Dinero</span>
             </div>
             <div>
                 <a href="yape.php">
-                    <div class="circulo_naranja"></div>
+                    <div class="circulo_naranja"><i class="fas fa-location-arrow"></i></div>
                 </a>
                 <span>Yapear Seguro</span>
             </div>
             <div>
                 <a href="dispositivos.php">
-                    <div class="circulo_naranja"></div>
+                    <div class="circulo_naranja"><i class="fa-solid fa-mobile"></i></div>
                 </a>
                 <span>Gestionar dispositivos</span>
             </div>
             <div>
                 <a href="#">
-                    <div class="circulo_naranja"></div>
+                    <div class="circulo_naranja"><i class="fa-solid fa-droplet"></i></div>
                 </a>
                 <span>Pagar a Servicios</span>
             </div>
@@ -85,7 +86,7 @@ $usuario = $daoUsuario->obtenerUsuario($_SESSION['id']);
             <div class="donaciones">
                 <div>
                     <span>Donaciones</span>
-                    <p>Transforma vidas y sé parte del cambio</p>
+                    <p>Transforma vidas y se parte del cambio</p>
                 </div>
                 <div> <i class="fa-solid fa-heart fa-2xl"></i>
                     <span class="fa-solid fa-chevron-right fa-xl"></span>
