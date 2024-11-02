@@ -1,8 +1,8 @@
 <?php
-include_once '../php/util/validar_entradas.php';
-include '../php/util/connection.php';
-validar_entrada('index.php');
-
+include_once '../controller/ControllerEntradas.php';
+include_once '../controller/ControllerSeguridad.php';
+$entradas = new ControllerEntradas();
+$entradas->validarEntrada('index.php');
 ?>
 
 <!DOCTYPE html>
@@ -10,14 +10,14 @@ validar_entrada('index.php');
 
 <head>
   <?php include '../view/fragmentos/head.php' ?>
-  <title>Configuracion</title>
+  <title>Configuración</title>
 </head>
 
 <body>
   <header>
     <?php include '../view/fragmentos/nav.php' ?>
     <div class="head-config">
-      <h2>Configuracion</h2>
+      <h2>Configuración</h2>
     </div>
   </header>
   <section>
@@ -27,7 +27,7 @@ validar_entrada('index.php');
       <div class="modal alerta">
         <div class="modal_info">
           <i class="fa-regular fa-face-grin-squint"></i>
-          <h2>Que tan satisfecho te encuentras con nuestro servicio?</h2>
+          <h2>¿Qué tan satisfecho te encuentras con nuestro servicio?</h2>
         </div>
         <div class="config">
           <div class="config options">
@@ -77,8 +77,8 @@ validar_entrada('index.php');
           <div>
             <i class="fa-solid fa-credit-card"></i>
             <div>
-              <h3>Configuracion de tarjetas</h3>
-              <span>Gestiona tus tarjetas y agrega mas</span>
+              <h3>Configuración de tarjetas</h3>
+              <span>Gestiona tus tarjetas y agrega más</span>
             </div>
           </div>
           <i class="fa-solid fa-chevron-right"></i>
@@ -90,7 +90,7 @@ validar_entrada('index.php');
             <i class="fa-solid fa-shield-halved"></i>
             <div>
               <h3>Seguridad</h3>
-              <span>Selecciona el metodo de tu preferencia</span>
+              <span>Selecciona el método de tu preferencia</span>
             </div>
           </div>
           <a href="horario_ubicacion.php"><i class="fa-solid fa-chevron-right"></i></a>
@@ -109,7 +109,7 @@ validar_entrada('index.php');
     </div>
     <button id="abrirModal">
       <i class="fa-solid fa-clipboard-list"></i>
-      <span>Ayudanos resolviendo una encuesta para mejorar tu experiencia</span>
+      <span>Ayúdanos resolviendo una encuesta para mejorar tu experiencia</span>
     </button>
   </section>
   <footer>
@@ -129,8 +129,8 @@ validar_entrada('index.php');
       })
 
       const boton = document.querySelector('#envioEmocion');
-      const estado = document.querySelector('input[name="emotion"]:checked').value;
       boton.addEventListener('click', async () => {
+        const estado = document.querySelector('input[name="emotion"]:checked').value;
         await fetch("../controller/ControllerEmocion.php", {
             method: "POST",
             body: JSON.stringify({

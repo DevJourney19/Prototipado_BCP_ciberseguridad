@@ -17,6 +17,14 @@ try {
     die($exc->getMessage());
 }
 
+include_once '../controller/ControllerEntradas.php';
+include_once '../controller/ControllerSeguridad.php';
+$entradas = new ControllerEntradas();
+$entradas->validarEntrada('index.php');
+
+$seguridad = new ControllerSeguridad();
+$datos = $seguridad->verificarSeguridad($_SESSION['id']);
+
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +44,7 @@ try {
         <span>El cargo se ha realizado exitosamente</span>
     </div>
     <main>
-        <h1>Activación de Nuevo Sistema Seguridad</h1>
+        <h1>Activación del Nuevo Sistema Seguridad</h1>
         <div class="flex">
             <div class="primer_cuadro">
                 <p>
@@ -57,9 +65,10 @@ try {
                     </div>
                 </div>
                 <p>Ingrese sus datos para realizar el cargo a la cuenta</p>
-                <form action="#"> <!-- activar_seguridad.php-->
-                    <div><input id="nombre_activacion" type="text" placeholder="Nombre Completo de la tarjeta" <?php if ($datos != null)
+                <form action="#">
+                    <div><input id="nombre_activacion" type="text" placeholder="Número completo de la tarjeta" <?php if ($datos != null)
                         echo 'disabled'; ?>></div>
+
                     <div><input id="telefono_activacion" type="text" placeholder="Teléfono" <?php if ($datos != null)
                         echo 'disabled'; ?>></div>
                     <div><input id="correo_activacion" type="text" placeholder="Correo" <?php if ($datos != null)

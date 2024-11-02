@@ -1,4 +1,4 @@
-<div id="modal" class="blur">
+<div id="modal" class="blur close">
   <!--BLUR-->
   <div class="modal alerta">
     <div>

@@ -1,32 +1,10 @@
 <?php
-include_once '../php/util/validar_entradas.php';
-include_once '../php/util/connection.php';
-validar_entrada('index.php');
-// verificar si ya ha sido contratado el servicio
-validar_servicio('principal.php');
-// verificar si la funcion de yape ha sido activada
 
-$id_seguridad = $_SESSION['id_seguridad'] ?? null; // Usando coalescencia nula
-
-if ($id_seguridad === null) {
-    return null; // Maneja el caso donde id_seguridad no está definido
-}
-
-
-
-$sql = "SELECT * FROM seguridad WHERE id_seguridad = '" . $id_seguridad . "' AND estado_yape = 1";
-try {
-    conectar();
-    $resultadoYape = consultar($sql);
-    if (count($resultadoYape) == 0) {
-        $estado = 0;
-    } else {
-        $estado = 1;
-    }
-    desconectar();
-} catch (Exception $exc) {
-    die($exc->getMessage());
-}
+include_once '../controller/ControllerEntradas.php';
+$entradas = new ControllerEntradas();
+$entradas->validarEntrada('index.php');
+$entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
+$estado = $entradas->validarYape('yape.php', $_SESSION['id_seguridad']);
 ?>
 
 <!DOCTYPE html>

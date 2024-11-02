@@ -1,7 +1,8 @@
 <?php
-include_once '../php/util/validar_entradas.php';
-include '../php/util/connection.php';
-validar_entrada('index.php');
+include_once '../controller/ControllerEntradas.php';
+include_once '../controller/ControllerUsuario.php';
+$entradas = new ControllerEntradas();
+$entradas->validarEntrada('index.php');
 
 $sql = "SELECT * FROM usuario WHERE id_usuario = " . $_SESSION['id_usuario'];
 if ($_SESSION['estado_dispositivo'] === 'seguro') {
@@ -19,6 +20,8 @@ try {
     die($exc->getMessage());
 }
 
+$daoUsuario = new ControllerUsuario();
+$usuario = $daoUsuario->obtenerUsuario($_SESSION['id']);
 ?>
 
 <!DOCTYPE html>
@@ -44,50 +47,55 @@ try {
     </div>
     <div class="cuadro_superior">
         <div class="izquierda">
-            <div><span class="hola">Hola, </span><span><?= $nombre ?></span></div>
-            <div class="circulo">
+            <<<<<<< HEAD <div><span class="hola">Hola, </span><span><?= $nombre ?></span>
+        </div>
+        =======
+        <div><span class="hola">Hola, </span><span><?= $usuario->getNombre() ?></span></div>
+        >>>>>>> 1530d48364483322a7de83750dc61148f72dacc4
+        <div class="circulo">
+            <img src="img/usuario.png" alt="Perfil Usuario">
+        </div>
+    </div>
+    <div class="derecha">
+        <span>Mis productos</span>
+        <div class="cuentas">
+            <div class="cuenta_1">
+                <span>Cuentas de Ahorro</span>
+                <span class="amount">S/. 120.40</span>
+                <span>**** 2030</span>
+            </div>
+            <div class="cuenta_2">
+                <span>Cuentas de Ahorro</span>
+                <span class="amount">S/. 120.40</span>
+                <span>**** 2030</span>
             </div>
         </div>
-        <div class="derecha">
-            <span>Mis productos</span>
-            <div class="cuentas">
-                <div class="cuenta_1">
-                    <span>Cuentas de Ahorro</span>
-                    <span class="amount">S/. 120.40</span>
-                    <span>**** 2030</span>
-                </div>
-                <div class="cuenta_2">
-                    <span>Cuentas de Ahorro</span>
-                    <span class="amount">S/. 120.40</span>
-                    <span>**** 2030</span>
-                </div>
-            </div>
-        </div>
+    </div>
     </div>
     <section>
         <div class="fila">
 
             <div>
                 <a href="#">
-                    <div class="circulo_naranja"></div>
+                    <div class="circulo_naranja"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
                 </a>
                 <span>Transferir Dinero</span>
             </div>
             <div>
                 <a href="yape.php">
-                    <div class="circulo_naranja"></div>
+                    <div class="circulo_naranja"><i class="fas fa-location-arrow"></i></div>
                 </a>
                 <span>Yapear Seguro</span>
             </div>
             <div>
                 <a href="dispositivos.php">
-                    <div class="circulo_naranja"></div>
+                    <div class="circulo_naranja"><i class="fa-solid fa-mobile"></i></div>
                 </a>
                 <span>Gestionar dispositivos</span>
             </div>
             <div>
                 <a href="#">
-                    <div class="circulo_naranja"></div>
+                    <div class="circulo_naranja"><i class="fa-solid fa-droplet"></i></div>
                 </a>
                 <span>Pagar a Servicios</span>
             </div>
@@ -98,7 +106,7 @@ try {
             <div class="donaciones">
                 <div>
                     <span>Donaciones</span>
-                    <p>Transforma vidas y sé parte del cambio</p>
+                    <p>Transforma vidas y se parte del cambio</p>
                 </div>
                 <div> <i class="fa-solid fa-heart fa-2xl"></i>
                     <span class="fa-solid fa-chevron-right fa-xl"></span>
@@ -109,7 +117,7 @@ try {
                     <span>Seguridad Mejorada</span>
                     <p>Introduce nuevas funcionalidades y controla tus datos</p>
                 </div>
-                <div><i class="fa-solid fa-user-lock"></i>
+                <div><i class="fa-solid fa-user-lock fa-2xl"></i>
                     <a href="activacion.php" class="fa-solid fa-chevron-right fa-xl"></a>
                 </div>
             </div>

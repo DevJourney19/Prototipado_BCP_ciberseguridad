@@ -5,7 +5,7 @@
 }
 
 .contenido-principal .titulo h4 {
-    font-family: Inter;
+    font-family: 'Inter';
     font-size: 20px;
     font-weight: 600;
     line-height: 24.2px;
@@ -14,7 +14,7 @@
 }
 
 .contenido-principal .subtitulo p {
-    font-family: Inter;
+    font-family: 'Inter';
     font-size: 16px;
     font-weight: 400;
     line-height: 19.36px;
@@ -30,7 +30,7 @@
     display: flex;
     flex-wrap: wrap;
     max-width: 900px;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .caja {
@@ -139,12 +139,20 @@ input:checked+label .radio-button {
     background-color: #FF7900;
 }
 
+.boton-primario button:hover {
+    background-color: #f48728;
+}
+
 .boton-primario button:active {
     background-color: #d16201;
 }
 
 .boton-secundario button {
     background-color: #001843;
+}
+
+.boton-secundario button:hover {
+    background-color: #002d80;
 }
 
 .boton-secundario button:active {

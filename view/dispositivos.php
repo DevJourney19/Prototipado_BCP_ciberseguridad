@@ -1,9 +1,9 @@
 <?php
-include_once '../php/util/validar_entradas.php';
-include_once '../php/util/connection.php';
-validar_entrada('index.php');
-// verificar si ya ha sido contratado el servicio
-validar_servicio('principal.php');
+include_once '../controller/ControllerEntradas.php';
+$entradas = new ControllerEntradas();
+$entradas->validarEntrada('index.php');
+$entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
+
 $id_usuario = $_SESSION['id_usuario'];
 conectar();
 $sql = "select * from usuario where id_usuario= '$id_usuario'";
@@ -19,8 +19,6 @@ if ($_SESSION['estado_dispositivo'] === 'seguro') {
     echo 'Es un dispositivo seguro';
     $seguro = true;
 }
-//Si ese dispositivo tiene el estado activado entonces se mostrará
-
 ?>
 
 <!DOCTYPE html>
@@ -129,7 +127,21 @@ if ($_SESSION['estado_dispositivo'] === 'seguro') {
 
 
         </div>
-        <?php if (!isset($seguro)) { ?>
+        <<<<<<< HEAD <?php if (!isset($seguro)) { ?>
+                <div class="opciones">
+                    <div class="boton-primario">
+                        <button type="button" onclick="openModal()">Dispositivo Principal</button>
+                    </div>
+                    <div class="boton-secundario">
+                        <button type="button" onclick="openModalDos()">Desvincular</button>
+                    </div>
+                    <div class="boton-primario">
+                        <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
+                    </div>
+                </div>
+            <?php } ?>
+            =======
+            -->
             <div class="opciones">
                 <div class="boton-primario">
                     <button type="button" onclick="openModal()">Dispositivo Principal</button>
@@ -141,7 +153,7 @@ if ($_SESSION['estado_dispositivo'] === 'seguro') {
                     <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
                 </div>
             </div>
-        <?php } ?>
+            >>>>>>> 1530d48364483322a7de83750dc61148f72dacc4
     </main>
 
     <footer>
@@ -152,7 +164,7 @@ if ($_SESSION['estado_dispositivo'] === 'seguro') {
             <img src="img/touch.png" alt="touch">
         </div>
         <div class="texto">
-            <p>¿Estas seguro que deseas establecer el dispositivo como principal?</p>
+            <p>¿Estás seguro que deseas establecer el dispositivo como principal?</p>
         </div>
         <div class="opciones-modal">
             <div class="boton-primario-modal">
@@ -168,7 +180,7 @@ if ($_SESSION['estado_dispositivo'] === 'seguro') {
             <img src="img/desvincular.png" alt="desvinular">
         </div>
         <div class="texto">
-            <p>¿Estas seguro que deseas desvincular este dispositivo?</p>
+            <p>¿Estás seguro que deseas desvincular este dispositivo?</p>
         </div>
         <div class="opciones-modal">
             <div class="boton-primario-modal">
@@ -221,10 +233,10 @@ if ($_SESSION['estado_dispositivo'] === 'seguro') {
                     </div>
                 </div>
                 <?php if (!isset($seguro)) { ?>
-                    <div class="segundo">
-                        <input type="radio" name="vinculo" id="dispositivo${index + 2}" />
-                        <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
-                    </div>
+                            <div class="segundo">
+                                <input type="radio" name="vinculo" id="dispositivo${index + 2}" />
+                                <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
+                            </div>
                 <?php } ?>
             `;
                     //localStorage.removeItem('nuevo_dispositivo');

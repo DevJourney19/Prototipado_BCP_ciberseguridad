@@ -1,15 +1,10 @@
 <?php
-include_once '../php/util/connection.php';
-$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id_usuario'];
-try {
-  conectar();
-  $resultado = consultar($sql);
-  $datos = $resultado[0]['estado_hora_direccion'];
-  desconectar();
-} catch (Exception $exc) {
-  die($exc->getMessage());
-}
 
+include_once '../controller/ControllerSeguridad.php';
+
+$controllerSeguridad = new ControllerSeguridad();
+$resultado = $controllerSeguridad->obtenerUsuario($_SESSION['id']);
+$datos = $resultado[0]['estado_horas_direcciones'];
 ?>
 
 <div class="tabs">
@@ -38,7 +33,7 @@ try {
   const switchCheckbox = document.getElementById('switchCheckbox');
   const estado = <?php echo $datos ? 'false' : 'true' ?>;
   switchCheckbox.addEventListener('change', async () => {
-    const response = await fetch("../php/estado_funcionalidades.php", {
+    const response = await fetch("../controller/ControllerEstadoFunciones.php", {
         method: "POST",
         body: JSON.stringify({
           estado: estado,
@@ -59,5 +54,23 @@ try {
       .catch((error) => {
         console.error("Error al enviar los datos:", error);
       });
+  });
+</script>
+
+<script>
+  const links = document.querySelectorAll('.tab-link');
+
+  const activeTab = localStorage.getItem('activeTab');
+  if (activeTab) {
+    document.querySelector(`a[href="${activeTab}"]`)?.classList.add('active');
+  }
+
+  links.forEach(link => {
+    link.addEventListener('click', function(event) {
+      links.forEach(link => link.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+
+      localStorage.setItem('activeTab', event.currentTarget.getAttribute('href'));
+    });
   });
 </script>

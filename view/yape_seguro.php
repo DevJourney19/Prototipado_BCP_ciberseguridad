@@ -1,25 +1,12 @@
 <?php
-include_once '../php/util/validar_entradas.php';
-include_once '../php/util/connection.php';
-validar_entrada('index.php');
-// verificar si ya ha sido contratado el servicio
-validar_servicio('principal.php');
+include_once '../controller/ControllerEntradas.php';
+include_once '../controller/ControllerSeguridad.php';
+session_start();
+$entradas = new ControllerEntradas();
+$entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
 
-$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id_usuario'];
-try {
-    conectar();
-    $resultado2 = consultar($sql);
-    if ($resultado2) {
-        $datos2 = $resultado2[0];
-    } else {
-        $datos2 = null;
-    }
-
-    unset($resultado2);
-    desconectar();
-} catch (Exception $exc) {
-    die($exc->getMessage());
-}
+$seguridad = new ControllerSeguridad();
+$datos2 = $seguridad->obtenerUsuario($_SESSION['id'])[0];
 
 ?>
 
@@ -62,7 +49,7 @@ try {
             const boton = document.querySelector('#activar');
             const estado = <?php echo $datos2["estado_yape"] ? 'false' : 'true' ?>;
             boton.addEventListener('click', async () => {
-                await fetch("../php/estado_funcionalidades.php", {
+                await fetch("../controller/ControllerEstadoFunciones.php", {
                         method: "POST",
                         body: JSON.stringify({
                             estado: estado,

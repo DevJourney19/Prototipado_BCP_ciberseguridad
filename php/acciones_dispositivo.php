@@ -1,6 +1,6 @@
 <?php
 
-include 'util/connection.php';
+include '../config/connection.php';
 conectar();
 
 session_start();
