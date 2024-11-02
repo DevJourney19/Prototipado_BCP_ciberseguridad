@@ -19,9 +19,9 @@ class DaoDireccion implements DaoInterfaceDireccion {
         $this->connection->ejecutar($query, [$id_seguridad, $direccion_exacta, $rango_gps, $fecha_configuracion, $hora_configuracion]);
     }
 
-    public function obtenerTodasDirecciones() {
-        $query = "SELECT * FROM direccion";
-        return $this->connection->consultar($query);
+    public function obtenerTodasDirecciones($id) {
+        $query = "SELECT * FROM direccion where id_seguridad = :id";
+        return $this->connection->consultar($query, ['id' => $id]);
     }
 
     public function modificarDireccion($id_direccion, $direccion_exacta, $rango_gps) {

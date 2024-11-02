@@ -9,10 +9,10 @@ class ControllerUsuario {
         $this->daoUsuario = new DaoUsuario();
     }
 
-    public function obtenerUsuario($id_seguridad) {
-        $result = $this->daoUsuario->read($id_seguridad);
+    public function obtenerUsuario($id, $tipo) {
+        $result = $this->daoUsuario->read($id, $tipo);
         $usuario = new Usuario();
-        $usuario->setIdUsuario($result['id_seguridad']);
+        $usuario->setIdUsuario($result['id_usuario']);
         $usuario->setNombre($result['nombre']);
         $usuario->setTelefono($result['telefono']);
         return $usuario;

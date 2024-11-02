@@ -24,9 +24,8 @@ class ControllerDireccion {
         $this->daoSeguridad = new DaoSeguridad();
     }
 
-    public function registrar() {
+    public function registrar($id_seguridad) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnRegistrarDireccion'])) {
-            $id_seguridad = $_SESSION['id_seguridad'] ?? null;
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
             $rango_gps = 10; 
             $fecha_configuracion = date('Y-m-d');
@@ -43,15 +42,15 @@ class ControllerDireccion {
                 $_SESSION['mensaje'] = "Error: El id_seguridad no existe.";
             }
 
-            header('Location: /view/horario_ubicacion.php');
+            header('Location: ../view/horario_ubicacion.php');
             exit;
         } else {
             echo "No se envió el formulario.";
         }
     }
 
-    public function obtenerDirecciones() {
-        return $this->daoDireccion->obtenerTodasDirecciones();
+    public function obtenerDirecciones($id) {
+        return $this->daoDireccion->obtenerTodasDirecciones($id);
     }
 
     public function modificar() {
@@ -69,7 +68,7 @@ class ControllerDireccion {
                 $error = true; 
             }
     
-            header('Location: /view/ver_direcciones.php');
+            header('Location: ../view/ver_direcciones.php');
             exit;
         } else {
             echo "No se ha enviado el formulario de modificación correctamente.";
@@ -84,7 +83,7 @@ class ControllerDireccion {
             $_SESSION['mensaje'] = "Error: El id de dirección no es válido.";
         }
     
-        header('Location: /view/horario_ubicacion.php');
+        header('Location: ../view/horario_ubicacion.php');
         exit;
     }
 }
@@ -95,7 +94,8 @@ if (isset($_GET['action'])) {
 
     switch ($_GET['action']) {
         case 'registrar':
-            $controller->registrar();
+            $id_seguridad = isset($GET['id_seguridad']) ? $_GET['id_seguridad'] : null;
+            $controller->registrar($id_seguridad);
             break;
         case 'modificar':
             $controller->modificar();

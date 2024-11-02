@@ -3,7 +3,7 @@ include_once '../controller/ControllerEntradas.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
-?>
+
 // cambiar y crear un dao, controllador y modelo
 $inc = include_once("../config/connection.php");
 
