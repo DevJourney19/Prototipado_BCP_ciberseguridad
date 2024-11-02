@@ -4,6 +4,7 @@ include_once '../controller/ControllerUsuario.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 
+
 $daoUsuario = new ControllerUsuario();
 if (isset($_SESSION['id_seguridad'])) {
     $usuario = $daoUsuario->obtenerUsuario($_SESSION['id_seguridad'], "seguridad");
@@ -35,7 +36,9 @@ if (isset($_SESSION['id_seguridad'])) {
     </div>
     <div class="cuadro_superior">
         <div class="izquierda">
+
             <div><span class="hola">Hola, </span><span><?=$usuario->getNombre()?></span></div>
+
             <div class="circulo">
                 <img src="img/usuario.png" alt="Perfil Usuario">
             </div>

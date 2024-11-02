@@ -5,7 +5,7 @@ $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 
 $seguridad = new ControllerSeguridad();
-$datos = $seguridad->verificarSeguridad($_SESSION['id']);
+$datos = $seguridad->verificarSeguridad($_SESSION['id_usuario']);
 
 ?>
 

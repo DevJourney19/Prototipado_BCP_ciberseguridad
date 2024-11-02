@@ -14,7 +14,7 @@ class ControllerEntradas {
             session_start();
         }
         
-        if (!isset($_SESSION['id'])) {
+        if (!isset($_SESSION['id_usuario'])) {
             echo "<script>alert('Inicie Sesion para poder continuar');
                 window.location.href = '$location';</script>";
             exit();

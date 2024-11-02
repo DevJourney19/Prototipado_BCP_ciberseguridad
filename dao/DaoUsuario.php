@@ -50,7 +50,8 @@ class DaoUsuario implements DaoInterfaceUsuario
         }
     }
 
-    public function verificarLogin($tarjeta, $dni, $clave_internet){
+    public function verificarLogin($tarjeta, $dni, $clave_internet)
+    {
         try {
             $sql = "SELECT * FROM usuario WHERE numero_tarjeta = :tarjeta AND dni = :dni AND AES_DECRYPT(clave_internet, 'D9u#F5h8*Z3kB9!nL7^mQ4') = :clave_internet";
             $result = $this->db->consultar($sql, ['tarjeta' => $tarjeta, 'dni' => $dni, 'clave_internet' => $clave_internet]);
@@ -61,11 +62,27 @@ class DaoUsuario implements DaoInterfaceUsuario
         }
     }
 
-    public function verificarLoginAdmi($email, $nombre, $contra){
-        try{
+    public function verificarLoginAdmi($email, $nombre, $contra)
+    {
+        try {
             $sql = "SELECT * FROM usuario WHERE correo = :email AND nombre= :nombre AND AES_DECRYPT(password, 'D9u#F5h8*Z3kB9!nL7^mQ4') = :contra";
-            $result = $this->db->consultar($sql, ['email' => $email, 'nombre'=> $nombre,'contra' => $contra]);
+            $result = $this->db->consultar($sql, ['email' => $email, 'nombre' => $nombre, 'contra' => $contra]);
             return $result;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return null;
+        }
+    }
+    public function readDispo($idUsuario, $id_segu)
+    {
+        try {
+            $query = "SELECT * FROM dispositivo WHERE id_seguridad = :idSeguridad AND ";
+            $result = $this->db->consultar($query, ['idSeguridad' => $idUsuario], '');
+            if (count($result) > 0) {
+                return $result[0];
+            } else {
+                return null;
+            }
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
             return null;
