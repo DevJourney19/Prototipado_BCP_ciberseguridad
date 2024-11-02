@@ -60,11 +60,13 @@ class ControllerDireccion {
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
             $rango_gps = $_POST['txtRango'] ?? 10;
     
-            if ($id_direccion && !empty($direccion_exacta)) {
+            if ($id_direccion && !empty($direccion_exacta)) { 
                 $this->daoDireccion->modificarDireccion($id_direccion, $direccion_exacta, $rango_gps);
                 $_SESSION['mensaje'] = "Dirección modificada correctamente";
+                $error = false; 
             } else {
                 $_SESSION['mensaje'] = "Error: Debes llenar todos los campos.";
+                $error = true; 
             }
     
             header('Location: /view/ver_direcciones.php');

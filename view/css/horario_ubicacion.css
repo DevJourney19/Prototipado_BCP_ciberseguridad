@@ -235,6 +235,21 @@
 .modal-guardar-rango.show {
     display: block;
 }
+.btn-salir {
+    background-color: #002855;
+    color: white;
+    width: 130px;
+    height: 40px;
+    font-size: 14px;
+    padding: 0.3rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.btn-salir:hover {
+    background-color: #011d3d;
+    color: white;
+}
+
 
 /* FIN DE estilos para la lista de ubicaciones  */
 @media (min-width: 768px) {

@@ -32,6 +32,7 @@ $fechaHoy = date('d-m-Y');
     <?php include 'fragmentos/head.php'; ?>
     <title>Rango de Horario y Ubicación</title>
     <link rel="stylesheet" href="css/horario_ubicacion.css">
+
 </head>
 
 <body>
@@ -99,10 +100,10 @@ $fechaHoy = date('d-m-Y');
 
         <div class="secciones">
             <form action="../controller/ControllerDireccion.php?action=registrar" method="post">
-                <div>
+                <div id="avisoError" style="color: red; <?php echo $error ? 'background-color: red;' : ''; ?>">
                     <?php
                     if (isset($_SESSION['mensaje'])) {
-                        echo "<div style='color: red;'>" . $_SESSION['mensaje'] . "</div>";
+                        echo $_SESSION['mensaje'];
                         unset($_SESSION['mensaje']); // Limpiar el mensaje de la sesión
                     }
                     ?>
@@ -116,7 +117,7 @@ $fechaHoy = date('d-m-Y');
                         <input type="text" id="locationInput" placeholder="Busca una dirección"
                             oninput="autocompleteAddress(this.value)" name="txtdireccion"
                             style="flex: 1; margin-right: 5px; width: 200px;" />
-                        <button type="button" onclick="getLocation()" class="boton-azulle">Ubicación Actual</button>
+                        <button type="button" onclick="getLocation()" class="btn-salir">Ubicación Actual</button>
                     </div>
                     <ul id="suggestions"></ul>
                 </div>

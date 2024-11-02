@@ -23,36 +23,7 @@ $direcciones = $daoDireccion->obtenerTodasDirecciones();
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" href="css/ver_direccion.css">
-    <style>
-        .modal {
-            display: none;
-            position: fixed;
-            top: 60%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1055;
-            width: 500px;
-            max-width: 100%;
-            height: auto !important; 
-
-        }
-
-        .modal-dialog {
-            margin: 1.5rem auto;
-        }
-
-        .modal-content {
-            padding: 1.5rem;
-        }
-
-        .modal-header {
-            margin-bottom: 1rem;
-        }
-
-        .mb-3 {
-            margin-bottom: 1rem;
-        }
-    </style>
+    <link rel="stylesheet" href="css/modal_direccion.css">
 </head>
 
 <body>
