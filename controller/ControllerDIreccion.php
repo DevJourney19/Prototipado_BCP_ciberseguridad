@@ -8,98 +8,73 @@ $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
 
-class ControllerDireccion {
+class ControllerDireccion
+{
     private $daoDireccion;
     private $daoSeguridad;
 
-    public function __construct() {
-        session_start(); 
+    public function __construct()
+    {
         $this->daoDireccion = new DaoDireccion();
         $this->daoSeguridad = new DaoSeguridad();
     }
 
-    public function registrar($id_seguridad) {
+    private function redirect($location)
+    {
+        header("Location: $location");
+        exit;
+    }
+
+    public function registrar()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnRegistrarDireccion'])) {
             $id_seguridad = $_SESSION['id_seguridad'] ?? null;
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
-            $rango_gps = 10; 
-            $fecha_configuracion = date('Y-m-d');
-            $hora_configuracion = date('H:i:s');
 
-            if ($id_seguridad && $this->daoSeguridad->existeSeguridad($id_seguridad)) {
-                if (!empty($direccion_exacta)) {
-                    $this->daoDireccion->registrarDireccion($id_seguridad, $direccion_exacta, $rango_gps, $fecha_configuracion, $hora_configuracion);
-                    $_SESSION['mensaje'] = "Dirección registrada correctamente";
-                } else {
-                    $_SESSION['mensaje'] = "Error: Debes llenar todos los campos.";
-                }
+            if ($id_seguridad && $this->daoSeguridad->existeSeguridad($id_seguridad) && !empty($direccion_exacta)) {
+                $this->daoDireccion->registrarDireccion($id_seguridad, $direccion_exacta, 10, date('Y-m-d'), date('H:i:s'));
+                $_SESSION['mensaje'] = "Dirección registrada correctamente";
             } else {
-                $_SESSION['mensaje'] = "Error: El id_seguridad no existe.";
+                $_SESSION['mensaje'] = "Error: Debes llenar todos los campos.";
             }
-            header('Location: /Prototipado_BCP_ciberseguridad/view/horario_ubicacion.php');
-            exit;
-        } else {
-            echo "No se envió el formulario.";
+            $this->redirect('/Prototipado_BCP_ciberseguridad/view/horario_ubicacion.php');
         }
     }
 
-    public function obtenerDirecciones($id) {
-        return $this->daoDireccion->obtenerTodasDirecciones($id);
-    }
-
-    public function modificar() {
+    public function modificar()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnModificar'])) {
             $id_direccion = $_POST['txtId'] ?? null;
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
-            $rango_gps = $_POST['txtRango'] ?? 10;
-    
-            if ($id_direccion && !empty($direccion_exacta)) { 
-                $this->daoDireccion->modificarDireccion($id_direccion, $direccion_exacta, $rango_gps);
+
+            if ($id_direccion && !empty($direccion_exacta)) {
+                $this->daoDireccion->modificarDireccion($id_direccion, $direccion_exacta, $_POST['txtRango'] ?? 10);
                 $_SESSION['mensaje'] = "Dirección modificada correctamente";
-                $error = false; 
             } else {
                 $_SESSION['mensaje'] = "Error: Debes llenar todos los campos.";
-                $error = true; 
             }
-    
-            header('Location: /Prototipado_BCP_ciberseguridad/view/ver_direcciones.php');
-            exit;
-        } else {
-            echo "No se ha enviado el formulario de modificación correctamente.";
+
+            $this->redirect('/Prototipado_BCP_ciberseguridad/view/ver_direcciones.php');
         }
     }
 
-    public function eliminar($id) {
+    public function eliminar($id)
+    {
         if (is_numeric($id)) {
             $this->daoDireccion->eliminarDireccion($id);
             $_SESSION['mensaje'] = "Dirección eliminada correctamente";
         } else {
-            $_SESSION['mensaje'] = "Error: El id de dirección no es válido.";
+            $_SESSION['mensaje'] = "Error: El ID de dirección no es válido.";
         }
-    
-        header('Location: /Prototipado_BCP_ciberseguridad/view/horario_ubicacion.php');
-        exit;
+
+        $this->redirect('/Prototipado_BCP_ciberseguridad/view/horario_ubicacion.php');
     }
 }
 
-if (isset($_GET['action'])) {
-    $controller = new ControllerDireccion();
+$controller = new ControllerDireccion();
+$action = $_GET['action'] ?? null;
+$id = $_GET['id'] ?? null;
 
-    switch ($_GET['action']) {
-        case 'registrar':
-            $id_seguridad = isset($GET['id_seguridad']) ? $_GET['id_seguridad'] : null;
-            $controller->registrar($id_seguridad);
-            break;
-        case 'modificar':
-            $controller->modificar();
-            break;
-        case 'eliminar':
-            $id = $_GET['id'] ?? null;
-            $controller->eliminar($id);
-            break;
-        default:
-            echo "Acción no válida.";
-            break;
-    }
-} else {
+if ($action && method_exists($controller, $action)) {
+    $controller->$action($id);
 }
