@@ -2,7 +2,7 @@
 
 include_once '../model/Seguridad.php';
 include_once '../config/Connection.php';
-include_once './interfaces/DaoInterfaceSeguridad.php';
+include_once 'interfaces/DaoInterfaceSeguridad.php';
 
 class DaoSeguridad implements DaoInterfaceSeguridad
 {
@@ -89,4 +89,17 @@ class DaoSeguridad implements DaoInterfaceSeguridad
       return false;
     }
   }
+  public function existeSeguridad($idUsuario)
+{
+    try {
+        $query = "SELECT COUNT(*) FROM seguridad WHERE id_usuario = :idUsuario";
+        $result = $this->db->consultar($query, ['idUsuario' => $idUsuario]);
+        return $result[0]['COUNT(*)'] > 0; // Devuelve true si hay al menos un registro
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+        return false;
+    }
+}
+
+
 }
