@@ -30,25 +30,34 @@ if (historial) {
 
 document.addEventListener('DOMContentLoaded', function () {
     //Se puso así para cuando se reciba un mensaje de success se pueda volver a llamar a la función 
-    actualizar_dispositivos();
+    agregando_solicitudes_html();
 });
 
-
-async function actualizar_dispositivos() {
+async function dispositivo() {
     try {
         const response = await fetch('../php/obtener_dispositivos.php');
         const data = await response.json();
-
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+//CONSULTAR DISPOSITIVOS
+async function agregando_solicitudes_html() {
+    try {
+        const data = await dispositivo();
         //Filtrar los dispositivos según el estado (de esta manera nos ahorramos usar el where de la bd, ahorrando lineas de codigo)
         const dispositivos_filtrados = data.filter(dispositivo =>
             dispositivo.estado === 'en_proceso_si' || dispositivo.estado === 'en_proceso_no'
         );
 
         const tabla_dis = document.getElementById('tabla_dispositivos');
+
         tabla_dis.innerHTML = '';
 
         dispositivos_filtrados.forEach(dispositivo => {
             const estado_dis = dispositivo.estado === 'en_proceso_si' ? 'Si' : 'No';
+
             tabla_dis.innerHTML += `
                 <tr>
                     <td>${dispositivo.tipo}</td>
@@ -62,15 +71,23 @@ async function actualizar_dispositivos() {
                     <td><button class="botoncito_accion_bloquear accion-boton" data-id="${dispositivo.id}" data-accion="bloquear">Bloquear</button></td>
                 </tr>`;
         });
-
     } catch (error) {
         console.error('Error al obtener dispositivos:', error);
     };
-    //Leer los botones para hacerlos asíncronos
+
+    //Botones
+
+    //Añadiendo los listeners a los botones | Para evitar bucles o reiteraciones del action event por cada botón realizado
+    manejadorBoton();
+
+}
+
+async function manejadorBoton(event) {
     const botonesAccion = document.querySelectorAll('.accion-boton');
     botonesAccion.forEach(boton => {
         boton.addEventListener('click', async function () {
             const id_dispositivo = this.getAttribute('data-id'); // Obtener el ID del dispositivo
+            localStorage.setItem('id_dispositivo', id_dispositivo);
             const accion = this.getAttribute('data-accion'); // Obtener la acción
             try {
                 // Realizar la solicitud AJAX usando fetch
@@ -83,13 +100,52 @@ async function actualizar_dispositivos() {
                         id_dispositivo: id_dispositivo,
                         accion: accion
                     })
-                })
+                });
+
                 const data = await response.json();
                 const resultado_div = document.getElementById('resultado');
 
                 if (data.status === 'success') {
                     resultado_div.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
-                    actualizar_dispositivos();
+                    await agregando_solicitudes_html(); //Actualizar la tabla
+                    //htmleando(accion);
+                    if (accion === 'permitir') {
+                        const id_comparar = this.getAttribute('data-id');
+
+                        const info = await dispositivo();
+
+                        const id_dispositivo = localStorage.getItem('id_dispositivo');
+                        console.log('Comparar con el this.get: ' + id_comparar);
+                        console.log("Local Storage: " + id_dispositivo);
+                        if (id_dispositivo === id_comparar) {
+                            //filtremos info
+                            const informacion = info.filter(t => t.estado === 'seguro');
+                            console.log("La informacion es: " + informacion);
+                            localStorage.setItem('nuevo_dispositivo', JSON.stringify(informacion));
+                            window.location.href = './dispositivos.php';
+                        }
+                        //localStorage.removeItem('nuevo_dispositivo');
+
+                        /*const elementos = document.querySelectorAll('[data-id]');
+    
+                        elementos.forEach(function (elemento) {
+                            elemento.addEventListener('click', function () {
+    
+                                const id_dispositivo = this.getAttribute('data-id');
+                                console.log(id_dispositivo);
+                                if (id_dispositivo) {
+                                    console.log('dentro data-id');
+                                    localStorage.setItem('nuevo_dispositivo', JSON.stringify(info));
+                                    window.location.href = './dispositivos.php';
+    
+                                } else {
+                                    console.error('El id_dispositivo es inválido o no se encuentra en el DOM.');
+                                }
+                            })
+                        })
+    */
+
+                    }//fin del if
                 } else {
                     resultado_div.innerHTML = '<div class="alert alert-danger">' + data.message + '</div>';
                 }
@@ -97,10 +153,6 @@ async function actualizar_dispositivos() {
                 console.error('Error:', error);
                 document.getElementById('resultado').innerHTML = '<div class="alert alert-danger">Error al realizar la acción.</div>';
             };
-        });
+        })
     })
-
 };
-
-
-

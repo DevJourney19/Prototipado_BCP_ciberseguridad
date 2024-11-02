@@ -320,6 +320,17 @@ th {
     color: white;
 }
 
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: auto;
+    height: 600px;
+}
+
+.col {
+    grid-template-columns: 1fr;
+}
+
 @media (max-width: 900px) {
     .contenido-principal {
         width: 90%;
@@ -434,7 +445,7 @@ th {
 
     .caja {
         width: 330px;
-        height: 116px;
+        /*height: 116px;*/
         gap: 2rem;
         margin: 1rem;
     }

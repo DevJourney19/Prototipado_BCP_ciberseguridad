@@ -50,23 +50,16 @@ desconectar();
             </div>
         </div>
 
-        <div class="tabla">
+
+        <div class="tabla grid" id="mensajin">
             <!--Necesito crear esto por js -->
-            <div class="generation">
-                <!-- Aqui se va a generar, primero el activado, y de ahi por medio del permitir-->
-            </div>
+
             <?php if (isset($resultado3)) { ?>
 
                 <div class="caja">
 
                     <div class="primero">
                         <div class="imagen">
-                            <p style="
-    color: darkorange;
-    font-weight: 800;
-    width: min-content;
-">Dispositivo activado</p>
-
                             <?php switch ($resultado3[0]['tipo_dispositivo']) {
                                 case 'Ordenador de escritorio': ?>
                                     <img src="img/computadora.png" alt="Imagen de celular">
@@ -129,7 +122,118 @@ desconectar();
                     </div>
                 </div>
             <?php } ?>
-            <!--
+
+
+        </div>
+
+        <div class="opciones">
+            <div class="boton-primario">
+                <button type="button" onclick="openModal()">Dispositivo Principal</button>
+            </div>
+            <div class="boton-secundario">
+                <button type="button" onclick="openModalDos()">Desvincular</button>
+            </div>
+            <div class="boton-primario">
+                <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <?php include_once '../view/fragmentos/menubar.php' ?>
+    </footer>
+    <dialog class="dispositivo-vinculados" id="vinculo">
+        <div class="imagen">
+            <img src="img/touch.png" alt="touch">
+        </div>
+        <div class="texto">
+            <p>¿Estas seguro que deseas establecer el dispositivo como principal?</p>
+        </div>
+        <div class="opciones-modal">
+            <div class="boton-primario-modal">
+                <button type="button" onclick="closeModal()">Aceptar</button>
+            </div>
+            <div class="boton-secundario-modal">
+                <button type="button" onclick="closeModal()">Cancelar</button>
+            </div>
+        </div>
+    </dialog>
+    <dialog class="dispositivo-vinculados" id="desvinculo">
+        <div class="imagen">
+            <img src="img/desvincular.png" alt="desvinular">
+        </div>
+        <div class="texto">
+            <p>¿Estas seguro que deseas desvincular este dispositivo?</p>
+        </div>
+        <div class="opciones-modal">
+            <div class="boton-primario-modal">
+                <button type="button" onclick="closeModalDos()">Aceptar</button>
+            </div>
+            <div class="boton-secundario-modal">
+                <button type="button" onclick="closeModalDos()">Cancelar</button>
+            </div>
+        </div>
+    </dialog>
+    <script src="../view/js/index.js"></script>
+    <script src="../view/js/utils.js"></script>
+    <script src="js/dispositivos.js"></script>
+    <script>
+        const info = localStorage.getItem('nuevo_dispositivo'); //Retorna String
+        console.log(info);
+        if (info) {
+            try {
+                //Convertir la cadena JSON de nuevo a un objeto
+                const obj_info = JSON.parse(info);
+                console.log(obj_info);
+
+                //Cambiar el contenido del div [ubicación referencial]
+                const mensajito = document.getElementById('mensajin');
+                obj_info.forEach((item, index) => {
+                    //Crear un nuevo div
+                    const nueva_caja = document.createElement('div');
+                    nueva_caja.classList.add('caja');
+
+                    nueva_caja.innerHTML = `
+            
+                <div class="primero">
+                    <div class="imagen">
+                        <img src="img/laptop.png" alt="Imagen de celular" />
+                    </div>
+                    <div class="seccion">
+                        <div class="titulo-caja">
+                            <h4>
+                                ${item.tipo}
+                            </h4>
+                        </div>
+                        <div class="descripcion-caja">
+                            <p>
+                                Lugar: ${item.ciudad} - ${item.pais} <br/> 
+                                IP: ${item.dip} <br/>
+                                Ingreso: ${item.fecha}
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="segundo">
+                    <input type="radio" name="vinculo" id="dispositivo${index + 2}" />
+                    <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
+                </div>
+            `;
+                    //localStorage.removeItem('nuevo_dispositivo');
+                    mensajito.appendChild(nueva_caja);
+                });
+            } catch (error) {
+                console.error('Error al analizar JSON:', error);
+            }
+        }
+    </script>
+</body>
+
+</html>
+<!--
             <div class="caja">
                 <div class="primero">
                     <div class="imagen">
@@ -253,60 +357,3 @@ desconectar();
                 </div>
             </div>
 -->
-        </div>
-
-        <div class="opciones">
-            <div class="boton-primario">
-                <button type="button" onclick="openModal()">Dispositivo Principal</button>
-            </div>
-            <div class="boton-secundario">
-                <button type="button" onclick="openModalDos()">Desvincular</button>
-            </div>
-            <div class="boton-primario">
-                <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
-            </div>
-        </div>
-
-    </main>
-
-    <footer>
-        <?php include_once '../view/fragmentos/menubar.php' ?>
-    </footer>
-    <dialog class="dispositivo-vinculados" id="vinculo">
-        <div class="imagen">
-            <img src="img/touch.png" alt="touch">
-        </div>
-        <div class="texto">
-            <p>¿Estas seguro que deseas establecer el dispositivo como principal?</p>
-        </div>
-        <div class="opciones-modal">
-            <div class="boton-primario-modal">
-                <button type="button" onclick="closeModal()">Aceptar</button>
-            </div>
-            <div class="boton-secundario-modal">
-                <button type="button" onclick="closeModal()">Cancelar</button>
-            </div>
-        </div>
-    </dialog>
-    <dialog class="dispositivo-vinculados" id="desvinculo">
-        <div class="imagen">
-            <img src="img/desvincular.png" alt="desvinular">
-        </div>
-        <div class="texto">
-            <p>¿Estas seguro que deseas desvincular este dispositivo?</p>
-        </div>
-        <div class="opciones-modal">
-            <div class="boton-primario-modal">
-                <button type="button" onclick="closeModalDos()">Aceptar</button>
-            </div>
-            <div class="boton-secundario-modal">
-                <button type="button" onclick="closeModalDos()">Cancelar</button>
-            </div>
-        </div>
-    </dialog>
-    <script src="../view/js/index.js"></script>
-    <script src="../view/js/utils.js"></script>
-    <script src="../view/js/dispositivos.js"></script>
-</body>
-
-</html>

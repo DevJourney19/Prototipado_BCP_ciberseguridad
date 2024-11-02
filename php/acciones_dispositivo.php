@@ -15,17 +15,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ejecutar($sql);
         $response['status'] = 'success';
         $response['message'] = 'Dispositivo eliminado con éxito.';
+
     } else if ($accion === 'bloquear') {
         $sql = "UPDATE dispositivo SET estado_dispositivo='bloqueado' where id_dispositivo ='$id_dispositivo'";
         ejecutar($sql);
         $response['status'] = 'success';
         $response['message'] = 'Dispositivo bloqueado con éxito.';
+
     } else if ($accion === 'permitir') {
         //Voy a traer el id de esa fila y procederé a cambiarle el estado
         $sql = "UPDATE dispositivo SET estado_dispositivo='seguro' where id_dispositivo ='$id_dispositivo'";
         ejecutar($sql);
         $response['status'] = 'success';
         $response['message'] = 'Dispositivo permitido con éxito.';
+        
     }
     //header('Location: ../view/consulta_dispositivos.php'); //evitar cargar la pagina
     header('Content-Type: application/json');

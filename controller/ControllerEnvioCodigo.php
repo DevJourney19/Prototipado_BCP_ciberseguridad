@@ -21,8 +21,8 @@ try {
   $mail->Host = 'smtp.gmail.com';
   $mail->SMTPAuth = true;
   //DEBE SER CORREO DE LA CUENTA DEL CLIENTE EN EL QUE SE QUIERE INGRESAR
-  $mail->Username = 'f4r3ver@gmail.com';
-  $mail->Password = 'kcfz bjgu ydxl qqha'; //Contraseña creada en la verficacion de 2 pasos de Google
+  $mail->Username = 'correo';
+  $mail->Password = ''; //Contraseña creada en la verficacion de 2 pasos de Google
   $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
   $mail->Port = 587; //465 para la conexion encriptada
 
@@ -51,8 +51,8 @@ try {
     throw new Exception('Invalid email address');
   }
 */
-  $mail->setFrom("f4r3ver@gmail.com", "Banca en Linea BCP");
-  $mail->addAddress("f4r3ver@gmail.com", "Daniel");
+  $mail->setFrom("correo", "Banca en Linea BCP");
+  $mail->addAddress("correo", "Juan");
 
   $mail->Subject = 'Codigo de verificacion';
   $mail->Body = 'El codigo de verificacion es: ' . $codigo;
