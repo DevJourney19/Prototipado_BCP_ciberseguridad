@@ -21,10 +21,15 @@ try {
         $_SESSION['security'] = '12345';
         $_SESSION['id_usuario'] = $registro[0]['id_usuario']; //Se establece el id del usuario
 
-        $resultado = $daoSeguridad->readByUser($_SESSION['id_usuario']);
-        $idSeguridad = $resultado[0]['id_seguridad'];
+        $resultado = $daoUsuario->read($_SESSION['id_usuario']);
+        $idSeguridad = $resultado[0]['id_seguridad']; //retorna el id de seguridad
+
         if ($resultado[0]['activacion_seguridad'] == 1) {
             $_SESSION['id_seguridad'] = $idSeguridad;
+
+            if(){
+                
+            }
         }
 
         header("Location: ../view/principal.php");
