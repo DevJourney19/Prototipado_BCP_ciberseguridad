@@ -32,7 +32,7 @@ $fechaHoy = date('d-m-Y');
     <?php include 'fragmentos/head.php'; ?>
     <title>Rango de Horario y Ubicación</title>
     <link rel="stylesheet" href="css/horario_ubicacion.css">
-
+   
 </head>
 
 <body>
@@ -113,10 +113,9 @@ $fechaHoy = date('d-m-Y');
                     <label for="direccion">
                         <i class="fa-solid fa-map-location-dot"></i> Dirección Exacta (Calle y Distrito)
                     </label>
-                    <div style="display: flex; align-items: center; position: relative;">
+                    <div class="input-container">
                         <input type="text" id="locationInput" placeholder="Busca una dirección"
-                            oninput="autocompleteAddress(this.value)" name="txtdireccion"
-                            style="flex: 1; margin-right: 5px; width: 200px;" />
+                            oninput="autocompleteAddress(this.value)" name="txtdireccion" autocomplete="off" />
                         <button type="button" onclick="getLocation()" class="btn-salir">Ubicación Actual</button>
                     </div>
                     <ul id="suggestions"></ul>
