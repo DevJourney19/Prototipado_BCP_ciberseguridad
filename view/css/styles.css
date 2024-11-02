@@ -247,7 +247,12 @@ main {
   border-radius: 20px;
   cursor: pointer;
 }
-
+.segundo_cuadro button:hover {
+  background: #f48728;
+  color: #ffffff;
+  transition: background 0.3s, transform 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 /* --- Principal ---*/
 .cuadro_superior {
   background-color: #011844;
@@ -1038,6 +1043,7 @@ section button{
   gap: 10px;
   align-items: center;
   justify-content: center;
+  margin-bottom: 30px;
 }
 
 .config.options > div label{
@@ -1225,11 +1231,17 @@ section button i{
 .modal button.bloquear{
   background: #001843;
 }
-
+.modal button.bloquear:hover {
+  background-color: #07317e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
 .modal button.aceptar{
   background: #ff7900;
 }
-
+.modal button.aceptar:hover {
+  background-color: #fd9335;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
 .modal .button_modal{
   display: flex;
   flex-direction: column;
