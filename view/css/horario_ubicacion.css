@@ -267,6 +267,22 @@
     align-items: center;
 }
 
+.input-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #002855;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.input-container button{
+    background-color: #002855;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 #suggestions {
     list-style: none;
     padding: 0;

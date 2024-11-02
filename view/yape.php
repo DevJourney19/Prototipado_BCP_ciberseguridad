@@ -4,7 +4,7 @@ include_once '../controller/ControllerEntradas.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
-$estado = $entradas->validarYape('yape.php', $_SESSION['id_seguridad']);
+$estado = $entradas->validarYape('principal.php', $_SESSION['id_seguridad']);
 ?>
 
 <!DOCTYPE html>

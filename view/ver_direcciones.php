@@ -1,6 +1,5 @@
 <?php
 include_once '../controller/ControllerEntradas.php';
-include_once '../dao/DaoDireccion.php';
 include_once '../controller/ControllerDireccion.php';
 
 $entradas = new ControllerEntradas();
@@ -9,7 +8,7 @@ $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
 
 // Crear una instancia del DAO
 $daoDireccion = new DaoDireccion();
-$direcciones = $daoDireccion->obtenerTodasDirecciones();
+$direcciones = $daoDireccion->obtenerTodasDirecciones($_SESSION['id_seguridad']);
 
 ?>
 
@@ -49,7 +48,7 @@ $direcciones = $daoDireccion->obtenerTodasDirecciones();
                             echo "<tr><td colspan='7' class='text-center'>No se encontraron resultados.</td></tr>";
                         } else {
                             foreach ($direcciones as $datos) {
-                                ?>
+                        ?>
                                 <tr>
                                     <td><?php echo $datos['id_direccion']; ?></td>
                                     <td><?php echo $datos['direccion_exacta']; ?></td>
@@ -70,7 +69,7 @@ $direcciones = $daoDireccion->obtenerTodasDirecciones();
                                         </div>
                                     </td>
                                 </tr>
-                                <?php
+                        <?php
                             }
                         }
                         ?>

@@ -22,7 +22,7 @@ if (isset($_GET["error"])) {
             <div class="img_trabajador"><img src="../view/img/trabajador_bcp.jpg" alt="imagen_login.jpg"></img></div>
             <div class="iniciar_sesion">
                 <h1>Ingresa tus datos de Administrador</h1>
-                <form action="php/admin_login.php" method="POST" autocomplete="off">
+                <form action="../controller/ControllerAdmiLogin.php" method="POST" autocomplete="off">
                     <div><input type="text" placeholder="Email" name="email"></div>
                     <div><input type="text" placeholder="Nombre Completo" name="nombre"></div>
                     <div><input type="password" placeholder="Contraseña" name="password"></div>

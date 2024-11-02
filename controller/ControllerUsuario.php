@@ -16,6 +16,14 @@ class ControllerUsuario
         $result = $this->daoUsuario->read($id);
         $usuario = new Usuario();
         //$usuario->setIdUsuario($result['id']);
+
+  /*
+    public function obtenerUsuario($id, $tipo) {
+        $result = $this->daoUsuario->read($id, $tipo);
+        $usuario = new Usuario();
+        $usuario->setIdUsuario($result['id_usuario']);
+        */
+
         $usuario->setNombre($result['nombre']);
         $usuario->setTelefono($result['telefono']);
         return $usuario;

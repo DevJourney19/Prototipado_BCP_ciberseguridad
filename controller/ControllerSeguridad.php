@@ -11,9 +11,9 @@ class ControllerSeguridad
     $this->daoSeguridad = new DaoSeguridad();
   }
 
-  public function obtenerUsuario($id)
+  public function obtenerUsuario($id_usuario)
   {
-    return $this->daoSeguridad->readByUser($id);
+    return $this->daoSeguridad->readByUser($id_usuario);
   }
 
   public function verificarSeguridad($id)

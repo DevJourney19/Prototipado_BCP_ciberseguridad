@@ -33,6 +33,7 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
 
         /* Para Firefox */
         input[type=number] {
+            appearance: textfield;
             -moz-appearance: textfield;
             /* Cambia la apariencia a un campo de texto */
         }
@@ -53,19 +54,12 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
             <!--Cambiar image-->
             <div class="img_trabajador"><img src="img/bcp_bycer.jpg" alt="imagen_login.jpg"></img></div>
             <div class="iniciar_sesion">
-                <!--
-                <h1>Ingresa a tu banca en linea</h1>
-                <form action="../php/user_login.php" method="POST" autocomplete="off">
-                    <div>
-                        <input type="text" placeholder="Numero de tarjeta de debido o credito" name="tarjeta"
-                            autocomplete="off" maxlength="16">
-        -->
+
                 <h1>Ingresa a tu banca en línea</h1>
                 <form action="../controller/ControllerUserLogin.php" method="POST" autocomplete="off">
                     <div>
                         <input type="text" placeholder="Número de tarjeta de débito o crédito" name="tarjeta"
                             autocomplete="off">
-
                     </div>
                     <div class="group">
                         <input class="only_text" disabled value="DNI" />
