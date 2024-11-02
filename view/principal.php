@@ -5,7 +5,7 @@ $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 
 $daoUsuario = new ControllerUsuario();
-$usuario = $daoUsuario->obtenerUsuario($_SESSION['id']);
+$usuario = $daoUsuario->obtenerUsuario($_SESSION['id_seguridad']);
 ?>
 
 <!DOCTYPE html>

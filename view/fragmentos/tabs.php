@@ -3,7 +3,11 @@ include_once '../controller/ControllerSeguridad.php';
 
 $controllerSeguridad = new ControllerSeguridad();
 $resultado = $controllerSeguridad->obtenerUsuario($_SESSION['id']);
-$datos = $resultado[0]['estado_horas_direcciones'];
+if (isset($resultado[0]['estado_horas_direcciones']) && $resultado[0]['estado_horas_direcciones'] !== null) {
+    $datos = $resultado[0]['estado_horas_direcciones'];
+} else {
+    $datos = false;
+}
 ?>
 
 <div class="tabs">
