@@ -3,13 +3,7 @@
 require_once '../dao/DaoDireccion.php';
 require_once '../dao/DaoSeguridad.php';
 include_once '../controller/ControllerEntradas.php';
-if (session_status() === PHP_SESSION_NONE) {
-    session_start(); // Inicia la sesión solo si no está activa
-}
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL); // Cambia a E_ALL & ~E_NOTICE en producción
-// Crear una instancia del controlador de entradas
+
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
@@ -19,13 +13,14 @@ class ControllerDireccion {
     private $daoSeguridad;
 
     public function __construct() {
-        session_start(); // Iniciar sesión
+        session_start(); 
         $this->daoDireccion = new DaoDireccion();
         $this->daoSeguridad = new DaoSeguridad();
     }
 
     public function registrar($id_seguridad) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnRegistrarDireccion'])) {
+            $id_seguridad = $_SESSION['id_seguridad'] ?? null;
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
             $rango_gps = 10; 
             $fecha_configuracion = date('Y-m-d');
@@ -41,8 +36,7 @@ class ControllerDireccion {
             } else {
                 $_SESSION['mensaje'] = "Error: El id_seguridad no existe.";
             }
-
-            header('Location: ../view/horario_ubicacion.php');
+            header('Location: /Prototipado_BCP_ciberseguridad/view/horario_ubicacion.php');
             exit;
         } else {
             echo "No se envió el formulario.";
@@ -68,7 +62,7 @@ class ControllerDireccion {
                 $error = true; 
             }
     
-            header('Location: ../view/ver_direcciones.php');
+            header('Location: /Prototipado_BCP_ciberseguridad/view/ver_direcciones.php');
             exit;
         } else {
             echo "No se ha enviado el formulario de modificación correctamente.";
@@ -83,12 +77,11 @@ class ControllerDireccion {
             $_SESSION['mensaje'] = "Error: El id de dirección no es válido.";
         }
     
-        header('Location: ../view/horario_ubicacion.php');
+        header('Location: /Prototipado_BCP_ciberseguridad/view/horario_ubicacion.php');
         exit;
     }
 }
 
-// Verificar la acción en el controlador
 if (isset($_GET['action'])) {
     $controller = new ControllerDireccion();
 

@@ -36,7 +36,7 @@ class ControllerHorario {
 
                     if ($resultado) {
                         echo "Registro exitoso, redirigiendo...<br>";
-                        header('Location: /view/horario_ubicacion.php');
+                        header('Location: /Prototipado_BCP_ciberseguridad/view/horario_ubicacion.php');
                         exit;
                     } else {
                         echo "Error al registrar el horario en la base de datos.";
@@ -67,7 +67,7 @@ class ControllerHorario {
             if ($id_seguridad && $id_hora && !empty($hora_inicio) && !empty($hora_fin)) {
                 $resultado = $this->daoHorario->modificarHorario($id_hora, $id_seguridad, $hora_inicio, $hora_fin, $fecha);
                 if ($resultado) {
-                    header('Location: /view/horario_ubicacion.php?msg=modificacion_exitosa');
+                    header('Location: /Prototipado_BCP_ciberseguridad/view/horario_ubicacion.php?msg=modificacion_exitosa');
                     exit;
                 } else {
                     echo "Error al modificar el horario en la base de datos.";

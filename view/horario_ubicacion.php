@@ -1,7 +1,7 @@
 <?php
 include_once '../controller/ControllerEntradas.php';
 include_once '../controller/ControllerHorario.php';
-include_once '../controller/ControllerDireccion.php'; // Incluir el controlador de dirección
+include_once '../controller/ControllerDireccion.php'; 
 
 $controllerEntradas = new ControllerEntradas();
 $controllerEntradas->validarEntrada('index.php');
@@ -90,12 +90,12 @@ $error = null
         </div>
 
         <div class="secciones">
-            <form action="../controller/ControllerDireccion.php?action=registrar" method="post">
+            <form action="http://localhost/Prototipado_BCP_ciberseguridad/controller/ControllerDireccion.php?action=registrar" method="post">
                 <div id="avisoError" style="color: red; <?php echo $error ? 'background-color: red;' : ''; ?>">
                     <?php
                     if (isset($_SESSION['mensaje'])) {
                         echo $_SESSION['mensaje'];
-                        unset($_SESSION['mensaje']); // Limpiar el mensaje de la sesión
+                        unset($_SESSION['mensaje']);
                     }
                     ?>
                 </div>
