@@ -1,25 +1,29 @@
--- phpMyAdmin SQL Dump -- version 5.2.1 -- https://www.phpmyadmin.net/ -- -- Servidor: localhost:3308 -- Tiempo de generación: 26-10-2024 a las 07:06:10 -- Versión del servidor: 10.4.32-MariaDB -- Versión de PHP: 8.2.12 
+-- **phpMyAdmin SQL Dump**
+-- **version 5.2.1**
+-- **Servidor: localhost:3308**
+-- **Tiempo de generación: 26-10-2024 a las 07:06:10**
+-- **Versión del servidor: 10.4.32-MariaDB**
+-- **Versión de PHP: 8.2.12**
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO"; 
 START TRANSACTION; 
 SET time_zone = "+00:00"; 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */; 
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS 
-*/; 
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION 
-*/; 
-/*!40101 SET NAMES utf8mb4 */; 
+
 create database seguridadbcp; 
 use seguridadbcp; 
+
 CREATE TABLE `alerta` ( 
-`id_alerta` int(11) NOT NULL, 
-`id_seguridad` int(11) NOT NULL, 
-`mensaje_alerta` text NOT NULL, 
-`fecha_alerta` date NOT NULL, 
-`hora_alerta` time NOT NULL, 
-`motivo_alerta` varchar(255) DEFAULT NULL, 
-`estado_alerta` varchar(50) DEFAULT NULL 
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci; -- -------------------------------------------------------- -- -- Estructura de tabla para la tabla `direccion` 
--- 
+  `id_alerta` int(11) NOT NULL, 
+  `id_seguridad` int(11) NOT NULL, 
+  `mensaje_alerta` text NOT NULL, 
+  `fecha_alerta` date NOT NULL, 
+  `hora_alerta` time NOT NULL, 
+  `motivo_alerta` varchar(255) DEFAULT NULL, 
+  `estado_alerta` varchar(50) DEFAULT NULL 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci; 
+
+-- --------------------------------------------------------
+-- **Estructura de tabla para la tabla `direccion`**
 CREATE TABLE `direccion` ( 
 `id_direccion` int(11) NOT NULL, 
 `id_seguridad` int(11) NOT NULL, 
