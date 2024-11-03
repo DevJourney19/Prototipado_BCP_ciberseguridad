@@ -1,3 +1,4 @@
+
 -- **phpMyAdmin SQL Dump**
 -- **version 5.2.1**
 -- **Servidor: localhost:3308**
@@ -103,7 +104,9 @@ INSERT INTO `seguridad` (`id_seguridad`, `id_usuario`, `activacion_seguridad`,
 (5, 1, 0, 0, 0), 
 (6, 1, 0, 0, 0); 
 
--- -------------------------------------------------------- -- -- Estructura de tabla para la tabla `usuario` -- 
+-- -------------------------------------------------------- -- -- 
+**Estructura de tabla para la tabla `usuario`** 
+
 CREATE TABLE `usuario` ( 
 `id_usuario` int(11) NOT NULL, 
 `nombre` varchar(100) NOT NULL, 
@@ -115,57 +118,73 @@ CREATE TABLE `usuario` (
 `clave_internet` blob NOT NULL, 
 `created_at` datetime DEFAULT NULL 
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci; 
--- -- Volcado de datos para la tabla `usuario` -- 
+
+-- Volcado de datos para la tabla `usuario` --
+
 INSERT INTO `usuario` (`id_usuario`, `nombre`, `password`, `dni`, 
 `telefono`, `correo`, `numero_tarjeta`,`clave_internet`, 
 `created_at`) VALUES 
+
 (1, 'Jose Balcazar', 0x7d8497535b0db29bf50f6c3b20d39c58, '12345678', 
 '987654321', 'jose@gmail.com', '1234567891234567', 
 0xd6f6721a0967fea2ad0a5b8378a2110f,'2024-10-21 17:50:43'), 
+
 (2, 'Yoshua Castañeda', 0xc4a413b0134675de9b5ea2e1654cd06b, '12345679', 
 '876543210', 'yoshua@gmail.com', '1234567891234568', 
 0xd6f6721a0967fea2ad0a5b8378a2110f, '2024-10-21 17:50:43'), 
+
 (3, 'Elena Suarez', 0xb4d931e55b1dba0b85ab3971ae65eccb, '12345680', 
 '765432109', 'elena@gmail.com', '1234567891234569',0x2096738160590e4bbd0227f7d4a352f5, 
  '2024-10-21 17:50:43'), 
+ 
 (4, 'Daniela Suarez', 0xb4d931e55b1dba0b85ab3971ae65eccb, '12345681', 
 '654321098', 'daniela@gmail.com', '1234567891234570', 
 0xd6f6721a0967fea2ad0a5b8378a2110f, '2024-10-21 17:50:43'), 
+
 (5, 'Jorge Flores', 0xaf7b3a4c86643325a86dfba967b73abd, '12345682', 
 '543210987', 'jorge@gmail.com', '1234567891234571', 
 0xd6f6721a0967fea2ad0a5b8378a2110f, '2024-10-21 17:50:43'), 
+
 (6, 'Cesar Angeles', 0x817824677fafd50629777e79c095c1be, '12345683', 
 '432109876', 'cesar@gmail.com', '1234567891234572', 
 0xd6f6721a0967fea2ad0a5b8378a2110f, '2024-10-21 17:50:43'); 
+
 -- -- Índices para tablas volcadas -- -- 
 -- Indices de la tabla `alerta` -- 
 ALTER TABLE `alerta` 
 ADD PRIMARY KEY (`id_alerta`), 
 ADD KEY `id_seguridad` (`id_seguridad`); 
+
 -- -- Indices de la tabla `direccion` -- 
 ALTER TABLE `direccion` 
 ADD PRIMARY KEY (`id_direccion`), 
 ADD KEY `id_seguridad` (`id_seguridad`); 
+
 -- -- Indices de la tabla `dispositivo` -- 
 ALTER TABLE `dispositivo` 
 ADD PRIMARY KEY (`id_dispositivo`), 
 ADD KEY `id_seguridad` (`id_seguridad`); 
+
 -- -- Indices de la tabla `encuestas` -- 
 ALTER TABLE `encuesta` 
 ADD PRIMARY KEY (`id_encuesta`), 
 ADD KEY `id_seguridad` (`id_seguridad`); 
+
 -- -- Indices de la tabla `horas_restringidas` -- 
 ALTER TABLE `hora_restringida` 
 ADD PRIMARY KEY (`id_hora`), 
 ADD KEY `id_seguridad` (`id_seguridad`); 
+
 -- -- Indices de la tabla `pagos_yape` -- 
 ALTER TABLE `pago_yape` 
 ADD PRIMARY KEY (`id_pago`), 
 ADD KEY `id_seguridad_origen` (`id_seguridad_origen`); 
+
 -- -- Indices de la tabla `seguridad` -- 
 ALTER TABLE `seguridad` 
 ADD PRIMARY KEY (`id_seguridad`), 
-ADD KEY `id_usuario` (`id_usuario`); -- 
+ADD KEY `id_usuario` (`id_usuario`); 
+
 -- Indices de la tabla `usuario` -- 
 ALTER TABLE `usuario` 
 ADD PRIMARY KEY (`id_usuario`), 
@@ -173,47 +192,73 @@ ADD UNIQUE KEY `dni` (`dni`),
 ADD UNIQUE KEY `telefono` (`telefono`), 
 ADD UNIQUE KEY `correo` (`correo`), 
 ADD UNIQUE KEY `numero_tarjeta` (`numero_tarjeta`);
+
 -- -- AUTO_INCREMENT de las tablas volcadas 
 -- -- -- AUTO_INCREMENT de la tabla `alerta` -- 
+
 ALTER TABLE `alerta` 
 MODIFY `id_alerta` int(11) NOT NULL AUTO_INCREMENT; 
+
 -- -- AUTO_INCREMENT de la tabla `direccion` -- 
 ALTER TABLE `direccion` 
 MODIFY `id_direccion` int(11) NOT NULL AUTO_INCREMENT; 
+
 -- -- AUTO_INCREMENT de la tabla `dispositivo` -- 
 ALTER TABLE `dispositivo` 
 MODIFY `id_dispositivo` int(11) NOT NULL AUTO_INCREMENT; 
+
 -- -- AUTO_INCREMENT de la tabla `encuestas` -- 
 ALTER TABLE `encuesta` 
 MODIFY `id_encuesta` int(11) NOT NULL AUTO_INCREMENT; 
+
 -- -- AUTO_INCREMENT de la tabla `horas_restringidas` -- 
 ALTER TABLE `hora_restringida` 
-MODIFY `id_hora` int(11) NOT NULL AUTO_INCREMENT; -- -- AUTO_INCREMENT de la tabla `pagos_yape` -- 
+MODIFY `id_hora` int(11) NOT NULL AUTO_INCREMENT; 
+
+-- -- AUTO_INCREMENT de la tabla `pagos_yape` -- 
 ALTER TABLE `pago_yape` 
-MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT; -- -- AUTO_INCREMENT de la tabla `seguridad` -- 
+MODIFY `id_pago` int(11) NOT NULL AUTO_INCREMENT; 
+
+-- -- AUTO_INCREMENT de la tabla `seguridad` -- 
 ALTER TABLE `seguridad` 
-MODIFY `id_seguridad` int(11) NOT NULL AUTO_INCREMENT; -- -- AUTO_INCREMENT de la tabla `usuario` -- 
+MODIFY `id_seguridad` int(11) NOT NULL AUTO_INCREMENT; 
+
+-- -- AUTO_INCREMENT de la tabla `usuario` -- 
 ALTER TABLE `usuario` 
-MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT; -- -- Restricciones para tablas volcadas -- -- -- Filtros para la tabla `alerta` -- 
+MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT; -- 
+
+-- Restricciones para tablas volcadas -- -- 
+-- Filtros para la tabla `alerta` -- 
 ALTER TABLE `alerta` 
 ADD CONSTRAINT `alerta_ibfk_1` FOREIGN KEY (`id_seguridad`) REFERENCES 
 `seguridad` (`id_seguridad`); -- 
+
 -- Filtros para la tabla `direccion` -- 
 ALTER TABLE `direccion` 
 ADD CONSTRAINT `direccion_ibfk_1` FOREIGN KEY (`id_seguridad`) 
-REFERENCES `seguridad` (`id_seguridad`); -- -- Filtros para la tabla `dispositivo` -- 
+REFERENCES `seguridad` (`id_seguridad`); -- 
+
+-- Filtros para la tabla `dispositivo` -- 
 ALTER TABLE `dispositivo` 
 ADD CONSTRAINT `dispositivo_ibfk_1` FOREIGN KEY (`id_seguridad`) 
-REFERENCES `seguridad` (`id_seguridad`); -- -- Filtros para la tabla `encuestas` -- 
+REFERENCES `seguridad` (`id_seguridad`); -- 
+
+-- Filtros para la tabla `encuestas` -- 
 ALTER TABLE `encuesta` 
 ADD CONSTRAINT `encuesta_ibfk_1` FOREIGN KEY (`id_seguridad`) 
-REFERENCES `seguridad` (`id_seguridad`); -- -- Filtros para la tabla `horas_restringidas` -- 
+REFERENCES `seguridad` (`id_seguridad`); -- 
+
+-- Filtros para la tabla `horas_restringidas` -- 
 ALTER TABLE `hora_restringida` 
 ADD CONSTRAINT `hora_restringida_ibfk_1` FOREIGN KEY (`id_seguridad`) 
-REFERENCES `seguridad` (`id_seguridad`); -- -- Filtros para la tabla `pagos_yape` -- 
+REFERENCES `seguridad` (`id_seguridad`); -- 
+
+-- Filtros para la tabla `pagos_yape` -- 
 ALTER TABLE `pago_yape` 
 ADD CONSTRAINT `pago_yape_ibfk_1` FOREIGN KEY (`id_seguridad_origen`) 
-REFERENCES `seguridad` (`id_seguridad`); -- -- Filtros para la tabla `seguridad` 
+REFERENCES `seguridad` (`id_seguridad`); -- 
+
+-- Filtros para la tabla `seguridad` 
 -- 
 ALTER TABLE `seguridad` 
 ADD CONSTRAINT `seguridad_ibfk_1` FOREIGN KEY (`id_usuario`) 
