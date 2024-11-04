@@ -1,4 +1,7 @@
-<div id="modal" class="blur close">
+<?= 'ESTOY DENTRO DEL MODAL!!' ?>
+<div id="modal" class="blur ">
+  <?= 'ESTOY DENTRO DEL MODAL222222222222222222!!' ?>
+
   <!--BLUR-->
   <div class="modal alerta">
     <div>
@@ -128,7 +131,7 @@
       /*Se necesita establecer una comunicación con el servidor para trabajar con PHP, 
       es por ello que se realizó un JSON */
       try {
-        const response = await fetch('../php/set_session.php', {
+        const response = await fetch('../controller/ControllerDispositivo/?action=getUsuario&cambio=true', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -150,7 +153,7 @@
     } else { //Que se cree un registro pero con el verificado en 0
       alert('Código incorrecto');
       try {
-        const response = await fetch('../php/set_session.php', {
+        const response = await fetch('../controller/ControllerDispositivo/?action=getUsuario&cambio=true', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
