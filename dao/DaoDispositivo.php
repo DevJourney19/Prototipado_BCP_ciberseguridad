@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once '../model/Dispositivo.php';
 include_once '../config/Connection.php';
 include_once 'interfaces/DaoInterfaceDispositivo.php';
@@ -15,9 +16,9 @@ class DaoDispositivo implements DaoInterfaceDispositivo
     {
         try {
             $id_seguridad = $_SESSION['id_seguridad'];
-            $ip_usuario = getPublicIp();
-            $resultado = obtener_info_ip($ip_usuario);
-            $dispositivo = obtener_dispositivo();
+            $ip_usuario = $_SESSION['direccion_ip']; // null en caso que es un dispositivo que no coincida con los requisitos pero si que registro los datos correctos
+            $resultado = $_SESSION['info']; // Si funciona en verificaacion 
+            $dispositivo = $_SESSION['dispositivo'];
             $fecha_registro = date('Y-m-d H:i:s');
 
             $query = "INSERT INTO dispositivo (id_seguridad, tipo_dispositivo, direccion_ip, 

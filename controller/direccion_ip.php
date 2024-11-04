@@ -29,11 +29,38 @@ function obtener_dispositivo()
     //Se detecta que dispositivo se está utilizando por medio de la página web
     $userAgent = $_SERVER['HTTP_USER_AGENT']; //exclusivo de PHP
 
-    if (strpos($userAgent, 'Mobile') !== false) {
-        return 'Dispositivo móvil';
-    } elseif (strpos($userAgent, 'Tablet') !== false) {
-        return 'Tableta';
-    } else {
-        return 'Ordenador de escritorio';
+    // Clasificar el tipo de dispositivo usando switch
+    switch (true) {
+        case strpos($userAgent, 'Windows') !== false:
+        case strpos($userAgent, 'Macintosh') !== false:
+        case strpos($userAgent, 'Linux') !== false:
+            return 'Ordenador de escritorio';
+
+        case strpos($userAgent, 'Mobile') !== false:
+            return 'Teléfono móvil';
+
+        case strpos($userAgent, 'Tablet') !== false:
+        case strpos($userAgent, 'iPad') !== false:
+        case (strpos($userAgent, 'Android') !== false && strpos($userAgent, 'Mobile') === false):
+            return 'Tableta';
+
+        case strpos($userAgent, 'SmartWatch') !== false:
+            return 'Smartwatch';
+
+        case strpos($userAgent, 'SmartTV') !== false:
+        case strpos($userAgent, 'TV') !== false:
+            return 'Televisor inteligente';
+
+        case strpos($userAgent, 'Nintendo') !== false:
+        case strpos($userAgent, 'PlayStation') !== false:
+        case strpos($userAgent, 'Xbox') !== false:
+            return 'Consola de videojuegos';
+
+        case strpos($userAgent, 'IoT') !== false:
+        case strpos($userAgent, 'Raspberry') !== false:
+            return 'Dispositivo IoT';
+
+        default:
+            return 'Tipo de dispositivo no reconocido';
     }
 }
