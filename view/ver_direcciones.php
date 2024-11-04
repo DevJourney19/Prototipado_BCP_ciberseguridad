@@ -6,7 +6,6 @@ $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
 
-// Crear una instancia del DAO
 $daoDireccion = new DaoDireccion();
 $direcciones = $daoDireccion->obtenerTodasDirecciones($_SESSION['id_seguridad']);
 

@@ -61,4 +61,3 @@ class Horario {
         $this->updatedAt = $updatedAt;
     }
 }
-?>

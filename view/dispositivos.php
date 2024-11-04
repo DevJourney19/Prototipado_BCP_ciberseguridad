@@ -1,4 +1,5 @@
 <?php
+
 /*include_once '../controller/ControllerEntradas.php';
 include_once '../controller/ControllerEntradas.php';*/
 include '../config/Connection.php';
@@ -62,68 +63,25 @@ $usuario->estado_activado($info_usuario);*/
                 <p>Estos son los dispositivos que se encuentran vinculados en tu banca móvil.</p>
             </div>
         </div>
-
-
-        <div class="tabla grid" id="mensajin">
-            <!--Necesito crear esto por js -->
-
-            <?php if (isset($resultado3)) { ?>
-
+        <div class="tabla">
+            <div class="contenido-izq">
                 <div class="caja">
-
                     <div class="primero">
                         <div class="imagen">
-                            <?php switch ($resultado3[0]['tipo_dispositivo']) {
-                                case 'Ordenador de escritorio': ?>
-                                    <img src="img/computadora.png" alt="Imagen de celular">
-
-                                    <?php break;
-                                case 'Portátil': ?>
-                                    <img src="img/icono_portatil.png" alt="Imagen de portátil">
-                                    <?php break;
-
-                                case 'Tableta': ?>
-                                    <img src="img/icono_tableta.png" alt="Imagen de tableta">
-                                    <?php break;
-
-                                case 'Teléfono móvil': ?>
-                                    <img src="img/icono_cel.png" alt="Imagen de teléfono móvil">
-                                    <?php break;
-
-                                case 'Smartwatch': ?>
-                                    <img src="img/icono_smartwatch.png" alt="Imagen de smartwatch">
-                                    <?php break;
-
-                                case 'Televisor inteligente': ?>
-                                    <img src="img/icono_televisor.png" alt="Imagen de televisor inteligente">
-                                    <?php break;
-
-                                case 'Consola de videojuegos': ?>
-                                    <img src="img/icono_consola.png" alt="Imagen de consola de videojuegos">
-                                    <?php break;
-
-                                case 'Dispositivo IoT': ?>
-                                    <img src="img/icono_iot.png" alt="Imagen de dispositivo IoT">
-                                    <?php break;
-
-                                default: ?>
-                                    <p>Tipo de dispositivo no reconocido.</p>
-                            <?php } ?>
-
+                            <img src="img/icono_cel.png" alt="Imagen de celular">
                         </div>
                         <div class="seccion">
                             <div class="titulo-caja">
+
                                 <h4  style="color: darkorange; font-weight: 800;">
                                     <?= $resultado3[0]['tipo_dispositivo'] ?>
                                 </h4>
                             </div>
                             <div class="descripcion-caja">
                                 <p>
-                                    Lugar: <?= $resultado3[0]['ciudad'] ?>- <?= $resultado3[0]['pais'] ?>
-                                    <br />
-                                    IP: <?= $resultado3[0]['direccion_ip'] ?>
-                                    <br />
-                                    Ingreso: <?= $resultado3[0]['fecha_registro'] ?>
+                                    Lugar: Av Lomas - SMP
+                                    IP: 192.168.769
+                                    Ingreso: 05/09/2024
                                 </p>
 
                             </div>
@@ -134,10 +92,133 @@ $usuario->estado_activado($info_usuario);*/
                         <label for="dispositivo1"><span class="radio-button"></span></label>
                     </div>
                 </div>
-            <?php } ?>
+                <!--
+                <div class="caja">
+                    <div class="primero">
+                        <div class="imagen">
+                            <img src="img/laptop.png" alt="Imagen de celular">
+                        </div>
+                        <div class="seccion">
+                            <div class="titulo-caja">
+                                <h4>
+                                    Laptop
+                                </h4>
+                            </div>
+                            <div class="descripcion-caja">
+                                <p>
+                                Lugar: Av Lomas - SMP IP: 192.168.769 Ingreso: 05/09/2024
+                                </p>
 
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="segundo">
+                        <input type="radio" name="vinculo" id="dispositivo2">
+                        <label for="dispositivo2"><span class="radio-button"></span></label>
+                    </div>
+
+                </div>
+                <div class="caja">
+                    <div class="primero">
+                        <div class="imagen">
+                            <img src="img/computadora.png" alt="Imagen de celular">
+                        </div>
+                        <div class="seccion">
+                            <div class="titulo-caja">
+                                <h4>
+                                    Computadora
+                                </h4>
+                            </div>
+                            <div class="descripcion-caja">
+                                <p>Lugar: Av Lomas - SMP
+                                    IP: 192.168.769
+                                    Ingreso: 05/09/2024</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="segundo">
+                        <input type="radio" name="vinculo" id="dispositivo3">
+                        <label for="dispositivo3"><span class="radio-button"></span></label>
+                    </div>
+                </div>
+                <div class="caja">
+                    <div class="primero">
+                        <div class="imagen">
+                            <img src="img/icono_cel.png" alt="Imagen de celular">
+                        </div>
+                        <div class="seccion">
+                            <div class="titulo-caja">
+                                <h4>
+                                    iPhone
+                                </h4>
+                            </div>
+                            <div class="descripcion-caja">
+                                <p>Lugar: Av Lomas - SMP
+                                    IP: 192.168.769
+                                    Ingreso: 05/09/2024</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="segundo">
+                        <input type="radio" name="vinculo" id="dispositivo4">
+                        <label for="dispositivo4"><span class="radio-button"></span></label>
+                    </div>
+                </div>
+                <div class="caja">
+                    <div class="primero">
+                        <div class="imagen">
+                            <img src="img/laptop.png" alt="Imagen de celular">
+                        </div>
+                        <div class="seccion">
+                            <div class="titulo-caja">
+                                <h4>
+                                    Laptop
+                                </h4>
+                            </div>
+                            <div class="descripcion-caja">
+                                <p>Lugar: Av Lomas - SMP
+                                    IP: 192.168.769
+                                    Ingreso: 05/09/2024</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="segundo">
+                        <input type="radio" name="vinculo" id="dispositivo5">
+                        <label for="dispositivo5"><span class="radio-button"></span></label>
+                    </div>
+                </div>
+                <div class="caja">
+                    <div class="primero">
+                        <div class="imagen">
+                            <img src="img/computadora.png" alt="Imagen de celular">
+                        </div>
+                        <div class="seccion">
+                            <div class="titulo-caja">
+                                <h4>
+                                    Computadora
+                                </h4>
+                            </div>
+                            <div class="descripcion-caja">
+                                <p>Lugar: Av Lomas - SMP
+                                    IP: 192.168.769
+                                    Ingreso: 05/09/2024</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="segundo">
+                        <input type="radio" name="vinculo" id="dispositivo6">
+                        <label for="dispositivo6"><span class="radio-button"></span></label>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
         <?php if (!isset($seguro)) { ?>
             <div class="opciones">
                 <div class="boton-primario">
@@ -153,7 +234,6 @@ $usuario->estado_activado($info_usuario);*/
         <?php } ?>
 
     </main>
-
     <footer>
         <?php include_once '../view/fragmentos/menubar.php' ?>
     </footer>
@@ -191,6 +271,7 @@ $usuario->estado_activado($info_usuario);*/
     </dialog>
     <script src="../view/js/index.js"></script>
     <script src="../view/js/utils.js"></script>
+
     <script src="js/dispositivos.js"></script>
     <script>
         const info = localStorage.getItem('nuevo_dispositivo'); //Retorna String
@@ -245,130 +326,6 @@ $usuario->estado_activado($info_usuario);*/
             }
         }
     </script>
+>>>>>>> main
 </body>
-
 </html>
-<!--
-            <div class="caja">
-                <div class="primero">
-                    <div class="imagen">
-                        <img src="img/laptop.png" alt="Imagen de celular">
-                    </div>
-                    <div class="seccion">
-                        <div class="titulo-caja">
-                            <h4>
-                                Laptop
-                            </h4>
-                        </div>
-                        <div class="descripcion-caja">
-                            <p>
-                                Lugar: Av Lomas - SMP IP: 192.168.769 Ingreso: 05/09/2024
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="segundo">
-                    <input type="radio" name="vinculo" id="dispositivo2">
-                    <label for="dispositivo2"><span class="radio-button"></span></label>
-                </div>
-
-            </div>
-            <div class="caja">
-                <div class="primero">
-                    <div class="imagen">
-                        <img src="img/computadora.png" alt="Imagen de celular">
-                    </div>
-                    <div class="seccion">
-                        <div class="titulo-caja">
-                            <h4>
-                                Computadora
-                            </h4>
-                        </div>
-                        <div class="descripcion-caja">
-                            <p>Lugar: Av Lomas - SMP
-                                IP: 192.168.769
-                                Ingreso: 05/09/2024</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="segundo">
-                    <input type="radio" name="vinculo" id="dispositivo3">
-                    <label for="dispositivo3"><span class="radio-button"></span></label>
-                </div>
-            </div>
-            <div class="caja">
-                <div class="primero">
-                    <div class="imagen">
-                        <img src="img/icono_cel.png" alt="Imagen de celular">
-                    </div>
-                    <div class="seccion">
-                        <div class="titulo-caja">
-                            <h4>
-                                iPhone
-                            </h4>
-                        </div>
-                        <div class="descripcion-caja">
-                            <p>Lugar: Av Lomas - SMP
-                                IP: 192.168.769
-                                Ingreso: 05/09/2024</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="segundo">
-                    <input type="radio" name="vinculo" id="dispositivo4">
-                    <label for="dispositivo4"><span class="radio-button"></span></label>
-                </div>
-            </div>
-            <div class="caja">
-                <div class="primero">
-                    <div class="imagen">
-                        <img src="img/laptop.png" alt="Imagen de celular">
-                    </div>
-                    <div class="seccion">
-                        <div class="titulo-caja">
-                            <h4>
-                                Laptop
-                            </h4>
-                        </div>
-                        <div class="descripcion-caja">
-                            <p>Lugar: Av Lomas - SMP
-                                IP: 192.168.769
-                                Ingreso: 05/09/2024</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="segundo">
-                    <input type="radio" name="vinculo" id="dispositivo5">
-                    <label for="dispositivo5"><span class="radio-button"></span></label>
-                </div>
-            </div>
-            <div class="caja">
-                <div class="primero">
-                    <div class="imagen">
-                        <img src="img/computadora.png" alt="Imagen de celular">
-                    </div>
-                    <div class="seccion">
-                        <div class="titulo-caja">
-                            <h4>
-                                Computadora
-                            </h4>
-                        </div>
-                        <div class="descripcion-caja">
-                            <p>Lugar: Av Lomas - SMP
-                                IP: 192.168.769
-                                Ingreso: 05/09/2024</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="segundo">
-                    <input type="radio" name="vinculo" id="dispositivo6">
-                    <label for="dispositivo6"><span class="radio-button"></span></label>
-                </div>
-            </div>
--->
