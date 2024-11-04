@@ -3,7 +3,7 @@
 session_start();
 if (isset($_SESSION['security'])) {
     $response = [
-        'id' => $_SESSION['id'],
+        'id' => $_SESSION['id_usuario'],
         'security' => $_SESSION['security'],
         'status' => true
     ];

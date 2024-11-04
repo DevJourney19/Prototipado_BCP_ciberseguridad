@@ -4,9 +4,9 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2185d2f99bcd56787481d9357a5972d3
+class ComposerStaticInit695d0a4a2ad6fd08a5f50ec1ace05aeb
 {
-    public static $files = array(
+    public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -19,217 +19,230 @@ class ComposerStaticInit2185d2f99bcd56787481d9357a5972d3
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
     );
 
-    public static $prefixLengthsPsr4 = array(
-        'p' =>
-            array(
-                'phpDocumentor\\Reflection\\' => 25,
-            ),
-        'W' =>
-            array(
-                'Webmozart\\Assert\\' => 17,
-            ),
-        'S' =>
-            array(
-                'Symfony\\Polyfill\\Php83\\' => 23,
-                'Symfony\\Polyfill\\Php80\\' => 23,
-                'Symfony\\Polyfill\\Mbstring\\' => 26,
-                'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
-                'Symfony\\Polyfill\\Intl\\Grapheme\\' => 31,
-                'Symfony\\Polyfill\\Ctype\\' => 23,
-                'Symfony\\Contracts\\Translation\\' => 30,
-                'Symfony\\Contracts\\Service\\' => 26,
-                'Symfony\\Contracts\\Cache\\' => 24,
-                'Symfony\\Component\\VarExporter\\' => 30,
-                'Symfony\\Component\\Validator\\' => 28,
-                'Symfony\\Component\\TypeInfo\\' => 27,
-                'Symfony\\Component\\String\\' => 25,
-                'Symfony\\Component\\Serializer\\' => 29,
-                'Symfony\\Component\\PropertyInfo\\' => 31,
-                'Symfony\\Component\\PropertyAccess\\' => 33,
-                'Symfony\\Component\\Cache\\' => 24,
-            ),
-        'P' =>
-            array(
-                'Psr\\Log\\' => 8,
-                'Psr\\Http\\Message\\' => 17,
-                'Psr\\Http\\Client\\' => 16,
-                'Psr\\Container\\' => 14,
-                'Psr\\Cache\\' => 10,
-                'PhpOption\\' => 10,
-                'PHPStan\\PhpDocParser\\' => 21,
-                'PHPMailer\\PHPMailer\\' => 20,
-            ),
-        'I' =>
-            array(
-                'Infobip\\' => 8,
-            ),
-        'G' =>
-            array(
-                'GuzzleHttp\\Psr7\\' => 16,
-                'GuzzleHttp\\Promise\\' => 19,
-                'GuzzleHttp\\' => 11,
-                'GrahamCampbell\\ResultType\\' => 26,
-            ),
-        'D' =>
-            array(
-                'Dotenv\\' => 7,
-                'Doctrine\\Deprecations\\' => 22,
-                'Doctrine\\Common\\Lexer\\' => 22,
-                'Doctrine\\Common\\Annotations\\' => 28,
-            ),
+    public static $prefixLengthsPsr4 = array (
+        'p' => 
+        array (
+            'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'W' => 
+        array (
+            'Webmozart\\Assert\\' => 17,
+        ),
+        'T' => 
+        array (
+            'Twilio\\' => 7,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Php83\\' => 23,
+            'Symfony\\Polyfill\\Php80\\' => 23,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Intl\\Normalizer\\' => 33,
+            'Symfony\\Polyfill\\Intl\\Grapheme\\' => 31,
+            'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Contracts\\Translation\\' => 30,
+            'Symfony\\Contracts\\Service\\' => 26,
+            'Symfony\\Contracts\\Cache\\' => 24,
+            'Symfony\\Component\\VarExporter\\' => 30,
+            'Symfony\\Component\\Validator\\' => 28,
+            'Symfony\\Component\\TypeInfo\\' => 27,
+            'Symfony\\Component\\String\\' => 25,
+            'Symfony\\Component\\Serializer\\' => 29,
+            'Symfony\\Component\\PropertyInfo\\' => 31,
+            'Symfony\\Component\\PropertyAccess\\' => 33,
+            'Symfony\\Component\\Cache\\' => 24,
+        ),
+        'P' => 
+        array (
+            'Psr\\Log\\' => 8,
+            'Psr\\Http\\Message\\' => 17,
+            'Psr\\Http\\Client\\' => 16,
+            'Psr\\Container\\' => 14,
+            'Psr\\Cache\\' => 10,
+            'PhpOption\\' => 10,
+            'PHPStan\\PhpDocParser\\' => 21,
+            'PHPMailer\\PHPMailer\\' => 20,
+        ),
+        'I' => 
+        array (
+            'Infobip\\' => 8,
+        ),
+        'G' => 
+        array (
+            'GuzzleHttp\\Psr7\\' => 16,
+            'GuzzleHttp\\Promise\\' => 19,
+            'GuzzleHttp\\' => 11,
+            'GrahamCampbell\\ResultType\\' => 26,
+        ),
+        'D' => 
+        array (
+            'Dotenv\\' => 7,
+            'Doctrine\\Deprecations\\' => 22,
+            'Doctrine\\Common\\Lexer\\' => 22,
+            'Doctrine\\Common\\Annotations\\' => 28,
+            'Danie\\PrototipadoBcpCiberseguridad\\' => 35,
+        ),
     );
 
-    public static $prefixDirsPsr4 = array(
-        'phpDocumentor\\Reflection\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-                1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-                2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            ),
-        'Webmozart\\Assert\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/webmozart/assert/src',
-            ),
-        'Symfony\\Polyfill\\Php83\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/polyfill-php83',
-            ),
-        'Symfony\\Polyfill\\Php80\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
-            ),
-        'Symfony\\Polyfill\\Mbstring\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-            ),
-        'Symfony\\Polyfill\\Intl\\Normalizer\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
-            ),
-        'Symfony\\Polyfill\\Intl\\Grapheme\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
-            ),
-        'Symfony\\Polyfill\\Ctype\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
-            ),
-        'Symfony\\Contracts\\Translation\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/translation-contracts',
-            ),
-        'Symfony\\Contracts\\Service\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/service-contracts',
-            ),
-        'Symfony\\Contracts\\Cache\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/cache-contracts',
-            ),
-        'Symfony\\Component\\VarExporter\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/var-exporter',
-            ),
-        'Symfony\\Component\\Validator\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/validator',
-            ),
-        'Symfony\\Component\\TypeInfo\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/type-info',
-            ),
-        'Symfony\\Component\\String\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/string',
-            ),
-        'Symfony\\Component\\Serializer\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/serializer',
-            ),
-        'Symfony\\Component\\PropertyInfo\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/property-info',
-            ),
-        'Symfony\\Component\\PropertyAccess\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/property-access',
-            ),
-        'Symfony\\Component\\Cache\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/symfony/cache',
-            ),
-        'Psr\\Log\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/psr/log/src',
-            ),
-        'Psr\\Http\\Message\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/psr/http-factory/src',
-                1 => __DIR__ . '/..' . '/psr/http-message/src',
-            ),
-        'Psr\\Http\\Client\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/psr/http-client/src',
-            ),
-        'Psr\\Container\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/psr/container/src',
-            ),
-        'Psr\\Cache\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/psr/cache/src',
-            ),
-        'PhpOption\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
-            ),
-        'PHPStan\\PhpDocParser\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src',
-            ),
-        'PHPMailer\\PHPMailer\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
-            ),
-        'Infobip\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/infobip/infobip-api-php-client/Infobip',
-            ),
-        'GuzzleHttp\\Psr7\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
-            ),
-        'GuzzleHttp\\Promise\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
-            ),
-        'GuzzleHttp\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
-            ),
-        'GrahamCampbell\\ResultType\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
-            ),
-        'Dotenv\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
-            ),
-        'Doctrine\\Deprecations\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/doctrine/deprecations/lib/Doctrine/Deprecations',
-            ),
-        'Doctrine\\Common\\Lexer\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/doctrine/lexer/src',
-            ),
-        'Doctrine\\Common\\Annotations\\' =>
-            array(
-                0 => __DIR__ . '/..' . '/doctrine/annotations/lib/Doctrine/Common/Annotations',
-            ),
+    public static $prefixDirsPsr4 = array (
+        'phpDocumentor\\Reflection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'Webmozart\\Assert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'Twilio\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twilio/sdk/src/Twilio',
+        ),
+        'Symfony\\Polyfill\\Php83\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php83',
+        ),
+        'Symfony\\Polyfill\\Php80\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Intl\\Normalizer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer',
+        ),
+        'Symfony\\Polyfill\\Intl\\Grapheme\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme',
+        ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
+        'Symfony\\Contracts\\Translation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/translation-contracts',
+        ),
+        'Symfony\\Contracts\\Service\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/service-contracts',
+        ),
+        'Symfony\\Contracts\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/cache-contracts',
+        ),
+        'Symfony\\Component\\VarExporter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/var-exporter',
+        ),
+        'Symfony\\Component\\Validator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/validator',
+        ),
+        'Symfony\\Component\\TypeInfo\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/type-info',
+        ),
+        'Symfony\\Component\\String\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/string',
+        ),
+        'Symfony\\Component\\Serializer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/serializer',
+        ),
+        'Symfony\\Component\\PropertyInfo\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/property-info',
+        ),
+        'Symfony\\Component\\PropertyAccess\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/property-access',
+        ),
+        'Symfony\\Component\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/cache',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
+        ),
+        'Psr\\Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'Psr\\Http\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/http-client/src',
+        ),
+        'Psr\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'Psr\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'PhpOption\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
+        ),
+        'PHPStan\\PhpDocParser\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpstan/phpdoc-parser/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'Infobip\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/infobip/infobip-api-php-client/Infobip',
+        ),
+        'GuzzleHttp\\Psr7\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'GuzzleHttp\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
+        ),
+        'GuzzleHttp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'GrahamCampbell\\ResultType\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
+        ),
+        'Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
+        'Doctrine\\Deprecations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/deprecations/lib/Doctrine/Deprecations',
+        ),
+        'Doctrine\\Common\\Lexer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/lexer/src',
+        ),
+        'Doctrine\\Common\\Annotations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/annotations/lib/Doctrine/Common/Annotations',
+        ),
+        'Danie\\PrototipadoBcpCiberseguridad\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
+        ),
     );
 
-    public static $classMap = array(
+    public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'DateError' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/DateError.php',
@@ -248,15 +261,15 @@ class ComposerStaticInit2185d2f99bcd56787481d9357a5972d3
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
-        'ï¿½' => __DIR__ . '/..' . '/symfony/cache/Traits/ValueWrapper.php',
+        '©' => __DIR__ . '/..' . '/symfony/cache/Traits/ValueWrapper.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit2185d2f99bcd56787481d9357a5972d3::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit2185d2f99bcd56787481d9357a5972d3::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit2185d2f99bcd56787481d9357a5972d3::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit695d0a4a2ad6fd08a5f50ec1ace05aeb::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit695d0a4a2ad6fd08a5f50ec1ace05aeb::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit695d0a4a2ad6fd08a5f50ec1ace05aeb::$classMap;
 
         }, null, ClassLoader::class);
     }

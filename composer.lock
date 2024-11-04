@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-
-    "content-hash": "e7df1031756003f841d471796b6dd63a",
+    "content-hash": "9dc6b69d837bc389b759759b025af5f0",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -2870,6 +2869,59 @@
                 }
             ],
             "time": "2024-09-25T14:20:29+00:00"
+        },
+        {
+            "name": "twilio/sdk",
+            "version": "8.3.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twilio/twilio-php.git",
+                "reference": "d2eba45cdc483fde10527ce44811d6bbeea3c82e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twilio/twilio-php/zipball/d2eba45cdc483fde10527ce44811d6bbeea3c82e",
+                "reference": "d2eba45cdc483fde10527ce44811d6bbeea3c82e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^6.3 || ^7.0",
+                "phpunit/phpunit": ">=7.0 < 10"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "An HTTP client to execute the API requests"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Twilio\\": "src/Twilio/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Twilio API Team",
+                    "email": "api@twilio.com"
+                }
+            ],
+            "description": "A PHP wrapper for Twilio's API",
+            "homepage": "https://github.com/twilio/twilio-php",
+            "keywords": [
+                "api",
+                "sms",
+                "twilio"
+            ],
+            "support": {
+                "issues": "https://github.com/twilio/twilio-php/issues",
+                "source": "https://github.com/twilio/twilio-php/tree/8.3.7"
+            },
+            "time": "2024-10-28T12:15:00+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

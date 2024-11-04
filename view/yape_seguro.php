@@ -6,7 +6,7 @@ $entradas = new ControllerEntradas();
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
 
 $seguridad = new ControllerSeguridad();
-$datos2 = $seguridad->obtenerUsuario($_SESSION['id'])[0];
+$datos2 = $seguridad->obtenerSeguridadUsuario($_SESSION['id_usuario'])[0];
 
 ?>
 
@@ -50,12 +50,12 @@ $datos2 = $seguridad->obtenerUsuario($_SESSION['id'])[0];
             const estado = <?php echo $datos2["estado_yape"] ? 'false' : 'true' ?>;
             boton.addEventListener('click', async () => {
                 await fetch("../controller/ControllerEstadoFunciones.php", {
-                        method: "POST",
-                        body: JSON.stringify({
-                            estado: estado,
-                            funcion: "estado_yape"
-                        }),
-                    })
+                    method: "POST",
+                    body: JSON.stringify({
+                        estado: estado,
+                        funcion: "estado_yape"
+                    }),
+                })
                     .then((response) => response.json())
                     .then((data) => {
                         console.log("Resultado:", data);
@@ -73,8 +73,8 @@ $datos2 = $seguridad->obtenerUsuario($_SESSION['id'])[0];
             })
         })
     </script>
-    <script src="../view/js/utils.js"></script>
-    <script src="../view/js/index.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>

@@ -3,11 +3,12 @@
 include_once '../controller/ControllerSeguridad.php';
 
 $controllerSeguridad = new ControllerSeguridad();
-$resultado = $controllerSeguridad->obtenerUsuario($_SESSION['id']);
+
+$resultado = $controllerSeguridad->obtenerSeguridadUsuario($_SESSION['id_usuario']);
 if (isset($resultado[0]['estado_horas_direcciones']) && $resultado[0]['estado_horas_direcciones'] !== null) {
-    $datos = $resultado[0]['estado_horas_direcciones'];
+  $datos = $resultado[0]['estado_horas_direcciones'];
 } else {
-    $datos = false;
+  $datos = false;
 }
 ?>
 
@@ -45,18 +46,34 @@ if (isset($resultado[0]['estado_horas_direcciones']) && $resultado[0]['estado_ho
         funcion: "estado_horas_direcciones",
       }),
     })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Resultado:", data);
-      if (data.status == "activado") {
-        alert("Restricciones activadas");
-      } else {
-        alert("Restricciones desactivadas");
-      }
-      location.reload(); 
-    })
-    .catch((error) => {
-      console.error("Error al enviar los datos:", error);
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Resultado:", data);
+        if (data.status == "activado") {
+          alert("Restricciones activadas");
+        } else {
+          alert("Restricciones desactivadas");
+        }
+        location.reload();
+      })
+      .catch((error) => {
+        console.error("Error al enviar los datos:", error);
+      });
+  });
+
+  const links = document.querySelectorAll('.tab-link');
+
+  const activeTab = localStorage.getItem('activeTab');
+  if (activeTab) {
+    document.querySelector(`a[href="${activeTab}"]`)?.classList.add('active');
+  }
+
+  links.forEach(link => {
+    link.addEventListener('click', function (event) {
+      links.forEach(link => link.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+
+      localStorage.setItem('activeTab', event.currentTarget.getAttribute('href'));
     });
   });
 </script>

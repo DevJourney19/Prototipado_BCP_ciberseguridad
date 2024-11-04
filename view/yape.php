@@ -4,6 +4,7 @@ include_once '../controller/ControllerEntradas.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
+//algo esta mal aca, el problema es con el estado que no es 1
 $estado = $entradas->validarYape('principal.php', $_SESSION['id_seguridad']);
 ?>
 

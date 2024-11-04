@@ -1,15 +1,21 @@
 <?php
 include_once '../controller/ControllerEntradas.php';
 include_once '../controller/ControllerUsuario.php';
+
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
+if (isset($_SESSION['estado_dispositivo'])) {
+    echo $_SESSION['estado_dispositivo'];
+}
 
 $daoUsuario = new ControllerUsuario();
 if (isset($_SESSION['id_seguridad'])) {
+    //El id coincide tanto para el usuario como para seguridad, solo que la diferencia radica en los campos extra que brinda seguridad
     $usuario = $daoUsuario->obtenerUsuario($_SESSION['id_seguridad'], "seguridad");
 } else {
-    $usuario = $daoUsuario->obtenerUsuario($_SESSION['id'], "usuario");
+    $usuario = $daoUsuario->obtenerUsuario($_SESSION['id_usuario'], "usuario");
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +41,9 @@ if (isset($_SESSION['id_seguridad'])) {
     </div>
     <div class="cuadro_superior">
         <div class="izquierda">
-            <div><span class="hola">Hola, </span><span><?=$usuario->getNombre()?></span></div>
+
+            <div><span class="hola">Hola, </span><span><?= $usuario->getNombre() ?></span></div>
+
             <div class="circulo">
                 <img src="img/usuario.png" alt="Perfil Usuario">
             </div>
