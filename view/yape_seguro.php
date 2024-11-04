@@ -6,7 +6,7 @@ $entradas = new ControllerEntradas();
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
 
 $seguridad = new ControllerSeguridad();
-$datos2 = $seguridad->obtenerUsuario($_SESSION['id_usuario'])[0];
+$datos2 = $seguridad->obtenerSeguridadUsuario($_SESSION['id_usuario'])[0];
 
 ?>
 

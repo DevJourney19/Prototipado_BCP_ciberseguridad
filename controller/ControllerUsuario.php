@@ -11,19 +11,11 @@ class ControllerUsuario
         $this->daoUsuario = new DaoUsuario();
     }
 
-    public function obtenerUsuario($id)
+    public function obtenerUsuario($id, $tipo)
     {
-        $result = $this->daoUsuario->readUser($id);
-        $usuario = new Usuario();
-        //$usuario->setIdUsuario($result['id']);
-
-  /*
-    public function obtenerUsuario($id, $tipo) {
-        $result = $this->daoUsuario->read($id, $tipo);
+        $result = $this->daoUsuario->readUserWithSecurity($id, $tipo);
         $usuario = new Usuario();
         $usuario->setIdUsuario($result['id_usuario']);
-        */
-
         $usuario->setNombre($result['nombre']);
         $usuario->setTelefono($result['telefono']);
         return $usuario;
@@ -37,6 +29,16 @@ class ControllerUsuario
         $usuario->setTelefono($result['telefono']);
         return $usuario;
     }
+    /*
+    public function obtenerUsuario($id)
+    {
+        $result = $this->daoUsuario->readUser($id);
+        $usuario = new Usuario();
+        //$usuario->setIdUsuario($result['id']);
+
+    }
+        */
+    /*
     public function usuario_activado($id)
     {
         $result = $this->daoUsuario->readUser($id);
@@ -46,6 +48,8 @@ class ControllerUsuario
         $usuario->setTelefono($result['telefono']);
         return $usuario;
     }
+        */
+    /*
     public function estado_activado($id)
     {
         $result = $this->daoUsuario->readDispo($id);
@@ -56,4 +60,5 @@ class ControllerUsuario
         return $usuario;
         
     }
+        */
 }
