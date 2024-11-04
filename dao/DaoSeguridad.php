@@ -12,7 +12,9 @@ class DaoSeguridad implements DaoInterfaceSeguridad
   {
     $this->db = new Connection();
   }
-
+  function mostrarDispositivos(){
+    
+  }
   public function read($idSeguridad)
   {
     try {

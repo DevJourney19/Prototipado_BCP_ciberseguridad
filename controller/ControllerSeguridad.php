@@ -11,8 +11,9 @@ class ControllerSeguridad
     $this->daoSeguridad = new DaoSeguridad();
   }
 
-  public function obtenerUsuario($id_usuario)
+  public function obtenerSeguridadUsuario($id_usuario)
   {
+    //Importante para hacer la conexion con dispositivos
     return $this->daoSeguridad->readByUser($id_usuario);
   }
 

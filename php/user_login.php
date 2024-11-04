@@ -18,12 +18,11 @@ $_SESSION['ciudad'] = $info['city'];
 $hora_actual = date("h:i:s");
 $_SESSION['hora'] = $hora_actual;
 
-// Corregir la consulta para desencriptar el pin almacenado y compararlo con el ingresado
 $validar_login = "SELECT * FROM usuario WHERE numero_tarjeta = '$tarjeta' AND dni = '$dni' AND AES_DECRYPT(clave_internet, 'D9u#F5h8*Z3kB9!nL7^mQ4') = '$clave_internet'";
 
 //$verificar_entradas = "SELECT * FROM usuario WHERE numero_tarjeta = '$tarjeta' OR dni = '$dni'";
 //$verificar_ip_activada = "SELECT * FROM usuario WHERE ip_principal= '$dir_ip'";
-$verificar_ip_activada = "SELECT direccion_ip FROM dispositivo WHERE id_seguridad= '$id_seguridad'";
+//$verificar_ip_activada = "SELECT direccion_ip FROM dispositivo WHERE id_seguridad= '$id_seguridad'";
 
 //Se hace esto para crear una Session para poder enviarle el registro al cliente
 //1. Entrar a seguridad por medio del id del usuario
@@ -34,27 +33,34 @@ try {
     conectar();
 
     $registro = consultar($validar_login);
+
     $_SESSION['id_usuario'] = $registro[0]['id_usuario'];
     //Obteniendo el id del usuario
     $id_usuario = $_SESSION['id_usuario']; //Se desea la informacion del usuario a mandar el mensaje
 
     conectar();
+//---
     $part1 = "SELECT * FROM seguridad WHERE id_usuario = '$id_usuario'";
     $part1_consul = consultar($part1);
     $_SESSION['id_seguridad'] = $part1_consul[0]['id_seguridad'];
+
     $id_seguridad = $_SESSION['id_seguridad']; //Se desea la informacion de la seguridad para identificar los dispositivos
     desconectar();
     conectar();
     $part2 = "SELECT * FROM dispositivo WHERE id_seguridad = '$id_seguridad' AND (estado_dispositivo='activado' || estado_dispositivo='seguro') AND direccion_ip='$dir_ip'";
     $part2_consul = consultar($part2);
+    
     $_SESSION['id_dispositivo'] = $part2_consul[0]['id_dispositivo'];
+
+
+
     $valor_entrada = $part2_consul[0]['estado_dispositivo'];
     $_SESSION['estado_dispositivo'] = $valor_entrada;
     //Creo que se tiene que hacer un if para separar a los estados acitvados con los seguros
     $direccion_ip_deseada = $part2_consul[0]['direccion_ip'];
     $id_dispositivo = $_SESSION['id_dispositivo'];  //Se desea la informacion del dispositivo a mandar el mensaje
     desconectar();
-
+    //Me falta completar lo de abajo
     if (count($registro) == 1) {
 
         $_SESSION['security'] = '12345';

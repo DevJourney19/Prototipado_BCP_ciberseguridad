@@ -12,10 +12,10 @@ class DaoUsuario implements DaoInterfaceUsuario
         $this->db = new Connection();
     }
 
-    public function read($id, $tipo)
+    public function readUserWithSecurity($id, $entrada)
     {
         try {
-            if ($tipo == 'seguridad') {
+            if ($entrada == 'seguridad') {
                 $query = "SELECT * FROM usuario 
                       JOIN seguridad ON usuario.id_usuario = seguridad.id_usuario 
                       WHERE seguridad.id_seguridad = :id";
@@ -73,6 +73,7 @@ class DaoUsuario implements DaoInterfaceUsuario
             return null;
         }
     }
+    /*
     public function readDispo($idUsuario, $id_segu)
     {
         try {
@@ -88,4 +89,5 @@ class DaoUsuario implements DaoInterfaceUsuario
             return null;
         }
     }
+        */
 }

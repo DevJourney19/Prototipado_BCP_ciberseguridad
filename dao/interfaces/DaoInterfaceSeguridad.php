@@ -7,4 +7,6 @@ interface DaoInterfaceSeguridad
   public function readByUser($idUsuario);
   public function readActiveSecurity($idUsuario);
   public function verificarActivaciones($idUsuario);
+  public function mostrarDispositivos();
 }
+ 

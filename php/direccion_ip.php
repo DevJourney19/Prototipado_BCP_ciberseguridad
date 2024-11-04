@@ -1,21 +1,26 @@
 <?php
-include '../config/connection.php';
+//include '../config/connection.php';
+include '../config/Connection.php/';
+
+$conexion = new Connection(); //se establece una conexion directa con el dao impl
 session_start();
-conectar();
-//Se va a obtener el id del usuario, en caso coincida su DNI o su tarjeta de crédito
+//$conexion->conectar();
+
 $id_usuario_no_permitido = $_SESSION["id_no_permitido"];
-//Se va a obtener el campo id_seguridad que debe ser 1 por cada usuario
-$listaa = consultar("SELECT id_seguridad from seguridad 
+
+/*$listaa = $conexion->consultar("SELECT id_seguridad from seguridad 
 WHERE id_usuario='$id_usuario_no_permitido'");
-/*Si en caso te salga una alerta del problema que es la variable $id_seguridad, debe 
-ser porque todavía no se ha activado el servicio de ciberseguridad.*/
+*/ //En lugar de ese metodo largo vamos a llamar al metodo de Seguridad
+
+
+
+
 if (count($listaa) > 0) {
-    //Se obtiene el id_seguridad por medio de la filtración especifica del usuario
     $_SESSION["id_seguridad"] = $listaa[0]["id_seguridad"];
     $id_seguridad = $_SESSION["id_seguridad"];
 }
 
-desconectar();
+$conexion->desconectar();
 function obtener_info_ip($ip)
 {
     //Se construye la url utilizando la dirección ip a consultar 
