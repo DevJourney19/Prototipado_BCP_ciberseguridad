@@ -1,26 +1,36 @@
 <?php
+session_start();
 require_once '../dao/DaoHorario.php';
 require_once '../dao/DaoSeguridad.php';
-session_start();
 
 class ControllerHorario {
     private $daoHorario;
     private $daoSeguridad;
 
     public function __construct() {
+        
         $this->daoHorario = new DaoHorario();
         $this->daoSeguridad = new DaoSeguridad();
     }
 
     public function registrar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnRegistrar'])) {
-            $id_seguridad = $_SESSION['id_seguridad'] ?? null;
+            $id_seguridad = $_POST["id_seguridad"] ?? null;
             $hora_inicio = $_POST['txtHoraInicio'] ?? '';
             $hora_fin = $_POST['txtHoraFin'] ?? '';
             $fecha = date('Y-m-d');
 
+            // Depuración: Imprimir los valores recibidos
+            echo "id_seguridad: $id_seguridad<br>";
+            echo "hora_inicio: $hora_inicio<br>";
+            echo "hora_fin: $hora_fin<br>";
+
             if ($id_seguridad && $this->daoSeguridad->existeSeguridad($id_seguridad) && !empty($hora_inicio) && !empty($hora_fin)) {
-                $resultado = $this->daoHorario->registrarHorario($id_seguridad, $hora_inicio, $hora_fin, $fecha);
+                if($this->daoHorario->registrarHorario($id_seguridad, $hora_inicio, $hora_fin, $fecha)){
+                    $resultado = true;
+                } else {
+                    $resultado = false;
+                }
                 $this->redireccionar($resultado, 'Registro');
             } else {
                 $this->mensajeError($id_seguridad, $hora_inicio, $hora_fin);
@@ -34,14 +44,14 @@ class ControllerHorario {
 
     public function modificar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnModificar'])) {
-            $id_seguridad = $_SESSION['id_seguridad'] ?? null;
+            $seguridad = $_SESSION['id_seguridad'] ?? null;
             $id_hora = $_POST['txtId'] ?? null;
             $hora_inicio = $_POST['txtHoraInicio'] ?? '';
             $hora_fin = $_POST['txtHoraFin'] ?? '';
             $fecha = date('Y-m-d');
 
-            if ($id_seguridad && $id_hora && !empty($hora_inicio) && !empty($hora_fin)) {
-                $resultado = $this->daoHorario->modificarHorario($id_hora, $id_seguridad, $hora_inicio, $hora_fin, $fecha);
+            if ($seguridad && $id_hora && !empty($hora_inicio) && !empty($hora_fin)) {
+                $resultado = $this->daoHorario->modificarHorario($id_hora, $seguridad, $hora_inicio, $hora_fin, $fecha);
                 $this->redireccionar($resultado, 'Modificación');
             } else {
                 echo "Error: Todos los campos son obligatorios y el id de seguridad debe ser válido.";
@@ -67,8 +77,8 @@ class ControllerHorario {
         exit;
     }
 
-    private function mensajeError($id_seguridad, $hora_inicio, $hora_fin) {
-        if (!$id_seguridad) {
+    private function mensajeError($seguridad, $hora_inicio, $hora_fin) {
+        if (!$seguridad) {
             echo "Error: No se ha encontrado la sesión de seguridad.";
         } elseif (empty($hora_inicio) || empty($hora_fin)) {
             echo "Error: Debes llenar todos los campos.";
@@ -81,9 +91,8 @@ class ControllerHorario {
 if (isset($_GET['action'])) {
     $controller = new ControllerHorario();
     $action = $_GET['action'];
-
     if (method_exists($controller, $action)) {
-        $controller->$action(isset($_GET['id']) ? $_GET['id'] : null);
+        $controller->$action();
     } else {
         echo "Acción no válida.";
     }

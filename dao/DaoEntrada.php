@@ -29,7 +29,7 @@ class DaoEntrada implements DaoInterfaceEntrada
         $sql = "SELECT * FROM seguridad WHERE id_seguridad = :idSeguridad AND estado_yape = 1";
         $result = $this->db->consultar($sql, ['idSeguridad' => $idSeguridad]);
         if (count($result) > 0) {
-            return $result;
+            return $result[0];
         } else {
             echo "No se encontraron resultados.";
             return null;

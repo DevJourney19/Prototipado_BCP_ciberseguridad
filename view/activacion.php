@@ -1,11 +1,11 @@
 <?php
-include '../php/util/validar_entradas.php';
-include '../php/util/connection.php';
 //validar_entrada('index.php');
 // verificar si ya ha sido contratado el servicio
 
 include_once '../controller/ControllerEntradas.php';
 include_once '../controller/ControllerSeguridad.php';
+include_once '../controller/ControllerEntradas.php';
+$entradas = new ControllerEntradas();
 $conexion = new Connection();
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');

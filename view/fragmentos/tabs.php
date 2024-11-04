@@ -5,8 +5,8 @@ include_once '../controller/ControllerSeguridad.php';
 $controllerSeguridad = new ControllerSeguridad();
 
 $resultado = $controllerSeguridad->obtenerSeguridadUsuario($_SESSION['id_usuario']);
-if (isset($resultado[0]['estado_horas_direcciones']) && $resultado[0]['estado_horas_direcciones'] !== null) {
-  $datos = $resultado[0]['estado_horas_direcciones'];
+if (isset($resultado[0]['estado_hora_direccion']) && $resultado[0]['estado_hora_direccion'] !== null) {
+  $datos = $resultado[0]['estado_hora_direccion'];
 } else {
   $datos = false;
 }
@@ -40,12 +40,12 @@ if (isset($resultado[0]['estado_horas_direcciones']) && $resultado[0]['estado_ho
 
   switchCheckbox.addEventListener('change', async () => {
     const response = await fetch("../controller/ControllerEstadoFunciones.php", {
-      method: "POST",
-      body: JSON.stringify({
-        estado: !estado, // Cambia el estado cuando se haga clic
-        funcion: "estado_horas_direcciones",
-      }),
-    })
+        method: "POST",
+        body: JSON.stringify({
+          estado: !estado, // Cambia el estado cuando se haga clic
+          funcion: "estado_hora_direccion",
+        }),
+      })
       .then((response) => response.json())
       .then((data) => {
         console.log("Resultado:", data);
@@ -63,17 +63,45 @@ if (isset($resultado[0]['estado_horas_direcciones']) && $resultado[0]['estado_ho
 
   const links = document.querySelectorAll('.tab-link');
 
-  const activeTab = localStorage.getItem('activeTab');
-  if (activeTab) {
-    document.querySelector(`a[href="${activeTab}"]`)?.classList.add('active');
+  // Obtener la URL actual
+  const currentUrl = window.location.href;
+
+  // Marcar la pestaña activa según la URL actual
+  links.forEach(link => {
+    if (link.href === currentUrl) {
+      link.classList.add('active');
+    }
+  });
+
+  // Ocultar el switchCheckbox si la URL no es horario_ubicacion.php
+  if (!currentUrl.includes('horario_ubicacion.php')) {
+    switchCheckbox.style.display = 'none';
   }
 
+  // Añadir event listeners a cada enlace de pestaña
   links.forEach(link => {
-    link.addEventListener('click', function (event) {
+    link.addEventListener('click', function(event) {
+      // Eliminar la clase 'active' de todos los enlaces
       links.forEach(link => link.classList.remove('active'));
+      // Añadir la clase 'active' al enlace clicado
       event.currentTarget.classList.add('active');
 
-      localStorage.setItem('activeTab', event.currentTarget.getAttribute('href'));
+      // Guardar la URL en localStorage
+      localStorage.setItem('activeTab', event.currentTarget.href);
     });
+  });
+
+  // Escuchar cambios en la URL
+  window.addEventListener('popstate', function() {
+    const newActiveTab = window.location.href;
+    links.forEach(link => link.classList.remove('active'));
+    document.querySelector(`a[href="${newActiveTab}"]`)?.classList.add('active');
+
+    // Ocultar el switchCheckbox si la URL no es horario_ubicacion.php
+    if (!newActiveTab.includes('horario_ubicacion.php')) {
+      switchCheckbox.style.display = 'none';
+    } else {
+      switchCheckbox.style.display = 'block';
+    }
   });
 </script>

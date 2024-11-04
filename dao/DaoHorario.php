@@ -12,7 +12,7 @@ class DaoHorario implements DaoInterfaceHorario {
         $this->db = new Connection();
     }
 
-    public function registrarHorario($idSeguridad, $horaInicio, $horaFin, $fecha) {
+    public function registrarHorario($idSeguridad, $horaInicio, $horaFin) {
         try {
             $query = "INSERT INTO hora_restringida (id_seguridad, hora_inicio, hora_final, created_at, updated_at) VALUES (:idSeguridad, :horaInicio, :horaFin, NOW(), NOW())";
             return $this->db->ejecutar($query, [

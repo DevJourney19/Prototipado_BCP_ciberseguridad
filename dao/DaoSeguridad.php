@@ -35,11 +35,11 @@ class DaoSeguridad implements DaoInterfaceSeguridad
   {
     try {
       $response = false;
-      if ($funcion != 'activacion_seguridad') {
+      if ($funcion != "activacion_seguridad") {
         $query = "UPDATE seguridad SET $funcion = :estado WHERE id_seguridad = :seguridad";
         $response = $this->db->ejecutar($query, ['estado' => $estado, 'seguridad' => $seguridad]);
       } else {
-        $query = "UPDATE seguridad SET activacion_seguridad = :estado1 , estado_horas_direcciones = :estado2 , estado_yape = :estado3 WHERE id_seguridad = :seguridad";
+        $query = "UPDATE seguridad SET activacion_seguridad = :estado1 , estado_hora_direccion = :estado2 , estado_yape = :estado3 WHERE id_seguridad = :seguridad";
         $response = $this->db->ejecutar($query, ['estado1' => $estado, 'estado2' => $estado, 'estado3' => $estado, 'seguridad' => $seguridad]);
       }
       return $response;

@@ -39,7 +39,7 @@ $error = null
 
             <?php if (empty($horarios)): ?>
                 <h4>No se han encontrado horarios restringidos. Puedes registrar uno nuevo.</h4>
-                <form action="../controller/ControllerHorario.php?action=registrar&id_seguridad=<?= $_SESSION['id_seguridad'] ?>" method="post">
+                <form action="../controller/ControllerHorario.php?action=registrar" method="POST">
                     <div class="formulario">
                         <input type="hidden" name="id_seguridad" value="<?= $_SESSION['id_seguridad']?>">
                         <div class="grupo-formulario-horario">
@@ -57,7 +57,7 @@ $error = null
                     </div>
                     <small>* Recuerda que cada día debes registrar un rango de horario</small>
                     <div class="botones">
-                        <button type="submit" class="boton-naranja" name="btnRegistrar">Registrar</button>
+                        <button type="submit" name="btnRegistrar" class="boton-naranja">Registrar</button>
                     </div>
                 </form>
             <?php else: ?>

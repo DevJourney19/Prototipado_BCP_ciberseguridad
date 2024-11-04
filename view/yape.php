@@ -4,7 +4,6 @@ include_once '../controller/ControllerEntradas.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
-//algo esta mal aca, el problema es con el estado que no es 1
 $estado = $entradas->validarYape('principal.php', $_SESSION['id_seguridad']);
 ?>
 
@@ -39,7 +38,7 @@ $estado = $entradas->validarYape('principal.php', $_SESSION['id_seguridad']);
             <div class="contenedor-botones">
                 <button class="btn-otros">Otros Bancos</button>
                 <button class="btn-yapear" <?php
-                if ($estado == 1) {
+                if ($estado["estado_yape"] == 1) {
                     ?> onclick="abrirModal()" <?php } ?>>Yapear</button>
             </div>
         </div>

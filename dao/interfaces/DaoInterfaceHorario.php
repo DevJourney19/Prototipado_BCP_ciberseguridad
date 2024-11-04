@@ -1,7 +1,7 @@
 <?php
 
 interface DaoInterfaceHorario {
-    public function registrarHorario($idSeguridad, $horaInicio, $horaFin, $fecha);
+    public function registrarHorario($idSeguridad, $horaInicio, $horaFin);
     
     // Declaración del nuevo método
     public function obtenerHorariosRestringidos();

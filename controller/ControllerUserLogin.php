@@ -31,32 +31,34 @@ try {
             $_SESSION['id_seguridad'] = $registro2[0]['id_seguridad'];
             $id_seguridad = $_SESSION['id_seguridad'];
             //DISPOSITIVO
-            $registro3 = $daoDispositivo->enterAccess($id_seguridad, $dir_ip);
-            $_SESSION['id_dispositivo'] = $registro3[0]['id_dispositivo'];
-            $_SESSION['estado_dispositivo'] = $registro3[0]['estado_dispositivo'];
-            $_SESSION['direccion_ip'] = $registro3[0]['direccion_ip'];
-            $id_dispositivo = $_SESSION['id_dispositivo'];
-            $direccion_ip_deseada = $_SESSION['direccion_ip'];
-            //----
-            $_SESSION['dispositivo'] = obtener_dispositivo();
-            $_SESSION['pais'] = $info['country'];
-            $_SESSION['ciudad'] = $info['city'];
-            $_SESSION['hora'] = date("h:i:s");
+            // $registro3 = $daoDispositivo->enterAccess($id_seguridad, $dir_ip);
+            // $_SESSION['id_dispositivo'] = $registro3[0]['id_dispositivo'];
+            // $_SESSION['estado_dispositivo'] = $registro3[0]['estado_dispositivo'];
+            // $_SESSION['direccion_ip'] = $registro3[0]['direccion_ip'];
+            // $id_dispositivo = $_SESSION['id_dispositivo'];
+            // $direccion_ip_deseada = $_SESSION['direccion_ip'];
+            // $_SESSION['dispositivo'] = obtener_dispositivo();
+            // $_SESSION['pais'] = $info['country'];
+            // $_SESSION['ciudad'] = $info['city'];
+            // $_SESSION['hora'] = date("h:i:s");
+            
 
-            if (empty($direccion_ip_deseada)) { //Si no existe la direccion ip por la comparacion
-                $_SESSION['error_ubicacion'] = true;
-                header("Location: ../view/index.php");
+            // if (empty($direccion_ip_deseada)) { //Si no existe la direccion ip por la comparacion
+            //     $_SESSION['error_ubicacion'] = true;
+            //     header("Location: ../view/index.php");
 
-            } else {
-                header("Location: ../view/principal.php");
-                die();
-            }
+            // } else {
+            //     header("Location: ../view/principal.php");
+            //     die();
+            // }
+            // ----
+            header("Location: ../view/index.php");
         } else {
             header("Location: ../view/index.php");
         }
         // verificar si la direccion ip es existe y es la misma de la principal
         // y colocar en la variable de session el estado de la seguridad
-
+        header("Location: ../view/principal.php");
     } else {
         session_destroy();
         header("Location: ../view/index.php?error=true");

@@ -1,6 +1,5 @@
-<?= 'ESTOY DENTRO DEL MODAL!!' ?>
+
 <div id="modal" class="blur ">
-  <?= 'ESTOY DENTRO DEL MODAL222222222222222222!!' ?>
 
   <!--BLUR-->
   <div class="modal alerta">
@@ -10,9 +9,9 @@
     </div>
     <div>
       <div class="description">
-        <span>Tipo: <?= $_SESSION['dispositivo'] ?></span>
-        <span>Ubicacion: <?= $_SESSION['ciudad'] ?>, <?= $_SESSION['pais'] ?></span>
-        <span>Hora: <?= $_SESSION['hora'] ?></span>
+        <span>Tipo: Lima</span>
+        <span>Ubicacion: Lima</span>
+        <span>Hora: 6:45</span>
       </div>
       <div class="button_modal">
         <button type="button" id="envioCodigo" class="aceptar" onclick="enviarCodigo()">Si, enviar codigo</button>
@@ -105,7 +104,6 @@
           codigo: token
         }),
       });
-      //console.log(token);
       const data = await response.json(); // esto devuelve algo y marca error
 
     } catch (error) { //Problemita a resolver 

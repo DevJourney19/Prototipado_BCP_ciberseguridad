@@ -4,7 +4,7 @@ $error = null;
 if (isset($_GET["error"])) {
     $error = "Credenciales incorrectas";
 }
-$error_ubicacion = false;
+$error_ubicacion = false; 
 if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
     echo "Estoy aca";
     $error_ubicacion = true;
@@ -52,6 +52,8 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
         unset($_SESSION['error_ubicacion']);
 
         ?>
+        
+        <?php include 'modals/alerta_dispositivo.php';?>
         <div class="logo"><img src="img/loguito.png" alt="logo_bcp.jpg"></div>
         <div class="flex">
             <!--Cambiar image-->
