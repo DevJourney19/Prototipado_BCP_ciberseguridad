@@ -12,7 +12,10 @@ class ControllerDispositivo
         $this->daoDispositivo = new DaoDispositivo();
     }
 
-    public function crearDispositivo($estado)//JSON
+    //LLAMADA A CREAR DISPOSITIVO
+
+
+    public function crearDispositivo()//JSON
     {
         header('Content-Type: application/json');
         $data = json_decode(file_get_contents("php://input"), true);
@@ -81,4 +84,8 @@ class ControllerDispositivo
             echo 'Error en el lugar de cambiar_estado: ' . $e->getMessage();
         }
     }
+}
+if (isset($_GET['action']) && $_GET['action'] === 'getUsuario' && isset($_GET['cambio'])) {
+    $controller = new ControllerDispositivo();
+    $controller->crearDispositivo();
 }
