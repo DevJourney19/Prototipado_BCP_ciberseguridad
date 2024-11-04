@@ -6,6 +6,7 @@ if (isset($_GET["error"])) {
 }
 $error_ubicacion = false;
 if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
+    echo "Estoy aca";
     $error_ubicacion = true;
 }
 
@@ -43,8 +44,10 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
 <body>
     <main>
         <!-- Despues de darle clic en ingresar y los datos sean correctos-->
-        <?php if ($error_ubicacion) { ?>
-            <?php include '../view/modals/alerta_dispositivo.php' ?>
+        <?php if ($error_ubicacion) {
+            //echo realpath('modals/alerta_dispositivo.php');
+            include 'modals/alerta_dispositivo.php';
+            ?>
         <?php }
         unset($_SESSION['error_ubicacion']);
 
@@ -75,6 +78,7 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
                     <button type="submit">Ingresar</button>
                 </form>
             </div>
+            
         </div>
     </main>
 

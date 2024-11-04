@@ -60,7 +60,7 @@ class ControllerHorario {
 
     private function redireccionar($resultado, $accion) {
         if ($resultado) {
-            header("Location: /Prototipado_BCP_ciberseguridad/view/horario_ubicacion.php?msg={$accion}_exitosa");
+            header("Location: ../view/horario_ubicacion.php?msg={$accion}_exitosa");
         } else {
             echo "Error al {$accion} el horario en la base de datos.";
         }
