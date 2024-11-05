@@ -35,11 +35,11 @@ class DaoSeguridad implements DaoInterfaceSeguridad
   {
     try {
       $response = false;
-      if ($funcion != 'activacion_seguridad') {
+      if ($funcion != "activacion_seguridad") {
         $query = "UPDATE seguridad SET $funcion = :estado WHERE id_seguridad = :seguridad";
         $response = $this->db->ejecutar($query, ['estado' => $estado, 'seguridad' => $seguridad]);
       } else {
-        $query = "UPDATE seguridad SET activacion_seguridad = :estado1 , estado_horas_direcciones = :estado2 , estado_yape = :estado3 WHERE id_seguridad = :seguridad";
+        $query = "UPDATE seguridad SET activacion_seguridad = :estado1 , estado_hora_direccion = :estado2 , estado_yape = :estado3 WHERE id_seguridad = :seguridad";
         $response = $this->db->ejecutar($query, ['estado1' => $estado, 'estado2' => $estado, 'estado3' => $estado, 'seguridad' => $seguridad]);
       }
       return $response;
@@ -92,17 +92,24 @@ class DaoSeguridad implements DaoInterfaceSeguridad
       return false;
     }
   }
-  public function existeSeguridad($idUsuario)
-  {
+  public function existeSeguridad($id_seguridad) {
     try {
-      $query = "SELECT COUNT(*) FROM seguridad WHERE id_usuario = :idUsuario";
-      $result = $this->db->consultar($query, ['idUsuario' => $idUsuario]);
-      return $result[0]['COUNT(*)'] > 0; // Devuelve true si hay al menos un registro
+        $query = "SELECT COUNT(*) FROM seguridad WHERE id_seguridad = :idSeguridad"; 
+        $result = $this->db->consultar($query, ['idSeguridad' => $id_seguridad]);
+        return $result[0]['COUNT(*)'] > 0; 
     } catch (Exception $e) {
-      echo "Error: " . $e->getMessage();
-      return false;
+        echo "Error: " . $e->getMessage();
+        return false;
     }
-  }
-
+}
+  public function obtenerIdUsuarioPorSeguridad($idSeguridad) {
+    try {
+        $query = "SELECT id_usuario FROM seguridad WHERE id_seguridad = :idSeguridad";
+        return $this->db->consultar($query, ['idSeguridad' => $idSeguridad]);
+    } catch (Exception $e) {
+        echo "Error al obtener id_usuario por id_seguridad: " . $e->getMessage();
+        return null;
+    }
+}
 
 }

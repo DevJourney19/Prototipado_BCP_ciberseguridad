@@ -1,6 +1,7 @@
 <?php
 include_once '../controller/ControllerEntradas.php';
 include_once '../controller/ControllerSeguridad.php';
+
 $entradas = new ControllerEntradas();
 $seguridad = new ControllerSeguridad();
 

@@ -1,10 +1,9 @@
 <?php
 
 session_start();
-if (isset($_SESSION['security'])) {
+if (isset($_SESSION['id_usuario'])) {
     $response = [
         'id' => $_SESSION['id_usuario'],
-        'security' => $_SESSION['security'],
         'status' => true
     ];
 } else {

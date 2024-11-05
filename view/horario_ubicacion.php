@@ -1,7 +1,7 @@
 <?php
 include_once '../controller/ControllerEntradas.php';
 include_once '../controller/ControllerHorario.php';
-include_once '../controller/ControllerDireccion.php'; // Incluir el controlador de dirección
+include_once '../controller/ControllerDireccion.php'; 
 
 $controllerEntradas = new ControllerEntradas();
 $controllerEntradas->validarEntrada('index.php');
@@ -39,10 +39,10 @@ $error = null
 
             <?php if (empty($horarios)): ?>
                 <h4>No se han encontrado horarios restringidos. Puedes registrar uno nuevo.</h4>
-                <form action="../controller/ControllerHorario.php?action=registrar&id_seguridad=<?= $_SESSION['id_seguridad'] ?>" method="post">
-                    <div class="formulario">
-                        <input type="hidden" name="id_seguridad" value="<?= $_SESSION['id_seguridad']?>">
-                        <div class="grupo-formulario-horario">
+                <form action="../controller/ControllerHorario.php?action=registrar" method="POST">
+                <div class="formulario">
+                    <input type="hidden" name="id_seguridad" value="<?= $_SESSION['id_seguridad']?>">
+                    <div class="grupo-formulario-horario">
                             <label for="hora-inicio-nuevo">
                                 <i class="fas fa-clock"></i> Hora Inicio
                             </label>
@@ -57,7 +57,7 @@ $error = null
                     </div>
                     <small>* Recuerda que cada día debes registrar un rango de horario</small>
                     <div class="botones">
-                        <button type="submit" class="boton-naranja" name="btnRegistrar">Registrar</button>
+                        <button type="submit" name="btnRegistrar" class="boton-naranja">Registrar</button>
                     </div>
                 </form>
             <?php else: ?>
@@ -95,7 +95,7 @@ $error = null
                     <?php
                     if (isset($_SESSION['mensaje'])) {
                         echo $_SESSION['mensaje'];
-                        unset($_SESSION['mensaje']); // Limpiar el mensaje de la sesión
+                        unset($_SESSION['mensaje']);
                     }
                     ?>
                 </div>
@@ -135,6 +135,7 @@ $error = null
         crossorigin="anonymous"></script>
     <script src="js/validacionhora.js"></script>
     <script src="js/Ubicacion_direccion.js"></script>
+    
 </body>
 
 </html>

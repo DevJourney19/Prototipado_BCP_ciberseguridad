@@ -56,7 +56,6 @@ try {
         } else {
             header("Location: ../view/index.php");
         }
-
     } else {
         session_destroy();
         header("Location: ../view/index.php?error=true");
