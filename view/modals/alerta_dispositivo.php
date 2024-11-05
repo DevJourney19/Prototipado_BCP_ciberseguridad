@@ -128,7 +128,7 @@
       tokenIngresado += element.value;
     });
     if (token === tokenIngresado) {
-      alert('Ingreso exitoso');//Se debe de mostrar un modal brindando la bienvenida
+      alert('Código exitoso, necesita validación');//Se debe de mostrar un modal brindando la bienvenida
       /*Se necesita establecer una comunicación con el servidor para trabajar con PHP, 
       es por ello que se realizó un JSON */
       try {

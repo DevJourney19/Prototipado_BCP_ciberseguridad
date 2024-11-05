@@ -1,30 +1,11 @@
 <?php
-include '../php/util/validar_entradas.php';
-include '../php/util/connection.php';
-//validar_entrada('index.php');
-// verificar si ya ha sido contratado el servicio
-
 include_once '../controller/ControllerEntradas.php';
 include_once '../controller/ControllerSeguridad.php';
-$conexion = new Connection();
 $entradas = new ControllerEntradas();
-$entradas->validarEntrada('index.php');
-
 $seguridad = new ControllerSeguridad();
+
+$entradas->validarEntrada('index.php');
 $datos = $seguridad->verificarSeguridad($_SESSION['id_usuario']);
-
-$sql = "SELECT * FROM seguridad WHERE id_usuario = " . $_SESSION['id_usuario'] . " AND activacion_seguridad = 1";
-
-try {
-    $conexion->conectar();
-    $resultado = $conexion->consultar($sql);
-    $datos = $resultado;
-    unset($resultado);
-
-    //desconectar();
-} catch (Exception $exc) {
-    die($exc->getMessage());
-}
 
 ?>
 
@@ -95,6 +76,7 @@ try {
     <script src="../view/js/index.js"></script>
     <script src="../view/js/utils.js"></script>
     <script src="../view/js/dispositivo_activado.js"></script>
+
 </body>
 
 

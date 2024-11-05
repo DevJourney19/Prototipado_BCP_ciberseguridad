@@ -15,6 +15,7 @@ try {
     $response = ['status' => 'registrado'];
     $result = $daoSeguridad->readByUser($id);
     $_SESSION['id_seguridad'] = $result[0]['id_seguridad'];
+  
     unset($result);
   } else {
     $response = ['status' => 'no registrado'];

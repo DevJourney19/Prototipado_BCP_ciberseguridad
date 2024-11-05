@@ -74,6 +74,7 @@ class DaoSeguridad implements DaoInterfaceSeguridad
   public function verificarActivaciones($idUsuario)
   {
     try {
+      
       $resultadoVerificacion = $this->readByUser($idUsuario);
       if ($resultadoVerificacion) {
         $query = "UPDATE seguridad set activacion_seguridad  = '1' where id_usuario= :idUsuario";

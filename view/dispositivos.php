@@ -46,6 +46,7 @@ $dispositivo = $_SESSION['dispositivo'];
 
 
         <div class="tabla grid" id="mensajin">
+
             <!--Necesito crear esto por js -->
 
             <?php if (isset($dispositivo)) { ?>
@@ -118,6 +119,9 @@ $dispositivo = $_SESSION['dispositivo'];
             <?php } ?>
 
 
+
+            <!--Necesito crear esto por js -->
+
         </div>
         <?php if (!isset($seguro)) { ?>
             <div class="opciones">
@@ -125,7 +129,7 @@ $dispositivo = $_SESSION['dispositivo'];
                     <button type="button" onclick="openModal()">Dispositivo Principal</button>
                 </div>
                 <div class="boton-secundario">
-                    <button type="button" onclick="openModalDos()">Desvincular</button>
+                    <button type="button" onclick="openModalDos()">Desvincular y eliminar</button>
                 </div>
                 <div class="boton-primario">
                     <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
@@ -180,7 +184,7 @@ $dispositivo = $_SESSION['dispositivo'];
         //console.log(info);
         if (info) {
             try {
-                
+
                 //Convertir la cadena JSON de nuevo a un objeto
                 const obj_info = JSON.parse(info);
                 //console.log(obj_info);
@@ -250,10 +254,10 @@ $dispositivo = $_SESSION['dispositivo'];
                     </div>
                 </div>
                 <?php if (!isset($seguro)) { ?>
-                                                                                                                                                                            <div class="segundo">
-                                                                                                                                                                                <input type="radio" name="vinculo" onchange="handleCheckboxClick(this)" id="dispositivo${index + 2}" />
-                                                                                                                                                                                <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
-                                                                                                                                                                            </div>
+                                                                                                                                                                                            <div class="segundo">
+                                                                                                                                                                                                <input type="radio" name="vinculo" onchange="handleCheckboxClick(this)" id="dispositivo${index + 2}" />
+                                                                                                                                                                                                <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
+                                                                                                                                                                                            </div>
                 <?php } ?>
             `;
                     //localStorage.removeItem('nuevo_dispositivo');

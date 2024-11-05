@@ -27,8 +27,6 @@ const dispositivo_principal = async () => {
         console.log(idSeleccionado);
         const caja = document.getElementById(idSeleccionado); //HGcemos la unión entre la caja y el checkbox
         if (caja) {
-            let activar = 'activar'; //Lo que se va a enviar como body al ControllerDispositivo
-            let estado = 'activado'; //La actualizacion que se realizará en el localStorage cuando se cambié a dispositivo principal
 
             let dispositivoss = JSON.parse(localStorage.getItem('nuevo_dispositivo'));
 
@@ -54,13 +52,10 @@ const dispositivo_principal = async () => {
                     },
                     body: new URLSearchParams({
                         id_dispositivo: idSeleccionado,
-                        accion: activar
+                        accion: 'activar'
                     })
                 });
-                /*const textResponse = await response.text(); // Obtener la respuesta como texto
-                console.log(textResponse); // Imprimir la respuesta para depuración
-    */
-                //const data = JSON.parse(textResponse);
+
                 const data = await response.json();
                 console.log(idSeleccionado);
             } catch (error) {
@@ -195,7 +190,7 @@ async function agregando_solicitudes_html() {
 
 }
 
-async function manejadorBoton(event) {
+async function manejadorBoton() {
     const botonesAccion = document.querySelectorAll('.accion-boton');
     botonesAccion.forEach(boton => {
         boton.addEventListener('click', async function () {
@@ -228,12 +223,16 @@ async function manejadorBoton(event) {
 
                         const info = await dispositivo();
 
-                        const id_dispositivo = localStorage.getItem('id_dispositivo');
-
                         if (id_dispositivo === id_comparar) {
                             //filtremos info
+                            //Quizás se tenga que hacer un filtro para el dispositivo de usuario //Quizás se tenga que hacer como una consulta especifica...
                             const informacion = info.filter(t => t.estado === 'seguro');
+
                             console.log("La informacion es: " + informacion);
+
+                            //let local = JSON.parse(localStorage.getItem('nuevo_dispositivo'));
+                            //local.push(informacion);
+                            //Se van a agregar después de haber agregado al primero que es el dispositivo activado
                             localStorage.setItem('nuevo_dispositivo', JSON.stringify(informacion));
                             window.location.href = './dispositivos.php';
                         }
