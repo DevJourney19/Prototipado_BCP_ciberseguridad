@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const elems = document.querySelectorAll(".tab-link");
 	const switchElement = document.querySelector(".switch");
 	const path = window.location.pathname.split(
-		"/Prototipado_bcp_ciberseguridad/view/")[1];
+		"/Prototipado_BCP_ciberseguridad/view/")[1];
 	switch (path) {
 		case "horario_ubicacion.php":
 			elems[0].classList.add("active");

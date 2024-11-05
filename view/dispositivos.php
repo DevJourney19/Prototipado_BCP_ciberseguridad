@@ -1,4 +1,5 @@
 <?php
+
 include_once '../controller/ControllerEntradas.php';
 
 $entradas = new ControllerEntradas();
@@ -44,7 +45,6 @@ $dispositivo = $_SESSION['dispositivo'];
             </div>
         </div>
 
-
         <div class="tabla grid" id="mensajin">
 
             <!--Necesito crear esto por js -->
@@ -52,7 +52,6 @@ $dispositivo = $_SESSION['dispositivo'];
             <?php if (isset($dispositivo)) { ?>
 
                 <div class="caja">
-
                     <div class="primero">
                         <div class="imagen">
                             <?php switch ($dispositivo) {
@@ -107,7 +106,6 @@ $dispositivo = $_SESSION['dispositivo'];
                                     <br />
                                     Ingreso: <?= $_SESSION['hora'] ?>
                                 </p>
-
                             </div>
                         </div>
                     </div>
@@ -116,13 +114,8 @@ $dispositivo = $_SESSION['dispositivo'];
                         <label for="dispositivo1"><span class="radio-button"></span></label>
                     </div>
                 </div>
-            <?php } ?>
-
-
-
-            <!--Necesito crear esto por js -->
-
         </div>
+
         <?php if (!isset($seguro)) { ?>
             <div class="opciones">
                 <div class="boton-primario">
@@ -138,7 +131,6 @@ $dispositivo = $_SESSION['dispositivo'];
         <?php } ?>
 
     </main>
-
     <footer>
         <?php include_once '../view/fragmentos/menubar.php' ?>
     </footer>
@@ -178,6 +170,7 @@ $dispositivo = $_SESSION['dispositivo'];
     </dialog>
     <script src="../view/js/index.js"></script>
     <script src="../view/js/utils.js"></script>
+
     <script src="js/dispositivos.js"></script>
     <script>
         const info = localStorage.getItem('nuevo_dispositivo'); //Retorna String
@@ -268,6 +261,6 @@ $dispositivo = $_SESSION['dispositivo'];
             }
         }
     </script>
-</body>
 
+</body>
 </html>

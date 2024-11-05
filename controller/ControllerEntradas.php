@@ -40,7 +40,6 @@ class ControllerEntradas
         if (!$datos) {
             echo "<script>alert('No ha activado la funcion de Yape');
                 window.location.href = '$location';</script>";
-            
             exit();
         }
         return $datos;
