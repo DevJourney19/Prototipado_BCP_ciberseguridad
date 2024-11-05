@@ -1,95 +1,110 @@
 <?php
-
-require_once '../dao/DaoDireccion.php';
+session_start();
+require_once '../dao/DaoHorario.php';
 require_once '../dao/DaoSeguridad.php';
-include_once '../controller/ControllerEntradas.php';
 
-
-// $entradas = new ControllerEntradas();
-// $entradas->validarEntrada('index.php');
-// $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
-
-class ControllerDireccion
-{
-    private $daoDireccion;
+class ControllerHorario {
+    private $daoHorario;
     private $daoSeguridad;
 
-    public function __construct()
-    {
-        $this->daoDireccion = new DaoDireccion();
+    public function __construct() {
+        $this->daoHorario = new DaoHorario();
         $this->daoSeguridad = new DaoSeguridad();
-        // session_start(); 
-
     }
 
+    public function registrar() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnRegistrar'])) {
+            $id_seguridad = $_POST["id_seguridad"] ?? null;
+            $hora_inicio = $_POST['txtHoraInicio'] ?? '';
+            $hora_fin = $_POST['txtHoraFin'] ?? '';
+            $fecha = date('Y-m-d');
 
-    public function registrar()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnRegistrarDireccion'])) {
-            $id_seguridad = $_SESSION['id_seguridad'] ?? null;
-            $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
+            // Depuración: Imprimir los valores recibidos
+            echo "id_seguridad: $id_seguridad<br>";
+            echo "hora_inicio: $hora_inicio<br>";
+            echo "hora_fin: $hora_fin<br>";
 
-            if ($id_seguridad && !empty($direccion_exacta)) {
-                $this->daoDireccion->registrarDireccion($id_seguridad, $direccion_exacta, 10, date('Y-m-d'), date('H:i:s'));
-                $_SESSION['mensaje'] = "Dirección registrada correctamente";
-                header('Location: ../view/horario_ubicacion.php');
-                exit;
+            // Verificar la existencia del id de seguridad
+            $existe = false; // Inicializar variable
+            if ($id_seguridad) {
+                $existe = $this->daoSeguridad->existeSeguridad($id_seguridad);
+                echo "existeSeguridad: " . ($existe ? 'true' : 'false') . "<br>"; // Depuración
             } else {
-                $_SESSION['mensaje'] = "Error: Debes llenar todos los campos.";
-                header('Location: ../view/horario_ubicacion.php');
-                exit;
+                echo "Error: No se ha proporcionado un id_seguridad.<br>";
+            }
+
+            if ($existe && !empty($hora_inicio) && !empty($hora_fin)) {
+                if ($this->daoHorario->registrarHorario($id_seguridad, $hora_inicio, $hora_fin)) {
+                    $resultado = true;
+                } else {
+                    $resultado = false;
+                }
+                $this->redireccionar($resultado, 'Registro');
+            } else {
+                $this->mensajeError($id_seguridad, $hora_inicio, $hora_fin);
             }
         }
     }
 
-    public function obtenerDirecciones($id)
-    {
-        return $this->daoDireccion->obtenerTodasDirecciones($id);
+    public function obtenerHorarios() {
+        return $this->daoHorario->obtenerHorariosRestringidos();
     }
 
-    public function modificar()
-    {
+    public function modificar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnModificar'])) {
-            $id_direccion = $_POST['txtId'] ?? null;
-            $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
-            $rango_gps = $_POST['txtRango'] ?? 10;
+            $seguridad = $_SESSION['id_seguridad'] ?? null;
+            $id_hora = $_POST['txtId'] ?? null;
+            $hora_inicio = $_POST['txtHoraInicio'] ?? '';
+            $hora_fin = $_POST['txtHoraFin'] ?? '';
+            $fecha = date('Y-m-d');
 
-            if ($id_direccion && !empty($direccion_exacta)) {
-                $this->daoDireccion->modificarDireccion($id_direccion, $direccion_exacta, $rango_gps);
-                $_SESSION['mensaje'] = "Dirección modificada correctamente";
-                $error = false;
+            if ($seguridad && $id_hora && !empty($hora_inicio) && !empty($hora_fin)) {
+                $resultado = $this->daoHorario->modificarHorario($id_hora, $seguridad, $hora_inicio, $hora_fin, $fecha);
+                $this->redireccionar($resultado, 'Modificación');
             } else {
-                $_SESSION['mensaje'] = "Error: Debes llenar todos los campos.";
-                $error = true;
+                echo "Error: Todos los campos son obligatorios y el id de seguridad debe ser válido.";
             }
-
-
-            header('Location: ../view/ver_direcciones.php');
-            exit;
-        } else {
-            echo "No se ha enviado el formulario de modificación correctamente.";
         }
     }
 
-    public function eliminar($id)
-    {
-        if (is_numeric($id)) {
-            $this->daoDireccion->eliminarDireccion($id);
-            $_SESSION['mensaje'] = "Dirección eliminada correctamente";
+    public function eliminar($id_hora) {
+        if ($id_hora) {
+            $resultado = $this->daoHorario->eliminarHorario($id_hora);
+            $this->redireccionar($resultado, 'Eliminación');
         } else {
-            $_SESSION['mensaje'] = "Error: El ID de dirección no es válido.";
+            echo "Error: El id del horario no es válido.";
         }
+    }
 
-        header('Location: ../view/horario_ubicacion.php');
-
+    private function redireccionar($resultado, $accion) {
+        if ($resultado) {
+            header("Location: ../view/horario_ubicacion.php?msg={$accion}_exitosa");
+        } else {
+            echo "Error al {$accion} el horario en la base de datos.";
+        }
         exit;
+    }
+
+    private function mensajeError($id_seguridad, $hora_inicio, $hora_fin) {
+        if (!$id_seguridad) {
+            echo "Error: No se ha encontrado la sesión de seguridad.";
+        } elseif (!$this->daoSeguridad->existeSeguridad($id_seguridad)) {
+            echo "Error: El id_seguridad no existe.";
+        } elseif (empty($hora_inicio) || empty($hora_fin)) {
+            echo "Error: Debes llenar todos los campos.";
+        } else {
+            echo "Error desconocido. Por favor intenta de nuevo.";
+        }
     }
 }
 
-$controller = new ControllerDireccion();
-$action = $_GET['action'] ?? null;
-$id = $_GET['id'] ?? null;
-
-if ($action && method_exists($controller, $action)) {
-    $controller->$action($id);
+// Controlador de acciones
+if (isset($_GET['action'])) {
+    $controller = new ControllerHorario();
+    $action = $_GET['action'];
+    if (method_exists($controller, $action)) {
+        $controller->$action();
+    } else {
+        echo "Acción no válida.";
+    }
 }
