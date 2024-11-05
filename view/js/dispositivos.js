@@ -16,7 +16,7 @@ const openModalDos = () => {
     //Creo que aqui se debe obtener el id
 };
 let idSeleccionado = null;
-
+//Cuando se haga click en el checkbox
 function handleCheckboxClick(checkbox) {
     if (checkbox.checked) {
         // Guardar el id del div (caja) que contiene el checkbox
@@ -39,9 +39,14 @@ const closeModalDos = async (estado) => {
 async function eliminarCajaSeleccionada() {
     if (idSeleccionado) {
         console.log(idSeleccionado);
-        const caja = document.getElementById(idSeleccionado);
+        const caja = document.getElementById(idSeleccionado); //HGcemos la unión entre la caja y el checkbox
         if (caja) {
             caja.remove(); // Eliminar la caja del DOM
+            let dispositivos = JSON.parse(localStorage.getItem('nuevo_dispositivo'));
+            if (dispositivos) {
+                dispositivos = dispositivos.filter(t => t.id !== Number(idSeleccionado));
+                localStorage.setItem('nuevo_dispositivo', JSON.stringify(dispositivos));
+            }
 
             //CORREGIR
             try {
