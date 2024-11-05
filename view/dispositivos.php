@@ -54,6 +54,7 @@ $dispositivo = $_SESSION['dispositivo'];
                 <div class="caja">
                     <div class="primero">
                         <div class="imagen">
+
                             <?php switch ($dispositivo) {
                                 case 'Ordenador de escritorio': ?>
                                     <img src="img/computadora.png" alt="Imagen de celular">
@@ -96,6 +97,7 @@ $dispositivo = $_SESSION['dispositivo'];
                             <div class="titulo-caja">
                                 <h4 style="color: darkorange; font-weight: 800;">
                                     <?= $dispositivo ?>
+
                                 </h4>
                             </div>
                             <div class="descripcion-caja">
@@ -105,6 +107,7 @@ $dispositivo = $_SESSION['dispositivo'];
                                     IP: <?= $_SESSION['direccion_ip'] ?>
                                     <br />
                                     Ingreso: <?= $_SESSION['hora'] ?>
+
                                 </p>
                             </div>
                         </div>
@@ -261,6 +264,5 @@ $dispositivo = $_SESSION['dispositivo'];
             }
         }
     </script>
-
 </body>
 </html>
