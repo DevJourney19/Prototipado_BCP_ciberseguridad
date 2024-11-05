@@ -16,6 +16,7 @@ $response = [];
 
 $query = "SELECT id_dispositivo, tipo_dispositivo, direccion_ip, 
 pais, ciudad, estado_dispositivo, fecha_registro FROM dispositivo WHERE id_seguridad='$id_seguridad'";
+
 $resultado_total = $conectar->consultar($query);
 
 if ($resultado_total) {

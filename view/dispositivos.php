@@ -163,10 +163,12 @@ $dispositivo = $_SESSION['dispositivo'];
         </div>
         <div class="opciones-modal">
             <div class="boton-primario-modal">
-                <button type="button" onclick="closeModalDos()">Aceptar</button>
+                <!-- LOGICA AQUI - QUE SE ELIMINE ESA CAJA-->
+                <button type="button" onclick="closeModalDos('aceptar')">Aceptar</button>
+
             </div>
             <div class="boton-secundario-modal">
-                <button type="button" onclick="closeModalDos()">Cancelar</button>
+                <button type="button" onclick="closeModalDos('cancelar')">Cancelar</button>
             </div>
         </div>
     </dialog>
@@ -189,6 +191,9 @@ $dispositivo = $_SESSION['dispositivo'];
                     //Crear un nuevo div
                     const nueva_caja = document.createElement('div');
                     nueva_caja.classList.add('caja');
+                    // Asignar un id único numérico al div
+                    const idNumerico = item.id;
+                    nueva_caja.id = idNumerico;
                     // Switch en JavaScript para determinar la imagen
                     let imagenHTML;
                     switch (item.tipo) {
@@ -242,10 +247,10 @@ $dispositivo = $_SESSION['dispositivo'];
                     </div>
                 </div>
                 <?php if (!isset($seguro)) { ?>
-                                                                                                                                    <div class="segundo">
-                                                                                                                                        <input type="radio" name="vinculo" id="dispositivo${index + 2}" />
-                                                                                                                                        <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
-                                                                                                                                    </div>
+                                                                                                                                                    <div class="segundo">
+                                                                                                                                                        <input type="radio" name="vinculo" onchange="handleCheckboxClick(this)" id="dispositivo${index + 2}" />
+                                                                                                                                                        <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
+                                                                                                                                                    </div>
                 <?php } ?>
             `;
                     //localStorage.removeItem('nuevo_dispositivo');

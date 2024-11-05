@@ -53,7 +53,7 @@ class ControllerDispositivo
         }
         echo json_encode($response);
     }
-    public function cambiar_estado($accion, $id_dispositivo)
+    public function cambiar_estado_acciones()
     {
         try {
 
@@ -84,8 +84,33 @@ class ControllerDispositivo
             echo 'Error en el lugar de cambiar_estado: ' . $e->getMessage();
         }
     }
+    public function eliminar_dispositivo()
+    {
+        header('Content-Type: application/json');
+        try {
+            $id_dispositivo = $_POST['idSeleccionado'];
+            $this->daoDispositivo->delete($id_dispositivo);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+        echo json_encode(['status' => 'eliminado']);
+    }
 }
+if (isset($_GET['action']) && $_GET['action'] === 'mostrar') {
+    $controller = new ControllerDispositivo();
+    $controller->mostrarDispositivos($_SESSION['id_seguridad']);
+}
+
 if (isset($_GET['action']) && $_GET['action'] === 'getUsuario' && isset($_GET['cambio'])) {
     $controller = new ControllerDispositivo();
     $controller->crearDispositivo();
+}
+if (isset($_GET['action']) && $_GET['action'] === 'deleteDispo') {
+    $controller = new ControllerDispositivo();
+    $controller->eliminar_dispositivo();
+}
+if (isset($_GET['action']) && $_GET['action'] === 'acciones' ) {
+    $controller = new ControllerDispositivo();
+    $controller->cambiar_estado_acciones();
 }
