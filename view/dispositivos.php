@@ -147,10 +147,10 @@ $dispositivo = $_SESSION['dispositivo'];
         </div>
         <div class="opciones-modal">
             <div class="boton-primario-modal">
-                <button type="button" onclick="closeModal()">Aceptar</button>
+                <button type="button" onclick="closeModal('aceptar')">Aceptar</button>
             </div>
             <div class="boton-secundario-modal">
-                <button type="button" onclick="closeModal()">Cancelar</button>
+                <button type="button" onclick="closeModal('cancelar')">Cancelar</button>
             </div>
         </div>
     </dialog>
@@ -180,14 +180,16 @@ $dispositivo = $_SESSION['dispositivo'];
         //console.log(info);
         if (info) {
             try {
+                
                 //Convertir la cadena JSON de nuevo a un objeto
                 const obj_info = JSON.parse(info);
                 //console.log(obj_info);
-
+                console.log(obj_info);
                 //Cambiar el contenido del div [ubicación referencial]
                 const mensajito = document.getElementById('mensajin');
                 obj_info.forEach((item, index) => {
-
+                    let color = item.estado === 'activado' ? 'darkorange' : '#001843';
+                    let font = item.estado === 'activado' ? '800' : '400';
                     //Crear un nuevo div
                     const nueva_caja = document.createElement('div');
                     nueva_caja.classList.add('caja');
@@ -232,7 +234,8 @@ $dispositivo = $_SESSION['dispositivo'];
                     </div>
                     <div class="seccion">
                         <div class="titulo-caja">
-                            <h4>
+                        
+                            <h4 style="color:${color}; font-weight:${font}">
                                 ${item.tipo}
                             </h4>
                         </div>
@@ -247,10 +250,10 @@ $dispositivo = $_SESSION['dispositivo'];
                     </div>
                 </div>
                 <?php if (!isset($seguro)) { ?>
-                                                                                                                                                    <div class="segundo">
-                                                                                                                                                        <input type="radio" name="vinculo" onchange="handleCheckboxClick(this)" id="dispositivo${index + 2}" />
-                                                                                                                                                        <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
-                                                                                                                                                    </div>
+                                                                                                                                                                            <div class="segundo">
+                                                                                                                                                                                <input type="radio" name="vinculo" onchange="handleCheckboxClick(this)" id="dispositivo${index + 2}" />
+                                                                                                                                                                                <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
+                                                                                                                                                                            </div>
                 <?php } ?>
             `;
                     //localStorage.removeItem('nuevo_dispositivo');

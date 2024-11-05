@@ -47,6 +47,8 @@ class DaoDispositivo implements DaoInterfaceDispositivo
                 $sql = "UPDATE dispositivo SET estado_dispositivo='bloqueado' where id_dispositivo ='$id_dispositivo'";
             } else if ($accion === 'eliminar') {
                 $sql = "delete from dispositivo where id_dispositivo = '$id_dispositivo'";
+            } else if ($accion === 'activar') {
+                $sql = "UPDATE dispositivo SET estado_dispositivo='activado' where id_dispositivo ='$id_dispositivo'";
             }
             $reponse = $this->db->ejecutar($sql);
         } catch (Exception $e) {

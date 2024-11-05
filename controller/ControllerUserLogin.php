@@ -40,7 +40,7 @@ try {
             $_SESSION['dispositivo'] = obtener_dispositivo();
             $_SESSION['pais'] = $info['country'];
             $_SESSION['ciudad'] = $info['city'];
-            $_SESSION['hora'] = date("h:i:s");
+            $_SESSION['hora'] = date("h:i:s A");
 
             //SI NO COINCIDE EN LA VERIFCACION
             if (empty($direccion_ip_deseada)) { //SE COMPARAN LAS 2 DIRECCIONES IP O LOS ESTADOS DE ACTIVACION O SEGURO PARA PODER INGRESAR

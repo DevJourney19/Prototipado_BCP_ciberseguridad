@@ -6,15 +6,6 @@ const openModal = () => {
     modal.showModal();
 };
 
-// Función para cerrar el modal
-const closeModal = () => {
-    modal.close();
-};
-// Función para abrir el modal
-const openModalDos = () => {
-    modalDos.showModal();
-    //Creo que aqui se debe obtener el id
-};
 let idSeleccionado = null;
 //Cuando se haga click en el checkbox
 function handleCheckboxClick(checkbox) {
@@ -23,7 +14,79 @@ function handleCheckboxClick(checkbox) {
         idSeleccionado = checkbox.closest('.caja').id; // Obtiene el id del div más cercano con clase 'caja'
     }
 }
-// Función para cerrar el modal
+// Función para cerrar el modal //DISPOSITIVO PRINCIPAL
+const closeModal = (estado) => {
+    modal.close();
+    if (estado === 'aceptar') {
+        dispositivo_principal();
+    }
+};
+
+const dispositivo_principal = async () => {
+    if (idSeleccionado) {
+        console.log(idSeleccionado);
+        const caja = document.getElementById(idSeleccionado); //HGcemos la unión entre la caja y el checkbox
+        if (caja) {
+            let activar = 'activar'; //Lo que se va a enviar como body al ControllerDispositivo
+            let estado = 'activado'; //La actualizacion que se realizará en el localStorage cuando se cambié a dispositivo principal
+
+            let dispositivoss = JSON.parse(localStorage.getItem('nuevo_dispositivo'));
+
+            const dispositivoEncontrado = dispositivoss.find(d => d.id === Number(idSeleccionado));
+
+            const estado_actualizado = {
+                id: idSeleccionado,
+                tipo: dispositivoEncontrado.tipo,
+                dip: dispositivoEncontrado.dip,
+                pais: dispositivoEncontrado.pais,
+                ciudad: dispositivoEncontrado.ciudad,
+                estado: 'activado',
+                fecha: dispositivoEncontrado.fecha
+            }
+
+            actualizacion_local_storage(idSeleccionado, estado_actualizado);
+
+            try {
+                const response = await fetch("../controller/ControllerDispositivo.php?action=acciones", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        id_dispositivo: idSeleccionado,
+                        accion: activar
+                    })
+                });
+                /*const textResponse = await response.text(); // Obtener la respuesta como texto
+                console.log(textResponse); // Imprimir la respuesta para depuración
+    */
+                //const data = JSON.parse(textResponse);
+                const data = await response.json();
+                console.log(idSeleccionado);
+            } catch (error) {
+                console.error('Error al establecer la sesión: ', error);
+            };
+        }
+    }
+}
+function actualizacion_local_storage(idSeleccionado, estado_actualizado) {
+    let dispositivos = JSON.parse(localStorage.getItem('nuevo_dispositivo'));
+    dispositivos = dispositivos.map(t => {
+        if (t.id === Number(idSeleccionado)) {
+            //Actualiza el estado del localStorage
+            return { ...t, ...estado_actualizado };
+        }
+        return t;
+    });
+    localStorage.setItem('nuevo_dispositivo', JSON.stringify(dispositivos));
+}
+// Función para abrir el modal
+const openModalDos = () => {
+    modalDos.showModal();
+    //Creo que aqui se debe obtener el id
+};
+idSeleccionado = null;
+// Función para cerrar el modal //DESVINCULAR DISPOSITIVO
 const closeModalDos = async (estado) => {
     modalDos.close();
     if (estado === 'aceptar') {
@@ -34,7 +97,6 @@ const closeModalDos = async (estado) => {
     }
 };
 //__--__
-
 
 async function eliminarCajaSeleccionada() {
     if (idSeleccionado) {
@@ -72,8 +134,6 @@ async function eliminarCajaSeleccionada() {
     }
 }
 
-
-
 //--__--
 //En caso para ver los resultados de los equipos que han querido intentar ingresar a su cuenta
 const historial = document.getElementById("historial");
@@ -97,7 +157,7 @@ async function dispositivo() {
         console.log(error);
     }
 };
-//CONSULTAR DISPOSITIVOS
+//CONSULTAR DISPOSITIVOS //SE AGREGAN LOS DISPOSITIVOS A CONSULTA DISPOSITIVO, LOS CUALES SON LOS QUE HAN INGRESADO EL CODIGO SEA CORRECTO O INCORRECTO
 async function agregando_solicitudes_html() {
     try {
         const data = await dispositivo();
