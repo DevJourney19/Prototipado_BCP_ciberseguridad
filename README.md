@@ -1,10 +1,10 @@
 
--- **phpMyAdmin SQL Dump**
--- **version 5.2.1**
--- **Servidor: localhost:3308**
--- **Tiempo de generación: 26-10-2024 a las 07:06:10**
--- **Versión del servidor: 10.4.32-MariaDB**
--- **Versión de PHP: 8.2.12**
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- Servidor: localhost:3308
+-- Tiempo de generación: 26-10-2024 a las 07:06:10
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO"; 
 START TRANSACTION; 
@@ -105,7 +105,7 @@ INSERT INTO `seguridad` (`id_seguridad`, `id_usuario`, `activacion_seguridad`,
 (6, 1, 0, 0, 0); 
 
 -- -------------------------------------------------------- -- -- 
-**Estructura de tabla para la tabla `usuario`** 
+-- **Estructura de tabla para la tabla `usuario`** 
 
 CREATE TABLE `usuario` ( 
 `id_usuario` int(11) NOT NULL, 
@@ -266,6 +266,3 @@ REFERENCES `usuario` (`id_usuario`);
 COMMIT; 
 
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */; 
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */; 
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */; 
