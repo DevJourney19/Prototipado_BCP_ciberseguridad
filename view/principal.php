@@ -4,9 +4,6 @@ include_once '../controller/ControllerUsuario.php';
 
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
-if (isset($_SESSION['estado_dispositivo'])) {
-    echo $_SESSION['estado_dispositivo'];
-}
 
 $daoUsuario = new ControllerUsuario();
 if (isset($_SESSION['id_seguridad'])) {

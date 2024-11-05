@@ -1,6 +1,7 @@
 <?php
 
 include_once '../controller/ControllerEntradas.php';
+
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
@@ -44,8 +45,6 @@ $dispositivo = $_SESSION['dispositivo'];
             </div>
         </div>
 
-
-
         <div class="tabla grid" id="mensajin">
 
             <!--Necesito crear esto por js -->
@@ -69,28 +68,36 @@ $dispositivo = $_SESSION['dispositivo'];
                                     <img src="img/icono_tableta.png" alt="Imagen de tableta">
                                     <?php break;
 
-                                <h4  style="color: darkorange; font-weight: 800;">
-                                    <?= $resultado3[0]['tipo_dispositivo'] ?>
-                                </h4>
-                            </div>
-                            <div class="descripcion-caja">
-                                <p>
-                                    Lugar: Av Lomas - SMP
-                                    IP: 192.168.769
-                                    Ingreso: 05/09/2024
-                                </p>
+                                case 'Teléfono móvil': ?>
+                                    <img src="img/icono_cel.png" alt="Imagen de teléfono móvil">
+                                    <?php break;
 
-                            </div>
+                                case 'Smartwatch': ?>
+                                    <img src="img/icono_smartwatch.png" alt="Imagen de smartwatch">
+                                    <?php break;
+
+                                case 'Televisor inteligente': ?>
+                                    <img src="img/icono_televisor.png" alt="Imagen de televisor inteligente">
+                                    <?php break;
+
+                                case 'Consola de videojuegos': ?>
+                                    <img src="img/icono_consola.png" alt="Imagen de consola de videojuegos">
+                                    <?php break;
+
+                                case 'Dispositivo IoT': ?>
+                                    <img src="img/icono_iot.png" alt="Imagen de dispositivo IoT">
+                                    <?php break;
+
+                                default: ?>
+                                    <p>Tipo de dispositivo no reconocido.</p>
+                            <?php } ?>
+
                         </div>
-                    </div>
-                    <div class="segundo">
-                        <input type="radio" name="vinculo" id="dispositivo1" checked>
-                        <label for="dispositivo1"><span class="radio-button"></span></label>
-                    </div>
-                </div>
-
+                        <div class="seccion">
+                            <div class="titulo-caja">
                                 <h4 style="color: darkorange; font-weight: 800;">
                                     <?= $dispositivo ?>
+
                                 </h4>
                             </div>
                             <div class="descripcion-caja">
@@ -100,39 +107,14 @@ $dispositivo = $_SESSION['dispositivo'];
                                     IP: <?= $_SESSION['direccion_ip'] ?>
                                     <br />
                                     Ingreso: <?= $_SESSION['hora'] ?>
+
                                 </p>
-
-
                             </div>
                         </div>
                     </div>
                     <div class="segundo">
-                        <input type="radio" name="vinculo" id="dispositivo5">
-                        <label for="dispositivo5"><span class="radio-button"></span></label>
-                    </div>
-                </div>
-                <div class="caja">
-                    <div class="primero">
-                        <div class="imagen">
-                            <img src="img/computadora.png" alt="Imagen de celular">
-                        </div>
-                        <div class="seccion">
-                            <div class="titulo-caja">
-                                <h4>
-                                    Computadora
-                                </h4>
-                            </div>
-                            <div class="descripcion-caja">
-                                <p>Lugar: Av Lomas - SMP
-                                    IP: 192.168.769
-                                    Ingreso: 05/09/2024</p>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="segundo">
-                        <input type="radio" name="vinculo" id="dispositivo6">
-                        <label for="dispositivo6"><span class="radio-button"></span></label>
+                        <input type="radio" name="vinculo" id="dispositivo1" checked>
+                        <label for="dispositivo1"><span class="radio-button"></span></label>
                     </div>
                 </div>
         </div>
@@ -283,5 +265,4 @@ $dispositivo = $_SESSION['dispositivo'];
         }
     </script>
 </body>
-
 </html>
