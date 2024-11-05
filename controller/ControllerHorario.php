@@ -47,9 +47,18 @@ class ControllerHorario {
     }
 
     public function obtenerHorarios() {
-        return $this->daoHorario->obtenerHorariosRestringidos();
+        // Obtener id_seguridad de la sesión o de donde corresponda
+        $idSeguridad = $_SESSION['id_seguridad'] ?? null;
+    
+        if ($idSeguridad) {
+            // Llamar al método de DaoHorario para obtener horarios restringidos
+            return $this->daoHorario->obtenerHorariosRestringidos($idSeguridad); // Llama correctamente al método
+        } else {
+            // Manejar el caso en que id_seguridad no esté definido
+            echo "Error: No se ha encontrado la sesión de seguridad.";
+            return [];
+        }
     }
-
     public function modificar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnModificar'])) {
             $seguridad = $_SESSION['id_seguridad'] ?? null;

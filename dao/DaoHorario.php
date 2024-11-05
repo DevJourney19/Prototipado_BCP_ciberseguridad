@@ -4,6 +4,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once '../config/Connection.php';
 include_once 'interfaces/DaoInterfaceHorario.php';
+// include_once '/DaoSeguridad.php';
+
 
 class DaoHorario implements DaoInterfaceHorario {
     private $db;
@@ -28,16 +30,15 @@ class DaoHorario implements DaoInterfaceHorario {
         }
     }
 
-    public function obtenerHorariosRestringidos() {
+    public function obtenerHorariosRestringidos($idSeguridad) {
         try {
-            $query = "SELECT * FROM hora_restringida WHERE DATE(created_at) = CURDATE()";
-            return $this->db->consultar($query);
+            $query = "SELECT * FROM hora_restringida WHERE id_seguridad = :idSeguridad";
+            return $this->db->consultar($query, ['idSeguridad' => $idSeguridad]);
         } catch (Exception $e) {
             echo "Error al obtener horarios restringidos: " . $e->getMessage();
             return [];
         }
     }
-
     public function obtenerTodosLosHorarios() {
         try {
             $query = "SELECT * FROM hora_restringida";
