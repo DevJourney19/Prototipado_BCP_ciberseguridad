@@ -6,7 +6,6 @@ if (isset($_GET["error"])) {
 }
 $error_ubicacion = false; 
 if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
-    echo "Estoy aca";
     $error_ubicacion = true;
 }
 

@@ -40,6 +40,7 @@
     gap: 6rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin: 10px 0;
+    max-height: 120px;
 }
 
 .caja .primero {
@@ -332,7 +333,8 @@ th {
     display: grid;
     grid-template-columns: 1fr 1fr;
     overflow: auto;
-    height: 600px;
+    height: fit-content;
+    
 }
 
 .col {
@@ -454,6 +456,7 @@ th {
     .caja {
         width: 330px;
         /*height: 116px;*/
+        max-height: 100%;
         gap: 2rem;
         margin: 1rem;
     }

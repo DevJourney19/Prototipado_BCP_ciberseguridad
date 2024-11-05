@@ -6,20 +6,128 @@ const openModal = () => {
     modal.showModal();
 };
 
-// Función para cerrar el modal
-const closeModal = () => {
+let idSeleccionado = null;
+//Cuando se haga click en el checkbox
+function handleCheckboxClick(checkbox) {
+    if (checkbox.checked) {
+        // Guardar el id del div (caja) que contiene el checkbox
+        idSeleccionado = checkbox.closest('.caja').id; // Obtiene el id del div más cercano con clase 'caja'
+    }
+}
+// Función para cerrar el modal //DISPOSITIVO PRINCIPAL
+const closeModal = (estado) => {
     modal.close();
+    if (estado === 'aceptar') {
+        dispositivo_principal();
+    }
 };
+
+const dispositivo_principal = async () => {
+    if (idSeleccionado) {
+        console.log(idSeleccionado);
+        const caja = document.getElementById(idSeleccionado); //HGcemos la unión entre la caja y el checkbox
+        if (caja) {
+
+            let dispositivoss = JSON.parse(localStorage.getItem('nuevo_dispositivo'));
+
+            const dispositivoEncontrado = dispositivoss.find(d => d.id === Number(idSeleccionado));
+
+            const estado_actualizado = {
+                id: idSeleccionado,
+                tipo: dispositivoEncontrado.tipo,
+                dip: dispositivoEncontrado.dip,
+                pais: dispositivoEncontrado.pais,
+                ciudad: dispositivoEncontrado.ciudad,
+                estado: 'activado',
+                fecha: dispositivoEncontrado.fecha
+            }
+
+            actualizacion_local_storage(idSeleccionado, estado_actualizado);
+
+            try {
+                const response = await fetch("../controller/ControllerDispositivo.php?action=acciones", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        id_dispositivo: idSeleccionado,
+                        accion: 'activar'
+                    })
+                });
+
+                const data = await response.json();
+                console.log(idSeleccionado);
+            } catch (error) {
+                console.error('Error al establecer la sesión: ', error);
+            };
+        }
+    }
+}
+//VERIFICAR !!
+function actualizacion_local_storage(idSeleccionado, estado_actualizado) {
+    let dispositivos = JSON.parse(localStorage.getItem('nuevo_dispositivo'));
+    dispositivos = dispositivos.map(t => {
+        if (t.id === Number(idSeleccionado)) {
+            //Actualiza el estado del localStorage
+            return { ...t, ...estado_actualizado };
+        }
+        return t;
+    });
+    localStorage.setItem('nuevo_dispositivo', JSON.stringify(dispositivos));
+}
 // Función para abrir el modal
 const openModalDos = () => {
     modalDos.showModal();
+    //Creo que aqui se debe obtener el id
 };
-
-// Función para cerrar el modal
-const closeModalDos = () => {
+idSeleccionado = null;
+// Función para cerrar el modal //DESVINCULAR DISPOSITIVO
+const closeModalDos = async (estado) => {
     modalDos.close();
+    if (estado === 'aceptar') {
+        console.log("aceptado");
+        eliminarCajaSeleccionada();
+    } else {
+        console.log("cancelado");
+    }
 };
+//__--__
 
+async function eliminarCajaSeleccionada() {
+    if (idSeleccionado) {
+        console.log(idSeleccionado);
+        const caja = document.getElementById(idSeleccionado); //HGcemos la unión entre la caja y el checkbox
+        if (caja) {
+            caja.remove(); // Eliminar la caja del DOM
+            let dispositivos = JSON.parse(localStorage.getItem('nuevo_dispositivo'));
+            if (dispositivos) {
+                dispositivos = dispositivos.filter(t => t.id !== Number(idSeleccionado));
+                localStorage.setItem('nuevo_dispositivo', JSON.stringify(dispositivos));
+            }
+
+            //CORREGIR
+            try {
+                const response = await fetch("../controller/ControllerDispositivo.php?action=deleteDispo", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams({
+                        idSeleccionado: idSeleccionado
+                    })
+                });
+
+                const data = await response.json();
+                console.log(idSeleccionado);
+            } catch (error) {
+                console.error('Error al establecer la sesión: ', error);
+            };
+        }
+    }
+}
+
+//--__--
 //En caso para ver los resultados de los equipos que han querido intentar ingresar a su cuenta
 const historial = document.getElementById("historial");
 if (historial) {
@@ -35,14 +143,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 async function dispositivo() {
     try {
-        const response = await fetch('../php/obtener_dispositivos.php');
+        const response = await fetch('../controller/ControllerDispositivo.php?action=mostrar');
         const data = await response.json();
         return data;
     } catch (error) {
         console.log(error);
     }
 };
-//CONSULTAR DISPOSITIVOS
+
+
+//CONSULTAR DISPOSITIVOS //SE AGREGAN LOS DISPOSITIVOS A CONSULTA DISPOSITIVO, LOS CUALES SON LOS QUE HAN INGRESADO EL CODIGO SEA CORRECTO O INCORRECTO
 async function agregando_solicitudes_html() {
     try {
         const data = await dispositivo();
@@ -80,7 +190,7 @@ async function agregando_solicitudes_html() {
 
 }
 
-async function manejadorBoton(event) {
+async function manejadorBoton() {
     const botonesAccion = document.querySelectorAll('.accion-boton');
     botonesAccion.forEach(boton => {
         boton.addEventListener('click', async function () {
@@ -89,7 +199,7 @@ async function manejadorBoton(event) {
             const accion = this.getAttribute('data-accion'); // Obtener la acción
             try {
                 // Realizar la solicitud AJAX usando fetch
-                const response = await fetch('../php/acciones_dispositivo.php', {
+                const response = await fetch('../controller/ControllerDispositivo.php?action=acciones', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -99,51 +209,33 @@ async function manejadorBoton(event) {
                         accion: accion
                     })
                 });
-                
+
                 const data = await response.json(); //problema detected
                 const resultado_div = document.getElementById('resultado');
-                
+
                 if (data.status === 'success') {
                     resultado_div.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
                     await agregando_solicitudes_html(); //Actualizar la tabla
                     //htmleando(accion);
-                    
+
                     if (accion === 'permitir') {
                         const id_comparar = this.getAttribute('data-id');
 
                         const info = await dispositivo();
 
-                        const id_dispositivo = localStorage.getItem('id_dispositivo');
-                        console.log('Comparar con el this.get: ' + id_comparar);
-                        console.log("Local Storage: " + id_dispositivo);
                         if (id_dispositivo === id_comparar) {
                             //filtremos info
+                            //Quizás se tenga que hacer un filtro para el dispositivo de usuario //Quizás se tenga que hacer como una consulta especifica...
                             const informacion = info.filter(t => t.estado === 'seguro');
+
                             console.log("La informacion es: " + informacion);
+
+                            //let local = JSON.parse(localStorage.getItem('nuevo_dispositivo'));
+                            //local.push(informacion);
+                            //Se van a agregar después de haber agregado al primero que es el dispositivo activado
                             localStorage.setItem('nuevo_dispositivo', JSON.stringify(informacion));
                             window.location.href = './dispositivos.php';
                         }
-                        //localStorage.removeItem('nuevo_dispositivo');
-
-                        /*const elementos = document.querySelectorAll('[data-id]');
-    
-                        elementos.forEach(function (elemento) {
-                            elemento.addEventListener('click', function () {
-    
-                                const id_dispositivo = this.getAttribute('data-id');
-                                console.log(id_dispositivo);
-                                if (id_dispositivo) {
-                                    console.log('dentro data-id');
-                                    localStorage.setItem('nuevo_dispositivo', JSON.stringify(info));
-                                    window.location.href = './dispositivos.php';
-    
-                                } else {
-                                    console.error('El id_dispositivo es inválido o no se encuentra en el DOM.');
-                                }
-                            })
-                        })
-    */
-
                     }//fin del if
                 } else {
                     resultado_div.innerHTML = '<div class="alert alert-danger">' + data.message + '</div>';

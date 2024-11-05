@@ -1,36 +1,16 @@
 <?php
 
-/*include_once '../controller/ControllerEntradas.php';
-include_once '../controller/ControllerEntradas.php';*/
-include '../config/Connection.php';
-session_start();
-$conexion = new Connection();
-$conexion->conectar();
-$id_usuario = $_SESSION['id_usuario'];
-$sql = "select * from usuario where id_usuario= '$id_usuario'";
-$resultado1 = $conexion->consultar($sql);
-$sql2 = "Select * from seguridad where id_usuario='$id_usuario'";
-$resultado2 = $conexion->consultar($sql2);
-$id_segu = $resultado2[0]['id_seguridad'];
-$sql3 = "Select * from dispositivo where id_seguridad='$id_segu' AND estado_dispositivo='activado'";
-$resultado3 = $conexion->consultar($sql3);
-
+include_once '../controller/ControllerEntradas.php';
+$entradas = new ControllerEntradas();
+$entradas->validarEntrada('index.php');
+$entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
 $seguro = null;
-/*
-if ($_SESSION['estado_dispositivo'] === 'seguro') {
-    echo 'Es un dispositivo seguro';
-    $seguro = true;
-}*/
-//$entradas = new ControllerEntradas();
-/*$entradas->validarEntrada('index.php');
-$entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);*/
 
-//$dispositivo = new ControllerDispositivo();
-//$dispositivo->readById($id_usuario);
-/*$usuario = new ControllerUsuario();
-$info_usuario->obtener_info_usuario($id_usuario);
-$info_usuario->obtenerUsuario($entradas);
-$usuario->estado_activado($info_usuario);*/
+if ($_SESSION['estado_dispositivo'] === 'seguro') {
+    $seguro = true;
+}
+$dispositivo = $_SESSION['dispositivo'];
+
 ?>
 
 <!DOCTYPE html>
@@ -63,15 +43,31 @@ $usuario->estado_activado($info_usuario);*/
                 <p>Estos son los dispositivos que se encuentran vinculados en tu banca móvil.</p>
             </div>
         </div>
-        <div class="tabla">
-            <div class="contenido-izq">
+
+
+
+        <div class="tabla grid" id="mensajin">
+
+            <!--Necesito crear esto por js -->
+
+            <?php if (isset($dispositivo)) { ?>
+
                 <div class="caja">
                     <div class="primero">
                         <div class="imagen">
-                            <img src="img/icono_cel.png" alt="Imagen de celular">
-                        </div>
-                        <div class="seccion">
-                            <div class="titulo-caja">
+
+                            <?php switch ($dispositivo) {
+                                case 'Ordenador de escritorio': ?>
+                                    <img src="img/computadora.png" alt="Imagen de celular">
+
+                                    <?php break;
+                                case 'Portátil': ?>
+                                    <img src="img/icono_portatil.png" alt="Imagen de portátil">
+                                    <?php break;
+
+                                case 'Tableta': ?>
+                                    <img src="img/icono_tableta.png" alt="Imagen de tableta">
+                                    <?php break;
 
                                 <h4  style="color: darkorange; font-weight: 800;">
                                     <?= $resultado3[0]['tipo_dispositivo'] ?>
@@ -92,96 +88,20 @@ $usuario->estado_activado($info_usuario);*/
                         <label for="dispositivo1"><span class="radio-button"></span></label>
                     </div>
                 </div>
-                <!--
-                <div class="caja">
-                    <div class="primero">
-                        <div class="imagen">
-                            <img src="img/laptop.png" alt="Imagen de celular">
-                        </div>
-                        <div class="seccion">
-                            <div class="titulo-caja">
-                                <h4>
-                                    Laptop
+
+                                <h4 style="color: darkorange; font-weight: 800;">
+                                    <?= $dispositivo ?>
                                 </h4>
                             </div>
                             <div class="descripcion-caja">
                                 <p>
-                                Lugar: Av Lomas - SMP IP: 192.168.769 Ingreso: 05/09/2024
+                                    Lugar: <?= $_SESSION['ciudad'] ?>- <?= $_SESSION['pais'] ?>
+                                    <br />
+                                    IP: <?= $_SESSION['direccion_ip'] ?>
+                                    <br />
+                                    Ingreso: <?= $_SESSION['hora'] ?>
                                 </p>
 
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="segundo">
-                        <input type="radio" name="vinculo" id="dispositivo2">
-                        <label for="dispositivo2"><span class="radio-button"></span></label>
-                    </div>
-
-                </div>
-                <div class="caja">
-                    <div class="primero">
-                        <div class="imagen">
-                            <img src="img/computadora.png" alt="Imagen de celular">
-                        </div>
-                        <div class="seccion">
-                            <div class="titulo-caja">
-                                <h4>
-                                    Computadora
-                                </h4>
-                            </div>
-                            <div class="descripcion-caja">
-                                <p>Lugar: Av Lomas - SMP
-                                    IP: 192.168.769
-                                    Ingreso: 05/09/2024</p>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="segundo">
-                        <input type="radio" name="vinculo" id="dispositivo3">
-                        <label for="dispositivo3"><span class="radio-button"></span></label>
-                    </div>
-                </div>
-                <div class="caja">
-                    <div class="primero">
-                        <div class="imagen">
-                            <img src="img/icono_cel.png" alt="Imagen de celular">
-                        </div>
-                        <div class="seccion">
-                            <div class="titulo-caja">
-                                <h4>
-                                    iPhone
-                                </h4>
-                            </div>
-                            <div class="descripcion-caja">
-                                <p>Lugar: Av Lomas - SMP
-                                    IP: 192.168.769
-                                    Ingreso: 05/09/2024</p>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="segundo">
-                        <input type="radio" name="vinculo" id="dispositivo4">
-                        <label for="dispositivo4"><span class="radio-button"></span></label>
-                    </div>
-                </div>
-                <div class="caja">
-                    <div class="primero">
-                        <div class="imagen">
-                            <img src="img/laptop.png" alt="Imagen de celular">
-                        </div>
-                        <div class="seccion">
-                            <div class="titulo-caja">
-                                <h4>
-                                    Laptop
-                                </h4>
-                            </div>
-                            <div class="descripcion-caja">
-                                <p>Lugar: Av Lomas - SMP
-                                    IP: 192.168.769
-                                    Ingreso: 05/09/2024</p>
 
                             </div>
                         </div>
@@ -215,8 +135,6 @@ $usuario->estado_activado($info_usuario);*/
                         <label for="dispositivo6"><span class="radio-button"></span></label>
                     </div>
                 </div>
-
-            </div>
         </div>
 
         <?php if (!isset($seguro)) { ?>
@@ -225,7 +143,7 @@ $usuario->estado_activado($info_usuario);*/
                     <button type="button" onclick="openModal()">Dispositivo Principal</button>
                 </div>
                 <div class="boton-secundario">
-                    <button type="button" onclick="openModalDos()">Desvincular</button>
+                    <button type="button" onclick="openModalDos()">Desvincular y eliminar</button>
                 </div>
                 <div class="boton-primario">
                     <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
@@ -246,10 +164,10 @@ $usuario->estado_activado($info_usuario);*/
         </div>
         <div class="opciones-modal">
             <div class="boton-primario-modal">
-                <button type="button" onclick="closeModal()">Aceptar</button>
+                <button type="button" onclick="closeModal('aceptar')">Aceptar</button>
             </div>
             <div class="boton-secundario-modal">
-                <button type="button" onclick="closeModal()">Cancelar</button>
+                <button type="button" onclick="closeModal('cancelar')">Cancelar</button>
             </div>
         </div>
     </dialog>
@@ -262,10 +180,12 @@ $usuario->estado_activado($info_usuario);*/
         </div>
         <div class="opciones-modal">
             <div class="boton-primario-modal">
-                <button type="button" onclick="closeModalDos()">Aceptar</button>
+                <!-- LOGICA AQUI - QUE SE ELIMINE ESA CAJA-->
+                <button type="button" onclick="closeModalDos('aceptar')">Aceptar</button>
+
             </div>
             <div class="boton-secundario-modal">
-                <button type="button" onclick="closeModalDos()">Cancelar</button>
+                <button type="button" onclick="closeModalDos('cancelar')">Cancelar</button>
             </div>
         </div>
     </dialog>
@@ -278,26 +198,62 @@ $usuario->estado_activado($info_usuario);*/
         //console.log(info);
         if (info) {
             try {
+
                 //Convertir la cadena JSON de nuevo a un objeto
                 const obj_info = JSON.parse(info);
                 //console.log(obj_info);
-
+                console.log(obj_info);
                 //Cambiar el contenido del div [ubicación referencial]
                 const mensajito = document.getElementById('mensajin');
                 obj_info.forEach((item, index) => {
+                    let color = item.estado === 'activado' ? 'darkorange' : '#001843';
+                    let font = item.estado === 'activado' ? '800' : '400';
                     //Crear un nuevo div
                     const nueva_caja = document.createElement('div');
                     nueva_caja.classList.add('caja');
-
+                    // Asignar un id único numérico al div
+                    const idNumerico = item.id;
+                    nueva_caja.id = idNumerico;
+                    // Switch en JavaScript para determinar la imagen
+                    let imagenHTML;
+                    switch (item.tipo) {
+                        case 'Ordenador de escritorio':
+                            imagenHTML = '<img src="img/computadora.png" alt="Imagen de computadora">';
+                            break;
+                        case 'Portátil':
+                            imagenHTML = '<img src="img/icono_portatil.png" alt="Imagen de portátil">';
+                            break;
+                        case 'Tableta':
+                            imagenHTML = '<img src="img/icono_tableta.png" alt="Imagen de tableta">';
+                            break;
+                        case 'Teléfono móvil':
+                            imagenHTML = '<img src="img/icono_cel.png" alt="Imagen de teléfono móvil">';
+                            break;
+                        case 'Smartwatch':
+                            imagenHTML = '<img src="img/icono_smartwatch.png" alt="Imagen de smartwatch">';
+                            break;
+                        case 'Televisor inteligente':
+                            imagenHTML = '<img src="img/icono_televisor.png" alt="Imagen de televisor inteligente">';
+                            break;
+                        case 'Consola de videojuegos':
+                            imagenHTML = '<img src="img/icono_consola.png" alt="Imagen de consola de videojuegos">';
+                            break;
+                        case 'Dispositivo IoT':
+                            imagenHTML = '<img src="img/icono_iot.png" alt="Imagen de dispositivo IoT">';
+                            break;
+                        default:
+                            imagenHTML = '<p>Tipo de dispositivo no reconocido.</p>';
+                    }
                     nueva_caja.innerHTML = `
             
                 <div class="primero">
                     <div class="imagen">
-                        <img src="img/laptop.png" alt="Imagen de celular" />
+                ${imagenHTML}
                     </div>
                     <div class="seccion">
                         <div class="titulo-caja">
-                            <h4>
+                        
+                            <h4 style="color:${color}; font-weight:${font}">
                                 ${item.tipo}
                             </h4>
                         </div>
@@ -312,10 +268,10 @@ $usuario->estado_activado($info_usuario);*/
                     </div>
                 </div>
                 <?php if (!isset($seguro)) { ?>
-                                                                                <div class="segundo">
-                                                                                    <input type="radio" name="vinculo" id="dispositivo${index + 2}" />
-                                                                                    <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
-                                                                                </div>
+                                                                                                                                                                                            <div class="segundo">
+                                                                                                                                                                                                <input type="radio" name="vinculo" onchange="handleCheckboxClick(this)" id="dispositivo${index + 2}" />
+                                                                                                                                                                                                <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
+                                                                                                                                                                                            </div>
                 <?php } ?>
             `;
                     //localStorage.removeItem('nuevo_dispositivo');
@@ -326,6 +282,6 @@ $usuario->estado_activado($info_usuario);*/
             }
         }
     </script>
->>>>>>> main
 </body>
+
 </html>

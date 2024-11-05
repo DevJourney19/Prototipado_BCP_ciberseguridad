@@ -30,6 +30,8 @@ class ControllerDispositivo
     {
         return $this->daoDispositivo->readDispoByUserSecurity($id_seguridad);
     }
+
+    //Info del o de los dispositivos que hayan intentado acceder por medio del código de verificacion 
     public function mostrarDispositivos($id_seguridad)
     {
         $response = [];
@@ -53,30 +55,29 @@ class ControllerDispositivo
         }
         echo json_encode($response);
     }
-    public function cambiar_estado($accion, $id_dispositivo)
+    public function cambiar_estado_acciones()
     {
         try {
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 //Se trae del input hidden
-                $id_dispositivo = $_POST['id_dispositivo'] ?? '';
-                $accion = $_POST['accion'] ?? '';
+                $id_dispositivo = $_POST['id_dispositivo'];
+                $accion = $_POST['accion'];
 
                 if ($accion === 'eliminar') {
                     $this->daoDispositivo->updateDeviceStatus($accion, $id_dispositivo);
-                    $response['status'] = 'success';
                     $response['message'] = 'Dispositivo eliminado con éxito.';
-
                 } else if ($accion === 'bloquear') {
                     $this->daoDispositivo->updateDeviceStatus($accion, $id_dispositivo);
-                    $response['status'] = 'success';
                     $response['message'] = 'Dispositivo bloqueado con éxito.';
-
                 } else if ($accion === 'permitir') {
                     $this->daoDispositivo->updateDeviceStatus($accion, $id_dispositivo);
-                    $response['status'] = 'success';
                     $response['message'] = 'Dispositivo permitido con éxito.';
+                } else if ($accion === 'activar') {
+                    $this->daoDispositivo->updateDeviceStatus($accion, $id_dispositivo);
+                    $response['message'] = 'Dispositivo activado con éxito.';
                 }
+                $response['status'] = 'success';
             }
             header('Content-Type: application/json');
             echo json_encode($response);
@@ -84,8 +85,35 @@ class ControllerDispositivo
             echo 'Error en el lugar de cambiar_estado: ' . $e->getMessage();
         }
     }
+    public function eliminar_dispositivo()
+    {
+        header('Content-Type: application/json');
+        try {
+            $id_dispositivo = $_POST['idSeleccionado'];
+            $this->daoDispositivo->delete($id_dispositivo);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+        echo json_encode(['status' => 'eliminado']);
+    }
+
 }
+if (isset($_GET['action']) && $_GET['action'] === 'mostrar') {
+    $controller = new ControllerDispositivo();
+    $controller->mostrarDispositivos($_SESSION['id_seguridad']);
+}
+
 if (isset($_GET['action']) && $_GET['action'] === 'getUsuario' && isset($_GET['cambio'])) {
     $controller = new ControllerDispositivo();
     $controller->crearDispositivo();
 }
+if (isset($_GET['action']) && $_GET['action'] === 'deleteDispo') {
+    $controller = new ControllerDispositivo();
+    $controller->eliminar_dispositivo();
+}
+if (isset($_GET['action']) && $_GET['action'] === 'acciones') {
+    $controller = new ControllerDispositivo();
+    $controller->cambiar_estado_acciones();
+}
+

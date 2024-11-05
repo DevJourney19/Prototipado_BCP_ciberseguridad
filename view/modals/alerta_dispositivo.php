@@ -1,6 +1,4 @@
-
 <div id="modal" class="blur ">
-
   <!--BLUR-->
   <div class="modal alerta">
     <div>
@@ -104,8 +102,9 @@
           codigo: token
         }),
       });
-      const data = await response.json(); // esto devuelve algo y marca error
 
+      const data = await response.json(); 
+      
     } catch (error) { //Problemita a resolver 
       console.error("Error al enviar los datos:", error);
     } finally {
@@ -125,11 +124,11 @@
       tokenIngresado += element.value;
     });
     if (token === tokenIngresado) {
-      alert('Ingreso exitoso');//Se debe de mostrar un modal brindando la bienvenida
+      alert('Código exitoso, necesita validación');//Se debe de mostrar un modal brindando la bienvenida
       /*Se necesita establecer una comunicación con el servidor para trabajar con PHP, 
       es por ello que se realizó un JSON */
       try {
-        const response = await fetch('../controller/ControllerDispositivo/?action=getUsuario&cambio=true', {
+        const response = await fetch('../controller/ControllerDispositivo.php?action=getUsuario&cambio=true', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -151,7 +150,7 @@
     } else { //Que se cree un registro pero con el verificado en 0
       alert('Código incorrecto');
       try {
-        const response = await fetch('../controller/ControllerDispositivo/?action=getUsuario&cambio=true', {
+        const response = await fetch('../controller/ControllerDispositivo.php?action=getUsuario&cambio=true', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

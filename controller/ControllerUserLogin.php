@@ -20,7 +20,7 @@ try {
 
     $registro = $daoUsuario->verificarLogin($tarjeta, $dni, $clave_internet);
     if (count($registro) === 1) {
-        session_start();
+
         //USUARIO
         $_SESSION['id_usuario'] = $registro[0]['id_usuario'];
         $id_usuario = $_SESSION['id_usuario'];
@@ -31,34 +31,31 @@ try {
             $_SESSION['id_seguridad'] = $registro2[0]['id_seguridad'];
             $id_seguridad = $_SESSION['id_seguridad'];
             //DISPOSITIVO
-            // $registro3 = $daoDispositivo->enterAccess($id_seguridad, $dir_ip);
-            // $_SESSION['id_dispositivo'] = $registro3[0]['id_dispositivo'];
-            // $_SESSION['estado_dispositivo'] = $registro3[0]['estado_dispositivo'];
-            // $_SESSION['direccion_ip'] = $registro3[0]['direccion_ip'];
-            // $id_dispositivo = $_SESSION['id_dispositivo'];
-            // $direccion_ip_deseada = $_SESSION['direccion_ip'];
-            // $_SESSION['dispositivo'] = obtener_dispositivo();
-            // $_SESSION['pais'] = $info['country'];
-            // $_SESSION['ciudad'] = $info['city'];
-            // $_SESSION['hora'] = date("h:i:s");
-            
+            $registro3 = $daoDispositivo->enterAccess($id_seguridad, $dir_ip);
 
-            // if (empty($direccion_ip_deseada)) { //Si no existe la direccion ip por la comparacion
-            //     $_SESSION['error_ubicacion'] = true;
-            //     header("Location: ../view/index.php");
+            $direccion_ip_deseada = $registro3[0]['direccion_ip'];
+            $_SESSION['info'] = $info;
+            //----
+            $_SESSION['direccion_ip'] = $dir_ip;
+            $_SESSION['dispositivo'] = obtener_dispositivo();
+            $_SESSION['pais'] = $info['country'];
+            $_SESSION['ciudad'] = $info['city'];
+            $_SESSION['hora'] = date("h:i:s A");
 
-            // } else {
-            //     header("Location: ../view/principal.php");
-            //     die();
-            // }
-            // ----
-            header("Location: ../view/index.php");
+            //SI NO COINCIDE EN LA VERIFCACION
+            if (empty($direccion_ip_deseada)) { //SE COMPARAN LAS 2 DIRECCIONES IP O LOS ESTADOS DE ACTIVACION O SEGURO PARA PODER INGRESAR
+                $_SESSION['error_ubicacion'] = true; //LLAVE PARA ABRIR EL MODAL PARA INGRESAR EL CÓDIGO DE VERIFICACIÓN
+                header("Location: ../view/index.php");
+                die();
+            } else {//SI SI COINCIDE EN LA VERIFCACION
+                $_SESSION['id_dispositivo'] = $registro3[0]['id_dispositivo'];
+                $_SESSION['estado_dispositivo'] = $registro3[0]['estado_dispositivo'];
+                header("Location: ../view/principal.php");
+                die();
+            }
         } else {
             header("Location: ../view/index.php");
         }
-        // verificar si la direccion ip es existe y es la misma de la principal
-        // y colocar en la variable de session el estado de la seguridad
-        header("Location: ../view/principal.php");
     } else {
         session_destroy();
         header("Location: ../view/index.php?error=true");
