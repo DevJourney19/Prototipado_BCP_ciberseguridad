@@ -1,32 +1,9 @@
 <?php
 include_once '../controller/ControllerEntradas.php';
+include_once '../controller/ControllerEntradas.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
-
-// cambiar y crear un dao, controllador y modelo
-$inc = include_once("../config/connection.php");
-
-if ($inc) {
-    
-    //Obtenemos el id del usuario que ingreso a la cuenta
-    $id_usuario = $_SESSION['id_usuario'];
-    $conexion = new Connection();
-    $conexion->conectar();
-    /*Quiero mostrar la información almacenada de la tabla dispositivos, para ello necesito el id del usuario, y 
-    de ahi el id de seguridad, para recien llegar al dispositivo, el cual su llave foranea es el id_seguro*/
-    $array_seguridad = $conexion->consultar(query: "Select id_seguridad from seguridad where id_usuario='$id_usuario'");
-    /*Necesito el id_seguridad porque de esta manera me relacionaría con la otra tabla dispositivos, teniendo 
-    en cuenta que por cada usuario solo podrá tener 1 cuenta activada.*/
-
-    $id_seguridad = $array_seguridad[0]['id_seguridad'] ?? "";
-    $_SESSION['id_seguridad'] = $id_seguridad;
-    /*Se va a filtrar todos los dispositivos almacenados de la base de datos con parametros si estan establecidos 
-    como inseguros y por el id de seguridad activado, el cual está relacionado de 1 a 1 con la información del cliente.*/
-    /*$consulta = consultar("Select id_dispositivo, tipo_dispositivo, direccion_ip, 
-    pais, ciudad, estado_dispositivo, fecha_registro, ultima_conexion from dispositivo where id_seguridad='$id_seguridad' AND (estado_dispositivo='en_proceso_si' || estado_dispositivo='en_proceso_no')");*/
-    //$conexion->desconectar();
-}
 ?>
 
 <!DOCTYPE html>
