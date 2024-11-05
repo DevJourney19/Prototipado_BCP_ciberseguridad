@@ -97,6 +97,7 @@ class ControllerDispositivo
 
         echo json_encode(['status' => 'eliminado']);
     }
+
 }
 if (isset($_GET['action']) && $_GET['action'] === 'mostrar') {
     $controller = new ControllerDispositivo();
@@ -115,3 +116,4 @@ if (isset($_GET['action']) && $_GET['action'] === 'acciones') {
     $controller = new ControllerDispositivo();
     $controller->cambiar_estado_acciones();
 }
+

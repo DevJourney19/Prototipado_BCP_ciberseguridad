@@ -69,6 +69,7 @@ const dispositivo_principal = async () => {
         }
     }
 }
+//VERIFICAR !!
 function actualizacion_local_storage(idSeleccionado, estado_actualizado) {
     let dispositivos = JSON.parse(localStorage.getItem('nuevo_dispositivo'));
     dispositivos = dispositivos.map(t => {
@@ -121,10 +122,7 @@ async function eliminarCajaSeleccionada() {
                         idSeleccionado: idSeleccionado
                     })
                 });
-                /*const textResponse = await response.text(); // Obtener la respuesta como texto
-                console.log(textResponse); // Imprimir la respuesta para depuración
-*/
-                //const data = JSON.parse(textResponse);
+
                 const data = await response.json();
                 console.log(idSeleccionado);
             } catch (error) {
@@ -157,6 +155,8 @@ async function dispositivo() {
         console.log(error);
     }
 };
+
+
 //CONSULTAR DISPOSITIVOS //SE AGREGAN LOS DISPOSITIVOS A CONSULTA DISPOSITIVO, LOS CUALES SON LOS QUE HAN INGRESADO EL CODIGO SEA CORRECTO O INCORRECTO
 async function agregando_solicitudes_html() {
     try {
@@ -229,8 +229,7 @@ async function manejadorBoton(event) {
                         const info = await dispositivo();
 
                         const id_dispositivo = localStorage.getItem('id_dispositivo');
-                        /*console.log('Comparar con el this.get: ' + id_comparar);
-                        console.log("Local Storage: " + id_dispositivo);*/
+
                         if (id_dispositivo === id_comparar) {
                             //filtremos info
                             const informacion = info.filter(t => t.estado === 'seguro');

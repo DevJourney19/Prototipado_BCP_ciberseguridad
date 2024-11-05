@@ -19,11 +19,11 @@ class DaoDispositivo implements DaoInterfaceDispositivo
             $ip_usuario = $_SESSION['direccion_ip']; // null en caso que es un dispositivo que no coincida con los requisitos pero si que registro los datos correctos
             $resultado = $_SESSION['info']; // Si funciona en verificaacion 
             $dispositivo = $_SESSION['dispositivo'];
-            $fecha_registro = date('Y-m-d H:i:s');
-
+            $fecha_registro = date('Y-m-d');
+            $ult_conexion = date('Y-m-d');
             $query = "INSERT INTO dispositivo (id_seguridad, tipo_dispositivo, direccion_ip, 
     pais, ciudad, fecha_registro, estado_dispositivo, ultima_conexion) VALUES ('$id_seguridad', '$dispositivo', '$ip_usuario', 
-    '{$resultado['country']}', '{$resultado['city']}', '$fecha_registro', '$estado', NOW())";
+    '{$resultado['country']}', '{$resultado['city']}', '$fecha_registro', '$estado', '$ult_conexion')";
             $response = $this->db->ejecutar($query);
 
         } catch (Exception $e) {
@@ -31,9 +31,19 @@ class DaoDispositivo implements DaoInterfaceDispositivo
         }
         return $response;
     }
+    function updateDate($id_dispositivo)
+    {
+        try {
+            $ult_conexion = date('Y-m-d');
+            $sql = "UPDATE dispositivo SET ultima_conexion = '$ult_conexion' WHERE id_dispositivo='$id_dispositivo'";
+            $this->db->ejecutar($sql);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
     function delete($id_dispositivo)
     {
-        $sql = "delete from dispositivo where id_dispositivo = '$id_dispositivo'";
+        $sql = "DELETE FROM dispositivo WHERE id_dispositivo = '$id_dispositivo'";
         $this->db->ejecutar($sql);
     }
 

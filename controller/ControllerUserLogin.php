@@ -33,7 +33,7 @@ try {
             //DISPOSITIVO
             $registro3 = $daoDispositivo->enterAccess($id_seguridad, $dir_ip);
 
-            $direccion_ip_deseada = $registro3[0]['direccion_ip']; //no se si ponerlo en session
+            $direccion_ip_deseada = $registro3[0]['direccion_ip'];
             $_SESSION['info'] = $info;
             //----
             $_SESSION['direccion_ip'] = $dir_ip;
@@ -44,8 +44,9 @@ try {
 
             //SI NO COINCIDE EN LA VERIFCACION
             if (empty($direccion_ip_deseada)) { //SE COMPARAN LAS 2 DIRECCIONES IP O LOS ESTADOS DE ACTIVACION O SEGURO PARA PODER INGRESAR
-                $_SESSION['error_ubicacion'] = true;
+                $_SESSION['error_ubicacion'] = true; //LLAVE PARA ABRIR EL MODAL PARA INGRESAR EL CÓDIGO DE VERIFICACIÓN
                 header("Location: ../view/index.php");
+                die();
             } else {//SI SI COINCIDE EN LA VERIFCACION
                 $_SESSION['id_dispositivo'] = $registro3[0]['id_dispositivo'];
                 $_SESSION['estado_dispositivo'] = $registro3[0]['estado_dispositivo'];
@@ -55,8 +56,6 @@ try {
         } else {
             header("Location: ../view/index.php");
         }
-        // verificar si la direccion ip es existe y es la misma de la principal
-        // y colocar en la variable de session el estado de la seguridad
 
     } else {
         session_destroy();
