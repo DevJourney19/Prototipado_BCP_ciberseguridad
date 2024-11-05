@@ -117,6 +117,7 @@ $dispositivo = $_SESSION['dispositivo'];
                         <label for="dispositivo1"><span class="radio-button"></span></label>
                     </div>
                 </div>
+            <?php } ?>
         </div>
 
         <?php if (!isset($seguro)) { ?>
@@ -250,10 +251,10 @@ $dispositivo = $_SESSION['dispositivo'];
                     </div>
                 </div>
                 <?php if (!isset($seguro)) { ?>
-                                                                                                                                                                                            <div class="segundo">
-                                                                                                                                                                                                <input type="radio" name="vinculo" onchange="handleCheckboxClick(this)" id="dispositivo${index + 2}" />
-                                                                                                                                                                                                <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
-                                                                                                                                                                                            </div>
+                                                                                                                                                                                                <div class="segundo">
+                                                                                                                                                                                                    <input type="radio" name="vinculo" onchange="handleCheckboxClick(this)" id="dispositivo${index + 2}" />
+                                                                                                                                                                                                    <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
+                                                                                                                                                                                                </div>
                 <?php } ?>
             `;
                     //localStorage.removeItem('nuevo_dispositivo');
@@ -265,4 +266,5 @@ $dispositivo = $_SESSION['dispositivo'];
         }
     </script>
 </body>
+
 </html>
