@@ -93,9 +93,9 @@ class DaoSeguridad implements DaoInterfaceSeguridad
   }
   public function existeSeguridad($id_seguridad) {
     try {
-        $query = "SELECT COUNT(*) FROM seguridad WHERE id_seguridad = :idSeguridad"; // Cambiar a id_seguridad
+        $query = "SELECT COUNT(*) FROM seguridad WHERE id_seguridad = :idSeguridad"; 
         $result = $this->db->consultar($query, ['idSeguridad' => $id_seguridad]);
-        return $result[0]['COUNT(*)'] > 0; // Devuelve true si hay al menos un registro
+        return $result[0]['COUNT(*)'] > 0; 
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
         return false;
