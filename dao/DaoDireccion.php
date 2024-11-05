@@ -3,6 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+
 include_once '../config/Connection.php';
 include_once 'interfaces/DaoInterfaceDireccion.php';
 

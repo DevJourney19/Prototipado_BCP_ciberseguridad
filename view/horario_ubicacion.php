@@ -40,9 +40,9 @@ $error = null
             <?php if (empty($horarios)): ?>
                 <h4>No se han encontrado horarios restringidos. Puedes registrar uno nuevo.</h4>
                 <form action="../controller/ControllerHorario.php?action=registrar" method="POST">
-                    <div class="formulario">
-                        <input type="hidden" name="id_seguridad" value="<?= $_SESSION['id_seguridad']?>">
-                        <div class="grupo-formulario-horario">
+                <div class="formulario">
+                    <input type="hidden" name="id_seguridad" value="<?= $_SESSION['id_seguridad']?>">
+                    <div class="grupo-formulario-horario">
                             <label for="hora-inicio-nuevo">
                                 <i class="fas fa-clock"></i> Hora Inicio
                             </label>
@@ -90,7 +90,7 @@ $error = null
         </div>
 
         <div class="secciones">
-            <form action="http://localhost/Prototipado_BCP_ciberseguridad/controller/ControllerDireccion.php?action=registrar" method="post">
+            <form action="../controller/ControllerDireccion.php?action=registrar" method="post">
                 <div id="avisoError" style="color: red; <?php echo $error ? 'background-color: red;' : ''; ?>">
                     <?php
                     if (isset($_SESSION['mensaje'])) {
@@ -135,6 +135,7 @@ $error = null
         crossorigin="anonymous"></script>
     <script src="js/validacionhora.js"></script>
     <script src="js/Ubicacion_direccion.js"></script>
+    
 </body>
 
 </html>

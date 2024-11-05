@@ -5,9 +5,9 @@ require_once '../dao/DaoSeguridad.php';
 include_once '../controller/ControllerEntradas.php';
 
 
-$entradas = new ControllerEntradas();
-$entradas->validarEntrada('index.php');
-$entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
+// $entradas = new ControllerEntradas();
+// $entradas->validarEntrada('index.php');
+// $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
 
 class ControllerDireccion
 {
@@ -23,23 +23,22 @@ class ControllerDireccion
     }
 
 
-    public function registrar($id_seguridad) {
+    public function registrar()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnRegistrarDireccion'])) {
             $id_seguridad = $_SESSION['id_seguridad'] ?? null;
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
-            // $rango_gps = 10;
-            // $fecha_configuracion = date('Y-m-d');
-            // $hora_configuracion = date('H:i:s');
 
-            if ($id_seguridad && $this->daoSeguridad->existeSeguridad($id_seguridad) && !empty($direccion_exacta)) {
+            if ($id_seguridad && !empty($direccion_exacta)) {
                 $this->daoDireccion->registrarDireccion($id_seguridad, $direccion_exacta, 10, date('Y-m-d'), date('H:i:s'));
                 $_SESSION['mensaje'] = "Dirección registrada correctamente";
+                header('Location: ../view/horario_ubicacion.php');
+                exit;
             } else {
                 $_SESSION['mensaje'] = "Error: Debes llenar todos los campos.";
+                header('Location: ../view/horario_ubicacion.php');
+                exit;
             }
-            header('Location: ../view/horario_ubicacion.php');
-            exit;
-
         }
     }
 
@@ -64,7 +63,7 @@ class ControllerDireccion
                 $error = true;
             }
 
-    
+
             header('Location: ../view/ver_direcciones.php');
             exit;
         } else {
@@ -80,7 +79,7 @@ class ControllerDireccion
         } else {
             $_SESSION['mensaje'] = "Error: El ID de dirección no es válido.";
         }
-    
+
         header('Location: ../view/horario_ubicacion.php');
 
         exit;
