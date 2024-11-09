@@ -15,9 +15,6 @@ $daoSeguridad = new DaoSeguridad();
 $daoDispositivo = new DaoDispositivo();
 
 try {
-
-    //$consultar = "SELECT * FROM dispositivo WHERE id_seguridad = '$id_seguridad' AND (estado_dispositivo='activado' || estado_dispositivo='seguro') AND direccion_ip='$dir_ip'";
-
     $registro = $daoUsuario->verificarLogin($tarjeta, $dni, $clave_internet);
     if (count($registro) === 1) {
 
@@ -25,7 +22,7 @@ try {
         $_SESSION['id_usuario'] = $registro[0]['id_usuario'];
         $id_usuario = $_SESSION['id_usuario'];
         //SEGURIDAD
-        $registro2 = $daoSeguridad->readByUser($id_usuario); //Seleccionar la llave foranea de id de usuario pero en seguridad(es decir la seguridad para el cliente tal... Esto se hace para conectar con dispositivo por medio de este valor obtenido)
+        $registro2 = $daoSeguridad->readByUser($id_usuario);
 
         if ($registro2[0]['activacion_seguridad'] === 1) { //Va a revisar si esta activado la seguridad 
             $_SESSION['id_seguridad'] = $registro2[0]['id_seguridad'];
@@ -35,7 +32,6 @@ try {
 
             $direccion_ip_deseada = $registro3[0]['direccion_ip'];
             $_SESSION['info'] = $info;
-            //----
             $_SESSION['direccion_ip'] = $dir_ip;
             $_SESSION['dispositivo'] = obtener_dispositivo();
             $_SESSION['pais'] = $info['country'];
@@ -54,7 +50,7 @@ try {
                 die();
             }
         } else {
-            header("Location: ../view/index.php");
+            header("Location: ../view/principal.php");
         }
     } else {
         session_destroy();

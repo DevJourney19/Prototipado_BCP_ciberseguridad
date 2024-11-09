@@ -11,12 +11,13 @@ function autocompleteAddress(input) {
     fetch(url)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Error en la red: ' + response.statusText);
+                throw new Error(`Error en la red: ${response.statusText}`);
             }
             return response.json();
         })
         .then(data => {
             suggestions.innerHTML = ''; 
+            // biome-ignore lint/complexity/noForEach: <explanation>
             data.forEach(item => {
                 const li = document.createElement('li');
                 li.textContent = item.display_name;
@@ -43,7 +44,7 @@ function getLocation() {
             fetch(url)
                 .then(response => {
                     if (!response.ok) {
-                        throw new Error('Error en la red: ' + response.statusText);
+                        throw new Error(`Error en la red: ${response.statusText}`);
                     }
                     return response.json();
                 })

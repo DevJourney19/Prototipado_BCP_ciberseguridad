@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 	const elems = document.querySelectorAll(".icon");
 	const path = window.location.pathname.split(
-		"/Prototipado_BCP_ciberseguridad/view/",
+		"/Prototipado_bcp_ciberseguridad/view/",
 	)[1];
 	switch (path) {
 		case "principal.php":

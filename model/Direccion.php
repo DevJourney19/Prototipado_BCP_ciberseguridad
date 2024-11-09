@@ -1,5 +1,5 @@
 <?php
-
+// utilizar el modelo en el controlador
 class Direccion {
     private $id;
     private $id_seguridad;

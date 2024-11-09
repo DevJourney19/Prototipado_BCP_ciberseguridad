@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once '../model/Dispositivo.php';
 include_once '../config/Connection.php';
 include_once 'interfaces/DaoInterfaceDispositivo.php';
@@ -12,20 +11,20 @@ class DaoDispositivo implements DaoInterfaceDispositivo
     {
         $this->db = new Connection();
     }
-    function createDevice($estado)
+    function createDevice($modelo_dispositivo)
     {
+        $response = false;
         try {
-            $id_seguridad = $_SESSION['id_seguridad'];
-            $ip_usuario = $_SESSION['direccion_ip']; // null en caso que es un dispositivo que no coincida con los requisitos pero si que registro los datos correctos
-            $resultado = $_SESSION['info']; // Si funciona en verificaacion 
-            $dispositivo = $_SESSION['dispositivo'];
+            $id_seguridad = $modelo_dispositivo->getIdSeguridad();
+            $ip_usuario = $modelo_dispositivo->getDireccionIp();
+            $pais = $modelo_dispositivo->getPais();
+            $ciudad = $modelo_dispositivo->getCiudad();
+            $dispositivo = $modelo_dispositivo->getTipoDispositivo();
+            $estado = $modelo_dispositivo->getEstadoDispositivo();
             $fecha_registro = date('Y-m-d');
             $ult_conexion = date('Y-m-d');
-            $query = "INSERT INTO dispositivo (id_seguridad, tipo_dispositivo, direccion_ip, 
-    pais, ciudad, fecha_registro, estado_dispositivo, ultima_conexion) VALUES ('$id_seguridad', '$dispositivo', '$ip_usuario', 
-    '{$resultado['country']}', '{$resultado['city']}', '$fecha_registro', '$estado', '$ult_conexion')";
+            $query = "INSERT INTO dispositivo (id_seguridad, tipo_dispositivo, direccion_ip, pais, ciudad, fecha_registro, estado_dispositivo, ultima_conexion) VALUES ('$id_seguridad', '$dispositivo', '$ip_usuario', '$pais', '$ciudad', '$fecha_registro', '$estado', '$ult_conexion')";
             $response = $this->db->ejecutar($query);
-
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -60,7 +59,7 @@ class DaoDispositivo implements DaoInterfaceDispositivo
             } else if ($accion === 'activar') {
                 $sql = "UPDATE dispositivo SET estado_dispositivo='activado' where id_dispositivo ='$id_dispositivo'";
             }
-            $reponse = $this->db->ejecutar($sql);
+            $response = $this->db->ejecutar($sql);
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
             return [];

@@ -4,11 +4,6 @@ require_once '../dao/DaoDireccion.php';
 require_once '../dao/DaoSeguridad.php';
 include_once '../controller/ControllerEntradas.php';
 
-
-// $entradas = new ControllerEntradas();
-// $entradas->validarEntrada('index.php');
-// $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
-
 class ControllerDireccion
 {
     private $daoDireccion;
@@ -18,8 +13,6 @@ class ControllerDireccion
     {
         $this->daoDireccion = new DaoDireccion();
         $this->daoSeguridad = new DaoSeguridad();
-        // session_start(); 
-
     }
 
 
@@ -57,13 +50,9 @@ class ControllerDireccion
             if ($id_direccion && !empty($direccion_exacta)) {
                 $this->daoDireccion->modificarDireccion($id_direccion, $direccion_exacta, $rango_gps);
                 $_SESSION['mensaje'] = "Dirección modificada correctamente";
-                $error = false;
             } else {
                 $_SESSION['mensaje'] = "Error: Debes llenar todos los campos.";
-                $error = true;
             }
-
-
             header('Location: ../view/ver_direcciones.php');
             exit;
         } else {

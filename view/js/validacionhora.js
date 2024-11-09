@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', ()=> {
     const horaInicioInput = document.getElementById('hora-inicio-nuevo');
     const horaFinInput = document.getElementById('hora-fin-nuevo');
     const mensajeError = document.getElementById('avisoError');

@@ -2,6 +2,7 @@
 require_once '../dao/DaoDispositivo.php';
 require_once '../dao/DaoUsuario.php';
 require_once '../dao/DaoSeguridad.php';
+require_once '../model/Dispositivo.php';
 class ControllerDispositivo
 {
     private $daoUsuario;
@@ -22,7 +23,14 @@ class ControllerDispositivo
         if (isset($data['token_validado'])) {
             $_SESSION['token_validado'] = $data['token_validado'];
             $estado = $data['token_validado'] === true ? 'en_proceso_si' : 'en_proceso_no';
-            $this->daoDispositivo->createDevice($estado); //true o false
+            $modelo_direccion = new Dispositivo();
+            $modelo_direccion->setIdSeguridad($_SESSION['id_seguridad']);
+            $modelo_direccion->setDireccionIp($_SESSION['direccion_ip']);
+            $modelo_direccion->setTipoDispositivo($_SESSION['dispositivo']);
+            $modelo_direccion->setPais($_SESSION['info']['country']);
+            $modelo_direccion->setCiudad($_SESSION['info']['city']);
+            $modelo_direccion->setEstadoDispositivo($estado);
+            $this->daoDispositivo->createDevice($modelo_direccion);
         }
         echo json_encode(['status' => 'success']);
     }

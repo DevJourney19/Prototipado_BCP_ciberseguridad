@@ -18,7 +18,7 @@ class DaoEmocion implements DaoInterfaceEmocion
     try {
       $id_seguridad = $emocion->getIdSeguridad();
       $estado = $emocion->getTipoEmocion();
-      $query = "INSERT INTO encuestas(id_seguridad, estado) VALUES(:id_seguridad, :estado)";
+      $query = "INSERT INTO encuesta(id_seguridad, estado) VALUES(:id_seguridad, :estado)";
       $response = $this->db->ejecutar($query, ['id_seguridad'=>$id_seguridad, 'estado' => $estado]);
     } catch (Exception $e) {
       echo "Error: " . $e->getMessage();

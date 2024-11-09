@@ -1,5 +1,5 @@
 <?php
-
+// utilizar el modelo en el controlador
 class Horario {
     private $id;
     private $idSeguridad;

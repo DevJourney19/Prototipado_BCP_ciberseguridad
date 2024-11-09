@@ -26,16 +26,13 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
         input[type=number]::-webkit-inner-spin-button,
         input[type=number]::-webkit-outer-spin-button {
             -webkit-appearance: none;
-            /* Oculta los spinners */
             margin: 0;
-            /* Elimina el margen */
         }
 
         /* Para Firefox */
         input[type=number] {
             appearance: textfield;
             -moz-appearance: textfield;
-            /* Cambia la apariencia a un campo de texto */
         }
     </style>
 </head>
@@ -44,7 +41,6 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
     <main>
         <!-- Despues de darle clic en ingresar y los datos sean correctos-->
         <?php if ($error_ubicacion) {
-            //echo realpath('modals/alerta_dispositivo.php');
             include 'modals/alerta_dispositivo.php';
             ?>
         <?php }

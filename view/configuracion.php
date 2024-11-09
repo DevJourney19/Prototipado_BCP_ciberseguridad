@@ -107,10 +107,12 @@ $entradas->validarEntrada('index.php');
         </div>
       </div>
     </div>
+    <?php if(isset($_SESSION["id_seguridad"])) {?>
     <button id="abrirModal">
       <i class="fa-solid fa-clipboard-list"></i>
       <span>Ayúdanos resolviendo una encuesta para mejorar tu experiencia</span>
     </button>
+    <?php } ?>
   </section>
   <footer>
     <?php include '../view/fragmentos/menubar.php' ?>

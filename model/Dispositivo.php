@@ -1,26 +1,47 @@
 <?php
-
+// utilizar el modelo en el controlador
 class Dispositivo
 {
-private $id_dispositivo;
-private $tipo_dispositivo;
-private $direccion_ip;
-private $pais;
-private $ciudad;
-private $estado_dispositivo;
-private $fecha_registro;
-private $ultima_conexion;
+    private $id_seguridad;
+    private $tipo_dispositivo;
+    private $direccion_ip;
+    private $pais;
+    private $ciudad;
+    private $estado_dispositivo;
+    private $fecha_registro;
+    private $ultima_conexion;
 
-public function getIdDispositivo()
-    {
-        return $this->id_dispositivo;
+    public function __construct($id_seguridad = null, $tipo_dispositivo = null, $direccion_ip = null, $pais = null, $ciudad = null, $estado_dispositivo = null, $fecha_registro = null, $ultima_conexion = null) {
+        $this->id_seguridad = $id_seguridad;
+        $this->tipo_dispositivo = $tipo_dispositivo;
+        $this->direccion_ip = $direccion_ip;
+        $this->pais = $pais;
+        $this->ciudad = $ciudad;
+        $this->estado_dispositivo = $estado_dispositivo;
+        $this->fecha_registro = $fecha_registro;
+        $this->ultima_conexion = $ultima_conexion;
     }
 
-    public function setIdDispositivo($id_dispositivo)
+    public function getIdSeguridad()
     {
-        $this->id_dispositivo = $id_dispositivo;
+        return $this->id_seguridad;
     }
 
+    public function setIdSeguridad($id_seguridad)
+    {
+        $this->id_seguridad = $id_seguridad;
+    }
+
+    public function getDireccionIp()
+    {
+        return $this->direccion_ip;
+    }
+
+    public function setDireccionIp($direccion_ip)
+    {
+        $this->direccion_ip = $direccion_ip;
+    }
+    
     public function getTipoDispositivo()
     {
         return $this->tipo_dispositivo;
@@ -41,7 +62,7 @@ public function getIdDispositivo()
         $this->pais = $pais;
     }
 
-    
+
     public function getCiudad()
     {
         return $this->ciudad;
@@ -51,7 +72,7 @@ public function getIdDispositivo()
     {
         $this->ciudad = $ciudad;
     }
-    
+
     public function getEstadoDispositivo()
     {
         return $this->estado_dispositivo;
@@ -61,12 +82,12 @@ public function getIdDispositivo()
     {
         $this->estado_dispositivo = $estado_dispositivo;
     }
-    
+
     public function setFechaRegistro($fecha_registro)
     {
         $this->fecha_registro = $fecha_registro;
     }
-    
+
     public function getFechaRegistro()
     {
         return $this->fecha_registro;
@@ -76,10 +97,9 @@ public function getIdDispositivo()
     {
         $this->ultima_conexion = $ultima_conexion;
     }
-    
+
     public function getUltimaConexion()
     {
         return $this->ultima_conexion;
     }
-
 }

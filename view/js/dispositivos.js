@@ -28,7 +28,7 @@ const dispositivo_principal = async () => {
         const caja = document.getElementById(idSeleccionado); //HGcemos la unión entre la caja y el checkbox
         if (caja) {
 
-            let dispositivoss = JSON.parse(localStorage.getItem('nuevo_dispositivo'));
+            const dispositivoss = JSON.parse(localStorage.getItem('nuevo_dispositivo'));
 
             const dispositivoEncontrado = dispositivoss.find(d => d.id === Number(idSeleccionado));
 
@@ -131,12 +131,12 @@ async function eliminarCajaSeleccionada() {
 //En caso para ver los resultados de los equipos que han querido intentar ingresar a su cuenta
 const historial = document.getElementById("historial");
 if (historial) {
-    historial.addEventListener('click', function () {
+    historial.addEventListener('click',  () => {
         window.location.href = './consulta_dispositivos.php';
     });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded',  () =>{
     //Se puso así para cuando se reciba un mensaje de success se pueda volver a llamar a la función 
     agregando_solicitudes_html();
 });
@@ -165,6 +165,7 @@ async function agregando_solicitudes_html() {
 
         tabla_dis.innerHTML = '';
 
+        // biome-ignore lint/complexity/noForEach: <explanation>
         dispositivos_filtrados.forEach(dispositivo => {
             const estado_dis = dispositivo.estado === 'en_proceso_si' ? 'Si' : 'No';
 
@@ -192,6 +193,7 @@ async function agregando_solicitudes_html() {
 
 async function manejadorBoton() {
     const botonesAccion = document.querySelectorAll('.accion-boton');
+    // biome-ignore lint/complexity/noForEach: <explanation>
     botonesAccion.forEach(boton => {
         boton.addEventListener('click', async function () {
             const id_dispositivo = this.getAttribute('data-id'); // Obtener el ID del dispositivo
@@ -214,7 +216,7 @@ async function manejadorBoton() {
                 const resultado_div = document.getElementById('resultado');
 
                 if (data.status === 'success') {
-                    resultado_div.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
+                    resultado_div.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
                     await agregando_solicitudes_html(); //Actualizar la tabla
                     //htmleando(accion);
 
@@ -228,7 +230,7 @@ async function manejadorBoton() {
                             //Quizás se tenga que hacer un filtro para el dispositivo de usuario //Quizás se tenga que hacer como una consulta especifica...
                             const informacion = info.filter(t => t.estado === 'seguro');
 
-                            console.log("La informacion es: " + informacion);
+                            console.log(`La informacion es: ${informacion}`);
 
                             //let local = JSON.parse(localStorage.getItem('nuevo_dispositivo'));
                             //local.push(informacion);
@@ -238,7 +240,7 @@ async function manejadorBoton() {
                         }
                     }//fin del if
                 } else {
-                    resultado_div.innerHTML = '<div class="alert alert-danger">' + data.message + '</div>';
+                    resultado_div.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
                 }
             } catch (error) {
                 console.error('Error:', error);

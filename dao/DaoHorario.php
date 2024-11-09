@@ -32,7 +32,7 @@ class DaoHorario implements DaoInterfaceHorario {
 
     public function obtenerHorariosRestringidos($idSeguridad) {
         try {
-            $query = "SELECT * FROM hora_restringida WHERE id_seguridad = :idSeguridad";
+            $query = "SELECT * FROM hora_restringida WHERE id_seguridad = :idSeguridad AND DATE(CREATED_AT) = CURDATE()";
             return $this->db->consultar($query, ['idSeguridad' => $idSeguridad]);
         } catch (Exception $e) {
             echo "Error al obtener horarios restringidos: " . $e->getMessage();
