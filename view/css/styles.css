@@ -427,14 +427,13 @@ main {
   margin-bottom: 20px;
 }
 
-canvas {
-  background-color: transparent;
-  width: 90%;
-  margin: 0 auto;
-  position: relative;
-  padding: 20px;
+.col > div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90%;
+  width: 500px;
 }
-
 .col {
   margin-bottom: 20px;
   position: relative;
@@ -1530,9 +1529,5 @@ section button i{
 @media (min-width: 1400px) {
   canvas {
     width: 70%;
-  }
-  #grafico_2 {
-    width: 90%;
-    padding: 20px;
   }
 }

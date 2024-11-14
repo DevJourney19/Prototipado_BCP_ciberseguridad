@@ -21,9 +21,9 @@ try {
         $_SESSION['id_usuario'] = $registro[0]['id_usuario'];
         header("Location: ../view/dashboard.php");
     } else {
-        // session_start();
-        // session_destroy();
-        // header("Location: ../view/login_admin.php?error=true");
+        session_start();
+        session_destroy();
+        header("Location: ../view/login_admin.php?error=true");
     }
 } catch (Exception $exc) {
     die($exc->getMessage());
