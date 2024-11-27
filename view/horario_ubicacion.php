@@ -83,7 +83,6 @@ $error = null;
                                     value="<?php echo htmlspecialchars($datos['hora_final']); ?>" required />
                             </div>
                         </div>
-                        <small>* Recuerda que cada día debes registrar un rango de horario</small>
                         <div class="botones">
                             <button type="submit" class="boton-azul" name="btnModificar" <?php if($datosActivados==0){?>disabled<?php } ?>>Editar Cambios</button>
                         </div>

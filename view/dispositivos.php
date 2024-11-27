@@ -1,13 +1,12 @@
 <?php
 
 include_once '../controller/ControllerEntradas.php';
-
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
 $seguro = null;
 
-if ($_SESSION['estado_dispositivo'] === 'seguro') {
+if (isset($_SESSION['estado_dispositivo'])&$_SESSION['estado_dispositivo'] === 'seguro') {
     $seguro = true;
 }
 $dispositivo = $_SESSION['dispositivo'];
@@ -50,7 +49,6 @@ $dispositivo = $_SESSION['dispositivo'];
             <!--Necesito crear esto por js -->
 
             <?php if (isset($dispositivo)) { ?>
-
                 <div class="caja">
                     <div class="primero">
                         <div class="imagen">

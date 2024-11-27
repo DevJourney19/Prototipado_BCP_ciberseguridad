@@ -18,6 +18,8 @@ use Infobip\Model\SmsAdvancedTextualRequest;
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
+function envioCorreo($lugar, $ip, $hora) {
+  session_start();
 try {
   $mail = new PHPMailer(true);
   
@@ -67,15 +69,15 @@ if (!filter_var($modelUsuario->getCorreo(), FILTER_VALIDATE_EMAIL)) {
 
 $mail->setFrom("bcp83584@gmail.com", "Banca en Linea BCP");
 $mail->addAddress($modelUsuario->getCorreo(), $modelUsuario->getNombre());
-$mail->Subject = 'Codigo de verificacion';
-$mail->Body = 'Alguien esta tratando de ingresar a tu cuenta!\nEl codigo de verificacion es: ' . $codigo . '\nSi no fuiste tu, por favor contacta a soporte tecnico e ignora este mensaje.';
+$mail->Subject = 'Ingreso Bloqueado';
+$mail->Body = 'Alguien esta tratando de ingresar a tu cuenta!\nDesde: ' . $lugar . '\Con ip: ' . $ip . '\A las: ' . $hora . '\nSi no fuiste tu, por favor contacta a soporte tecnico e ignora este mensaje.';
 $mail->send();
 
 $api = new SmsApi(config: $configuration);
 $destination = new SmsDestination(to: $modelUsuario->getTelefono());
 $message = new SmsTextualMessage(
   destinations: [$destination],
-  text: 'El codigo de verificacion es: ' . $codigo
+  text: 'Estan intentando ingresar a tu cuenta bcp desde: ' . $lugar . '\Con ip: ' . $ip . '\A las: ' . $hora
 );
 
 $request = new SmsAdvancedTextualRequest(messages: [$message]);
@@ -85,4 +87,4 @@ $responseSms = $api->sendSmsMessage($request);
 $response = ['status' => 'enviado'];
 echo json_encode($response);
 
-
+}

@@ -40,7 +40,7 @@
         <div class="button_modal">
           <button type="button" id="cancelar" class="bloquear">Cancelar</button>
           <button type="submit" class="aceptar" onclick="verificarCodigo(event)">Verificar</button>
-          <button type="button" class="reenviar">Reenviar</button>
+          <!-- <button type="button" class="reenviar">Reenviar</button> -->
         </div>
       </form>
     </div>
@@ -81,8 +81,8 @@
         authenticator
       } = window.otplib;
       secret = authenticator.generateSecret();
-      token = authenticator.generate(secret); //se va a generar por defecto un codigo de 6 digitos
-      return token;
+      const tokenGenerado = authenticator.generate(secret); //se va a generar por defecto un codigo de 6 digitos
+      return tokenGenerado;
     } else {
       console.error('otplib no esta cargando');
     }
@@ -91,7 +91,7 @@
 
   async function enviarCodigo() {
     document.getElementById("envioCodigo").disabled = true; //Evitar hacer multiples clics en el botón
-    const token = generarToken(); //Se va a enviar el token al ControllerEnvioCodigo.php
+    token = generarToken(); //Se va a enviar el token al ControllerEnvioCodigo.php
     try {
       const response = await fetch("../controller/ControllerEnvioCodigo.php", {
         method: "POST",
@@ -124,9 +124,7 @@
       tokenIngresado += element.value;
     });
     if (token === tokenIngresado) {
-      alert('Código exitoso, necesita validación');//Se debe de mostrar un modal brindando la bienvenida
-      /*Se necesita establecer una comunicación con el servidor para trabajar con PHP, 
-      es por ello que se realizó un JSON */
+      alert('Código exitoso, necesita validación');
       try {
         const response = await fetch('../controller/ControllerDispositivo.php?action=getUsuario&cambio=true', {
           method: 'POST',
@@ -135,11 +133,10 @@
           },
           body: JSON.stringify({ token_validado: true })
         });
-        const textResponse = await response.text(); // Obtener la respuesta como texto
-        console.log(textResponse); // Imprimir la respuesta para depuración
+        const textResponse = await response.text(); 
+        console.log(textResponse); 
 
         const data = JSON.parse(textResponse);
-        //const data = await response.json();
 
         window.location.href = "./index.php";
 
@@ -147,7 +144,7 @@
         console.error('Error al establecer la sesión: ', error);
       };
 
-    } else { //Que se cree un registro pero con el verificado en 0
+    } else { 
       alert('Código incorrecto');
       try {
         const response = await fetch('../controller/ControllerDispositivo.php?action=getUsuario&cambio=true', {
@@ -157,8 +154,8 @@
           },
           body: JSON.stringify({ token_validado: false })
         });
-        const textResponse = await response.text(); // Obtener la respuesta como texto
-        console.log(textResponse); // Imprimir la respuesta para depuración
+        const textResponse = await response.text(); 
+        console.log(textResponse); 
 
         const data = JSON.parse(textResponse);
         //const data = await response.json();
