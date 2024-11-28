@@ -18,7 +18,7 @@ date_default_timezone_set("America/Lima");
 // $dotenv->load();
 
 # Propiedades de la base de datos usando variables de entorno
-define('HOST', 'localhost:3306');
+define('HOST', 'localhost:3308');
 define('USER', 'root');
 define('PASS', '');
 define('DATABASE', 'seguridadbcp');
