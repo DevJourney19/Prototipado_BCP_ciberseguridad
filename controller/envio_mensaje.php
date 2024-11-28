@@ -3,7 +3,6 @@
 header('Content-Type: application/json');
 include_once '../dao/DaoUsuario.php';
 include_once '../model/Usuario.php';
-session_start();
 require __DIR__ . '/../vendor/autoload.php';
 
 use Dotenv\Dotenv;

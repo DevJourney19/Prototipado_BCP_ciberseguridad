@@ -6,11 +6,12 @@ include '../dao/DaoHorario.php';
 include '../dao/DaoDireccion.php';
 include 'direccion_ip.php';
 include 'envio_mensaje.php';
-session_start();
+
 //Evitar ataque SQL INJECTION
 $tarjeta = filter_input(INPUT_POST, 'tarjeta', FILTER_SANITIZE_NUMBER_INT);
 $dni = filter_input(INPUT_POST, 'dni', FILTER_SANITIZE_NUMBER_INT);
-$clave_internet = filter_input(INPUT_POST, 'clave_internet', FILTER_SANITIZE_STRING);
+$clave_internet = filter_input(INPUT_POST, var_name: 'clave_internet', filter: FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
 $dir_ip = getPublicIp(); //se obtiene la direccion actual para comparar con la direccion de activación
 $info = obtener_info_ip($dir_ip);
 $daoUsuario = new DaoUsuario();
@@ -56,13 +57,14 @@ try {
                         //obtener todas direcciones y recorrer
                         $direcciones = $daoDireccion->obtenerTodasDirecciones($id_seguridad);
                         $datosDispositivo = obtenerCoordenadasIP($dir_ip);
+                        
                         for ($i = 0; $i < count($direcciones); $i++) {
                             $datosUbicacion = obtenerCoordenadasOSM($direcciones[$i]['direccion_exacta']);
                             if (verificarUbicacionSegura($datosDispositivo['latitud'], $datosDispositivo['longitud'], $datosUbicacion['latitud'], $datosUbicacion['longitud'], $direcciones[$i]['rango_gps'])) {
                                 $_SESSION['id_dispositivo'] = $registro3[0]['id_dispositivo'];
                                 $_SESSION['estado_dispositivo'] = $registro3[0]['estado_dispositivo'];
                                 header("Location: ../view/principal.php");
-                                die();
+                                
                             } else {
                                 //enviar mensaje y no dejar ingresar
                                 envioCorreo($info['city'], $dir_ip, date("h:i:s A"));
