@@ -73,21 +73,16 @@ class DaoUsuario implements DaoInterfaceUsuario
             return null;
         }
     }
-    /*
-    public function readDispo($idUsuario, $id_segu)
-    {
+
+    public function  updateUser($usuario){
         try {
-            $query = "SELECT * FROM dispositivo WHERE id_seguridad = :idSeguridad AND ";
-            $result = $this->db->consultar($query, ['idSeguridad' => $idUsuario], '');
-            if (count($result) > 0) {
-                return $result[0];
-            } else {
-                return null;
-            }
+            $sql = "UPDATE usuario SET telefono = :telefono, correo = :correo WHERE id_usuario = :id";
+            $result = $this->db->ejecutar($sql, ['telefono' => $usuario->getTelefono(), 'correo' => $usuario->getCorreo(), 'id' => $usuario->getIdUsuario()]);
+            return $result;
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
             return null;
         }
     }
-        */
+
 }

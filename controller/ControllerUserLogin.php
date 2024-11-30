@@ -59,6 +59,7 @@ try {
                         $datosDispositivo = obtenerCoordenadasIP($dir_ip);
                         
                         for ($i = 0; $i < count($direcciones); $i++) {
+                            // en ves de direccion exacta obtener la ciudad
                             $datosUbicacion = obtenerCoordenadasOSM($direcciones[$i]['direccion_exacta']);
                             if (verificarUbicacionSegura($datosDispositivo['latitud'], $datosDispositivo['longitud'], $datosUbicacion['latitud'], $datosUbicacion['longitud'], $direcciones[$i]['rango_gps'])) {
                                 $_SESSION['id_dispositivo'] = $registro3[0]['id_dispositivo'];

@@ -29,36 +29,4 @@ class ControllerUsuario
         $usuario->setTelefono($result['telefono']);
         return $usuario;
     }
-    /*
-    public function obtenerUsuario($id)
-    {
-        $result = $this->daoUsuario->readUser($id);
-        $usuario = new Usuario();
-        //$usuario->setIdUsuario($result['id']);
-
-    }
-        */
-    /*
-    public function usuario_activado($id)
-    {
-        $result = $this->daoUsuario->readUser($id);
-        $usuario = new Usuario();
-        //$usuario->setIdUsuario($result['id']);
-        $usuario->setNombre($result['nombre']);
-        $usuario->setTelefono($result['telefono']);
-        return $usuario;
-    }
-        */
-    /*
-    public function estado_activado($id)
-    {
-        $result = $this->daoUsuario->readDispo($id);
-        $usuario = new Usuario();
-        //$usuario->setIdUsuario($result['id']);
-        $usuario->setNombre($result['nombre']);
-        $usuario->setTelefono($result['telefono']);
-        return $usuario;
-        
-    }
-        */
 }

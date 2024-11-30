@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       labels: valor,
       datasets: [
         {
-          label: "2023",
+          label: thisYear,
           data: numeros,
           backgroundColor: [
             "rgba(224, 132, 22, 0.2)",
@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           fill: false,
         },
         {
-          label: "2024",
+          label: thisYear - 1,
           data: numeros2,
           backgroundColor: [
             "rgba(224, 132, 22, 0.2)",

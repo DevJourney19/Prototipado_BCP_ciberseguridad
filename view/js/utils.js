@@ -40,6 +40,8 @@ const controlarFormulario = async (event) => {
 					},
 					body: JSON.stringify({
 						userId,
+						telefono: document.getElementById('telefono_activacion').value,
+						correo: document.getElementById('correo_activacion').value
 					}),
 				})
 					.then((response) => response.json())

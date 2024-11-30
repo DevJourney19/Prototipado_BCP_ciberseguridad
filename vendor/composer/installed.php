@@ -3,7 +3,7 @@
         'name' => 'danie/prototipado_bcp_ciberseguridad',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '9104ac534b583d5e7ed17b8e4d76131f72f4aa83',
+        'reference' => '828035d715ba66f06b131c61a0cc95d7ae747e87',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'danie/prototipado_bcp_ciberseguridad' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '9104ac534b583d5e7ed17b8e4d76131f72f4aa83',
+            'reference' => '828035d715ba66f06b131c61a0cc95d7ae747e87',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -76,7 +76,6 @@ $datos = $seguridad->verificarSeguridad($_SESSION['id_usuario']);
     </footer>
     <script src="../view/js/index.js"></script>
     <script src="../view/js/utils.js"></script>
-    <script src="../view/js/dispositivo_activado.js"></script>
 
 </body>
 
