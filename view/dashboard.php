@@ -22,9 +22,11 @@ $entradas->validarEntrada('login_admi.php');
             <h1 class="h1_dashboard">Dashboard</h1>
             <div>
                 <button class="excel"><i class="fa-solid fa-file-excel"></i></button>
-                <button class="pdf">
-                    <i class="fa-solid fa-file-pdf"></i>
-                </button>
+                <a href="reportepdf.php">
+                    <button class="pdf">
+                        <i class="fa-solid fa-file-pdf">Generar PDF</i>
+                    </button>
+                </a>
             </div>
         </div>
         <p class="description">Aquí puede visualizar las métricas del rendimiento dle sistema.</p>
