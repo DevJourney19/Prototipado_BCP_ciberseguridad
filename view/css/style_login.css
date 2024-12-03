@@ -225,6 +225,96 @@ input.only_text{
   box-shadow: 0 0 5px rgba(0, 024, 67, 0.5);
 }
 
+.advertencia {
+  position: fixed; 
+  top: 20px;
+  left: 50%; 
+  transform: translateX(-50%);
+  background-color: #fffbcc;
+  color: #856404;
+  padding: 15px 20px;
+  border: 1px solid #ffeeba; 
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  gap: 10px; 
+  font-size: 16px;
+  font-weight: bold;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out;
+}
+.modal.error {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 15px 20px;
+  border: 1px solid #f5c6cb;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: auto;
+  max-width: 90%;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out;
+}
+.modal.exito {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #d4edda;
+  color: #155724;
+  padding: 15px 20px;
+  border: 1px solid #c3e6cb;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: auto;
+  max-width: 90%;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, top 0.3s ease-in-out;
+}
+
+.modal.advertencia svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0; 
+}
+
+.modal.advertencia p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.modal.advertencia.open {
+  opacity: 1;
+  top: 30px; 
+}
+
+.modal.advertencia.close {
+  opacity: 0;
+  top: 0; 
+}
+
 @media (min-width: 768px) {
 
   .contenedor-token{
@@ -241,6 +331,31 @@ input.only_text{
   }
 }
 
+@media (max-width: 768px) {
+  .modal {
+    width: 90%; 
+    padding: 15px; 
+  }
+
+  .modal .description {
+    font-size: 14px; 
+  }
+
+  .modal button {
+    padding: 8px 20px;
+  }
+
+  .modal.exito,
+  .modal.error,
+  .modal.advertencia {
+    font-size: 14px; 
+  }
+
+  .contenedor-token input {
+    font-size: 16px; 
+    width: 40px; 
+  }
+}
 
 @media (max-width: 992px) {
   .img_trabajador {
