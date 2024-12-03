@@ -1,9 +1,17 @@
 <?php
 include_once '../controller/ControllerEntradas.php';
 include_once '../controller/ControllerEntradas.php';
+include_once '../controller/ControllerDispositivo.php';
 $entradas = new ControllerEntradas();
+$dispositivosEnProceso = new ControllerDispositivo();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
+
+$listaDisposEnProceso = $dispositivosEnProceso->obtenerDispositivosEnProceso($_SESSION['id_seguridad']);
+if ($listaDisposEnProceso === null or !isset($listaDisposEnProceso)) {
+    $listaDisposEnProceso = false;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +60,30 @@ $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
                     </tr>
                 </thead>
 
-                <tbody id="tabla_dispositivos"></tbody>
+                <tbody>
+                    <?php
+                    if (!empty($listaDisposEnProceso)) {
+                        foreach ($listaDisposEnProceso as $dispoProcess) { ?>
+                            <tr data-id="<?=$dispoProcess['id_dispositivo']?>">
+                                <td><?= $dispoProcess['tipo_dispositivo'] ?></td>
+                                <td><?= $dispoProcess['direccion_ip'] ?></td>
+                                <td><?= $dispoProcess['pais'] ?></td>
+                                <td><?= $dispoProcess['ciudad'] ?></td>
+                                <td class="estado-dispositivo"><?= $dispoProcess['estado_dispositivo'] ?></td>
+                                <td><?= $dispoProcess['fecha_registro'] ?></td>
+                                
+                                <td><button class="botoncito_accion_permitir accion-boton" data-id="<?=$dispoProcess['id_dispositivo']?>"
+                                        data-accion="permitir">Permitir</button></td>
+                                <td><button class="botoncito_accion_eliminar accion-boton" data-id="<?=$dispoProcess['id_dispositivo']?>"
+                                        data-accion="eliminar">Eliminar</button></td>
+                                <td><button class="botoncito_accion_bloquear accion-boton" data-id="<?=$dispoProcess['id_dispositivo']?>"
+                                        data-accion="bloquear">Bloquear</button></td>
+                            </tr>;
+
+                        <?php }
+                    } ?>
+
+                </tbody>
 
             </table>
 

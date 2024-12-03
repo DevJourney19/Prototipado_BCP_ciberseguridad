@@ -73,21 +73,4 @@ class DaoUsuario implements DaoInterfaceUsuario
             return null;
         }
     }
-    /*
-    public function readDispo($idUsuario, $id_segu)
-    {
-        try {
-            $query = "SELECT * FROM dispositivo WHERE id_seguridad = :idSeguridad AND ";
-            $result = $this->db->consultar($query, ['idSeguridad' => $idUsuario], '');
-            if (count($result) > 0) {
-                return $result[0];
-            } else {
-                return null;
-            }
-        } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
-            return null;
-        }
-    }
-        */
 }

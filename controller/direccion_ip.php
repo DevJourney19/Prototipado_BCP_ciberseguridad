@@ -103,11 +103,10 @@ function verificarUbicacionSegura($latDispositivo, $lonDispositivo, $latDireccio
     }
 }
 
-
 function obtenerCoordenadasOSM($direccion) {
     $direccionEncoded = urlencode($direccion);
     $url = "https://nominatim.openstreetmap.org/search?q=$direccionEncoded&format=json&limit=1";
-
+    
     $respuesta = file_get_contents($url);
     $datos = json_decode($respuesta, true);
 

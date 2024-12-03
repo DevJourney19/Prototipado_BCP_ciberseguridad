@@ -334,7 +334,12 @@ th {
     grid-template-columns: 1fr 1fr;
     overflow: auto;
     height: fit-content;
-    
+}
+
+.grid-item {
+    grid-column: span 2;
+    /* Ocupa ambas columnas */
+    text-align: center;
 }
 
 .col {
