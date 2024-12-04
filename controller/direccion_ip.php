@@ -102,29 +102,3 @@ function verificarUbicacionSegura($latDispositivo, $lonDispositivo, $latDireccio
         return false;
     }
 }
-
-
-function obtenerCoordenadasOSM($direccion) {
-    $direccionEncoded = urlencode($direccion);
-    $url = "https://nominatim.openstreetmap.org/search?q=$direccionEncoded&format=json&limit=1";
-
-    $respuesta = file_get_contents($url);
-    $datos = json_decode($respuesta, true);
-
-    if (!empty($datos)) {
-        return ['latitud' => $datos[0]['lat'], 'longitud' => $datos[0]['lon']];
-    }
-    return ['error' => 'No se encontraron coordenadas'];
-}
-
-function obtenerCoordenadasIP($ip) {
-    $url = "https://ipinfo.io/$ip/json";
-    $respuesta = file_get_contents($url);
-    $datos = json_decode($respuesta, true);
-
-    if (isset($datos['loc'])) {
-        list($latitud, $longitud) = explode(',', $datos['loc']);
-        return ['latitud' => $latitud, 'longitud' => $longitud];
-    }
-    return ['error' => 'No se pudo obtener la ubicación de la IP'];
-}

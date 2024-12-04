@@ -35,9 +35,9 @@ try {
             $_SESSION['id_seguridad'] = $registro2[0]['id_seguridad'];
             $id_seguridad = $_SESSION['id_seguridad'];
             //DISPOSITIVO
-            $registro3 = $daoDispositivo->enterAccess($id_seguridad, $dir_ip);
+            $dispositivo_actual = $daoDispositivo->enterAccess($id_seguridad, $dir_ip);
 
-            $direccion_ip_deseada = $registro3[0]['direccion_ip'];
+            $direccion_ip_deseada = $dispositivo_actual[0]['direccion_ip'];
             $_SESSION['info'] = $info;
             $_SESSION['direccion_ip'] = $dir_ip;
             $_SESSION['dispositivo'] = obtener_dispositivo();
@@ -47,7 +47,7 @@ try {
 
             //SI COINCIDE EN LA VERIFCACION
             if (!empty($direccion_ip_deseada) && $_SESSION['direccion_ip'] === $direccion_ip_deseada) {
-                // verificar si hora esta actividado, si no esta activado, se deja ingresar, si esta activado, verificar si la hora de ahora esta en el rango de la hora de bloqueo, si no esta, verificar si la ubicacion de la ip esta un un rango segun lo que se indique en la base de datos de las ubicaciones seguras, si no esta, se envia un correo con la ubicacion y la hora de acceso no autorizado y no deja ingresar. COMPARAR CON LA LATITUD Y LONGITUD DE LA DIRECCION DE LA BASE DE DATOS
+                //  COMPARAR CON LA LATITUD Y LONGITUD DE LA DIRECCION DE LA BASE DE DATOS
                 $horario = $registro2[0]['estado_hora_direccion'];
                 if ($horario) {
                     $horario_restringido = $daoHorario->obtenerHorariosRestringidos($id_seguridad);
@@ -56,14 +56,11 @@ try {
                     if ($hora_actual <= $horario_restringido[0]['hora_inicio'] && $hora_actual >= $horario_restringido[0]['hora_final']) {
                         //obtener todas direcciones y recorrer
                         $direcciones = $daoDireccion->obtenerTodasDirecciones($id_seguridad);
-                        $datosDispositivo = obtenerCoordenadasIP($dir_ip);
                         
                         for ($i = 0; $i < count($direcciones); $i++) {
-                            // en ves de direccion exacta obtener la ciudad
-                            $datosUbicacion = obtenerCoordenadasOSM($direcciones[$i]['direccion_exacta']);
-                            if (verificarUbicacionSegura($datosDispositivo['latitud'], $datosDispositivo['longitud'], $datosUbicacion['latitud'], $datosUbicacion['longitud'], $direcciones[$i]['rango_gps'])) {
-                                $_SESSION['id_dispositivo'] = $registro3[0]['id_dispositivo'];
-                                $_SESSION['estado_dispositivo'] = $registro3[0]['estado_dispositivo'];
+                            if (verificarUbicacionSegura($dispositivo_actual['latitud'], $dispositivo_actual['longitud'], $direcciones[$i]['latitud'], $direcciones[$i]['longitud'], $direcciones[$i]['rango_gps'])) {
+                                $_SESSION['id_dispositivo'] = $dispositivo_actual[0]['id_dispositivo'];
+                                $_SESSION['estado_dispositivo'] = $dispositivo_actual[0]['estado_dispositivo'];
                                 header("Location: ../view/principal.php");
                                 
                             } else {
@@ -82,8 +79,8 @@ try {
                         die();
                     }
                 } else {
-                    $_SESSION['id_dispositivo'] = $registro3[0]['id_dispositivo'];
-                    $_SESSION['estado_dispositivo'] = $registro3[0]['estado_dispositivo'];
+                    $_SESSION['id_dispositivo'] = $dispositivo_actual[0]['id_dispositivo'];
+                    $_SESSION['estado_dispositivo'] = $dispositivo_actual[0]['estado_dispositivo'];
                     header("Location: ../view/principal.php");
                     die();
                 }
