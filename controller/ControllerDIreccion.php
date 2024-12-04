@@ -21,9 +21,11 @@ class ControllerDireccion
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnRegistrarDireccion'])) {
             $id_seguridad = $_SESSION['id_seguridad'] ?? null;
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
+            $longitud = $_POST['longitud'] ?? null;
+            $latitud = $_POST['longitud'] ?? null;
 
             if ($id_seguridad && !empty($direccion_exacta)) {
-                $this->daoDireccion->registrarDireccion($id_seguridad, $direccion_exacta, 10, date('Y-m-d'), date('H:i:s'));
+                $this->daoDireccion->registrarDireccion($id_seguridad, $direccion_exacta, $longitud, $latitud, 10, date('Y-m-d'), date('H:i:s'));
                 $_SESSION['mensaje'] = "Dirección registrada correctamente";
                 header('Location: ../view/horario_ubicacion.php');
                 exit;
@@ -46,9 +48,11 @@ class ControllerDireccion
             $id_direccion = $_POST['txtId'] ?? null;
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
             $rango_gps = $_POST['txtRango'] ?? 10;
+            $longitud = $_POST['longitud'] ?? null;
+            $latitud = $_POST['longitud'] ?? null;
 
             if ($id_direccion && !empty($direccion_exacta)) {
-                $this->daoDireccion->modificarDireccion($id_direccion, $direccion_exacta, $rango_gps);
+                $this->daoDireccion->modificarDireccion($id_direccion, $direccion_exacta, $longitud, $latitud, $rango_gps);
                 $_SESSION['mensaje'] = "Dirección modificada correctamente";
             } else {
                 $_SESSION['mensaje'] = "Error: Debes llenar todos los campos.";

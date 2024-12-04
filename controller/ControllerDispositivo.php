@@ -30,6 +30,8 @@ class ControllerDispositivo
             $modelo_direccion->setPais($_SESSION['info']['country']);
             $modelo_direccion->setCiudad($_SESSION['info']['city']);
             $modelo_direccion->setEstadoDispositivo($estado);
+            $modelo_direccion->setLatitud($data['latitud']);
+            $modelo_direccion->setLongitud($data['longitud']);
             $this->daoDispositivo->createDevice($modelo_direccion);
         }
         echo json_encode(['status' => 'success']);

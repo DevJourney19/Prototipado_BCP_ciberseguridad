@@ -125,13 +125,24 @@
     });
     if (token === tokenIngresado) {
       alert('Código exitoso, necesita validación');
+      // latitud y longitud
+      let latitud = 0;
+        let longitud = 0;
+        navigator.geolocation.getCurrentPosition((position) => {
+          latitud = position.coords.latitude;
+          longitud = position.coords.longitude;
+        });
       try {
         const response = await fetch('../controller/ControllerDispositivo.php?action=getUsuario&cambio=true', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ token_validado: true })
+          body: JSON.stringify({ 
+            token_validado: true,
+            latitud,
+            longitud
+          })
         });
         const textResponse = await response.text(); 
         console.log(textResponse); 

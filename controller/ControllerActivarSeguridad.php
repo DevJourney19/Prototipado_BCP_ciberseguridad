@@ -27,6 +27,8 @@ try {
   $usuario->setTelefono($telefono);
   $usuario->setCorreo($correo);
   $usuario->setIdUsuario($id);
+  $latitud = $data['latitud'];
+  $longitud = $data['longitud'];
 
   if ($daoSeguridad->verificarActivaciones($id) && $daoUsuario->updateUser($usuario)) {
     $response = ['status' => 'registrado'];
@@ -48,6 +50,8 @@ try {
     $modelo_dispositivo->setCiudad($info['city']);
     $modelo_dispositivo->setTipoDispositivo(obtener_dispositivo());
     $modelo_dispositivo->setEstadoDispositivo('principal');
+    $modelo_dispositivo->setLatitud($latitud);
+    $modelo_dispositivo->setLongitud($longitud);
     $daoDispositivo->createDevice($modelo_dispositivo);
     unset($result);
   } else {

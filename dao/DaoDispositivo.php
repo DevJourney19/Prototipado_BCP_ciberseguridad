@@ -21,9 +21,11 @@ class DaoDispositivo implements DaoInterfaceDispositivo
             $ciudad = $modelo_dispositivo->getCiudad();
             $dispositivo = $modelo_dispositivo->getTipoDispositivo();
             $estado = $modelo_dispositivo->getEstadoDispositivo();
+            $latitud = $modelo_dispositivo->getLatitud();
+            $longitud = $modelo_dispositivo->getLongitud();
             $fecha_registro = date('Y-m-d');
             $ult_conexion = date('Y-m-d');
-            $query = "INSERT INTO dispositivo (id_seguridad, tipo_dispositivo, direccion_ip, pais, ciudad, fecha_registro, estado_dispositivo, ultima_conexion) VALUES ('$id_seguridad', '$dispositivo', '$ip_usuario', '$pais', '$ciudad', '$fecha_registro', '$estado', '$ult_conexion')";
+            $query = "INSERT INTO dispositivo (id_seguridad, tipo_dispositivo, direccion_ip, pais, ciudad, latitud, longitud, fecha_registro, estado_dispositivo, ultima_conexion) VALUES ('$id_seguridad', '$dispositivo', '$ip_usuario', '$pais', '$ciudad', '$latitud', '$longitud', '$fecha_registro', '$estado', '$ult_conexion')";
             $response = $this->db->ejecutar($query);
         } catch (Exception $e) {
             echo $e->getMessage();

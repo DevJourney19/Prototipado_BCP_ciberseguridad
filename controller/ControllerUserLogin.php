@@ -47,7 +47,7 @@ try {
 
             //SI COINCIDE EN LA VERIFCACION
             if (!empty($direccion_ip_deseada) && $_SESSION['direccion_ip'] === $direccion_ip_deseada) {
-                // verificar si hora esta actividado, si no esta activado, se deja ingresar, si esta activado, verificar si la hora de ahora esta en el rango de la hora de bloqueo, si no esta, verificar si la ubicacion de la ip esta un un rango segun lo que se indique en la base de datos de las ubicaciones seguras, si no esta, se envia un correo con la ubicacion y la hora de acceso no autorizado y no deja ingresar.
+                // verificar si hora esta actividado, si no esta activado, se deja ingresar, si esta activado, verificar si la hora de ahora esta en el rango de la hora de bloqueo, si no esta, verificar si la ubicacion de la ip esta un un rango segun lo que se indique en la base de datos de las ubicaciones seguras, si no esta, se envia un correo con la ubicacion y la hora de acceso no autorizado y no deja ingresar. COMPARAR CON LA LATITUD Y LONGITUD DE LA DIRECCION DE LA BASE DE DATOS
                 $horario = $registro2[0]['estado_hora_direccion'];
                 if ($horario) {
                     $horario_restringido = $daoHorario->obtenerHorariosRestringidos($id_seguridad);
