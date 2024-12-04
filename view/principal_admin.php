@@ -1,3 +1,19 @@
+<?php
+include_once '../controller/ControllerEntradas.php';
+include_once '../controller/ControllerUsuario.php';
+
+$entradas = new ControllerEntradas();
+$entradas->validarEntrada('index.php');
+
+$daoUsuario = new ControllerUsuario();
+
+if (isset($_SESSION['security'])) {
+    $usuario = $daoUsuario->obtenerUsuario($_SESSION['security'], "seguridad");
+} else {
+    $usuario = $daoUsuario->obtenerUsuario($_SESSION['security'], "usuario");
+}
+?>
+
 <head>
     <?php include '../view/fragmentos/head.php' ?>
     <style>
@@ -64,7 +80,6 @@
             }
 
             .campania {
-
                 flex-direction: row;
                 gap: 10px;
             }
@@ -75,13 +90,13 @@
 <body>
     <header>
         <link href="../view/css/admin.css" rel="stylesheet" />
-        <?php include '../view/fragmentos/nav.php' ?>
+        <?php include_once '../view/fragmentos/nav_close_admin.php' ?>
     </header>
 
     <div class="cuadro_superior">
         <div class="izquierda">
 
-            <div><span class="hola">Bienvenido, </span><span>Daniel</span></div>
+            <div><span class="hola">Bienvenido, </span><span><?= $usuario->getNombre(); ?></span></div>
 
             <div class="circulo">
                 <img src="img/usuario.png" alt="Perfil Usuario">

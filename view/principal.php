@@ -12,7 +12,6 @@ if (isset($_SESSION['id_seguridad'])) {
 } else {
     $usuario = $daoUsuario->obtenerUsuario($_SESSION['id_usuario'], "usuario");
 }
-
 ?>
 
 <!DOCTYPE html>

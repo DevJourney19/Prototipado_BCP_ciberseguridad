@@ -1,7 +1,7 @@
 <?php
 include_once '../controller/ControllerEntradas.php';
 $entradas = new ControllerEntradas();
-$entradas->validarEntrada('login_admi.php');
+$entradas->validarEntrada('login_admin.php');
 ?>
 
 <!DOCTYPE html>
@@ -15,10 +15,11 @@ $entradas->validarEntrada('login_admi.php');
 
 <body class="body_dashboard">
     <header>
-        <?php include '../view/fragmentos/nav.php' ?>
+        <?php include_once '../view/fragmentos/nav_close_admin.php' ?>
+        <?php include_once '../view/fragmentos/nav_admin.php' ?>
     </header>
+    
 
-    <?php include '../view/fragmentos/nav_admin.php' ?>
     <main class="main_dashboard" style="
     background: white;
     color: black;">
