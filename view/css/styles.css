@@ -26,7 +26,7 @@ h1 {
   padding: 10px;
 }
 
-nav > img {
+nav>img {
   width: 120px;
 }
 
@@ -74,27 +74,27 @@ main {
   padding-bottom: 10px;
 }
 
-.bcp_alerta > div {
+.bcp_alerta>div {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.bcp_alerta > img {
+.bcp_alerta>img {
   width: 80px;
 }
 
-.notificacion > div > span {
+.notificacion>div>span {
   color: #032f80;
   font-weight: 500;
   font-size: 1.2em;
 }
 
-.bcp_alerta > div > span {
+.bcp_alerta>div>span {
   color: #ae0c0c;
 }
 
-.notificacion > div > h3 {
+.notificacion>div>h3 {
   margin-top: 5px;
   color: #ff7900;
   font-weight: 700;
@@ -161,7 +161,7 @@ main {
   padding: 0 20px;
 }
 
-.primer_cuadro > p {
+.primer_cuadro>p {
   padding: 10px;
   text-align: center;
   font-weight: 600;
@@ -200,12 +200,12 @@ main {
   color: #ff7900;
 }
 
-.plan_seguro > img {
+.plan_seguro>img {
   width: 50px;
   margin: 0px 10px;
 }
 
-.segundo_cuadro > form a {
+.segundo_cuadro>form a {
   text-decoration: none;
 }
 
@@ -216,11 +216,11 @@ main {
   margin-top: 10px;
 }
 
-.segundo_cuadro > form {
+.segundo_cuadro>form {
   width: 100%;
 }
 
-.segundo_cuadro > p {
+.segundo_cuadro>p {
   font-weight: 600;
   text-align: center;
   margin-bottom: 10px;
@@ -247,12 +247,14 @@ main {
   border-radius: 20px;
   cursor: pointer;
 }
+
 .segundo_cuadro button:hover {
   background: #f48728;
   color: #ffffff;
   transition: background 0.3s, transform 0.3s;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 /* --- Principal ---*/
 .cuadro_superior {
   background-color: #011844;
@@ -269,7 +271,7 @@ main {
   font-weight: 600;
 }
 
-.derecha > span {
+.derecha>span {
   font-size: 1.2rem;
   display: block;
   text-align: center;
@@ -385,7 +387,7 @@ main {
   gap: 20px;
 }
 
-.tarjeta > div {
+.tarjeta>div {
   display: flex;
   border: 2px solid lightgray;
   border-radius: 10px;
@@ -395,14 +397,14 @@ main {
   gap: 10px;
 }
 
-.tarjeta > div > div:nth-last-child(1) {
+.tarjeta>div>div:nth-last-child(1) {
   display: flex;
   gap: 10px;
   align-items: center;
 }
 
-.donaciones > div > span,
-.seguridad_mejorada > div > span {
+.donaciones>div>span,
+.seguridad_mejorada>div>span {
   font-weight: 600;
   color: #032f80;
 }
@@ -411,7 +413,7 @@ main {
 .h1_dashboard {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #000000;
 }
 
 .description {
@@ -423,23 +425,24 @@ main {
   color: #ffffff;
 }
 
-.main_dashboard > p {
+.main_dashboard>p {
   margin-bottom: 20px;
 }
 
-.col > div{
+.col>div {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 90%;
   width: 500px;
 }
+
 .col {
   margin-bottom: 20px;
   position: relative;
 }
 
-.col > h5 {
+.col>h5 {
   margin-bottom: 10px;
   color: gray;
   font-weight: 500;
@@ -447,6 +450,7 @@ main {
 
 .fila_gr {
   display: grid;
+  color: white;
 }
 
 .fila_gr .col {
@@ -459,7 +463,7 @@ main {
   position: relative;
 }
 
-.fila_gr .col > div {
+.fila_gr .col>div {
   width: 90%;
   margin: 0 auto;
   position: relative;
@@ -495,6 +499,7 @@ main {
   color: #abaaaa;
   transition: all 0.3s ease-in-out;
 }
+
 .footer_bar ul li a:hover {
   color: #001843;
 }
@@ -599,7 +604,7 @@ main {
   justify-content: center;
 }
 
-.contenedor-cancelar > div {
+.contenedor-cancelar>div {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -736,6 +741,7 @@ main {
   gap: 20px;
   font-size: 1.5rem;
   font-weight: 600;
+
   .tab_title {
     display: flex;
     align-items: center;
@@ -819,15 +825,15 @@ main {
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: #ff7900;
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #ff7900;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -837,18 +843,23 @@ input:checked + .slider:before {
   .navegacion span {
     font-size: 18px;
   }
+
   .interrupto span {
     font-size: 14px;
   }
+
   .contenedor-yape-seguro .icono-fila i {
     font-size: 36px;
   }
+
   .contenedor-yape-seguro .icono-fila h2 {
     font-size: 20px;
   }
+
   .contenedor-texto p {
     font-size: 14px;
   }
+
   .contenedor-texto button {
     font-size: 14px;
     padding: 8px 16px;
@@ -982,6 +993,7 @@ input:checked + .slider:before {
   color: #fff;
   border: none;
 }
+
 /*FIN DE ESTILOS YAPE*/
 
 /*INICIO ESTILOS MODAL TOKEN*/
@@ -1020,11 +1032,11 @@ section {
   flex-direction: column;
 }
 
-section button{
+section button {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap:20px;
+  gap: 20px;
   text-align: left;
   border: none;
   border-radius: 50px;
@@ -1035,7 +1047,7 @@ section button{
   box-shadow: 1px 5px 16px rgb(116 116 116 / 76%);
 }
 
-.btns-reports{
+.btns-reports {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1044,7 +1056,7 @@ section button{
   margin: 20px;
 }
 
-.config.options{
+.config.options {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -1053,7 +1065,7 @@ section button{
   margin-bottom: 30px;
 }
 
-.config.options > div label{
+.config.options>div label {
   color: #001743;
   text-align: center;
   font-weight: 600;
@@ -1061,24 +1073,24 @@ section button{
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap:5px;
+  gap: 5px;
   cursor: pointer;
 }
 
-.config.options > div label i{
+.config.options>div label i {
   font-size: 40px;
 }
 
-.config.options > div input{
+.config.options>div input {
   appearance: none;
 }
 
-.config.options > div input:checked + label{
+.config.options>div input:checked+label {
   box-shadow: 0 0 5px #ff7900;
   border-radius: 10px;
 }
 
-.modal_info{
+.modal_info {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -1087,7 +1099,7 @@ section button{
   justify-content: center;
 }
 
-.modal_info i{
+.modal_info i {
   width: 100%;
   height: 100% !important;
   text-align: center;
@@ -1095,17 +1107,17 @@ section button{
   color: #001743;
 }
 
-.modal .config.button_modal{
+.modal .config.button_modal {
   flex-direction: row;
   gap: 10px;
 }
 
-.modal .config.button_modal button{
+.modal .config.button_modal button {
   width: 100%;
   margin: 10px 0;
 }
 
-section button i{
+section button i {
   font-size: 40px;
   color: #001743;
 }
@@ -1116,9 +1128,9 @@ section button i{
   width: 100%;
   padding: 20px;
 
-  > div {
+  >div {
     padding: 20px 30px;
-    gap:20px;
+    gap: 20px;
     flex-wrap: wrap;
     display: flex;
     justify-content: space-between;
@@ -1126,7 +1138,7 @@ section button i{
     border-bottom: 1px solid #ccc;
   }
 
-  > div > div {
+  >div>div {
     width: 100%;
     display: flex;
     align-items: center;
@@ -1135,36 +1147,36 @@ section button i{
     padding: 10px 0;
   }
 
-  > div > div > div {
+  >div>div>div {
     display: flex;
     gap: 20px;
     align-items: center;
   }
 
-  > div > div > div i {
+  >div>div>div i {
     font-size: 30px;
   }
 
-  > div > div > div > div {
+  >div>div>div>div {
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
 
-  > div > div > div > div h3 {
+  >div>div>div>div h3 {
     font-size: 16px;
     font-weight: 600;
     color: #001843;
   }
 
-  > div > div > div > div span {
+  >div>div>div>div span {
     font-weight: 500;
     color: rgb(92, 92, 92);
   }
 }
 
 /**Modals**/
-.blur{
+.blur {
   width: 100%;
   height: 100%;
   z-index: 99;
@@ -1174,7 +1186,7 @@ section button i{
   backdrop-filter: blur(5px);
 }
 
-.modal{
+.modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1192,13 +1204,13 @@ section button i{
   height: 20px;
 }
 
-.modal h2{
+.modal h2 {
   text-align: center;
   margin-bottom: 5px;
   color: #001843;
 }
 
-.modal .description{
+.modal .description {
   color: #ABAAAA;
   text-align: center;
   font-size: 20px;
@@ -1206,10 +1218,10 @@ section button i{
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding:10px 20px;
+  padding: 10px 20px;
 }
 
-.form_verificacion input{
+.form_verificacion input {
   font-size: 18px;
   padding: 8px;
   border-radius: 10px;
@@ -1220,14 +1232,14 @@ section button i{
   margin-bottom: 10px;
 }
 
-.form_verificacion div{
+.form_verificacion div {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
 }
 
-.modal button{
+.modal button {
   color: #ffff;
   border: transparent;
   padding: 10px 30px;
@@ -1235,28 +1247,32 @@ section button i{
   cursor: pointer;
 }
 
-.modal button.bloquear{
+.modal button.bloquear {
   background: #001843;
 }
+
 .modal button.bloquear:hover {
   background-color: #07317e;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
-.modal button.aceptar{
+
+.modal button.aceptar {
   background: #ff7900;
 }
+
 .modal button.aceptar:hover {
   background-color: #fd9335;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
-.modal .button_modal{
+
+.modal .button_modal {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
 
-.close{
+.close {
   display: none;
 }
 
@@ -1264,6 +1280,7 @@ section button i{
   from {
     bottom: -40%;
   }
+
   to {
     bottom: 0;
   }
@@ -1328,6 +1345,7 @@ section button i{
 .modal-yape.active {
   display: block;
 }
+
 /*FIN ESTILOS MODAL TOKEN*/
 
 /*INICIO CÓDIGO YAPE*/
@@ -1369,11 +1387,12 @@ section button i{
   color: #ff6600;
   font-weight: bold;
 }
+
 /*FIN CÓDIGO YAPE*/
 
 @media (min-width: 576px) {
 
-  .contenedor-cancelar > div {
+  .contenedor-cancelar>div {
     width: 500px;
   }
 
@@ -1389,13 +1408,14 @@ section button i{
     grid-template-columns: 1fr 1fr;
   }
 
-  section button{
+  section button {
     width: 450px;
   }
 
 }
 
 @media (min-width: 768px) {
+
   .primer_cuadro,
   .segundo_cuadro,
   button,
@@ -1415,7 +1435,7 @@ section button i{
     flex-direction: column;
   }
 
-  .tarjeta > div {
+  .tarjeta>div {
     width: 520px;
     height: 120px;
   }
@@ -1441,12 +1461,13 @@ section button i{
     border-radius: 0px 10px 10px 0px;
   }
 
-  .notificacion > span {
+  .notificacion>span {
     font-size: 1.1em;
   }
 
   .tabs,
-  .head-config, .section-config {
+  .head-config,
+  .section-config {
     padding: 20px 80px;
   }
 
@@ -1506,7 +1527,7 @@ section button i{
     gap: 5rem;
   }
 
-  .section-config > div >div{
+  .section-config>div>div {
     max-width: 400px;
   }
 
@@ -1517,7 +1538,7 @@ section button i{
     padding: 40px 60px 20px;
   }
 
-  nav > img {
+  nav>img {
     width: 200px;
   }
 

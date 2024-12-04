@@ -25,7 +25,7 @@ $estado = $entradas->validarYape('principal.php', $_SESSION['id_seguridad']);
             </div>
         </div>
         <div class="logo-yape">
-            <img src="img/logo_yape.png" alt="Logo Yape" width=100 height=100>
+            <img src="img/yape_logo.png" alt="Logo Yape" width=100 height=100>
         </div>
         <div class="contenedor-datos">
             <h2>Yapear a</h2>

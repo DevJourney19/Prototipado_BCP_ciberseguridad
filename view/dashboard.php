@@ -9,6 +9,7 @@ $entradas->validarEntrada('login_admi.php');
 
 <head>
     <?php include '../view/fragmentos/head.php' ?>
+    <link href="../view/css/admin.css" rel="stylesheet" />
     <title>Dashboard</title>
 </head>
 
@@ -17,9 +18,13 @@ $entradas->validarEntrada('login_admi.php');
         <?php include '../view/fragmentos/nav.php' ?>
     </header>
 
-    <main class="main_dashboard">
-        <h1 class="h1_dashboard">Dashboard</h1>
+    <?php include '../view/fragmentos/nav_admin.php' ?>
+    <main class="main_dashboard" style="
+    background: white;
+    color: black;">
+        <h1 class=" h1_dashboard">Dashboard</h1>
         <p class="description">Aquí puede visualizar las métricas del rendimiento dle sistema.</p>
+
         <div class="fila_gr">
             <div class="col">
                 <h3>Nivel de Satisfacción</h3>

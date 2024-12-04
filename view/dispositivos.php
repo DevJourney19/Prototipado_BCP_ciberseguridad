@@ -57,10 +57,11 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
             <!--Necesito crear esto por js -->
 
             <?php
+            $llave_dispositivo_principal = false;
             if ($listaDispositivos) {
 
                 $count = 0;
-                $llave_dispositivo_principal = false;
+                
 
                 foreach ($listaDispositivos as $dispo) {
                     if ($dispo['estado_dispositivo'] === "activado") {
@@ -118,11 +119,11 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
                                         <h4 <?php if ($dispo['estado_dispositivo'] === "activado") { ?>
                                                 style="color: darkorange; font-weight: 800;<?php } else { ?> style=" color: #001843;
                                                 font-weight: 600;<?php } ?> ">
-                                                                                                                                                                                <?= $dispo['tipo_dispositivo'] ?>
-                                                                                                                                                                            </h4>
+                                                                                                                                                                                            <?= $dispo['tipo_dispositivo'] ?>
+                                                                                                                                                                                        </h4>
 
-                                                                                                                                                                        </div>
-                                                                                                                                                                        <div class="
+                                                                                                                                                                                    </div>
+                                                                                                                                                                                    <div class="
                                 descripcion-caja">
                                             <p>
                                                 Lugar: <?= $dispo['ciudad'] ?>- <?= $dispo['pais'] ?>
@@ -149,7 +150,8 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
             <div class="opciones">
                 <div class="boton-primario">
 
-                    <button type="button" onclick="openModal()" <?php if ($llave_dispositivo_principal) { ?> disabled <?php } ?>>Dispositivo Principal</button>
+                    <button type="button" onclick="openModal()" <?php if ($llave_dispositivo_principal === true) { ?> disabled
+                        <?php } ?>>Dispositivo Principal</button>
                 </div>
                 <div class="boton-secundario">
                     <button type="button" onclick="openModalDos()">Desvincular y eliminar</button>
