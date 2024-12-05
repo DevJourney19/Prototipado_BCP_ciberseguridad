@@ -1,0 +1,97 @@
+.nav_admin {
+    background-color: #02173F;
+    /* Color de fondo */
+    padding: 10px 20px;
+    justify-content: center;
+}
+
+.nav_admin ul {
+    list-style-type: none;
+    /* Elimina los puntos de la lista */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    /* Coloca los elementos en línea */
+}
+
+.nav_admin li {
+    margin-right: 15px;
+}
+
+.nav_admin ul li a {
+    color: white;
+    /* Color del texto */
+    text-decoration: none;
+    /* Elimina el subrayado */
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+    /* Efecto de transición */
+}
+
+.nav_admin ul li a:hover {
+    background-color: #042460;
+    /* Color al pasar el mouse */
+    border-radius: 5px;
+    /* Bordes redondeados */
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.table-container {
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+th {
+    background-color: #5b738e;
+    color: white;
+}
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: black;
+    font-size: 0.9em;
+}
+
+.badge-draft {
+    background-color: #e3e3e3;
+}
+
+.badge-sent {
+    background-color: #d9efe8;
+}
+
+.btn {
+    background-color: #000;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+
+.btn:hover {
+    background-color: #333;
+}
+
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}

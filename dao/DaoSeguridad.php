@@ -12,8 +12,9 @@ class DaoSeguridad implements DaoInterfaceSeguridad
   {
     $this->db = new Connection();
   }
-  function mostrarDispositivos(){
-    
+  function mostrarDispositivos()
+  {
+
   }
   public function read($idSeguridad)
   {
@@ -74,7 +75,7 @@ class DaoSeguridad implements DaoInterfaceSeguridad
   public function verificarActivaciones($idUsuario)
   {
     try {
-      
+
       $resultadoVerificacion = $this->readByUser($idUsuario);
       if ($resultadoVerificacion) {
         $query = "UPDATE seguridad set activacion_seguridad  = '1' where id_usuario= :idUsuario";
@@ -92,24 +93,26 @@ class DaoSeguridad implements DaoInterfaceSeguridad
       return false;
     }
   }
-  public function existeSeguridad($id_seguridad) {
+  public function existeSeguridad($id_seguridad)
+  {
     try {
-        $query = "SELECT COUNT(*) FROM seguridad WHERE id_seguridad = :idSeguridad"; 
-        $result = $this->db->consultar($query, ['idSeguridad' => $id_seguridad]);
-        return $result[0]['COUNT(*)'] > 0; 
+      $query = "SELECT COUNT(*) FROM seguridad WHERE id_seguridad = :idSeguridad";
+      $result = $this->db->consultar($query, ['idSeguridad' => $id_seguridad]);
+      return $result[0]['COUNT(*)'] > 0;
     } catch (Exception $e) {
-        echo "Error: " . $e->getMessage();
-        return false;
+      echo "Error: " . $e->getMessage();
+      return false;
     }
-}
-  public function obtenerIdUsuarioPorSeguridad($idSeguridad) {
+  }
+  public function obtenerIdUsuarioPorSeguridad($idSeguridad)
+  {
     try {
-        $query = "SELECT id_usuario FROM seguridad WHERE id_seguridad = :idSeguridad";
-        return $this->db->consultar($query, ['idSeguridad' => $idSeguridad]);
+      $query = "SELECT id_usuario FROM seguridad WHERE id_seguridad = :idSeguridad";
+      return $this->db->consultar($query, ['idSeguridad' => $idSeguridad]);
     } catch (Exception $e) {
-        echo "Error al obtener id_usuario por id_seguridad: " . $e->getMessage();
-        return null;
+      echo "Error al obtener id_usuario por id_seguridad: " . $e->getMessage();
+      return null;
     }
-}
+  }
 
 }
