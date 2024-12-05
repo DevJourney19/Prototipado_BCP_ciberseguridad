@@ -11,7 +11,6 @@ $listaDisposEnProceso = $dispositivosEnProceso->obtenerDispositivosEnProceso($_S
 if ($listaDisposEnProceso === null or !isset($listaDisposEnProceso)) {
     $listaDisposEnProceso = false;
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +46,7 @@ if ($listaDisposEnProceso === null or !isset($listaDisposEnProceso)) {
             </div>
         </div>
         <div class="tabla_responsiva">
+
             <table border="1" class="tablita_equipos_no_deseados">
                 <thead>
                     <tr> <!-- EN PROCESO SI ///// //EN PROCESO NO -->
@@ -54,9 +54,9 @@ if ($listaDisposEnProceso === null or !isset($listaDisposEnProceso)) {
                         <th>Direccion IP</th>
                         <th>Pais</th>
                         <th>Ciudad</th>
-                        <th>Valido el codigo?</th>
+                        <th>¿Validó el codigo?</th>
                         <th>Fecha de Registro</th>
-                        <th colspan="3">Acciones</th>
+                        <th colspan="2">Acciones</th>
                     </tr>
                 </thead>
 
@@ -64,21 +64,27 @@ if ($listaDisposEnProceso === null or !isset($listaDisposEnProceso)) {
                     <?php
                     if (!empty($listaDisposEnProceso)) {
                         foreach ($listaDisposEnProceso as $dispoProcess) { ?>
-                            <tr data-id="<?=$dispoProcess['id_dispositivo']?>">
+                            <tr data-id="<?= $dispoProcess['id_dispositivo'] ?>">
                                 <td><?= $dispoProcess['tipo_dispositivo'] ?></td>
                                 <td><?= $dispoProcess['direccion_ip'] ?></td>
                                 <td><?= $dispoProcess['pais'] ?></td>
                                 <td><?= $dispoProcess['ciudad'] ?></td>
-                                <td class="estado-dispositivo"><?= $dispoProcess['estado_dispositivo'] ?></td>
+                                <td class="estado-dispositivo">
+                                    <?php if ($dispoProcess['estado_dispositivo'] === "en_proceso_no") { ?> No validó el
+                                        código<?php } else { ?> Si validó el código<?php } ?>
+                                </td>
                                 <td><?= $dispoProcess['fecha_registro'] ?></td>
-                                
-                                <td><button class="botoncito_accion_permitir accion-boton" data-id="<?=$dispoProcess['id_dispositivo']?>"
-                                        data-accion="permitir">Permitir</button></td>
-                                <td><button class="botoncito_accion_eliminar accion-boton" data-id="<?=$dispoProcess['id_dispositivo']?>"
-                                        data-accion="eliminar">Eliminar</button></td>
-                                <td><button class="botoncito_accion_bloquear accion-boton" data-id="<?=$dispoProcess['id_dispositivo']?>"
-                                        data-accion="bloquear">Bloquear</button></td>
-                            </tr>;
+
+                                <td><button class="botoncito_accion_permitir accion-boton"
+                                        data-id="<?= $dispoProcess['id_dispositivo'] ?>" data-accion="permitir"><i
+                                            class="fa-solid fa-check" style="color: #ffffff;"></i> Permitir</button>
+                                </td>
+                                <td><button class="botoncito_accion_eliminar accion-boton"
+                                        data-id="<?= $dispoProcess['id_dispositivo'] ?>" data-accion="eliminar"><i
+                                            class="fa-solid fa-x" style="color: #ffffff;"></i> Eliminar</button>
+                                </td>
+
+                            </tr>
 
                         <?php }
                     } ?>

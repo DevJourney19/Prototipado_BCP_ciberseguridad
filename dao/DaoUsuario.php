@@ -34,6 +34,25 @@ class DaoUsuario implements DaoInterfaceUsuario
         }
     }
 
+    public function readAllUsersWithSecurity()
+    {
+        try {
+
+            $query = "SELECT * FROM usuario 
+                      JOIN seguridad ON usuario.id_usuario = seguridad.id_usuario 
+                      WHERE activacion_seguridad=1";
+
+            $result = $this->db->consultar($query);
+            if (is_array($result) && count($result) > 0) {
+                return $result;
+            } else {
+                return [];
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return [];
+        }
+    }
     public function readUser($idUsuario)
     {
         try {

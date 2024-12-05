@@ -1,7 +1,15 @@
 <?php
 include_once '../controller/ControllerEntradas.php';
+include_once '../controller/ControllerUsuario.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('login_admin.php');
+
+$usuarioDao = new ControllerUsuario();
+$usuarios = $usuarioDao->obtenerUsuarios();
+$lista_llave = false;
+if (!empty($usuarios)) {
+    $lista_llave = true;
+}
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +25,7 @@ $entradas->validarEntrada('login_admin.php');
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+            grid-template-rows: auto 1fr auto;
         }
 
         .container {
@@ -33,6 +42,10 @@ $entradas->validarEntrada('login_admin.php');
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            text-align: center;
+            gap: 10px;
         }
 
         .header .select-all label {
@@ -47,7 +60,7 @@ $entradas->validarEntrada('login_admin.php');
         }
 
         .header .btn.enviar-emails {
-            background-color: #9c27b0;
+            background-color: #FF7900;
             color: #fff;
             border: none;
             border-radius: 4px;
@@ -100,11 +113,17 @@ $entradas->validarEntrada('login_admin.php');
         .tabla_correo {
             overflow-x: auto;
             width: 100%;
+            margin-bottom: 10%;
+        }
+
+        main {
+            padding: 10px 0px 10px 0px;
+            ;
         }
     </style>
 </head>
 
-<body class="body_dashboard">
+<body class="body_dashboard" style="background: white;">
     <header>
         <?php include_once '../view/fragmentos/nav_close_admin.php' ?>
         <?php include_once '../view/fragmentos/nav_admin.php' ?>
@@ -112,7 +131,7 @@ $entradas->validarEntrada('login_admin.php');
 
     <main class="main_dashboard" style="
     background: white;
-    color: black;">
+    color: black;width:80%; margin: auto;">
         <h1 class=" h1_dashboard">Enviar correos - Admin</h1>
         <p class="description">Aquí puede enviar correos a los clientes que adquirieron el servicio de ciberseguridad.
         </p>
@@ -123,7 +142,7 @@ $entradas->validarEntrada('login_admin.php');
                     <label><input type="checkbox" id="select-all"> Marcar todos</label>
                 </div>
                 <div class="info">
-                    <p>Tienes Actualmente <span id="selected-count">5</span> Registros Seleccionado(s)</p>
+                    <p>Tienes Actualmente <span id="selected-count">4</span> Registros Seleccionado(s)</p>
                 </div>
                 <button class="btn enviar-emails">ENVIAR EMAILS</button>
             </div>
@@ -140,24 +159,17 @@ $entradas->validarEntrada('login_admin.php');
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td>Urian</td>
-                        <td>urian1213viera@gmail.com</td>
-                        <td>✔</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td>Urian Viera</td>
-                        <td>programadorphp2017@gmail.com</td>
-                        <td>✔</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" checked></td>
-                        <td>Developer</td>
-                        <td>iamdeveloper86@gmail.com</td>
-                        <td>✔</td>
-                    </tr>
+                    <?php
+                    if ($lista_llave) {
+                        foreach ($usuarios as $user) { ?>
+                            <tr>
+                                <td><input type="checkbox" checked></td>
+                                <td><?= $user->getNombre(); ?></td>
+                                <td><?= $user->getCorreo(); ?></td>
+                                <td>✔</td>
+                            </tr>
+                        <?php }
+                    } ?>
                 </tbody>
             </table>
         </div>

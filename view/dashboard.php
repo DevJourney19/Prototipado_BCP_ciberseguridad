@@ -18,7 +18,6 @@ $entradas->validarEntrada('login_admin.php');
         <?php include_once '../view/fragmentos/nav_close_admin.php' ?>
         <?php include_once '../view/fragmentos/nav_admin.php' ?>
     </header>
-    
 
     <main class="main_dashboard" style="
     background: white;

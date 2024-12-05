@@ -29,36 +29,21 @@ class ControllerUsuario
         $usuario->setTelefono($result['telefono']);
         return $usuario;
     }
-    /*
-    public function obtenerUsuario($id)
+    public function obtenerUsuarios()
     {
-        $result = $this->daoUsuario->readUser($id);
-        $usuario = new Usuario();
-        //$usuario->setIdUsuario($result['id']);
+        $result = $this->daoUsuario->readAllUsersWithSecurity();
+        $usuarios = [];
 
+        if (!empty($result)) {
+            foreach ($result as $row) {
+                $usuario = new Usuario();
+                $usuario->setIdUsuario($row['id_usuario']);
+                $usuario->setNombre($row['nombre']);
+                $usuario->setCorreo($row['correo']);
+                $usuario->setTelefono($row['telefono']);
+                $usuarios[] = $usuario;
+            }
+        }
+        return $usuarios;
     }
-        */
-    /*
-    public function usuario_activado($id)
-    {
-        $result = $this->daoUsuario->readUser($id);
-        $usuario = new Usuario();
-        //$usuario->setIdUsuario($result['id']);
-        $usuario->setNombre($result['nombre']);
-        $usuario->setTelefono($result['telefono']);
-        return $usuario;
-    }
-        */
-    /*
-    public function estado_activado($id)
-    {
-        $result = $this->daoUsuario->readDispo($id);
-        $usuario = new Usuario();
-        //$usuario->setIdUsuario($result['id']);
-        $usuario->setNombre($result['nombre']);
-        $usuario->setTelefono($result['telefono']);
-        return $usuario;
-        
-    }
-        */
 }
