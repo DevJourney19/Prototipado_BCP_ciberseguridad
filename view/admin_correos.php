@@ -117,8 +117,7 @@ if (!empty($usuarios)) {
         }
 
         main {
-            padding: 10px 0px 10px 0px;
-            ;
+            padding: 30px 0px 10px 0px;
         }
     </style>
 </head>

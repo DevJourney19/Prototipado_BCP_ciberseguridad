@@ -29,6 +29,7 @@ class ControllerUsuario
         $usuario->setTelefono($result['telefono']);
         return $usuario;
     }
+
     public function obtenerUsuarios()
     {
         $result = $this->daoUsuario->readAllUsersWithSecurity();

@@ -60,6 +60,45 @@ $entradas->validarEntrada('index.php');
       </div>
     </div>
 
+    <div id="modal2" class="config blur close">
+      <!--BLUR-->
+      <div class="modal alerta">
+        <div class="modal_info">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <h2>Tienes algun reporte de ataque o sospecha?</h2>
+        </div>
+        <div class="config">
+          <div class="config options">
+            <div>
+              <h3>Elige lo que desea reportar</h3>
+              <div>
+                <div>
+                  <input type="radio" name="reporte" value="Ataque" id="ataque">
+                  <label for="ataque"><span><i class="fa-solid fa-bomb" style="color: red;"></i></span>Ataque</label>
+                </div>
+                <div>
+                  <input type="radio" name="reporte" value="Sospecha" id="sospecha">
+                  <label for="sospecha"><span><i class="fa-solid fa-exclamation" style="color: orange;"></i></span>Sospecha</label>
+                </div>
+                <div>
+                  <input type="radio" name="reporte" value="Otro" id="otro">
+                  <label for="otro"><span><i class="fa-solid fa-question" style="color: #dbca00;"></i></span>Otro</label>
+                </div>
+              </div>
+            </div>
+            <div class="form_report">
+              <input type="text" name="titulo" placeholder="Ingresa el asunto">
+              <textarea rows="5" name="descripcion" id="descripcion" placeholder="Ingresa la descripcion de lo sucedido"></textarea>
+            </div>
+          </div>
+          <div class="config button_modal">
+            <button type="button" id="envioReporte" class="aceptar">Enviar</button>
+            <button type="button" class="bloquear" id="bloquearReporte">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
     <div class="section-config">
       <div>
@@ -109,14 +148,14 @@ $entradas->validarEntrada('index.php');
     </div>
     <?php if (isset($_SESSION["id_seguridad"])) { ?>
       <div class="btns-reports">
-      <button id="abrirModal">
-        <i class="fa-solid fa-clipboard-list"></i>
-        <span>Ayúdanos resolviendo una encuesta para mejorar tu experiencia</span>
-      </button>
-      <button id="abrirModal2">
-        <i class="fa-solid fa-comment"></i>
-        <span>Si tienes algun reporte no te olvides avisarnos!</span>
-      </button>
+        <button id="abrirModal">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <span>Ayúdanos para mejorar tu experiencia</span>
+        </button>
+        <button id="abrirModal2">
+          <i class="fa-solid fa-comment"></i>
+          <span>Si tienes algun reporte no te olvides avisarnos!</span>
+        </button>
       </div>
     <?php } ?>
   </section>
@@ -127,13 +166,22 @@ $entradas->validarEntrada('index.php');
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const modal = document.querySelector('#modal');
+      const modal2 = document.querySelector('#modal2');
       const abrirModal = document.querySelector('#abrirModal');
+      const abrirModal2 = document.querySelector('#abrirModal2');
       const bloquear = document.querySelector('#bloquear');
+      const bloquearReporte = document.querySelector('#bloquearReporte');
       abrirModal.addEventListener('click', () => {
         modal.classList.remove('close');
       })
       bloquear.addEventListener('click', () => {
         modal.classList.add('close');
+      })
+      abrirModal2.addEventListener('click', () => {
+        modal2.classList.remove('close');
+      })
+      bloquearReporte.addEventListener('click', () => {
+        modal2.classList.add('close');
       })
 
       const boton = document.querySelector('#envioEmocion');
@@ -159,6 +207,35 @@ $entradas->validarEntrada('index.php');
             console.error("Error al enviar los datos:", error);
           });
       })
+      
+      const boton2 = document.querySelector('#envioReporte');
+      boton2.addEventListener('click', async () => {
+        const tipo = document.querySelector('input[name="reporte"]:checked').value;
+        const titulo = document.querySelector('input[name="titulo"]').value;
+        const descripcion = document.querySelector('textarea[name="descripcion"]').value;
+        await fetch("../controller/ControllerReportes.php?action=registrar", {
+            method: "POST",
+            body: JSON.stringify({
+              tipo: tipo,
+              titulo: titulo,
+              descripcion: descripcion
+            }),
+          })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Resultado:", data);
+            if (data.status == "registrado") {
+              alert("Gracias!\nRevisaremos tu reporte lo más pronto posible");
+            } else {
+              alert("Error al enviar los datos");
+            }
+            document.querySelector('#modal2').classList.add('close');
+          })
+          .catch((error) => {
+            console.error("Error al enviar los datos:", error);
+          });
+      })
+
     })
   </script>
 </body>

@@ -429,6 +429,27 @@ main {
   margin-bottom: 20px;
 }
 
+.title_dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+div>button {
+  background-color: white;
+  color: #ff7900;
+  border: 2px solid #ff7900;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+div>button:hover {
+  background-color: #ff7900;
+  color: white;
+}
+
 .col>div {
   display: flex;
   justify-content: center;
@@ -1065,8 +1086,34 @@ section button {
   margin-bottom: 30px;
 }
 
+.config.options>div>div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.form_report {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: start;
+}
+
+.form_report input,
+.form_report textarea {
+  border: none;
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 10px;
+  background: transparent;
+  border: 2px solid #001843;
+  color: #001843;
+  cursor: pointer;
+}
+
 .config.options>div label {
-  color: #001743;
   text-align: center;
   font-weight: 600;
   padding: 10px;

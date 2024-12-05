@@ -22,7 +22,15 @@ $entradas->validarEntrada('login_admin.php');
     <main class="main_dashboard" style="
     background: white;
     color: black;">
-        <h1 class=" h1_dashboard">Dashboard</h1>
+        <div class="title_dashboard">
+            <h1 class="h1_dashboard">Dashboard</h1>
+            <div>
+                <button class="excel"><i class="fa-solid fa-file-excel"></i></button>
+                <button class="pdf">
+                    <i class="fa-solid fa-file-pdf"></i>
+                </button>
+            </div>
+        </div>
         <p class="description">Aquí puede visualizar las métricas del rendimiento dle sistema.</p>
 
         <div class="fila_gr">

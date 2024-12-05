@@ -4,17 +4,31 @@ header('Content-Type: application/json');
 include_once '../dao/DaoSeguridad.php';
 include_once '../dao/DaoDispositivo.php';
 include_once '../model/Dispositivo.php';
+include_once '../model/Usuario.php';
+include_once '../dao/DaoUsuario.php';
 include 'direccion_ip.php';
+
+header('Content-Type: application/json');
+$data = json_decode(file_get_contents('php://input'), true);
 
 // Verificar si los datos necesarios están presentes
 try {
 
   $daoSeguridad = new DaoSeguridad();
   $daoDispositivo = new DaoDispositivo();
+  $daoUsuario = new DaoUsuario();
   $id = $_SESSION['id_usuario'];
 
-  // Ejecutar la consulta
-  if ($daoSeguridad->verificarActivaciones($id)) {
+  // Ejecutar la consulta, cambiar el telefono y correo del usuario
+
+  $usuario = new Usuario();
+  $telefono = $data['telefono'];
+  $correo = $data['correo'];
+  $usuario->setTelefono($telefono);
+  $usuario->setCorreo($correo);
+  $usuario->setIdUsuario($id);
+
+  if ($daoSeguridad->verificarActivaciones($id) && $daoUsuario->updateUser($usuario)) {
     $response = ['status' => 'registrado'];
     $result = $daoSeguridad->readByUser($id);
     $_SESSION['id_seguridad'] = $result[0]['id_seguridad'];

@@ -8,4 +8,6 @@ interface DaoInterfaceUsuario
   public function verificarLogin($tarjeta, $dni, $clave_internet);
   public function verificarLoginAdmi($email, $nombre, $contra);
   public function readAllUsersWithSecurity();
+  public function updateUser($usuario);
+
 }

@@ -92,4 +92,16 @@ class DaoUsuario implements DaoInterfaceUsuario
             return null;
         }
     }
+
+    public function updateUser($usuario)
+    {
+        try {
+            $sql = "UPDATE usuario SET telefono = :telefono, correo = :correo WHERE id_usuario = :id";
+            $result = $this->db->ejecutar($sql, ['telefono' => $usuario->getTelefono(), 'correo' => $usuario->getCorreo(), 'id' => $usuario->getIdUsuario()]);
+            return $result;
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return null;
+        }
+    }
 }
