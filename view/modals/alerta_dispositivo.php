@@ -2,7 +2,7 @@
   <!--BLUR-->
   <div class="modal alerta">
     <div>
-      <i class="fa-solid fa-vault"></i>
+      <i class="fa-solid fa-user-lock"></i>
       <h2>Estás intentando ingresar desde otro dispositivo?</h2>
     </div>
     <div>

@@ -58,8 +58,8 @@ try {
                 if ($horario) {
                     $horario_restringido = $daoHorario->obtenerHorariosRestringidos($id_seguridad);
                     $hora_actual = date("H:i:s");
-                    // si está fuera del rango de restriccion de hora de bloqueo
-                    if ($hora_actual <= $horario_restringido[0]['hora_inicio'] && $hora_actual >= $horario_restringido[0]['hora_final']) {
+                    // si está dentro del rango de restriccion de hora de bloqueo
+                    if ($hora_actual >= $horario_restringido[0]['hora_inicio'] && $hora_actual <= $horario_restringido[0]['hora_final']) {
                         //obtener todas direcciones segun seguridad y recorrer
                         $direcciones = $daoDireccion->obtenerTodasDirecciones($id_seguridad);
                         $verificar = false;
@@ -81,13 +81,12 @@ try {
                             die();
                         }
                     } else {
-                        //si esta dentro del rango de bloqueo enviar mensaje y no dejar ingresar
-                        $_SESSION['error_ubicacion'] = true; //LLAVE PARA ABRIR EL MODAL PARA INGRESAR EL CÓDIGO DE VERIFICACIÓN
-                        header("Location: ../view/index.php");
+                        $_SESSION['id_dispositivo'] = $dispositivo_actual[0]['id_dispositivo'];
+                        $_SESSION['estado_dispositivo'] = $dispositivo_actual[0]['estado_dispositivo'];
+                        header("Location: ../view/principal.php");
                         die();
                     }
-                } 
-                else {
+                } else {
                     $_SESSION['id_dispositivo'] = $dispositivo_actual[0]['id_dispositivo'];
                     $_SESSION['estado_dispositivo'] = $dispositivo_actual[0]['estado_dispositivo'];
                     header("Location: ../view/principal.php");

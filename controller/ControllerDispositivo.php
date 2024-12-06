@@ -23,7 +23,7 @@ class ControllerDispositivo
         $data = json_decode(file_get_contents("php://input"), true);
         if (isset($data['token_validado'])) {
             $_SESSION['token_validado'] = $data['token_validado'];
-            $estado = $data['token_validado'] === true ? 'en_proceso_si' : 'en_proceso_no';
+            $estado = $data['token_validado'] === true ? 'seguro' : 'en_proceso_no';
             $modelo_direccion = new Dispositivo();
             $modelo_direccion->setIdSeguridad($_SESSION['id_seguridad']);
             $modelo_direccion->setDireccionIp($_SESSION['direccion_ip']);
