@@ -19,7 +19,6 @@ class DaoDashboard implements DaoInterfaceDashboard
     $result = $this->conn->consultar($query, ['mes' => $mes, 'anio' => $anio]);
     return $result;
   }
-
   public function obtenerNumeroRegistros()
   {
     // retornar un array con la cantidad de registros por cada mes
@@ -43,4 +42,34 @@ class DaoDashboard implements DaoInterfaceDashboard
     $result = $this->conn->consultar($query, ['anio' => $anio]);
     return $result;
   }
+ public function obtenerGananciasPorAnio($anio)
+{
+    // Consulta para obtener el número de registros por mes en un año específico y multiplicarlos por 10
+    $query = "SELECT MONTH(created_at) as mes, COUNT(*) * 10 as total
+              FROM seguridad
+              WHERE YEAR(created_at) = ?
+              GROUP BY MONTH(created_at)";
+    
+    $result = $this->conn->consultar($query, [$anio]); 
+    return $result;
+}
+public function SatisfaccionPorAnio($anio)
+{
+    // La consulta SQL para obtener la cantidad de encuestas por estado en el año especificado
+    $query = "SELECT estado, COUNT(*) as cantidad 
+              FROM encuesta 
+              WHERE YEAR(created_at) = :anio 
+              GROUP BY estado";
+
+    // Llamamos al método consultar, pasándole la consulta y el parámetro de año
+    $result = $this->conn->consultar($query, ['anio' => $anio]);
+    return $result ?: [];
+}
+public function obtenerReportes()
+{
+    $query = "SELECT id, id_seguridad, titulo, descripcion, tipo, created_at FROM reporte";
+    $result = $this->conn->consultar($query);
+
+    return $result ?: [];
+}
 }
