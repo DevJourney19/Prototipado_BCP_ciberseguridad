@@ -75,7 +75,9 @@ try {
                         // si a la hora de recorrer no se encuentra ninguna ubicacion segura, enviar mensaje y no dejar ingresar
                         if (!$verificar) {
                             //enviar mensaje y no dejar ingresar
-                            envioCorreo($info['city'], $dir_ip, date("h:i:s A"));
+                            $envios = new EnvioMensaje();
+                            $envios->envioCorreo($_SESSION['ciudad'], $dir_ip, $hora_actual);
+                            $envios->envioSms($_SESSION['ciudad'], $dir_ip, $hora_actual);
                             $_SESSION['error_ubicacion'] = true;
                             header("Location: ../view/index.php");
                             die();
