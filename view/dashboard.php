@@ -21,12 +21,12 @@ $entradas->validarEntrada('login_admi.php');
         <div class="title_dashboard">
             <h1 class="h1_dashboard">Dashboard</h1>
             <div>
-                <button class="excel"><i class="fa-solid fa-file-excel"></i></button>
-                <a href="reportepdf.php">
-                    <button class="pdf">
-                        <i class="fa-solid fa-file-pdf">Generar PDF</i>
-                    </button>
-                </a>
+                <button class="excel" onclick="window.location.href='exceel.php'">
+                    <i class="fa-solid fa-file-excel"></i>Generar Excel
+                </button>
+                <button class="pdf" onclick="window.location.href='reportepdf.php'">
+                    <i class="fa-solid fa-file-pdf"></i> Generar PDF
+                </button>
             </div>
         </div>
         <p class="description">Aquí puede visualizar las métricas del rendimiento dle sistema.</p>
