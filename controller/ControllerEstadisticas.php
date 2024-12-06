@@ -46,7 +46,12 @@ $action = $_GET['action'] ?? null;
 
 if ($action && method_exists($controller, $action)) {
     $resultadoEstadistica = $controller->$action();
+    echo json_encode($resultadoEstadistica);
+
+} else {
+  // Si la acción no está definida o no existe
+  $resultadoEstadistica = null;
 }
 
 
-echo json_encode($resultadoEstadistica);
+
