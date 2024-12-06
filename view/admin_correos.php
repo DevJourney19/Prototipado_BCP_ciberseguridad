@@ -69,10 +69,15 @@ if (!empty($usuarios)) {
             cursor: pointer;
             text-transform: uppercase;
             font-weight: bold;
+            display: none;
+        }
+
+        .ver_btn_enviar_email {
+            display: block !important;
         }
 
         .header .btn.enviar-emails:hover {
-            background-color: #7b1fa2;
+            background-color: #de6900;
         }
 
         .custom-table {
@@ -119,6 +124,99 @@ if (!empty($usuarios)) {
         main {
             padding: 30px 0px 10px 0px;
         }
+
+        /* Estilo base del modal */
+        .modal {
+            /* Oculto por defecto */
+            display: none;
+            position: fixed;
+            z-index: 1000;
+
+            width: 100%;
+            height: 100%;
+            /* Fondo semitransparente */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Aplicar desenfoque */
+            backdrop-filter: blur(8px);
+            border-radius: 0px;
+
+        }
+
+        /* Contenido del modal */
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            color: black;
+        }
+
+        /* Botón de cierre */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            display: block !important;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+
+        .eleccion_contenido_correo {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            margin: 18px auto;
+            gap: 10px;
+        }
+
+        .image-container {
+            position: relative;
+            width: 200px;
+            cursor: pointer;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+        }
+
+        /* Estilos para el modal */
+        .fullscreen-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .fullscreen-modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .fullscreen-modal:target {
+            display: flex;
+        }
+
+        @media (min-width: 610px) {
+            .eleccion_contenido_correo {
+                flex-direction: row;
+            }
+        }
     </style>
 </head>
 
@@ -131,38 +229,45 @@ if (!empty($usuarios)) {
     <main class="main_dashboard" style="
     background: white;
     color: black;width:80%; margin: auto;">
+
         <h1 class=" h1_dashboard">Enviar correos - Admin</h1>
-        <p class="description">Aquí puede enviar correos a los clientes que adquirieron el servicio de ciberseguridad.
+        <p class="description">Aquí puede enviar correos a los clientes que adquirieron el servicio de
+            ciberseguridad.
         </p>
         <hr style="width: 70%" />
+
         <div class="container">
             <div class="header">
                 <div class="select-all">
-                    <label><input type="checkbox" id="select-all"> Marcar todos</label>
+                    <label><input type="checkbox" id="select-all" onclick="seleccionar_todo()"> Marcar todos</label>
                 </div>
                 <div class="info">
-                    <p>Tienes Actualmente <span id="selected-count">4</span> Registros Seleccionado(s)</p>
+                    <p>Tienes Actualmente <span id="selected-count">0</span> Registros Seleccionado(s)</p>
                 </div>
-                <button class="btn enviar-emails">ENVIAR EMAILS</button>
+                <button class="btn enviar-emails" name="enviarform" id="openModal">Seleccionar correos</button>
             </div>
 
         </div>
-        <div class="tabla_correo">
+        <div class=" tabla_correo">
             <table class="custom-table">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Cliente</th>
-                        <th>Email</th>
+                        <th>Correo electrónico</th>
                         <th>Estado de Notificación</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     if ($lista_llave) {
+                        /*en el name correo[], se implementó para poder almacenar en un array 
+                        el valor del correo de los checkboxes seleccionados, y no solo del último 
+                        checkbox que fue seleccionado*/
                         foreach ($usuarios as $user) { ?>
                             <tr>
-                                <td><input type="checkbox" checked></td>
+                                <td><input class="checkbox_seleccionado" type="checkbox" name="correo[]"
+                                        value="<?= $user->getCorreo() ?>"></td>
                                 <td><?= $user->getNombre(); ?></td>
                                 <td><?= $user->getCorreo(); ?></td>
                                 <td>✔</td>
@@ -173,9 +278,71 @@ if (!empty($usuarios)) {
             </table>
         </div>
     </main>
+    <!--Logica codigo enviar correo -->
+    <form action="../view/admin_proceso_correo.php" method="post">
+    </form>
+    <!-- -->
 
+    <div id="customModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Seleccione el contenido a enviar</h2>
+            <p>Aquí seleccionará el contenido que se enviará a los usuarios seleccionados</p>
+            <div class="eleccion_contenido_correo">
 
+                <div class="image-container" onclick="showFullscreen(event)">
+                    <img src="../view/img/img_1_info.jpg" alt="img_1" style="width:100%">
 
+                    <button type="submit" style="background: #ff7900;color:black">Enviar</button>
+                </div>
+                <div class="image-container" onclick="showFullscreen(event)">
+                    <img src="../view/img/img_2_info.jpg" alt="img_2" style="width:100%">
+                    <button type="submit" style="background: #ff7900;color:black">Enviar</button>
+                </div>
+                <div class="image-container" onclick="showFullscreen(event)">
+                    <img src="../view/img/img_3_info.jpg" alt="img_3" style="width:100%">
+                    <button type="submit" style="background: #ff7900;color:black">Enviar</button>
+                </div>
+
+                <!-- Modal para mostrar la imagen en pantalla completa -->
+                <div class="fullscreen-modal" id="fullscreen-modal">
+                    <img id="fullscreen-image" src="" alt="Imagen en pantalla completa">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../view/js/admin_correo.js"></script>
+    <script>
+        document.getElementById('openModal').onclick = function () {
+            document.getElementById('customModal').style.display = 'flex';
+        };
+
+        document.querySelector('.close').onclick = function () {
+            document.getElementById('customModal').style.display = 'none';
+        };
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById('customModal')) {
+                document.getElementById('customModal').style.display = 'none';
+            }
+        };
+        function showFullscreen(event) {
+            // Obtener el modal y la imagen seleccionada
+            const modal = document.getElementById('fullscreen-modal');
+            const fullscreenImage = document.getElementById('fullscreen-image');
+
+            // Actualizar la fuente de la imagen en el modal
+            fullscreenImage.src = event.target.src;
+
+            // Mostrar el modal
+            modal.style.display = 'flex';
+
+            // Cerrar el modal cuando se haga clic
+            modal.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+        }
+    </script>
 </body>
 
 </html>

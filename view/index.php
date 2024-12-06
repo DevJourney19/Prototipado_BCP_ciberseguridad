@@ -41,7 +41,7 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
     <main>
         <!-- Despues de darle clic en ingresar y los datos sean correctos-->
         <?php if ($error_ubicacion) {
-            include 'modals/alerta_dispositivo.php';
+            include '../view/alerta_dispositivo.php';
             ?>
         <?php }
         unset($_SESSION['error_ubicacion']);

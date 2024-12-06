@@ -20,23 +20,13 @@ $dotenv->load();
 
 try {
   $mail = new PHPMailer(true);
-  
-  $mail->isSMTP();
-  $mail->Host = 'smtp.gmail.com';
-  $mail->SMTPAuth = true;
-  //DEBE SER CORREO DE LA CUENTA DEL CLIENTE EN EL QUE SE QUIERE INGRESAR
-  $mail->Username = $_ENV['EMAIL'];
-  $mail->Password = $_ENV['PASSWORD']; //Contraseña creada en la verficacion de 2 pasos de Google
-  $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-  $mail->Port = 587; //465 para la conexion encriptada
 
-  // Configuración del sms
   $base_url = $_ENV['URL'];
   $api_key = $_ENV['API_KEY'];
+  //Configura los parámetros para trabajar con infobip [infobip]
   $configuration = new Configuration(host: $base_url, apiKey: $api_key);
 
   //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
-
   $response = [];
   $data = json_decode(file_get_contents('php://input'), true);
 
@@ -68,9 +58,10 @@ if (!filter_var($modelUsuario->getCorreo(), FILTER_VALIDATE_EMAIL)) {
 $mail->setFrom("bcp83584@gmail.com", "Banca en Linea BCP");
 $mail->addAddress($modelUsuario->getCorreo(), $modelUsuario->getNombre());
 $mail->Subject = 'Codigo de verificacion';
-$mail->Body = 'Alguien esta tratando de ingresar a tu cuenta!\nEl codigo de verificacion es: ' . $codigo . '\nSi no fuiste tu, por favor contacta a soporte tecnico e ignora este mensaje.';
+$mail->Body = 'Alguien esta tratando de ingresar a tu cuenta!<br>El codigo de verificacion es: ' . $codigo . '\n Si no fuiste tu, por favor contacta a soporte tecnico e ignora este mensaje.';
 $mail->send();
 
+//Envio de SMS [Se trabajó con la configuración de infoip]
 $api = new SmsApi(config: $configuration);
 $destination = new SmsDestination(to: $modelUsuario->getTelefono());
 $message = new SmsTextualMessage(
