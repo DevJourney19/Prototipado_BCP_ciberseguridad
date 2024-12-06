@@ -13,17 +13,14 @@ class ControllerDispositivo
         $this->daoUsuario = new DaoUsuario();
         $this->daoDispositivo = new DaoDispositivo();
     }
-
-    //LLAMADA A CREAR DISPOSITIVO
-
-
+    
     public function crearDispositivo()//JSON
     {
         header('Content-Type: application/json');
         $data = json_decode(file_get_contents("php://input"), true);
         if (isset($data['token_validado'])) {
             $_SESSION['token_validado'] = $data['token_validado'];
-            $estado = $data['token_validado'] === true ? 'seguro' : 'en_proceso_no';
+            $estado = $data['token_validado'] === true ? 'en_proceso_si' : 'en_proceso_no';
             $modelo_direccion = new Dispositivo();
             $modelo_direccion->setIdSeguridad($_SESSION['id_seguridad']);
             $modelo_direccion->setDireccionIp($_SESSION['direccion_ip']);
@@ -124,7 +121,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'mostrar') {
 
 if (isset($_GET['action']) && $_GET['action'] === 'getUsuario' && isset($_GET['cambio'])) {
     $controller = new ControllerDispositivo();
-    $controller->crearDispositivo();
+    // si el dispotivio no existe crear otro
+    if (isset($_SESSION['noExiste']) && $_SESSION['noExiste'] === true) {
+        $controller->crearDispositivo();
+    }else{
+        echo json_encode(['mensaje' => 'No cambio']);
+    }
 }
 if (isset($_GET['action']) && $_GET['action'] === 'deleteDispo') {
     $controller = new ControllerDispositivo();

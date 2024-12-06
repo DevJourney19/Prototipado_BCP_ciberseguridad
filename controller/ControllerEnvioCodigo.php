@@ -65,6 +65,7 @@ if (!filter_var($modelUsuario->getCorreo(), FILTER_VALIDATE_EMAIL)) {
   throw new Exception('Invalid email address');
 }
 
+$mail->isHTML(true);
 $mail->setFrom("bcp83584@gmail.com", "Banca en Linea BCP");
 $mail->addAddress($modelUsuario->getCorreo(), $modelUsuario->getNombre());
 $mail->Subject = 'Codigo de verificacion';

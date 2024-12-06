@@ -42,7 +42,7 @@ const dispositivo_principal = async () => {
                     },
                     body: new URLSearchParams({
                         id_dispositivo: idSeleccionado,
-                        accion: 'activar'
+                        accion: 'principal'
                     })
                 });
 

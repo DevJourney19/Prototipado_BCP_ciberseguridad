@@ -91,7 +91,7 @@ class DaoDispositivo implements DaoInterfaceDispositivo
     public function readDispoByUserSecurityFilter($id_seguridad)
     {
         try {
-            $sql = "SELECT * FROM dispositivo WHERE id_seguridad='$id_seguridad' AND (estado_dispositivo='activado' OR estado_dispositivo='seguro' OR estado_dispositivo='principal')";
+            $sql = "SELECT * FROM dispositivo WHERE id_seguridad='$id_seguridad' AND (estado_dispositivo='seguro' OR estado_dispositivo='principal')";
             return $this->db->consultar($sql);
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -111,7 +111,6 @@ class DaoDispositivo implements DaoInterfaceDispositivo
     public function enterAccess($id_seguridad, $dir_ip)
     {
         try {
-            //SI COINCIDE, TE DEJARÁ ENTRAR (ESTO ERA LA VALIDACIÓN DEFINITIVA POR MEDIO DE LAS DIRECCIONES IP DE LOS DISPOSITIVOS)
             $query = "SELECT * FROM dispositivo WHERE id_seguridad = :id_seguridad AND (estado_dispositivo='principal' OR estado_dispositivo='seguro') AND direccion_ip=:direccion_ip";
             return $this->db->consultar($query, ['id_seguridad' => $id_seguridad, 'direccion_ip' => $dir_ip]);
         } catch (Exception $e) {
