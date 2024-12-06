@@ -2,7 +2,7 @@
 include_once '../controller/ControllerEntradas.php';
 include_once '../controller/ControllerSeguridad.php';
 include_once '../controller/ControllerHorario.php';
-include_once '../controller/ControllerDireccion.php'; 
+include_once '../controller/ControllerDireccion.php';
 
 $controllerEntradas = new ControllerEntradas();
 $controllerSeguridad = new ControllerSeguridad();
@@ -26,7 +26,7 @@ $error = null;
     <?php include 'fragmentos/head.php'; ?>
     <title>Rango de Horario y Ubicación</title>
     <link rel="stylesheet" href="css/horario_ubicacion.css">
-   
+
 </head>
 
 <body>
@@ -43,9 +43,9 @@ $error = null;
             <?php if (empty($horarios)): ?>
                 <h4>No se han encontrado horarios restringidos. Puedes registrar uno nuevo.</h4>
                 <form action="../controller/ControllerHorario.php?action=registrar" method="POST">
-                <div class="formulario">
-                    <input type="hidden" name="id_seguridad" value="<?= $_SESSION['id_seguridad']?>">
-                    <div class="grupo-formulario-horario">
+                    <div class="formulario">
+                        <input type="hidden" name="id_seguridad" value="<?= $_SESSION['id_seguridad'] ?>">
+                        <div class="grupo-formulario-horario">
                             <label for="hora-inicio-nuevo">
                                 <i class="fas fa-clock"></i> Hora Inicio
                             </label>
@@ -60,7 +60,7 @@ $error = null;
                     </div>
                     <small>* Recuerda que cada día debes registrar un rango de horario</small>
                     <div class="botones">
-                        <button type="submit" name="btnRegistrar" class="boton-naranja" <?php if($datosActivados==0){?>disabled<?php } ?>>Registrar</button>
+                        <button type="submit" name="btnRegistrar" class="boton-naranja" <?php if ($datosActivados == 0) { ?>disabled<?php } ?>>Registrar</button>
                     </div>
                 </form>
             <?php else: ?>
@@ -84,7 +84,7 @@ $error = null;
                             </div>
                         </div>
                         <div class="botones">
-                            <button type="submit" class="boton-azul" name="btnModificar" <?php if($datosActivados==0){?>disabled<?php } ?>>Editar Cambios</button>
+                            <button type="submit" class="boton-azul" name="btnModificar" <?php if ($datosActivados == 0) { ?>disabled<?php } ?>>Editar Cambios</button>
                         </div>
                     </form>
                 <?php endforeach; ?>
@@ -101,6 +101,8 @@ $error = null;
                     }
                     ?>
                 </div>
+                <input type="hidden" name="longitud" id="longitud" value="">
+                <input type="hidden" name="latitud" id="latitud" value="">
                 <h2>Ingresa la Ubicación Segura</h2>
                 <div class="grupo-formulario">
                     <label for="direccion">
@@ -109,7 +111,7 @@ $error = null;
                     <div class="input-container">
                         <input type="text" id="locationInput" placeholder="Busca una dirección"
                             oninput="autocompleteAddress(this.value)" name="txtdireccion" autocomplete="off" />
-                        <button type="button" onclick="getLocation()" class="btn-salir" <?php if($datosActivados==0){?>disabled<?php } ?>>Ubicación Actual</button>
+                        <button type="button" onclick="getLocation()" class="btn-salir" <?php if ($datosActivados == 0) { ?>disabled<?php } ?>>Ubicación Actual</button>
                     </div>
                     <ul id="suggestions"></ul>
                 </div>
@@ -121,8 +123,8 @@ $error = null;
                 <small>* Puedes ingresar varias ubicaciones, pero solo 2 al día</small>
                 <div class="botones">
                     <button id="boton-registrar-direccion" class="boton-naranja" name="btnRegistrarDireccion"
-                        type="submit" <?php if($datosActivados==0){?>disabled<?php } ?>>Guardar</button>
-                    <button <?php if($datosActivados==0){?>disabled<?php } ?> id="boton-editar-rango" type="button" class="boton-azul"
+                        type="submit" <?php if ($datosActivados == 0) { ?>disabled<?php } ?>>Guardar</button>
+                    <button <?php if ($datosActivados == 0) { ?>disabled<?php } ?> id="boton-editar-rango" type="button" class="boton-azul"
                         onclick="window.location.href='ver_direcciones.php'">Ver direcciones</button>
                 </div>
             </form>
@@ -137,7 +139,7 @@ $error = null;
         crossorigin="anonymous"></script>
     <script src="js/validacionhora.js"></script>
     <script src="js/ubicacion_direccion.js"></script>
-    
+
 </body>
 
 </html>

@@ -14,10 +14,10 @@ class DaoDireccion implements DaoInterfaceDireccion {
         $this->connection = new Connection();
     }
 
-    public function registrarDireccion($id_seguridad, $direccion_exacta, $rango_gps, $fecha_configuracion, $hora_configuracion) {
-        $query = "INSERT INTO direccion (id_seguridad, direccion_exacta, rango_gps, fecha_configuracion, hora_configuracion) 
-                  VALUES (?, ?, ?, ?, ?)";
-        $this->connection->ejecutar($query, [$id_seguridad, $direccion_exacta, $rango_gps, $fecha_configuracion, $hora_configuracion]);
+    public function registrarDireccion($id_seguridad, $direccion_exacta, $longitud, $latitud, $rango_gps, $fecha_configuracion, $hora_configuracion) {
+        $query = "INSERT INTO direccion (id_seguridad, direccion_exacta, longitud, latitud, rango_gps, fecha_configuracion, hora_configuracion) 
+                  VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $this->connection->ejecutar($query, [$id_seguridad, $direccion_exacta, $longitud, $latitud, $rango_gps, $fecha_configuracion, $hora_configuracion]);
     }
 
     public function obtenerTodasDirecciones($id) {
@@ -25,10 +25,10 @@ class DaoDireccion implements DaoInterfaceDireccion {
         return $this->connection->consultar($query, ['id' => $id]);
     }
 
-    public function modificarDireccion($id_direccion, $direccion_exacta, $rango_gps) {
-        $sql = "UPDATE direccion SET direccion_exacta = ?, rango_gps = ? WHERE id_direccion = ?";
+    public function modificarDireccion($id_direccion,$longitud, $latitud, $direccion_exacta, $rango_gps) {
+        $sql = "UPDATE direccion SET direccion_exacta = ?, longitud = ?, latitud = ?, rango_gps = ? WHERE id_direccion = ?";
         
-        return $this->connection->ejecutar($sql, [$direccion_exacta, $rango_gps, $id_direccion]);
+        return $this->connection->ejecutar($sql, [$direccion_exacta,$longitud, $latitud, $rango_gps, $id_direccion]);
     }
 
     public function eliminarDireccion($id) {

@@ -37,10 +37,9 @@ try {
 
             $id_seguridad = $_SESSION['id_seguridad'];
             //DISPOSITIVO
-            $registro3 = $daoDispositivo->enterAccess($id_seguridad, $dir_ip);
+            $dispositivo_actual = $daoDispositivo->enterAccess($id_seguridad, $dir_ip);
 
-            $direccion_ip_deseada = $registro3[0]['direccion_ip'];
-
+            $direccion_ip_deseada = $dispositivo_actual[0]['direccion_ip'];
             $_SESSION['info'] = $info;
             $_SESSION['direccion_ip'] = $dir_ip;
             $_SESSION['dispositivo'] = obtener_dispositivo();
@@ -50,58 +49,50 @@ try {
 
             //SI COINCIDE EN LA VERIFCACION
             if (!empty($direccion_ip_deseada) && $_SESSION['direccion_ip'] === $direccion_ip_deseada) {
-
-                // verificar si hora esta actividado, si no esta activado, se deja ingresar, si esta activado, 
+                //  COMPARAR CON LA LATITUD Y LONGITUD DE LA DIRECCION DE LA BASE DE DATOS
+                //verificar si hora esta actividado, si no esta activado, se deja ingresar, si esta activado, 
                 //verificar si la hora de ahora esta en el rango de la hora de bloqueo, si no esta, verificar 
                 //si la ubicacion de la ip esta un un rango segun lo que se indique en la base de datos de las 
                 //ubicaciones seguras, si no esta, se envia un correo con la ubicacion y la hora de acceso no autorizado y no deja ingresar.
                 $horario = $registro2[0]['estado_hora_direccion'];
-                /*
                 if ($horario) {
                     $horario_restringido = $daoHorario->obtenerHorariosRestringidos($id_seguridad);
                     $hora_actual = date("H:i:s");
-                    // si está fuera del rango de restriccion de hora
+                    // si está fuera del rango de restriccion de hora de bloqueo
                     if ($hora_actual <= $horario_restringido[0]['hora_inicio'] && $hora_actual >= $horario_restringido[0]['hora_final']) {
-                        //obtener todas direcciones y recorrer
+                        //obtener todas direcciones segun seguridad y recorrer
                         $direcciones = $daoDireccion->obtenerTodasDirecciones($id_seguridad);
-                        
-                        //RETORNAR LA LATITUD Y LONGITUD
-                        $datosDispositivo = obtenerCoordenadasIP($dir_ip);
-                        
+                        $verificar = false;
                         for ($i = 0; $i < count($direcciones); $i++) {
-                            // en ves de direccion exacta obtener la ciudad
-                            $datosUbicacion = obtenerCoordenadasOSM($direcciones[$i]['direccion_exacta']);
-                            if (verificarUbicacionSegura($datosDispositivo['latitud'], $datosDispositivo['longitud'], $datosUbicacion['latitud'], $datosUbicacion['longitud'], $direcciones[$i]['rango_gps'])) {
-                            */
-                $_SESSION['id_dispositivo'] = $registro3[0]['id_dispositivo'];
-                $_SESSION['estado_dispositivo'] = $registro3[0]['estado_dispositivo'];
-                header("Location: ../view/principal.php");
-                /*
-            } else {
-                //enviar mensaje y no dejar ingresar
-            
-                envioCorreo($info['city'], $dir_ip, date("h:i:s A"));
-                $_SESSION['error_ubicacion'] = true; //LLAVE PARA ABRIR EL MODAL PARA INGRESAR EL CÓDIGO DE VERIFICACIÓN
-                header("Location: ../view/index.php");
-                die();
-            }
-        }
-    } else {
-        //enviar mensaje y no dejar ingresar
-
-        $_SESSION['error_ubicacion'] = true; //LLAVE PARA ABRIR EL MODAL PARA INGRESAR EL CÓDIGO DE VERIFICACIÓN
-        header("Location: ../view/index.php");
-        die();
-        
-    }
-
-} else {
-    $_SESSION['id_dispositivo'] = $registro3[0]['id_dispositivo'];
-    $_SESSION['estado_dispositivo'] = $registro3[0]['estado_dispositivo'];
-    header("Location: ../view/principal.php");
-    die();
-}
-     */
+                            // verificar si alguna direccion esta en el rango de ubicacion segura, si esta, dejar ingresar
+                            if (verificarUbicacionSegura($dispositivo_actual['latitud'], $dispositivo_actual['longitud'], $direcciones[$i]['latitud'], $direcciones[$i]['longitud'], $direcciones[$i]['rango_gps'])) {
+                                $_SESSION['id_dispositivo'] = $dispositivo_actual[0]['id_dispositivo'];
+                                $_SESSION['estado_dispositivo'] = $dispositivo_actual[0]['estado_dispositivo'];
+                                header("Location: ../view/principal.php");
+                                die();
+                            }
+                        }
+                        // si a la hora de recorrer no se encuentra ninguna ubicacion segura, enviar mensaje y no dejar ingresar
+                        if (!$verificar) {
+                            //enviar mensaje y no dejar ingresar
+                            envioCorreo($info['city'], $dir_ip, date("h:i:s A"));
+                            $_SESSION['error_ubicacion'] = true; //LLAVE PARA ABRIR EL MODAL PARA INGRESAR EL CÓDIGO DE VERIFICACIÓN
+                            header("Location: ../view/index.php");
+                            die();
+                        }
+                    } else {
+                        //si esta dentro del rango de bloqueo enviar mensaje y no dejar ingresar
+                        $_SESSION['error_ubicacion'] = true; //LLAVE PARA ABRIR EL MODAL PARA INGRESAR EL CÓDIGO DE VERIFICACIÓN
+                        header("Location: ../view/index.php");
+                        die();
+                    }
+                } 
+                else {
+                    $_SESSION['id_dispositivo'] = $dispositivo_actual[0]['id_dispositivo'];
+                    $_SESSION['estado_dispositivo'] = $dispositivo_actual[0]['estado_dispositivo'];
+                    header("Location: ../view/principal.php");
+                    die();
+                }
             } else { //SI NO COINCIDE EN LA VERIFCACION
                 $_SESSION['error_ubicacion'] = true; //LLAVE PARA ABRIR EL MODAL PARA INGRESAR EL CÓDIGO DE VERIFICACIÓN
                 header("Location: ../view/index.php");
@@ -114,7 +105,6 @@ try {
         session_destroy();
         header("Location: ../view/index.php?error=true");
     }
-
 } catch (Exception $exc) {
     die($exc->getMessage());
 }

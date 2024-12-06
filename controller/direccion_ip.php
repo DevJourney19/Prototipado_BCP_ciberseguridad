@@ -91,7 +91,6 @@ function calcularDistancia($lat1, $lon1, $lat2, $lon2)
 
 function verificarUbicacionSegura($latDispositivo, $lonDispositivo, $latDireccion, $lonDireccion, $rango)
 {
-
     $distancia = calcularDistancia($latDispositivo, $lonDispositivo, $latDireccion, $lonDireccion);
     $rango = $rango / 1000; // Convertir el rango de metros a kilómetros
     if ($distancia <= $rango) { 
@@ -101,29 +100,4 @@ function verificarUbicacionSegura($latDispositivo, $lonDispositivo, $latDireccio
         echo "El dispositivo está fuera del rango permitido.";
         return false;
     }
-}
-
-function obtenerCoordenadasOSM($direccion) {
-    $direccionEncoded = urlencode($direccion);
-    $url = "https://nominatim.openstreetmap.org/search?q=$direccionEncoded&format=json&limit=1";
-    
-    $respuesta = file_get_contents($url);
-    $datos = json_decode($respuesta, true);
-
-    if (!empty($datos)) {
-        return ['latitud' => $datos[0]['lat'], 'longitud' => $datos[0]['lon']];
-    }
-    return ['error' => 'No se encontraron coordenadas'];
-}
-
-function obtenerCoordenadasIP($ip) {
-    $url = "https://ipinfo.io/$ip/json";
-    $respuesta = file_get_contents($url);
-    $datos = json_decode($respuesta, true);
-
-    if (isset($datos['loc'])) {
-        list($latitud, $longitud) = explode(',', $datos['loc']);
-        return ['latitud' => $latitud, 'longitud' => $longitud];
-    }
-    return ['error' => 'No se pudo obtener la ubicación de la IP'];
 }

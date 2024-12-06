@@ -68,7 +68,7 @@ if (!filter_var($modelUsuario->getCorreo(), FILTER_VALIDATE_EMAIL)) {
 $mail->setFrom("bcp83584@gmail.com", "Banca en Linea BCP");
 $mail->addAddress($modelUsuario->getCorreo(), $modelUsuario->getNombre());
 $mail->Subject = 'Codigo de verificacion';
-$mail->Body = 'Alguien esta tratando de ingresar a tu cuenta!\nEl codigo de verificacion es: ' . $codigo . '\nSi no fuiste tu, por favor contacta a soporte tecnico e ignora este mensaje.';
+$mail->Body = 'Alguien esta tratando de ingresar a tu cuenta!<br>El codigo de verificacion es: ' . $codigo . '<br>Si no fuiste tu, por favor contacta a soporte tecnico e ignora este mensaje.';
 $mail->send();
 
 $api = new SmsApi(config: $configuration);
