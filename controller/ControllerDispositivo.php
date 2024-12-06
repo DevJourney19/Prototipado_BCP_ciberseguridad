@@ -13,10 +13,7 @@ class ControllerDispositivo
         $this->daoUsuario = new DaoUsuario();
         $this->daoDispositivo = new DaoDispositivo();
     }
-
-    //LLAMADA A CREAR DISPOSITIVO
-
-
+    
     public function crearDispositivo()//JSON
     {
         header('Content-Type: application/json');
@@ -124,7 +121,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'mostrar') {
 
 if (isset($_GET['action']) && $_GET['action'] === 'getUsuario' && isset($_GET['cambio'])) {
     $controller = new ControllerDispositivo();
-    $controller->crearDispositivo();
+    // si el dispotivio no existe crear otro
+    if (isset($_SESSION['noExiste']) && $_SESSION['noExiste'] === true) {
+        $controller->crearDispositivo();
+    }else{
+        echo json_encode(['mensaje' => 'No cambio']);
+    }
 }
 if (isset($_GET['action']) && $_GET['action'] === 'deleteDispo') {
     $controller = new ControllerDispositivo();

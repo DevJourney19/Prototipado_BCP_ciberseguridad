@@ -67,7 +67,7 @@ function obtener_dispositivo()
 
 function calcularDistancia($lat1, $lon1, $lat2, $lon2)
 {
-    $radioTierra = 6371; // Radio de la Tierra en kilómetros
+    $radioTierra = 6371000; // Radio de la Tierra en kilómetros
 
     // Convertir de grados a radianes
     $lat1Rad = deg2rad($lat1);
@@ -92,7 +92,6 @@ function calcularDistancia($lat1, $lon1, $lat2, $lon2)
 function verificarUbicacionSegura($latDispositivo, $lonDispositivo, $latDireccion, $lonDireccion, $rango)
 {
     $distancia = calcularDistancia($latDispositivo, $lonDispositivo, $latDireccion, $lonDireccion);
-    $rango = $rango / 1000; // Convertir el rango de metros a kilómetros
     if ($distancia <= $rango) { 
         echo "El dispositivo está dentro del rango permitido.";
         return true;

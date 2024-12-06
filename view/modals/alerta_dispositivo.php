@@ -2,7 +2,7 @@
   <!--BLUR-->
   <div class="modal alerta">
     <div>
-      <i class="fa-solid fa-vault"></i>
+      <i class="fa-solid fa-user-lock"></i>
       <h2>Estás intentando ingresar desde otro dispositivo?</h2>
     </div>
     <div>
@@ -211,9 +211,11 @@
 
         const data = JSON.parse(textResponse);
 
-        setTimeout(() => {
-          window.location.href = "./principal.php";
-        }, 2000)
+        if (data.mensaje === 'No cambio') {
+          setTimeout(() => {
+            window.location.href = "./principal.php";
+          }, 2000)
+        }
 
 
       } catch (error) {
