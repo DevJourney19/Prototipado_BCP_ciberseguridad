@@ -59,7 +59,7 @@ class DaoDispositivo implements DaoInterfaceDispositivo
             } else if ($accion === 'eliminar') {
                 $sql = "delete from dispositivo where id_dispositivo = '$id_dispositivo'";
             } else if ($accion === 'activar') {
-                $sql = "UPDATE dispositivo SET estado_dispositivo='activado' where id_dispositivo ='$id_dispositivo'";
+                $sql = "UPDATE dispositivo SET estado_dispositivo='principal' where id_dispositivo ='$id_dispositivo'";
             }
             $response = $this->db->ejecutar($sql);
         } catch (Exception $e) {
@@ -88,14 +88,35 @@ class DaoDispositivo implements DaoInterfaceDispositivo
             echo "Error: " . $e->getMessage();
         }
     }
+    public function readDispoByUserSecurityFilter($id_seguridad)
+    {
+        try {
+            $sql = "SELECT * FROM dispositivo WHERE id_seguridad='$id_seguridad' AND (estado_dispositivo='activado' OR estado_dispositivo='seguro' OR estado_dispositivo='principal')";
+            return $this->db->consultar($sql);
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
+
+    public function readDispoByUserSecurityFilterProcess($id_seguridad)
+    {
+        try {
+            $sql = "SELECT * FROM dispositivo WHERE id_seguridad='$id_seguridad' AND (estado_dispositivo='en_proceso_si' OR estado_dispositivo='en_proceso_no')";
+            return $this->db->consultar($sql);
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    }
 
     public function enterAccess($id_seguridad, $dir_ip)
     {
         try {
-            $query = "SELECT * FROM dispositivo WHERE id_seguridad = '$id_seguridad' AND (estado_dispositivo='activado' || estado_dispositivo='seguro') AND direccion_ip='$dir_ip'";
-            return $this->db->consultar($query);
+            //SI COINCIDE, TE DEJARÁ ENTRAR (ESTO ERA LA VALIDACIÓN DEFINITIVA POR MEDIO DE LAS DIRECCIONES IP DE LOS DISPOSITIVOS)
+            $query = "SELECT * FROM dispositivo WHERE id_seguridad = :id_seguridad AND (estado_dispositivo='principal' OR estado_dispositivo='seguro') AND direccion_ip=:direccion_ip";
+            return $this->db->consultar($query, ['id_seguridad' => $id_seguridad, 'direccion_ip' => $dir_ip]);
         } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();
+            error_log("Error en enterAccess: " . $e->getMessage());
+            return ['error' => 'Ocurrió un error en la validación del acceso.'];
         }
     }
 }

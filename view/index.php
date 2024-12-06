@@ -73,7 +73,7 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
                     <button type="submit">Ingresar</button>
                 </form>
             </div>
-            
+
         </div>
     </main>
 

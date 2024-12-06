@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../dao/DaoDispositivo.php';
 require_once '../dao/DaoUsuario.php';
 require_once '../dao/DaoSeguridad.php';
@@ -40,6 +41,14 @@ class ControllerDispositivo
     {
         return $this->daoDispositivo->readDispoByUserSecurity($id_seguridad);
     }
+    public function obtenerDispositivosFiltrados($id_seguridad)
+    {
+        return $this->daoDispositivo->readDispoByUserSecurityFilter($id_seguridad);
+    }
+    public function obtenerDispositivosEnProceso($id_seguridad)
+    {
+        return $this->daoDispositivo->readDispoByUserSecurityFilterProcess($id_seguridad);
+    }
 
     //Info del o de los dispositivos que hayan intentado acceder por medio del código de verificacion 
     public function mostrarDispositivos($id_seguridad)
@@ -70,24 +79,23 @@ class ControllerDispositivo
         try {
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                //Se trae del input hidden
+                //Se trae del data-id
                 $id_dispositivo = $_POST['id_dispositivo'];
                 $accion = $_POST['accion'];
 
-                if ($accion === 'eliminar') {
-                    $this->daoDispositivo->updateDeviceStatus($accion, $id_dispositivo);
-                    $response['message'] = 'Dispositivo eliminado con éxito.';
-                } else if ($accion === 'bloquear') {
-                    $this->daoDispositivo->updateDeviceStatus($accion, $id_dispositivo);
-                    $response['message'] = 'Dispositivo bloqueado con éxito.';
-                } else if ($accion === 'permitir') {
-                    $this->daoDispositivo->updateDeviceStatus($accion, $id_dispositivo);
-                    $response['message'] = 'Dispositivo permitido con éxito.';
-                } else if ($accion === 'activar') {
-                    $this->daoDispositivo->updateDeviceStatus($accion, $id_dispositivo);
-                    $response['message'] = 'Dispositivo activado con éxito.';
+                $resultado = $this->daoDispositivo->updateDeviceStatus($accion, $id_dispositivo);
+
+                if ($resultado) {
+                    if ($accion !== "eliminar") {
+                        $dispositivo_actualizado = $this->daoDispositivo->readById( $id_dispositivo);
+                        $response['data'] = $dispositivo_actualizado;
+                    }
+                    $response['status'] = 'success';
+                    $response['message'] = "Dispositivo " . $accion . " con exito";
+                }else{
+                    $response['status'] = 'error';
+                    $response['message'] = "No se pudo realizar la acción de $accion";
                 }
-                $response['status'] = 'success';
             }
             header('Content-Type: application/json');
             echo json_encode($response);

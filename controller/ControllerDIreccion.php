@@ -22,7 +22,7 @@ class ControllerDireccion
             $id_seguridad = $_SESSION['id_seguridad'] ?? null;
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
             $longitud = $_POST['longitud'] ?? null;
-            $latitud = $_POST['longitud'] ?? null;
+            $latitud = $_POST['latitud'] ?? null;
 
             if ($id_seguridad && !empty($direccion_exacta)) {
                 $this->daoDireccion->registrarDireccion($id_seguridad, $direccion_exacta, $longitud, $latitud, 10, date('Y-m-d'), date('H:i:s'));

@@ -1,7 +1,7 @@
 <?php
 include_once '../controller/ControllerEntradas.php';
 $entradas = new ControllerEntradas();
-$entradas->validarEntrada('login_admi.php');
+$entradas->validarEntrada('login_admin.php');
 ?>
 
 <!DOCTYPE html>
@@ -9,15 +9,19 @@ $entradas->validarEntrada('login_admi.php');
 
 <head>
     <?php include '../view/fragmentos/head.php' ?>
+    <link href="../view/css/admin.css" rel="stylesheet" />
     <title>Dashboard</title>
 </head>
 
 <body class="body_dashboard">
     <header>
-        <?php include '../view/fragmentos/nav.php' ?>
+        <?php include_once '../view/fragmentos/nav_close_admin.php' ?>
+        <?php include_once '../view/fragmentos/nav_admin.php' ?>
     </header>
 
-    <main class="main_dashboard">
+    <main class="main_dashboard" style="
+    background: white;
+    color: black;">
         <div class="title_dashboard">
             <h1 class="h1_dashboard">Dashboard</h1>
             <div>
@@ -28,6 +32,7 @@ $entradas->validarEntrada('login_admi.php');
             </div>
         </div>
         <p class="description">Aquí puede visualizar las métricas del rendimiento dle sistema.</p>
+
         <div class="fila_gr">
             <div class="col">
                 <h3>Nivel de Satisfacción</h3>

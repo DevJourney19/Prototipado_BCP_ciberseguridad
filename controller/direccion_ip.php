@@ -91,7 +91,6 @@ function calcularDistancia($lat1, $lon1, $lat2, $lon2)
 
 function verificarUbicacionSegura($latDispositivo, $lonDispositivo, $latDireccion, $lonDireccion, $rango)
 {
-
     $distancia = calcularDistancia($latDispositivo, $lonDispositivo, $latDireccion, $lonDireccion);
     $rango = $rango / 1000; // Convertir el rango de metros a kilómetros
     if ($distancia <= $rango) { 

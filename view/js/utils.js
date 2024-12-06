@@ -1,3 +1,9 @@
+function getCurrentPosition() {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+}
+
 const controlarFormulario = async (event) => {
   event.preventDefault();
   const nombre = document.getElementById("nombre_activacion").value;
@@ -24,6 +30,12 @@ const controlarFormulario = async (event) => {
   document.getElementById("correo_activacion").disabled = true;
   document.getElementById("button_activacion").disabled = true;
 
+  const position = await getCurrentPosition();
+  const latitud = position.coords.latitude;
+  const longitud = position.coords.longitude;
+
+  console.log(latitud, longitud);
+
   await fetch("../controller/ControllerVerifySession.php")
     .then((response) => response.json())
     .then(async (data) => {
@@ -31,14 +43,6 @@ const controlarFormulario = async (event) => {
       if (data.status === true) {
         // obtener el id del usuario
         const userId = data.id;
-        // latitud y longitud
-        let latitud = 0;
-        let longitud = 0;
-        navigator.geolocation.getCurrentPosition((position) => {
-          latitud = position.coords.latitude;
-          longitud = position.coords.longitude;
-        });
-
         // enviar los datos al servidor
         await fetch("../controller/ControllerActivarSeguridad.php", {
           method: "POST",

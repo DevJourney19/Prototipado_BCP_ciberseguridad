@@ -1,7 +1,9 @@
 <?php
 
 include_once '../controller/ControllerEntradas.php';
+include_once '../controller/ControllerDispositivo.php';
 $entradas = new ControllerEntradas();
+$dispositivoCtler = new ControllerDispositivo();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
 $seguro = null;
@@ -10,6 +12,12 @@ if (isset($_SESSION['estado_dispositivo']) && $_SESSION['estado_dispositivo'] ==
     $seguro = true;
 }
 $dispositivo = $_SESSION['dispositivo'];
+$listaDispositivos = $dispositivoCtler->obtenerDispositivosFiltrados($_SESSION['id_seguridad']);
+
+
+if ($listaDispositivos === null or !isset($listaDispositivos)) {
+    $listaDispositivos = false;
+}
 
 ?>
 
@@ -48,80 +56,100 @@ $dispositivo = $_SESSION['dispositivo'];
 
             <!--Necesito crear esto por js -->
 
-            <?php if (isset($dispositivo)) { ?>
-                <div class="caja">
-                    <div class="primero">
-                        <div class="imagen">
+            <?php
+            $llave_dispositivo_principal = false;
+            if ($listaDispositivos) {
 
-                            <?php switch ($dispositivo) {
-                                case 'Ordenador de escritorio': ?>
-                                    <img src="img/computadora.png" alt="Imagen de celular">
+                $count = 0;
 
-                                    <?php break;
-                                case 'Portátil': ?>
-                                    <img src="img/icono_portatil.png" alt="Imagen de portátil">
-                                    <?php break;
 
-                                case 'Tableta': ?>
-                                    <img src="img/icono_tableta.png" alt="Imagen de tableta">
-                                    <?php break;
+                foreach ($listaDispositivos as $dispo) {
+                    if ($dispo['estado_dispositivo'] === "principal") {
+                        $count++;
+                        if ($count >= 3) {
+                            echo "<script>alert('Limite máximo de 3 equipos principales');</script>";
+                            $llave_dispositivo_principal = true;
+                        }
+                    }
+                    if (isset($dispo['tipo_dispositivo'])) { ?>
+                        <div class="caja" data-id="<?= htmlspecialchars($dispo['id_dispositivo']) ?>">
+                            <div class="primero">
+                                <div class="imagen">
 
-                                case 'Teléfono móvil': ?>
-                                    <img src="img/icono_cel.png" alt="Imagen de teléfono móvil">
-                                    <?php break;
+                                    <?php switch ($dispo['tipo_dispositivo']) {
+                                        case 'Ordenador de escritorio': ?>
+                                            <img src="img/computadora.png" alt="Imagen de celular">
 
-                                case 'Smartwatch': ?>
-                                    <img src="img/icono_smartwatch.png" alt="Imagen de smartwatch">
-                                    <?php break;
+                                        <?php break;
+                                        case 'Portátil': ?>
+                                            <img src="img/icono_portatil.png" alt="Imagen de portátil">
+                                        <?php break;
 
-                                case 'Televisor inteligente': ?>
-                                    <img src="img/icono_televisor.png" alt="Imagen de televisor inteligente">
-                                    <?php break;
+                                        case 'Tableta': ?>
+                                            <img src="img/icono_tableta.png" alt="Imagen de tableta">
+                                        <?php break;
 
-                                case 'Consola de videojuegos': ?>
-                                    <img src="img/icono_consola.png" alt="Imagen de consola de videojuegos">
-                                    <?php break;
+                                        case 'Teléfono móvil': ?>
+                                            <img src="img/icono_cel.png" alt="Imagen de teléfono móvil">
+                                        <?php break;
 
-                                case 'Dispositivo IoT': ?>
-                                    <img src="img/icono_iot.png" alt="Imagen de dispositivo IoT">
-                                    <?php break;
+                                        case 'Smartwatch': ?>
+                                            <img src="img/icono_smartwatch.png" alt="Imagen de smartwatch">
+                                        <?php break;
 
-                                default: ?>
-                                    <p>Tipo de dispositivo no reconocido.</p>
-                            <?php } ?>
+                                        case 'Televisor inteligente': ?>
+                                            <img src="img/icono_televisor.png" alt="Imagen de televisor inteligente">
+                                        <?php break;
 
-                        </div>
-                        <div class="seccion">
-                            <div class="titulo-caja">
-                                <h4 style="color: darkorange; font-weight: 800;">
-                                    <?= $dispositivo ?>
+                                        case 'Consola de videojuegos': ?>
+                                            <img src="img/icono_consola.png" alt="Imagen de consola de videojuegos">
+                                        <?php break;
 
-                                </h4>
+                                        case 'Dispositivo IoT': ?>
+                                            <img src="img/icono_iot.png" alt="Imagen de dispositivo IoT">
+                                        <?php break;
+
+                                        default: ?>
+                                            <p>Tipo de dispositivo no reconocido.</p>
+                                    <?php } ?>
+
+                                </div>
+                                <div class="seccion">
+                                    <div class="titulo-caja">
+                                        <h4 <?php if ($dispo['estado_dispositivo'] === "principal") { ?>
+                                            style="color: darkorange; font-weight: 800;<?php } else { ?> style=" color: #001843;
+                                            font-weight: 600;<?php } ?> ">
+                                            <?= $dispo['tipo_dispositivo'] ?>
+                                            </h4>
+                                        </div>
+                                        <div class="descripcion-caja">
+                                            <p>
+                                                Lugar: <?= $dispo['ciudad'] ?>- <?= $dispo['pais'] ?>
+                                                <br />
+                                                IP: <?= $dispo['direccion_ip'] ?>
+                                                <br />
+                                                Ingreso: <?= $dispo['ultima_conexion'] ?>
+                                            </p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="descripcion-caja">
-                                <p>
-                                    Lugar: <?= $_SESSION['ciudad'] ?>- <?= $_SESSION['pais'] ?>
-                                    <br />
-                                    IP: <?= $_SESSION['direccion_ip'] ?>
-                                    <br />
-                                    Ingreso: <?= $_SESSION['hora'] ?>
-
-                                </p>
+                            <div class="segundo">
+                                <input type="radio" name="vinculo" onchange="handleCheckboxClick(this)"
+                                    id="<?= $dispo['id_dispositivo'] ?>">
+                                <label for="<?= $dispo['id_dispositivo'] ?>"><span class="radio-button"></span></label>
                             </div>
                         </div>
-                    </div>
-                    <div class="segundo">
-                        <input type="radio" name="vinculo" id="dispositivo1" checked>
-                        <label for="dispositivo1"><span class="radio-button"></span></label>
-                    </div>
-                </div>
-            <?php } ?>
+            <?php }
+                }
+            } ?>
         </div>
 
         <?php if (!isset($seguro)) { ?>
             <div class="opciones">
                 <div class="boton-primario">
-                    <button type="button" onclick="openModal()">Dispositivo Principal</button>
+
+                    <button type="button" onclick="openModal()" <?php if ($llave_dispositivo_principal === true) { ?> disabled
+                        <?php } ?>>Dispositivo Principal</button>
                 </div>
                 <div class="boton-secundario">
                     <button type="button" onclick="openModalDos()">Desvincular y eliminar</button>
@@ -172,97 +200,7 @@ $dispositivo = $_SESSION['dispositivo'];
     </dialog>
     <script src="../view/js/index.js"></script>
     <script src="../view/js/utils.js"></script>
-
     <script src="js/dispositivos.js"></script>
-    <script>
-        const info = localStorage.getItem('nuevo_dispositivo'); //Retorna String
-        //console.log(info);
-        if (info) {
-            try {
-
-                //Convertir la cadena JSON de nuevo a un objeto
-                const obj_info = JSON.parse(info);
-                //console.log(obj_info);
-                console.log(obj_info);
-                //Cambiar el contenido del div [ubicación referencial]
-                const mensajito = document.getElementById('mensajin');
-                obj_info.forEach((item, index) => {
-                    let color = item.estado === 'activado' ? 'darkorange' : '#001843';
-                    let font = item.estado === 'activado' ? '800' : '400';
-                    //Crear un nuevo div
-                    const nueva_caja = document.createElement('div');
-                    nueva_caja.classList.add('caja');
-                    // Asignar un id único numérico al div
-                    const idNumerico = item.id;
-                    nueva_caja.id = idNumerico;
-                    // Switch en JavaScript para determinar la imagen
-                    let imagenHTML;
-                    switch (item.tipo) {
-                        case 'Ordenador de escritorio':
-                            imagenHTML = '<img src="img/computadora.png" alt="Imagen de computadora">';
-                            break;
-                        case 'Portátil':
-                            imagenHTML = '<img src="img/icono_portatil.png" alt="Imagen de portátil">';
-                            break;
-                        case 'Tableta':
-                            imagenHTML = '<img src="img/icono_tableta.png" alt="Imagen de tableta">';
-                            break;
-                        case 'Teléfono móvil':
-                            imagenHTML = '<img src="img/icono_cel.png" alt="Imagen de teléfono móvil">';
-                            break;
-                        case 'Smartwatch':
-                            imagenHTML = '<img src="img/icono_smartwatch.png" alt="Imagen de smartwatch">';
-                            break;
-                        case 'Televisor inteligente':
-                            imagenHTML = '<img src="img/icono_televisor.png" alt="Imagen de televisor inteligente">';
-                            break;
-                        case 'Consola de videojuegos':
-                            imagenHTML = '<img src="img/icono_consola.png" alt="Imagen de consola de videojuegos">';
-                            break;
-                        case 'Dispositivo IoT':
-                            imagenHTML = '<img src="img/icono_iot.png" alt="Imagen de dispositivo IoT">';
-                            break;
-                        default:
-                            imagenHTML = '<p>Tipo de dispositivo no reconocido.</p>';
-                    }
-                    nueva_caja.innerHTML = `
-            
-                <div class="primero">
-                    <div class="imagen">
-                ${imagenHTML}
-                    </div>
-                    <div class="seccion">
-                        <div class="titulo-caja">
-                        
-                            <h4 style="color:${color}; font-weight:${font}">
-                                ${item.tipo}
-                            </h4>
-                        </div>
-                        <div class="descripcion-caja">
-                            <p>
-                                Lugar: ${item.ciudad} - ${item.pais} <br/> 
-                                IP: ${item.dip} <br/>
-                                Ingreso: ${item.fecha}
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-                <?php if (!isset($seguro)) { ?>
-                                                                                                                                                                                                <div class="segundo">
-                                                                                                                                                                                                    <input type="radio" name="vinculo" onchange="handleCheckboxClick(this)" id="dispositivo${index + 2}" />
-                                                                                                                                                                                                    <label for="dispositivo${index + 2}"><span class="radio-button"></span></label>
-                                                                                                                                                                                                </div>
-                <?php } ?>
-            `;
-                    //localStorage.removeItem('nuevo_dispositivo');
-                    mensajito.appendChild(nueva_caja);
-                });
-            } catch (error) {
-                console.error('Error al analizar JSON:', error);
-            }
-        }
-    </script>
 </body>
 
 </html>

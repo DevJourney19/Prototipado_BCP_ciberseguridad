@@ -29,4 +29,22 @@ class ControllerUsuario
         $usuario->setTelefono($result['telefono']);
         return $usuario;
     }
+
+    public function obtenerUsuarios()
+    {
+        $result = $this->daoUsuario->readAllUsersWithSecurity();
+        $usuarios = [];
+
+        if (!empty($result)) {
+            foreach ($result as $row) {
+                $usuario = new Usuario();
+                $usuario->setIdUsuario($row['id_usuario']);
+                $usuario->setNombre($row['nombre']);
+                $usuario->setCorreo($row['correo']);
+                $usuario->setTelefono($row['telefono']);
+                $usuarios[] = $usuario;
+            }
+        }
+        return $usuarios;
+    }
 }

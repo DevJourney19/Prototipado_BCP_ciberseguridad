@@ -16,7 +16,7 @@ class DaoDireccion implements DaoInterfaceDireccion {
 
     public function registrarDireccion($id_seguridad, $direccion_exacta, $longitud, $latitud, $rango_gps, $fecha_configuracion, $hora_configuracion) {
         $query = "INSERT INTO direccion (id_seguridad, direccion_exacta, longitud, latitud, rango_gps, fecha_configuracion, hora_configuracion) 
-                  VALUES (?, ?, ?, ?, ?)";
+                  VALUES (?, ?, ?, ?, ?, ?, ?)";
         $this->connection->ejecutar($query, [$id_seguridad, $direccion_exacta, $longitud, $latitud, $rango_gps, $fecha_configuracion, $hora_configuracion]);
     }
 
