@@ -94,7 +94,7 @@ $mensaje = "No se encontraron resultados.";
         <div style="text-align: center; margin-top: 1rem; margin-bottom: 1rem;">
             <h2>Reporte de Actividades del Sistema</h2>
         </div>
-        <h4>1. Nivel de Satisfacción de Usuario</h4>
+        <h4>1. Nivel de Satisfacción de Usuario <?php echo date('Y') ?></h4>
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
