@@ -91,6 +91,9 @@ $direcciones = $daoDireccion->obtenerTodasDirecciones($_SESSION['id_seguridad'])
                         <div class="modal-body">
                             <form action="../controller/ControllerDireccion.php?action=modificar" method="post">
                                 <input type="hidden" name="txtId" value="<?= $datos['id_direccion'] ?>">
+                                <input type="hidden" name="longitud" value="<?= $datos['longitud'] ?>">
+                                <input type="hidden" name="latitud" value="<?= $datos['latitud'] ?>">
+
                                 <div class="mb-3">
                                     <label for="direccion" class="form-label">Dirección Exacta</label>
                                     <input id="direccion" type="text" name="txtdireccion"
