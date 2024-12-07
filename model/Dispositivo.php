@@ -5,16 +5,20 @@ class Dispositivo
     private $id_seguridad;
     private $tipo_dispositivo;
     private $direccion_ip;
+    private $longitud;
+    private $latitud;
     private $pais;
     private $ciudad;
     private $estado_dispositivo;
     private $fecha_registro;
     private $ultima_conexion;
 
-    public function __construct($id_seguridad = null, $tipo_dispositivo = null, $direccion_ip = null, $pais = null, $ciudad = null, $estado_dispositivo = null, $fecha_registro = null, $ultima_conexion = null) {
+    public function __construct($id_seguridad = null, $tipo_dispositivo = null, $direccion_ip = null, $longitud = null, $latitud = null, $pais = null, $ciudad = null, $estado_dispositivo = null, $fecha_registro = null, $ultima_conexion = null) {
         $this->id_seguridad = $id_seguridad;
         $this->tipo_dispositivo = $tipo_dispositivo;
         $this->direccion_ip = $direccion_ip;
+        $this->longitud = $longitud;
+        $this->latitud = $latitud;
         $this->pais = $pais;
         $this->ciudad = $ciudad;
         $this->estado_dispositivo = $estado_dispositivo;
@@ -101,5 +105,25 @@ class Dispositivo
     public function getUltimaConexion()
     {
         return $this->ultima_conexion;
+    }
+
+    public function getLongitud()
+    {
+        return $this->longitud;
+    }
+
+    public function setLongitud($longitud)
+    {
+        $this->longitud = $longitud;
+    }
+
+    public function getLatitud()
+    {
+        return $this->latitud;
+    }
+
+    public function setLatitud($latitud)
+    {
+        $this->latitud = $latitud;
     }
 }

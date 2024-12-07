@@ -1,89 +1,94 @@
 <?php
 
 header('Content-Type: application/json');
+require __DIR__ . '/../vendor/autoload.php';
 include_once '../dao/DaoUsuario.php';
 include_once '../model/Usuario.php';
-require __DIR__ . '/../vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 use Infobip\Configuration;
 use Infobip\Api\SmsApi;
 use Infobip\Model\SmsDestination;
 use Infobip\Model\SmsTextualMessage;
 use Infobip\Model\SmsAdvancedTextualRequest;
 
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
+class EnvioMensaje {
+    private $modelUsuario;
+    private $daoUsuario;
+    private $id_seguridad;
+    private $usuario;
 
-function envioCorreo($lugar, $ip, $hora) {
-  session_start();
-try {
-  $mail = new PHPMailer(true);
-  
-  $mail->isSMTP();
-  $mail->Host = 'smtp.gmail.com';
-  $mail->SMTPAuth = true;
-  //DEBE SER CORREO DE LA CUENTA DEL CLIENTE EN EL QUE SE QUIERE INGRESAR
-  $mail->Username = $_ENV['EMAIL'];
-  $mail->Password = $_ENV['PASSWORD']; //Contraseña creada en la verficacion de 2 pasos de Google
-  $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-  $mail->Port = 587; //465 para la conexion encriptada
+    public function __construct() {
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+        $dotenv->load();
 
-  // Configuración del sms
-  $base_url = $_ENV['URL'];
-  $api_key = $_ENV['API_KEY'];
-  $configuration = new Configuration(host: $base_url, apiKey: $api_key);
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
-  //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        $this->daoUsuario = new DaoUsuario();
+        $this->id_seguridad = $_SESSION['id_seguridad'];
+        echo $this->id_seguridad;
+        $this->usuario = $this->daoUsuario->readUserWithSecurity($this->id_seguridad, 'seguridad');
 
-  $response = [];
-  $data = json_decode(file_get_contents('php://input'), true);
+        if (!$this->usuario) {
+            throw new Exception('User not found');
+        }
 
-  if (!isset($data['codigo'])) {
-    throw new Exception('Codigo is missing in the input');
-  }
-  $codigo = $data['codigo'];
-} catch (Exception $error) {
-  echo json_encode(['status' => 'error', 'message' => $error->getMessage()]);
-}
+        $this->modelUsuario = new Usuario();
+        $this->modelUsuario->setNombre($this->usuario['nombre']);
+        $this->modelUsuario->setTelefono($this->usuario['telefono']);
+        $this->modelUsuario->setCorreo($this->usuario['correo']);
 
-$daoUsuario = new DaoUsuario();
-$id_seguridad = $_SESSION['id_seguridad'];
-//echo $id_seguridad;
-$usuario = $daoUsuario->readUserWithSecurity($id_seguridad, 'seguridad');
+        if (!filter_var($this->modelUsuario->getCorreo(), FILTER_VALIDATE_EMAIL)) {
+            throw new Exception('Invalid email address');
+        }
+    }
 
-if (!$usuario) {
-  throw new Exception('User not found');
-}
-$modelUsuario = new Usuario();
-$modelUsuario->setNombre($usuario['nombre']);
-$modelUsuario->setTelefono($usuario['telefono']);
-$modelUsuario->setCorreo($usuario['correo']);
+    public function envioCorreo($lugar, $ip, $hora) {
+        try {
+            $mail = new PHPMailer(true);
 
-if (!filter_var($modelUsuario->getCorreo(), FILTER_VALIDATE_EMAIL)) {
-  throw new Exception('Invalid email address');
-}
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = $_ENV['EMAIL'];
+            $mail->Password = $_ENV['PASSWORD'];
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port = 587;
 
-$mail->setFrom("bcp83584@gmail.com", "Banca en Linea BCP");
-$mail->addAddress($modelUsuario->getCorreo(), $modelUsuario->getNombre());
-$mail->Subject = 'Ingreso Bloqueado';
-$mail->Body = 'Alguien esta tratando de ingresar a tu cuenta!\nDesde: ' . $lugar . '\Con ip: ' . $ip . '\A las: ' . $hora . '\nSi no fuiste tu, por favor contacta a soporte tecnico e ignora este mensaje.';
-$mail->send();
+            $mail->setFrom($_ENV['EMAIL'], "Banca en Linea BCP");
+            $mail->addAddress($this->modelUsuario->getCorreo(), $this->modelUsuario->getNombre());
+            $mail->isHTML(true);
+            $mail->Subject = 'Ingreso Bloqueado';
+            $mail->Body = 'Alguien está tratando de ingresar a tu cuenta!<br>Desde: ' . $lugar . '<br>Con ip: ' . $ip . '<br>A las: ' . $hora . '<br>Si no fuiste tú, por favor contacta a soporte técnico e ignora este mensaje.';
 
-$api = new SmsApi(config: $configuration);
-$destination = new SmsDestination(to: $modelUsuario->getTelefono());
-$message = new SmsTextualMessage(
-  destinations: [$destination],
-  text: 'Estan intentando ingresar a tu cuenta bcp desde: ' . $lugar . '\Con ip: ' . $ip . '\A las: ' . $hora
-);
+            $mail->send();
+            echo 'El mensaje ha sido enviado';
+        } catch (Exception $e) {
+            echo "El mensaje no pudo ser enviado. Error de correo: {$mail->ErrorInfo}";
+        }
+    }
 
-$request = new SmsAdvancedTextualRequest(messages: [$message]);
-$responseSms = $api->sendSmsMessage($request);
+    public function envioSms($lugar, $ip, $hora) {
+        $configuration = new Configuration(
+            host: $_ENV['URL'],
+            apiKey: $_ENV['API_KEY']
+        );
 
+        $api = new SmsApi(config: $configuration);
+        $destination = new SmsDestination(to: $this->modelUsuario->getTelefono());
+        $message = new SmsTextualMessage(
+            destinations: [$destination],
+            text:  "Están intentando ingresar a tu cuenta BCP desde: $lugar\nCon IP: $ip\nA las: $hora"
+        );
 
-$response = ['status' => 'enviado'];
-echo json_encode($response);
+        $request = new SmsAdvancedTextualRequest(messages: [$message]);
+        $responseSms = $api->sendSmsMessage($request);
 
+        $response = ['status' => 'enviado'];
+        echo json_encode($response);
+    }
 }

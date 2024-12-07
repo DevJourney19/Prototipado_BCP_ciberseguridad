@@ -6,13 +6,13 @@ const openModal = () => {
     modal.showModal();
 };
 
-var idSeleccionado = null;
+let idSeleccionado = null;
 
 //Cuando se haga click en el checkbox
 function handleCheckboxClick(checkbox) {
     if (checkbox.checked) {
         // Guardar el id del div (caja) que contiene el checkbox
-        let caja_seleccionada = checkbox.closest('.caja');
+        const caja_seleccionada = checkbox.closest('.caja');
         if (caja_seleccionada) {
             idSeleccionado = caja_seleccionada.getAttribute("data-id");
             console.log(idSeleccionado);
@@ -42,7 +42,7 @@ const dispositivo_principal = async () => {
                     },
                     body: new URLSearchParams({
                         id_dispositivo: idSeleccionado,
-                        accion: 'activar'
+                        accion: 'principal'
                     })
                 });
 
@@ -80,7 +80,7 @@ async function eliminarCajaSeleccionada() {
     if (idSeleccionado) {
         console.log(idSeleccionado);
         const caja = document.querySelector(`[data-id="${idSeleccionado}"]`); //HGcemos la unión entre la caja y el checkbox
-        console.log("La caja es " + caja);
+
         if (caja) {
             caja.remove(); // Eliminar la caja del DOM
 
@@ -115,7 +115,7 @@ if (historial) {
 
 async function manejadorBoton() {
     const botonesAccion = document.querySelectorAll('.accion-boton');
-    botonesAccion.forEach(boton => {
+    for (const boton of botonesAccion) {
         boton.addEventListener('click', async function () {
             const id_dispositivo = this.getAttribute('data-id');
             const accion = this.getAttribute('data-accion');
@@ -149,8 +149,8 @@ async function manejadorBoton() {
                 console.error('Error:', error);
                 alert("Error al realizar la acción");
             };
-        })
-    })
+        });
+    }
 };
 document.addEventListener('DOMContentLoaded', () => {
     manejadorBoton();

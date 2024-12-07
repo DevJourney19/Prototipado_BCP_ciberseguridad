@@ -2,7 +2,7 @@
   <!--BLUR-->
   <div class="modal alerta">
     <div>
-      <i class="fa-solid fa-vault"></i>
+      <i class="fa-solid fa-user-lock"></i>
       <h2>Estás intentando ingresar desde otro dispositivo?</h2>
     </div>
     <div>
@@ -82,7 +82,7 @@
   const inputs = document.querySelectorAll('input[type=number]');
 
   inputs.forEach((input, index) => {
-    input.addEventListener('input', function () {
+    input.addEventListener('input', function() {
       // Si la longitud del valor del input es igual a su máximo
       if (this.value.length >= this.max) {
         // Mueve el foco al siguiente input
@@ -174,6 +174,12 @@
     }, duracion);
   }
 
+  function getCurrentPosition() {
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+  }
+
   async function verificarCodigo(event) {
     event.preventDefault();
     const tokenElements = document.getElementsByClassName('input-token');
@@ -182,6 +188,11 @@
       tokenIngresado += element.value;
     });
     if (token === tokenIngresado) {
+      // latitud y longitud
+      const position = await getCurrentPosition();
+      const latitud = position.coords.latitude;
+      const longitud = position.coords.longitude;
+
       mostrarModalExito('modalExito');
       try {
         const response = await fetch('../controller/ControllerDispositivo.php?action=getUsuario&cambio=true', {
@@ -189,16 +200,22 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ token_validado: true })
+          body: JSON.stringify({
+            token_validado: true,
+            latitud,
+            longitud
+          })
         });
         const textResponse = await response.text();
         console.log(textResponse);
 
         const data = JSON.parse(textResponse);
 
-        setTimeout(() => {
-          window.location.href = "./index.php";
-        }, 2000)
+        if (data.mensaje === 'No cambio') {
+          setTimeout(() => {
+            window.location.href = "./principal.php";
+          }, 2000)
+        }
 
 
       } catch (error) {
@@ -213,7 +230,9 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ token_validado: false })
+          body: JSON.stringify({
+            token_validado: false
+          })
         });
         const textResponse = await response.text();
         console.log(textResponse);
@@ -230,11 +249,11 @@
     resetTimeout();
   }
 
-  document.getElementById('bloquear').addEventListener('click', function () {
+  document.getElementById('bloquear').addEventListener('click', function() {
     document.getElementById('modal').classList.add('close');
   });
 
-  document.getElementById('cancelar').addEventListener('click', function () {
+  document.getElementById('cancelar').addEventListener('click', function() {
     document.getElementById('modal').classList.add('close');
   });
 </script>

@@ -13,10 +13,7 @@ class ControllerDispositivo
         $this->daoUsuario = new DaoUsuario();
         $this->daoDispositivo = new DaoDispositivo();
     }
-
-    //LLAMADA A CREAR DISPOSITIVO
-
-
+    
     public function crearDispositivo()//JSON
     {
         header('Content-Type: application/json');
@@ -31,6 +28,8 @@ class ControllerDispositivo
             $modelo_direccion->setPais($_SESSION['info']['country']);
             $modelo_direccion->setCiudad($_SESSION['info']['city']);
             $modelo_direccion->setEstadoDispositivo($estado);
+            $modelo_direccion->setLatitud($data['latitud']);
+            $modelo_direccion->setLongitud($data['longitud']);
             $this->daoDispositivo->createDevice($modelo_direccion);
         }
         echo json_encode(['status' => 'success']);
@@ -122,7 +121,12 @@ if (isset($_GET['action']) && $_GET['action'] === 'mostrar') {
 
 if (isset($_GET['action']) && $_GET['action'] === 'getUsuario' && isset($_GET['cambio'])) {
     $controller = new ControllerDispositivo();
-    $controller->crearDispositivo();
+    // si el dispotivio no existe crear otro
+    if (isset($_SESSION['noExiste']) && $_SESSION['noExiste'] === true) {
+        $controller->crearDispositivo();
+    }else{
+        echo json_encode(['mensaje' => 'No cambio']);
+    }
 }
 if (isset($_GET['action']) && $_GET['action'] === 'deleteDispo') {
     $controller = new ControllerDispositivo();

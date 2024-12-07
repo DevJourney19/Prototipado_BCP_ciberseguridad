@@ -99,11 +99,11 @@ $direcciones = $daoDireccion->obtenerTodasDirecciones($_SESSION['id_seguridad'])
                                 <div class="mb-3">
                                     <label for="rango" class="form-label">Rango GPS</label>
                                     <select id="rango" name="txtRango" required class="form-select">
-                                        <option value="10" <?= $datos['rango_gps'] == 10 ? 'selected' : '' ?>>10 metros
+                                        <option value="50" <?= $datos['rango_gps'] == 50 ? 'selected' : '' ?>>50 metros
                                         </option>
-                                        <option value="20" <?= $datos['rango_gps'] == 20 ? 'selected' : '' ?>>20 metros
+                                        <option value="100" <?= $datos['rango_gps'] == 100 ? 'selected' : '' ?>>100 metros
                                         </option>
-                                        <option value="30" <?= $datos['rango_gps'] == 30 ? 'selected' : '' ?>>30 metros
+                                        <option value="200" <?= $datos['rango_gps'] == 200 ? 'selected' : '' ?>>200 metros
                                         </option>
                                     </select>
                                 </div>

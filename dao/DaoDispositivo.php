@@ -21,9 +21,11 @@ class DaoDispositivo implements DaoInterfaceDispositivo
             $ciudad = $modelo_dispositivo->getCiudad();
             $dispositivo = $modelo_dispositivo->getTipoDispositivo();
             $estado = $modelo_dispositivo->getEstadoDispositivo();
+            $latitud = $modelo_dispositivo->getLatitud();
+            $longitud = $modelo_dispositivo->getLongitud();
             $fecha_registro = date('Y-m-d');
             $ult_conexion = date('Y-m-d');
-            $query = "INSERT INTO dispositivo (id_seguridad, tipo_dispositivo, direccion_ip, pais, ciudad, fecha_registro, estado_dispositivo, ultima_conexion) VALUES ('$id_seguridad', '$dispositivo', '$ip_usuario', '$pais', '$ciudad', '$fecha_registro', '$estado', '$ult_conexion')";
+            $query = "INSERT INTO dispositivo (id_seguridad, tipo_dispositivo, direccion_ip, pais, ciudad, latitud, longitud, fecha_registro, estado_dispositivo, ultima_conexion) VALUES ('$id_seguridad', '$dispositivo', '$ip_usuario', '$pais', '$ciudad', '$latitud', '$longitud', '$fecha_registro', '$estado', '$ult_conexion')";
             $response = $this->db->ejecutar($query);
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -56,8 +58,8 @@ class DaoDispositivo implements DaoInterfaceDispositivo
                 $sql = "UPDATE dispositivo SET estado_dispositivo='bloqueado' where id_dispositivo ='$id_dispositivo'";
             } else if ($accion === 'eliminar') {
                 $sql = "delete from dispositivo where id_dispositivo = '$id_dispositivo'";
-            } else if ($accion === 'activar') {
-                $sql = "UPDATE dispositivo SET estado_dispositivo='activado' where id_dispositivo ='$id_dispositivo'";
+            } else if ($accion === 'principal') {
+                $sql = "UPDATE dispositivo SET estado_dispositivo='principal' where id_dispositivo ='$id_dispositivo'";
             }
             $response = $this->db->ejecutar($sql);
         } catch (Exception $e) {
@@ -89,7 +91,7 @@ class DaoDispositivo implements DaoInterfaceDispositivo
     public function readDispoByUserSecurityFilter($id_seguridad)
     {
         try {
-            $sql = "SELECT * FROM dispositivo WHERE id_seguridad='$id_seguridad' AND (estado_dispositivo='activado' OR estado_dispositivo='seguro')";
+            $sql = "SELECT * FROM dispositivo WHERE id_seguridad='$id_seguridad' AND (estado_dispositivo='seguro' OR estado_dispositivo='principal')";
             return $this->db->consultar($sql);
         } catch (Exception $e) {
             echo "Error: " . $e->getMessage();
@@ -109,8 +111,7 @@ class DaoDispositivo implements DaoInterfaceDispositivo
     public function enterAccess($id_seguridad, $dir_ip)
     {
         try {
-            //SI COINCIDE, TE DEJARÁ ENTRAR (ESTO ERA LA VALIDACIÓN DEFINITIVA POR MEDIO DE LAS DIRECCIONES IP DE LOS DISPOSITIVOS)
-            $query = "SELECT * FROM dispositivo WHERE id_seguridad = :id_seguridad AND (estado_dispositivo='activado' OR estado_dispositivo='seguro') AND direccion_ip=:direccion_ip";
+            $query = "SELECT * FROM dispositivo WHERE id_seguridad = :id_seguridad AND (estado_dispositivo='principal' OR estado_dispositivo='seguro') AND direccion_ip=:direccion_ip";
             return $this->db->consultar($query, ['id_seguridad' => $id_seguridad, 'direccion_ip' => $dir_ip]);
         } catch (Exception $e) {
             error_log("Error en enterAccess: " . $e->getMessage());

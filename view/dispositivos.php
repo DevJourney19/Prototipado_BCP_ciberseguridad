@@ -61,10 +61,10 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
             if ($listaDispositivos) {
 
                 $count = 0;
-                
+
 
                 foreach ($listaDispositivos as $dispo) {
-                    if ($dispo['estado_dispositivo'] === "activado") {
+                    if ($dispo['estado_dispositivo'] === "principal") {
                         $count++;
                         if ($count >= 3) {
                             echo "<script>alert('Limite máximo de 3 equipos principales');</script>";
@@ -80,34 +80,34 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
                                         case 'Ordenador de escritorio': ?>
                                             <img src="img/computadora.png" alt="Imagen de celular">
 
-                                            <?php break;
+                                        <?php break;
                                         case 'Portátil': ?>
                                             <img src="img/icono_portatil.png" alt="Imagen de portátil">
-                                            <?php break;
+                                        <?php break;
 
                                         case 'Tableta': ?>
                                             <img src="img/icono_tableta.png" alt="Imagen de tableta">
-                                            <?php break;
+                                        <?php break;
 
                                         case 'Teléfono móvil': ?>
                                             <img src="img/icono_cel.png" alt="Imagen de teléfono móvil">
-                                            <?php break;
+                                        <?php break;
 
                                         case 'Smartwatch': ?>
                                             <img src="img/icono_smartwatch.png" alt="Imagen de smartwatch">
-                                            <?php break;
+                                        <?php break;
 
                                         case 'Televisor inteligente': ?>
                                             <img src="img/icono_televisor.png" alt="Imagen de televisor inteligente">
-                                            <?php break;
+                                        <?php break;
 
                                         case 'Consola de videojuegos': ?>
                                             <img src="img/icono_consola.png" alt="Imagen de consola de videojuegos">
-                                            <?php break;
+                                        <?php break;
 
                                         case 'Dispositivo IoT': ?>
                                             <img src="img/icono_iot.png" alt="Imagen de dispositivo IoT">
-                                            <?php break;
+                                        <?php break;
 
                                         default: ?>
                                             <p>Tipo de dispositivo no reconocido.</p>
@@ -116,15 +116,13 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
                                 </div>
                                 <div class="seccion">
                                     <div class="titulo-caja">
-                                        <h4 <?php if ($dispo['estado_dispositivo'] === "activado") { ?>
-                                                style="color: darkorange; font-weight: 800;<?php } else { ?> style=" color: #001843;
-                                                font-weight: 600;<?php } ?> ">
-                                                                                                                                                                                            <?= $dispo['tipo_dispositivo'] ?>
-                                                                                                                                                                                        </h4>
-
-                                                                                                                                                                                    </div>
-                                                                                                                                                                                    <div class="
-                                descripcion-caja">
+                                        <h4 <?php if ($dispo['estado_dispositivo'] === "principal") { ?>
+                                            style="color: darkorange; font-weight: 800;<?php } else { ?> style=" color: #001843;
+                                            font-weight: 600;<?php } ?> ">
+                                            <?= $dispo['tipo_dispositivo'] ?>
+                                            </h4>
+                                        </div>
+                                        <div class="descripcion-caja">
                                             <p>
                                                 Lugar: <?= $dispo['ciudad'] ?>- <?= $dispo['pais'] ?>
                                                 <br />
@@ -141,7 +139,7 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
                                 <label for="<?= $dispo['id_dispositivo'] ?>"><span class="radio-button"></span></label>
                             </div>
                         </div>
-                    <?php }
+            <?php }
                 }
             } ?>
         </div>

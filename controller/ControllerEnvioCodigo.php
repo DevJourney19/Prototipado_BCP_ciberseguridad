@@ -24,10 +24,12 @@ try {
 
   $base_url = $_ENV['URL'];
   $api_key = $_ENV['API_KEY'];
-  //Configura los parámetros para trabajar con infobip [infobip]
-  $configuration = new Configuration(host: $base_url, apiKey: $api_key);
 
-  //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+  $configuration = new Configuration(
+    host: $base_url, 
+    apiKey: $api_key
+  );
+
   $response = [];
   $data = json_decode(file_get_contents('php://input'), true);
 
@@ -56,10 +58,12 @@ if (!filter_var($modelUsuario->getCorreo(), FILTER_VALIDATE_EMAIL)) {
   throw new Exception('Invalid email address');
 }
 
+$mail->isHTML(true);
 $mail->setFrom("bcp83584@gmail.com", "Banca en Linea BCP");
 $mail->addAddress($modelUsuario->getCorreo(), $modelUsuario->getNombre());
 $mail->Subject = 'Codigo de verificacion';
-$mail->Body = 'Alguien esta tratando de ingresar a tu cuenta!<br>El codigo de verificacion es: ' . $codigo . '\n Si no fuiste tu, por favor contacta a soporte tecnico e ignora este mensaje.';
+
+$mail->Body = 'Alguien esta tratando de ingresar a tu cuenta!<br>El codigo de verificacion es: ' . $codigo . '<br>Si no fuiste tu, por favor contacta a soporte tecnico e ignora este mensaje.';
 $mail->send();
 
 //Envio de SMS [Se trabajó con la configuración de infoip]
