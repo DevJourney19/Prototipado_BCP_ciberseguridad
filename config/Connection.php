@@ -43,8 +43,10 @@ class Connection
             $stmt = $this->pdo->prepare($query);
             $stmt->execute($params);
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
             return $result ?: [];
         } catch (PDOException $e) {
+
             error_log("Error en la consulta: " . $e->getMessage());
             return [];
         }

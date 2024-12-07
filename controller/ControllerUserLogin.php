@@ -31,12 +31,12 @@ try {
         //SEGURIDAD
         $registro2 = $daoSeguridad->readByUser($id_usuario);
         //Va a revisar si esta activado la seguridad
-        if ($registro2[0]['activacion_seguridad'] === 1) { 
+        if ($registro2[0]['activacion_seguridad'] === 1) {
 
             $_SESSION['id_seguridad'] = $registro2[0]['id_seguridad'];
 
             $id_seguridad = $_SESSION['id_seguridad'];
-            
+
             //Verificar si la direccion ip actual ya esta registrada en la base de datos y si es seguro o principal
             $dispositivo_actual = $daoDispositivo->enterAccess($id_seguridad, $dir_ip);
 
@@ -47,7 +47,7 @@ try {
             $_SESSION['pais'] = $info['country'];
             $_SESSION['ciudad'] = $info['city'];
             $_SESSION['hora'] = date("h:i:s A");
-            
+
 
             //RECORRER TODOS LOS DISPOSITIVOS QUE PRINCIPAL Y SEGURO PARA VER SI HAY ALGUNA DIRECCION IP QUE COINCIDA CON LA ACTUAL
             if (!empty($direccion_ip_deseada) && $_SESSION['direccion_ip'] === $direccion_ip_deseada) {
@@ -97,7 +97,7 @@ try {
             } else { //SI NO COINCIDE EN LA VERIFCACION DE LA DIRECCION IP SE ABRE MODAL
                 // PARA REGISTRAR UN NUEVO DIPOSITIVO CON en proceso si
                 $_SESSION['noExiste'] = true;
-                $_SESSION['error_ubicacion'] = true; 
+                $_SESSION['error_ubicacion'] = true;
                 header("Location: ../view/index.php");
                 die();
             }

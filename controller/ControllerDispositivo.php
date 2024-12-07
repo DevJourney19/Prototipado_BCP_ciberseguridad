@@ -84,12 +84,12 @@ class ControllerDispositivo
 
                 if ($resultado) {
                     if ($accion !== "eliminar") {
-                        $dispositivo_actualizado = $this->daoDispositivo->readById( $id_dispositivo);
+                        $dispositivo_actualizado = $this->daoDispositivo->readById($id_dispositivo);
                         $response['data'] = $dispositivo_actualizado;
                     }
                     $response['status'] = 'success';
-                    $response['message'] = "Dispositivo " . $accion . " con exito";
-                }else{
+                    $response['message'] = "La acción de " . $accion . " dispositivo se realizó con éxito";
+                } else {
                     $response['status'] = 'error';
                     $response['message'] = "No se pudo realizar la acción de $accion";
                 }
