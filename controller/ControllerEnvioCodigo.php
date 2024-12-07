@@ -19,6 +19,7 @@ $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
 try {
+  //phpmailer es utilizado solo para formar al mensaje 
   $mail = new PHPMailer(true);
 
   $base_url = $_ENV['URL'];

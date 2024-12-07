@@ -157,7 +157,7 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
                     <button type="button" onclick="openModalDos()">Desvincular y eliminar</button>
                 </div>
                 <div class="boton-primario">
-                    <button type="button" id="historial">Historial de intentos de acceso de dispositivos</button>
+                    <button type="button" id="historial">Historial de intentos de acceso</button>
                 </div>
             </div>
         <?php } ?>

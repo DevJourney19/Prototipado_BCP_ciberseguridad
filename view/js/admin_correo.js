@@ -1,6 +1,5 @@
 
 let btn_enviar_correo = document.querySelector(".header .btn.enviar-emails");
-console.log(btn_enviar_correo);
 // Todos los checkbox recorridos por el foreach
 let checkbox_seleccionado = document.querySelectorAll(".checkbox_seleccionado");
 
@@ -22,6 +21,8 @@ function marcarCheckBox() {
         btn_enviar_correo.classList.remove("ver_btn_enviar_email");
     }
 }
+
+//Al presionar en el checkbox para seleccionar todos los usuarios
 function seleccionar_todo() {
     let seleccionar_todo_cb = document.getElementById("select-all");
     let checkboxes = document.querySelectorAll(".checkbox_seleccionado");
@@ -44,6 +45,7 @@ function actualizarSeleccionarTodo() {
     // Si todos están seleccionados, marcar "Seleccionar todo", si no desmarcarlo
     seleccionar_todo_cb.checked = todosSeleccionados;
 }
+//Mostrar los elementos seleccionados
 function evidenciar_cambios() {
     let cantidad = obtenerCantidadSeleccionados();
     let mostrar_cantidad = document.getElementById("selected-count");
@@ -57,4 +59,87 @@ function obtenerCantidadSeleccionados() {
     let seleccionados = Array.from(checkboxes).filter(checkbox => checkbox.checked);
     // Devolver la cantidad de checkboxes seleccionados
     return seleccionados.length;
+}
+
+//Codigo enfocado en el modal
+document.getElementById('openModal').onclick = function () {
+    document.getElementById('customModal').style.display = 'flex';
+};
+
+document.querySelector('.close').onclick = function () {
+    document.getElementById('customModal').style.display = 'none';
+};
+
+window.onclick = function (event) {
+    if (event.target == document.getElementById('customModal')) {
+        document.getElementById('customModal').style.display = 'none';
+    }
+};
+
+//Modal
+document.getElementById('openModal').onclick = function () {
+    document.getElementById('customModal').style.display = 'flex';
+};
+
+document.querySelector('.close').onclick = function () {
+    document.getElementById('customModal').style.display = 'none';
+};
+
+//Hacer que cuando se haga clic en el customModal se cierre el modal, sin hacer clic en el div principal
+window.onclick = function (event) {
+    if (event.target == document.getElementById('customModal')) {
+        document.getElementById('customModal').style.display = 'none';
+    }
+};
+
+//Imagen en pantalla completa
+function showFullscreen(event) {
+    // Obtener el modal y la imagen seleccionada
+    const modal = document.getElementById('fullscreen-modal');
+    const fullscreenImage = document.getElementById('fullscreen-image');
+
+    // Actualizar la fuente de la imagen en el modal
+    fullscreenImage.src = event.target.src;
+
+    // Mostrar el modal
+    modal.style.display = 'flex';
+
+    // Cerrar el modal cuando se haga clic
+    modal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+}
+
+function obtenerCorreosSeleccionados() {
+    // Seleccionar todos los checkboxes marcados con name="correo[]"
+    const checkboxes = document.querySelectorAll('input[name="correo[]"]:checked');
+    // Crear un array con los valores de los checkboxes marcados
+    const correos = Array.from(checkboxes).map(checkbox => checkbox.value);
+    return correos;
+}
+async function enviarCorreo(event) {
+    event.preventDefault();
+    let nombre = document.getElementById("admin_nombre").dataset.value;
+    console.log(nombre);
+    let correos = obtenerCorreosSeleccionados();
+    let opcion = event.target.getAttribute("data-opcion");
+
+    let response = await fetch("../controller/admin_proceso_env_correo.php", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            correos: correos,
+            opcion: opcion,
+            nombre: nombre
+        }),
+    });
+    const data = await response.json();
+    if (data.success && data.success.length > 0) {
+        alert("Operación exitosa");
+    } else {
+        alert("Operación fallida");
+    }
+    document.getElementById('customModal').style.display = 'none';
 }

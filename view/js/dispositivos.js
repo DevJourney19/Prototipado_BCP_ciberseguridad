@@ -80,7 +80,7 @@ async function eliminarCajaSeleccionada() {
     if (idSeleccionado) {
         console.log(idSeleccionado);
         const caja = document.querySelector(`[data-id="${idSeleccionado}"]`); //HGcemos la unión entre la caja y el checkbox
-        console.log("La caja es "+caja);
+        console.log("La caja es " + caja);
         if (caja) {
             caja.remove(); // Eliminar la caja del DOM
 
@@ -133,10 +133,9 @@ async function manejadorBoton() {
                 });
 
                 const data = await response.json();
-                const resultado_div = document.getElementById('resultado');
 
                 if (data.status === 'success') {
-                    resultado_div.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+                    alert(data.message);
 
                     // Selecciona la fila correspondiente en la tabla
                     const fila = document.querySelector(`tr[data-id="${id_dispositivo}"]`);
@@ -144,11 +143,11 @@ async function manejadorBoton() {
                     fila.remove();
 
                 } else {
-                    resultado_div.innerHTML = `<div class="alert alert-danger">${data.message}</div>`;
+                    alert(data.message);
                 }
             } catch (error) {
                 console.error('Error:', error);
-                document.getElementById('resultado').innerHTML = '<div class="alert alert-danger">Error al realizar la acción.</div>';
+                alert("Error al realizar la acción");
             };
         })
     })
