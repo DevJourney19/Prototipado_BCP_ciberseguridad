@@ -49,7 +49,7 @@ class ControllerDireccion
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
             $rango_gps = $_POST['txtRango'] ?? 10;
             $longitud = $_POST['longitud'] ?? null;
-            $latitud = $_POST['longitud'] ?? null;
+            $latitud = $_POST['latitud'] ?? null;
 
             if ($id_direccion && !empty($direccion_exacta)) {
                 $this->daoDireccion->modificarDireccion($id_direccion, $direccion_exacta, $longitud, $latitud, $rango_gps);

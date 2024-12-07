@@ -91,10 +91,19 @@ $direcciones = $daoDireccion->obtenerTodasDirecciones($_SESSION['id_seguridad'])
                         <div class="modal-body">
                             <form action="../controller/ControllerDireccion.php?action=modificar" method="post">
                                 <input type="hidden" name="txtId" value="<?= $datos['id_direccion'] ?>">
+                                <input type="hidden" name="longitud" id="longitud" value="">
+                                <input type="hidden" name="latitud" id="latitud" value="">
                                 <div class="mb-3">
-                                    <label for="direccion" class="form-label">Dirección Exacta</label>
-                                    <input id="direccion" type="text" name="txtdireccion"
-                                        value="<?= $datos['direccion_exacta'] ?>" required class="form-control">
+                                    <label for="direccion" class="form-label d-flex gap-2 justify-content-start">
+                                        <i class="fa-solid fa-map-location-dot"></i> Dirección Exacta (Calle y Distrito)
+                                    </label>
+                                    <div class="input-container">
+                                        <input type="text" id="locationInput" placeholder="Busca una dirección"
+                                            oninput="autocompleteAddress(this.value)" name="txtdireccion" autocomplete="off" />
+                                        <button type="button" onclick="getLocation()">Ubicación Actual</button>
+                                    </div>
+                                    <ul id="suggestions"></ul>
+
                                 </div>
                                 <div class="mb-3">
                                     <label for="rango" class="form-label">Rango GPS</label>
@@ -130,6 +139,7 @@ $direcciones = $daoDireccion->obtenerTodasDirecciones($_SESSION['id_seguridad'])
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+        <script src="js/ubicacion_direccion.js"></script>
 </body>
 
 </html>

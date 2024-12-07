@@ -47,6 +47,8 @@ function getLocation() {
       (position) => {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
+        longitud.value = lon;
+        latitud.value = lat;
         const url = `https://us1.locationiq.com/v1/reverse.php?key=${locationIQToken}&lat=${lat}&lon=${lon}&format=json`;
 
         fetch(url)
@@ -58,8 +60,6 @@ function getLocation() {
           })
           .then((data) => {
             document.getElementById("locationInput").value = data.display_name;
-            longitud.value = lon;
-            latitud.value = lat;
           })
           .catch((error) => {
             console.error("Error al obtener la dirección:", error);
