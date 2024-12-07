@@ -48,11 +48,11 @@ class ControllerDireccion
             $id_direccion = $_POST['txtId'] ?? null;
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
             $rango_gps = $_POST['txtRango'] ?? 10;
-            $longitud = $_POST['longitud'] ?? null;
-            $latitud = $_POST['longitud'] ?? null;
+            $longitud = $_POST['longitud'] ;
+            $latitud = $_POST['latitud'] ;
 
             if ($id_direccion && !empty($direccion_exacta)) {
-                $this->daoDireccion->modificarDireccion($id_direccion, $direccion_exacta, $longitud, $latitud, $rango_gps);
+                $this->daoDireccion->modificarDireccion($id_direccion, $longitud, $latitud, $direccion_exacta, $rango_gps);
                 $_SESSION['mensaje'] = "Dirección modificada correctamente";
             } else {
                 $_SESSION['mensaje'] = "Error: Debes llenar todos los campos.";
