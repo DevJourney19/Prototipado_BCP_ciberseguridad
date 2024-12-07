@@ -33,9 +33,10 @@ try {
   // Configuración del sms
   $base_url = $_ENV['URL'];
   $api_key = $_ENV['API_KEY'];
-  $configuration = new Configuration(host: $base_url, apiKey: $api_key);
-
-  //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+  $configuration = new Configuration(
+    host: $base_url, 
+    apiKey: $api_key
+  );
 
   $response = [];
   $data = json_decode(file_get_contents('php://input'), true);
