@@ -61,13 +61,8 @@ try {
   $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
   $mail->Port = 587;
 
-  $base_url = $_ENV['URL'];
-  $api_key = $_ENV['API_KEY'];
-
-  $configuration = new Configuration(
-    host: $base_url,
-    apiKey: $api_key
-  );
+  $mail->CharSet = 'UTF-8';
+  $mail->Encoding = 'base64';
 
   // Configuración del correo
   $mail->setFrom($_ENV['EMAIL'], 'Banca en Linea BCP');
@@ -77,7 +72,9 @@ try {
   $mail->Body = 'Alguien está tratando de ingresar a tu cuenta!<br>El código de verificación es: ' . $codigo . '<br>Si no fuiste tú, por favor contacta a soporte técnico e ignora este mensaje.';
 
   $mail->send();
-
+  
+  $base_url = $_ENV['URL'];
+  $api_key = $_ENV['API_KEY'];
 
   $configuration = new Configuration(
     host: $base_url,
