@@ -25,10 +25,10 @@ class DaoDireccion implements DaoInterfaceDireccion {
         return $this->connection->consultar($query, ['id' => $id]);
     }
 
-    public function modificarDireccion($id_direccion,$longitud, $latitud, $direccion_exacta, $rango_gps) {
+    public function modificarDireccion($id_direccion,$direccion_exacta, $longitud, $latitud, $rango_gps) {
         $sql = "UPDATE direccion SET direccion_exacta = ?, longitud = ?, latitud = ?, rango_gps = ? WHERE id_direccion = ?";
         
-        return $this->connection->ejecutar($sql, [$direccion_exacta,$longitud, $latitud, $rango_gps, $id_direccion]);
+        return $this->connection->ejecutar($sql, [$direccion_exacta, $longitud, $latitud, $rango_gps, $id_direccion]);
     }
 
     public function eliminarDireccion($id) {

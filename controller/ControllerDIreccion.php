@@ -25,7 +25,7 @@ class ControllerDireccion
             $latitud = $_POST['latitud'] ?? null;
 
             if ($id_seguridad && !empty($direccion_exacta)) {
-                $this->daoDireccion->registrarDireccion($id_seguridad, $direccion_exacta, $longitud, $latitud, 10, date('Y-m-d'), date('H:i:s'));
+                $this->daoDireccion->registrarDireccion($id_seguridad, $direccion_exacta, $longitud, $latitud, 50, date('Y-m-d'), date('H:i:s'));
                 $_SESSION['mensaje'] = "Dirección registrada correctamente";
                 header('Location: ../view/horario_ubicacion.php');
                 exit;
@@ -49,7 +49,7 @@ class ControllerDireccion
             $direccion_exacta = trim($_POST['txtdireccion'] ?? '');
             $rango_gps = $_POST['txtRango'] ?? 10;
             $longitud = $_POST['longitud'] ?? null;
-            $latitud = $_POST['longitud'] ?? null;
+            $latitud = $_POST['latitud'] ?? null;
 
             if ($id_direccion && !empty($direccion_exacta)) {
                 $this->daoDireccion->modificarDireccion($id_direccion, $direccion_exacta, $longitud, $latitud, $rango_gps);

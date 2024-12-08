@@ -45,7 +45,6 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
             ?>
         <?php }
         unset($_SESSION['error_ubicacion']);
-
         ?>
         <div class="logo"><img src="img/loguito.png" alt="logo_bcp.jpg"></div>
         <div class="flex">

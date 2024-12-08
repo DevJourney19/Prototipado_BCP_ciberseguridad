@@ -3,7 +3,11 @@
         'name' => 'danie/prototipado_bcp_ciberseguridad',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
+<<<<<<< HEAD
         'reference' => '5816950e805d447cfe9d300a24e39689c70bc901',
+=======
+        'reference' => '6d8268779119ee0b731e49248a49c55190ee5cfd',
+>>>>>>> 73c87be9ad04ec102c9ad64713d6930bde9330cc
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +17,11 @@
         'danie/prototipado_bcp_ciberseguridad' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
+<<<<<<< HEAD
             'reference' => '5816950e805d447cfe9d300a24e39689c70bc901',
+=======
+            'reference' => '6d8268779119ee0b731e49248a49c55190ee5cfd',
+>>>>>>> 73c87be9ad04ec102c9ad64713d6930bde9330cc
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -47,18 +55,18 @@
             'dev_requirement' => false,
         ),
         'dompdf/dompdf' => array(
-            'pretty_version' => 'v3.0.0',
-            'version' => '3.0.0.0',
-            'reference' => 'fbc7c5ee5d94f7a910b78b43feb7931b7f971b59',
+            'pretty_version' => 'v3.0.1',
+            'version' => '3.0.1.0',
+            'reference' => '2d622faf9aa1f8f7f24dd094e49b5cf6c0c5d4e6',
             'type' => 'library',
             'install_path' => __DIR__ . '/../dompdf/dompdf',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
         'dompdf/php-font-lib' => array(
-            'pretty_version' => '1.0.0',
-            'version' => '1.0.0.0',
-            'reference' => '991d6a954f6bbd7e41022198f00586b230731441',
+            'pretty_version' => '1.0.1',
+            'version' => '1.0.1.0',
+            'reference' => '6137b7d4232b7f16c882c75e4ca3991dbcf6fe2d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../dompdf/php-font-lib',
             'aliases' => array(),
@@ -164,9 +172,9 @@
             'dev_requirement' => false,
         ),
         'phpdocumentor/reflection-docblock' => array(
-            'pretty_version' => '5.6.0',
-            'version' => '5.6.0.0',
-            'reference' => 'f3558a4c23426d12bffeaab463f8a8d8b681193c',
+            'pretty_version' => '5.6.1',
+            'version' => '5.6.1.0',
+            'reference' => 'e5e784149a09bd69d9a5e3b01c5cbd2e2bd653d8',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpdocumentor/reflection-docblock',
             'aliases' => array(),
@@ -493,15 +501,6 @@
             'reference' => '1a6a89f95a46af0f142874c9d650a6358d13070d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/var-exporter',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
-        'twilio/sdk' => array(
-            'pretty_version' => '8.3.8',
-            'version' => '8.3.8.0',
-            'reference' => 'd05c08d0b9ed017f61ebbc31bc4e5f4d758a0326',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../twilio/sdk',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

@@ -211,11 +211,9 @@
 
         const data = JSON.parse(textResponse);
 
-        if (data.mensaje === 'No cambio') {
           setTimeout(() => {
             window.location.href = "./principal.php";
           }, 2000)
-        }
 
 
       } catch (error) {
