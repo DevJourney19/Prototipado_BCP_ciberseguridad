@@ -48,11 +48,10 @@ try {
             $_SESSION['ciudad'] = $info['city'];
             $_SESSION['hora'] = date("h:i:s A");
 
-
-            //RECORRER TODOS LOS DISPOSITIVOS QUE PRINCIPAL Y SEGURO PARA VER SI HAY ALGUNA DIRECCION IP QUE COINCIDA CON LA ACTUAL
             if (!empty($direccion_ip_deseada) && $_SESSION['direccion_ip'] === $direccion_ip_deseada) {
                 //VERIFICAR SI FUNCIONALIDAD DE BLOQUEO POR HORA ESTA ACTIVADA
                 $horario = $registro2[0]['estado_hora_direccion'];
+                echo "horario: " . $horario;
                 if ($horario) {
                     //OBTENER HORARIO DE BLOQUEO
                     $horario_restringido = $daoHorario->obtenerHorariosRestringidos($id_seguridad);

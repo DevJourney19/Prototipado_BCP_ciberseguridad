@@ -91,14 +91,14 @@ $direcciones = $daoDireccion->obtenerTodasDirecciones($_SESSION['id_seguridad'])
                         <div class="modal-body">
                             <form action="../controller/ControllerDireccion.php?action=modificar" method="post">
                                 <input type="hidden" name="txtId" value="<?= $datos['id_direccion'] ?>">
-                                <input type="hidden" name="longitud" id="longitud" value="">
-                                <input type="hidden" name="latitud" id="latitud" value="">
+                                <input type="hidden" name="longitud" id="longitud" value="<?= $datos['longitud'] ?>">
+                                <input type="hidden" name="latitud" id="latitud" value="<?= $datos['latitud'] ?>">
                                 <div class="mb-3">
                                     <label for="direccion" class="form-label d-flex gap-2 justify-content-start">
                                         <i class="fa-solid fa-map-location-dot"></i> Dirección Exacta (Calle y Distrito)
                                     </label>
                                     <div class="input-container">
-                                        <input type="text" id="locationInput" placeholder="Busca una dirección"
+                                        <input type="text" id="locationInput" placeholder="Busca una dirección" value="<?= $datos['direccion_exacta'] ?>"
                                             oninput="autocompleteAddress(this.value)" name="txtdireccion" autocomplete="off" />
                                         <button type="button" onclick="getLocation()">Ubicación Actual</button>
                                     </div>
