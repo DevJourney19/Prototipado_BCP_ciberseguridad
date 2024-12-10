@@ -112,16 +112,26 @@ function showFullscreen(event) {
 
 function obtenerCorreosSeleccionados() {
     // Seleccionar todos los checkboxes marcados con name="correo[]"
-    const checkboxes = document.querySelectorAll('input[name="correo[]"]:checked');
+    const elementos = document.querySelectorAll('[name="correo[]"]');
     // Crear un array con los valores de los checkboxes marcados
-    const correos = Array.from(checkboxes).map(checkbox => checkbox.value);
+    const correos = Array.from(elementos).map(e => e.value);
     return correos;
 }
+
+function obtenerIdUsuariosServicioActivado() {
+    const obtener = document.querySelectorAll('[name="ids[]"]');
+
+    const ids = Array.from(obtener).map(e => e.value);
+    return ids;
+}
+
 async function enviarCorreo(event) {
     event.preventDefault();
     let nombre = document.getElementById("admin_nombre").dataset.value;
     console.log(nombre);
     let correos = obtenerCorreosSeleccionados();
+    console.log(correos);
+
     let opcion = event.target.getAttribute("data-opcion");
 
     let response = await fetch("../controller/admin_proceso_env_correo.php", {
@@ -135,11 +145,57 @@ async function enviarCorreo(event) {
             nombre: nombre
         }),
     });
+
     const data = await response.json();
+    console.log(data);
+    console.log("Correos es " + correos);
     if (data.success && data.success.length > 0) {
         alert("Operación exitosa");
     } else {
         alert("Operación fallida");
     }
+
     document.getElementById('customModal').style.display = 'none';
 }
+
+//Correo especifico
+
+let opcionn = document.querySelectorAll("[data-especifico]");
+
+opcionn.forEach(t => {
+    t.addEventListener("click", async function (event) {
+        console.log("helloo ;)");
+        let opcion = event.target.getAttribute("data-especifico");
+        let correos = obtenerCorreosSeleccionados();
+        let nombre = document.getElementById("admin_nombre").dataset.value;
+        let ids = obtenerIdUsuariosServicioActivado();
+        console.log(ids);
+        let response = await fetch("../controller/admin_proceso_env_especific_correo.php", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                opcion: opcion,
+                objetos: ids.map((dato, index) => ({
+                    id: dato,
+                    correo: correos[index]
+                })),
+                nombre: nombre,
+            })
+        });
+        //el response.text() puede generar que de el alert de operación fallida
+        const data = await response.json();
+        console.log(data);
+        console.log("Los correos son: " + correos);
+        if (data.success && data.success.length > 0) {
+            alert("Operación exitosa");
+        } else {
+            alert("Operación fallida");
+        }
+
+
+    });
+});
+
+

@@ -14,13 +14,15 @@ use Infobip\Model\SmsDestination;
 use Infobip\Model\SmsTextualMessage;
 use Infobip\Model\SmsAdvancedTextualRequest;
 
-class EnvioMensaje {
+class EnvioMensaje
+{
     private $modelUsuario;
     private $daoUsuario;
     private $id_seguridad;
     private $usuario;
 
-    public function __construct() {
+    public function __construct()
+    {
         $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
         $dotenv->load();
 
@@ -47,7 +49,8 @@ class EnvioMensaje {
         }
     }
 
-    public function envioCorreo($lugar, $ip, $hora) {
+    public function envioCorreo($lugar, $ip, $hora)
+    {
         try {
             $mail = new PHPMailer(true);
 
@@ -72,7 +75,8 @@ class EnvioMensaje {
         }
     }
 
-    public function envioSms($lugar, $ip, $hora) {
+    public function envioSms($lugar, $ip, $hora)
+    {
         $configuration = new Configuration(
             host: $_ENV['URL'],
             apiKey: $_ENV['API_KEY']
@@ -82,7 +86,7 @@ class EnvioMensaje {
         $destination = new SmsDestination(to: $this->modelUsuario->getTelefono());
         $message = new SmsTextualMessage(
             destinations: [$destination],
-            text:  "Están intentando ingresar a tu cuenta BCP desde: $lugar\nCon IP: $ip\nA las: $hora"
+            text: "Están intentando ingresar a tu cuenta BCP desde: $lugar\nCon IP: $ip\nA las: $hora"
         );
 
         $request = new SmsAdvancedTextualRequest(messages: [$message]);
@@ -91,4 +95,5 @@ class EnvioMensaje {
         $response = ['status' => 'enviado'];
         echo json_encode($response);
     }
+
 }

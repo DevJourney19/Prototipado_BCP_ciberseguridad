@@ -69,6 +69,23 @@ class DaoUsuario implements DaoInterfaceUsuario
         }
     }
 
+    public function readUserWithSecurityByEmail($email)
+    {
+        try {
+            $query = "SELECT * FROM usuario WHERE correo = :correo";
+            $result = $this->db->consultar($query, ['correo' => $email]);
+            if (count($result) > 0) {
+                return $result[0];
+            } else {
+                return null;
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return null;
+        }
+    }
+
+
     public function verificarLogin($tarjeta, $dni, $clave_internet)
     {
         try {
