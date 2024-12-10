@@ -124,8 +124,8 @@ if (isset($data['opcion'])) {
                         $response['failed'][] = $hora['hora_inicio'];
                     }
                 } else {
-                    $horasIniContenido = "No se registraron horas iniciales configuradas.";
-                    $horasFinContenido = "No se registraron horas finales configuradas.";
+                    $horasIniContenido = "No se registró la hora inicial configurada para hoy.";
+                    $horasFinContenido = "No se registró la hora final configurada para hoy.";
                 }
                 $cuerpo = $e_correo . '
         <body>
@@ -140,13 +140,13 @@ if (isset($data['opcion'])) {
                             
                            <p >Le enviamos el presente correo para informarle acerca de las <span style=font-weight:800>' . $descripcion . '</span> Le enviamos esta información para que pueda corroborar las direcciones configuradas por usted, a su vez que pueda ver que dispositivos están configurados para poder obtener acceso.</p>
                            <br/>
-                           <h2>Horas configuradas</h2>
+                           <h2>Horas configuradas de hoy</h2>
                            <br/>
-                           <h3>Horas iniciales</h3>
+                           <h3>Hora inicial</h3>
                             <ul>
                             ' . $horasIniContenido . '
                             </ul>
-                            <h3>Horas finales</h3>
+                            <h3>Hora final</h3>
                             <ul>
                             ' . $horasFinContenido . '
                             </ul>
