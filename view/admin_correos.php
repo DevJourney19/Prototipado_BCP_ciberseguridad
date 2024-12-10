@@ -37,7 +37,8 @@ $count = 0;
     background: white;
     color: black;width:80%; margin: auto;">
 
-        <h1 class=" h1_dashboard">Enviar correos - Admin</h1>
+        <h1 class="h1_dashboard" style="color: #02173f;"><i class="fa-solid fa-paper-plane" style="color: #02173f;"></i>
+            Enviar correos - Admin</h1>
         <span id="admin_nombre" data-value="<?= htmlspecialchars($admin->getNombre()) ?>"></span>
         <p class="description">Aquí puede enviar correos a los clientes que adquirieron el servicio de
             ciberseguridad.
@@ -45,14 +46,8 @@ $count = 0;
         <hr style="width: 70%" />
 
         <div class="container">
-            <div class="header">
-                <div class="select-all">
-                    <label><input type="checkbox" id="select-all" onclick="seleccionar_todo()"> Marcar todo</label>
-                </div>
-                <div class="info">
-                    <p>Tienes Actualmente <span id="selected-count">0</span> Registro(s) Seleccionado(s)</p>
-                </div>
-                <button class="btn enviar-emails" name="enviarform" id="openModal">Seleccionar correos</button>
+            <div class="header" style="margin-bottom: 0px;">
+                <button class="btn enviar-emails" name="enviarform" id="openModal">Elegir tipo de correo</button>
             </div>
 
         </div>
@@ -61,7 +56,6 @@ $count = 0;
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Seleccionar</th>
                         <th>Cliente</th>
                         <th>Correo electrónico</th>
                     </tr>
@@ -76,8 +70,8 @@ $count = 0;
                             $count++; ?>
                             <tr>
                                 <td><?= $count ?></td>
-                                <td><input class="checkbox_seleccionado" type="checkbox" name="correo[]"
-                                        value="<?= $user->getCorreo() ?>"></td>
+                                <input type="hidden" name="ids[]" value="<?= $user->getIdUsuario() ?>" />
+                                <input type="hidden" name="correo[]" value="<?= $user->getCorreo() ?>" />
                                 <td><?= $user->getNombre(); ?></td>
                                 <td><?= $user->getCorreo(); ?></td>
                             </tr>
@@ -92,28 +86,55 @@ $count = 0;
     <div id="customModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Seleccione el contenido a enviar</h2>
-            <p>Aquí seleccionará el contenido que se enviará a los usuarios seleccionados</p>
+            <h2>Seleccione el contenido a enviar de manera masiva</h2>
+            <hr style="border: 1px solid lightgray;" />
+            <br />
+            <h3 style="color:#ff7900">Mensajes específicos</h3>
+            <div class="mensaje_especifico_correo">
+                <div class="col_mensaje_especifico">
+                    <h2>Direcciones configuradas</h2>
+                    <button data-especifico="1">Enviar</button>
+                </div>
+                <div class="col_mensaje_especifico">
+                    <h2>Horas configuradas</h2>
+                    <button data-especifico="2">Enviar</button>
+                </div>
+                <div class="col_mensaje_especifico">
+                    <h2>Acceso de dispositivos</h2>
+                    <button data-especifico="3">Enviar</button>
+                </div>
+                <div class="col_mensaje_especifico">
+                    <h2>Configuración de dispositivos</h2>
+                    <button data-especifico="4">Enviar</button>
+                </div>
+                <div class="col_mensaje_especifico">
+                    <h2>Si el yape está activado</h2>
+                    <button data-especifico="5">Enviar</button>
+                </div>
+            </div>
+
+            <!--LOGICA COMPLETADA-->
+            <h3 style="color:#ff7900; margin-top: 10px;">Mensajes predeterminados</h3>
             <div class="eleccion_contenido_correo">
-                <div>
+                <div class="mensaje_predeterminado">
+                    <h2>Consejos</h2>
                     <div class="image-container" onclick="showFullscreen(event)">
-                        <h2>Consejos</h2>
                         <img src="../view/img/img_cb_1.jpg" alt="img_1" style="width:100%">
                     </div>
                     <button type="submit" style="background: #ff7900;color:white" onclick="enviarCorreo(event)"
                         data-opcion="1">Enviar</button>
                 </div>
-                <div>
+                <div class="mensaje_predeterminado">
+                    <h2>Novedades</h2>
                     <div class="image-container" onclick="showFullscreen(event)">
-                        <h2>Novedades</h2>
                         <img src="../view/img/img_cb_2.jpg" alt="img_2" style="width:100%">
                     </div>
                     <button type="submit" style="background: #ff7900;color:white" onclick="enviarCorreo(event)"
                         data-opcion="2">Enviar</button>
                 </div>
-                <div>
+                <div class="mensaje_predeterminado">
+                    <h2>Recordatorio</h2>
                     <div class="image-container" onclick="showFullscreen(event)">
-                        <h2>Recordatorio</h2>
                         <img src="../view/img/img_cb_3.jpg" alt="img_3" style="width:100%">
                     </div>
                     <button type="submit" style="background: #ff7900;color:white" onclick="enviarCorreo(event) "

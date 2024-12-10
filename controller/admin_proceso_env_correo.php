@@ -1,14 +1,10 @@
 <?php
 session_start();
 require __DIR__ . '/../vendor/autoload.php';
+
 use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use Infobip\Configuration;
-use Infobip\Api\SmsApi;
-use Infobip\Model\SmsDestination;
-use Infobip\Model\SmsTextualMessage;
-use Infobip\Model\SmsAdvancedTextualRequest;
+
 header('Content-Type: application/json');
 
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
@@ -22,7 +18,7 @@ $mail->SMTPAuth = true;
 //Registro de smtp, solo email y password
 $mail->Username = $_ENV['EMAIL'];  // Tu correo de Gmail
 $mail->Password = $_ENV['PASSWORD'];      // Tu contraseña de Gmail
-//$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 $mail->Port = 587;
 //De
 $mail->setFrom('bcp83584@gmail.com', 'Banca en Linea BCP - Ciberseguridad');
