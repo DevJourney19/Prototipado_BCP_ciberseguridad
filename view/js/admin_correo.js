@@ -134,6 +134,11 @@ async function enviarCorreo(event) {
 
     let opcion = event.target.getAttribute("data-opcion");
 
+    let posicion_icono = document.querySelector(".msg_especifico_correo");
+    let icono_carga = document.createElement("div");
+    icono_carga.classList.add('fa-solid', 'fa-spinner', 'fa-spin', 'fa-xl', 'icono_cargando');
+    posicion_icono.appendChild(icono_carga);
+
     let response = await fetch("../controller/admin_proceso_env_correo.php", {
         method: "POST",
         headers: {
@@ -146,6 +151,7 @@ async function enviarCorreo(event) {
         }),
     });
 
+    icono_carga.classList.remove('fa-solid', 'fa-spinner', 'fa-spin', 'fa-xl');
     const data = await response.json();
     console.log(data);
     console.log("Correos es " + correos);
@@ -170,6 +176,13 @@ opcionn.forEach(t => {
         let nombre = document.getElementById("admin_nombre").dataset.value;
         let ids = obtenerIdUsuariosServicioActivado();
         console.log(ids);
+
+        let posicion_icono = document.querySelector(".msg_especifico_correo");
+        let icono_carga = document.createElement("div");
+        icono_carga.classList.add('fa-solid', 'fa-spinner', 'fa-spin', 'fa-xl', 'icono_cargando');
+
+        posicion_icono.appendChild(icono_carga);
+
         let response = await fetch("../controller/admin_proceso_env_especific_correo.php", {
             method: "POST",
             headers: {
@@ -185,6 +198,7 @@ opcionn.forEach(t => {
             })
         });
         //el response.text() puede generar que de el alert de operación fallida
+        icono_carga.classList.remove('fa-solid', 'fa-spinner', 'fa-spin', 'fa-xl');
         const data = await response.json();
         console.log(data);
         console.log("Los correos son: " + correos);

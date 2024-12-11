@@ -41,7 +41,7 @@ $cierre = $configCorreo->cierre($data);
 $response = ['success' => [], 'failed' => []];
 
 if (isset($data['opcion'])) {
-    $asunto = "Ciberseguridad";
+
 
     $daoDireccion = new DaoDireccion();
     $daoSeguridad = new DaoSeguridad();
@@ -52,6 +52,7 @@ if (isset($data['opcion'])) {
     switch ($data['opcion']) {
         //Direcciones configuradas
         case 1: {
+            $asunto = "Direcciones seguras - Ciberseguridad";
             $descripcion = "direcciones que usted ha configurado.";
             foreach ($data['objetos'] as $valor) {
                 $infoUsuario = $daoUsuario->readUser($valor['id']);
@@ -67,7 +68,7 @@ if (isset($data['opcion'])) {
                         $direccionesContenido .= '<li>' . $direccion['direccion_exacta'] . '</li>';
                     }
                 } else {
-                    $direccionesContenido = "No se registraron direcciones configuradas.";
+                    $direccionesContenido = "No se registraron direcciones seguras.";
                 }
                 $cuerpo = $e_correo . '
         <body>
@@ -80,7 +81,7 @@ if (isset($data['opcion'])) {
                     <tr>
                         <td style="padding: 0; color: #132A55;text-align:left">
                             
-                           <p >Le enviamos el presente correo para informarle acerca de las <span style=font-weight:800>' . $descripcion . '</span> Le enviamos esta información para que pueda corroborar las direcciones configuradas por usted, a su vez que pueda ver que dispositivos están configurados para poder obtener acceso.</p>
+                           <p >Le enviamos el presente correo para informarle acerca de las <span style=font-weight:800>' . $descripcion . '</span> Le enviamos esta información para que pueda corroborar las direcciones configuradas por usted, para que de esta manera le pueda permitir el acceso.</p>
                            <br/>
                            <h2>Direcciones configuradas</h2>
                            <br/>
@@ -106,6 +107,7 @@ if (isset($data['opcion'])) {
             break;
         }
         case 2: {
+            $asunto = "Horas restringidas - Ciberseguridad";
             $descripcion = "horas que usted ha configurado.";
             foreach ($data['objetos'] as $valor) {
                 $infoUsuario = $daoUsuario->readUser($valor['id']);
@@ -138,7 +140,7 @@ if (isset($data['opcion'])) {
                     <tr>
                         <td style="padding: 0; color: #132A55;text-align:left">
                             
-                           <p >Le enviamos el presente correo para informarle acerca de las <span style=font-weight:800>' . $descripcion . '</span> Le enviamos esta información para que pueda corroborar las direcciones configuradas por usted, a su vez que pueda ver que dispositivos están configurados para poder obtener acceso.</p>
+                           <p >Le enviamos el presente correo para informarle acerca de las <span style=font-weight:800>' . $descripcion . '</span> Le enviamos esta información para que pueda corroborar las horas configuradas por usted, para que de esta manera pueda tener una mayor seguridad, evitando que dispositivos puedan acceder en ese rango de hora(s) establecida(s).</p>
                            <br/>
                            <h2>Horas configuradas de hoy</h2>
                            <br/>
@@ -170,6 +172,7 @@ if (isset($data['opcion'])) {
         }
         //Acceso de dispositivos
         case 3: {
+            $asunto = "Intentos de acceso a su cuenta - Ciberseguridad";
             $descripcion = "intentos de acceso que usted ha recibido.";
             foreach ($data['objetos'] as $valor) {
                 $infoUsuario = $daoUsuario->readUser($valor['id']);
@@ -211,7 +214,7 @@ if (isset($data['opcion'])) {
                     <tr>
                         <td style="padding: 0; color: #132A55;text-align:left">
                             
-                           <p >Le enviamos el presente correo para informarle acerca de los <span style=font-weight:800>' . $descripcion . '</span> Le enviamos esta información para que pueda corroborar las direcciones configuradas por usted, a su vez que pueda ver que dispositivos están configurados para poder obtener acceso.</p>
+                           <p >Le enviamos el presente correo para informarle acerca de los <span style=font-weight:800>' . $descripcion . '</span> Le enviamos esta información para que pueda visualizar los dispositivos que intentaron ingresar a su cuenta, y si verificaron éxitosamente el código de verificación.</p>
                            <br/>
                            <h2>Dispositivos con los que se ha intentado ingresar</h2>
                            <br/>
@@ -244,6 +247,7 @@ if (isset($data['opcion'])) {
         }
         //Configuración de dispositivos
         case 4: {
+            $asunto = "Dispositivos vinculados - Ciberseguridad";
             $descripcion = "dispositivos que ha activado o vinculado, para permitirle el acceso.";
             foreach ($data['objetos'] as $valor) {
                 $infoUsuario = $daoUsuario->readUser($valor['id']);
@@ -282,7 +286,7 @@ if (isset($data['opcion'])) {
                     <tr>
                         <td style="padding: 0; color: #132A55;text-align:left">
                             
-                           <p >Le enviamos el presente correo para informarle acerca de los <span style=font-weight:800>' . $descripcion . '</span> Le enviamos esta información para que pueda corroborar las direcciones configuradas por usted, a su vez que pueda ver que dispositivos están configurados para poder obtener acceso.</p>
+                           <p>Le enviamos el presente correo para informarle acerca de los <span style=font-weight:800>' . $descripcion . '</span> Le enviamos esta información para que pueda corroborar, y tener la certeza acerca de los dispositivos configuradas por usted, para evitar cualquier tipo de ataque a su cuenta BCP.</p>
                            <br/>
                            <h2>Dispositivos con acceso a la cuenta</h2>
                            <br/>
@@ -315,6 +319,7 @@ if (isset($data['opcion'])) {
         }
         //Yape activado
         case 5: {
+            $asunto = mb_encode_mimeheader("¿Su Yape está activado? - Ciberseguridad", "UTF-8");
             $descripcion = "En BCP, sabemos lo importante que es para ti la seguridad de tus operaciones bancarias. 
             Por eso, queremos recordarte la importancia de usar herramientas avanzadas que garanticen la protección de tus transacciones.
             Una de estas herramientas es el Código de Verificación (OTP). Este código es una clave única que se genera automáticamente 
@@ -328,9 +333,9 @@ if (isset($data['opcion'])) {
                 $estado_yape = $infoSeguridad[0]['estado_yape'];
 
                 if ($estado_yape === 1) {
-                    $mensaje = "Estimado cliente, queremos informarle tiene activada la funcionalidad de código de verificación OTP (One-Time Password) para Yape, la cual prevenirá las acciones no autorizadas, brindandote una mayor tranquilidad y seguridad en tu cuenta.";
+                    $mensaje = "activada la funcionalidad de código de verificación OTP, para Yape";
                 } else {
-                    $mensaje = "Estimado cliente, queremos informarle que tiene la opción de activar el código de verificación OTP de Yape, para que de esta manera logre aumentar la seguridad de sus transacciones. Esto ayudará a proteger su cuenta contra accesos u acciones no autorizadas.";
+                    $mensaje = "la opción de activar el código de verificación OTP, para Yape";
                 }
 
                 $cuerpo = $e_correo . '
@@ -349,7 +354,7 @@ if (isset($data['opcion'])) {
                            <h2>¿Tiene la opción para hacer transacciones seguras por Yape?</h2>
                            <br/>
                                           
-                           <p>' . $mensaje . '</p>
+                           <p>Estimado cliente, queremos informarle que tiene <span style="font-weight:800">' . $mensaje . '</span>, el cual le ayudará a prevenir las acciones no autorizadas, brindandote una mayor tranquilidad y seguridad en tu cuenta.</p>
                             <br/>
                             <h2>¿Cómo funciona?</h2>
                              <br/>

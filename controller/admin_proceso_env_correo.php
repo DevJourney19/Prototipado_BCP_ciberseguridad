@@ -21,7 +21,7 @@ $mail->Password = $_ENV['PASSWORD'];      // Tu contraseña de Gmail
 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 $mail->Port = 587;
 //De
-$mail->setFrom('bcp83584@gmail.com', 'Banca en Linea BCP - Ciberseguridad');
+$mail->setFrom($_ENV['EMAIL'], 'Banca en Linea BCP - Ciberseguridad');
 
 // Leer datos enviados desde JavaScript
 $input = file_get_contents("php://input");
@@ -31,25 +31,27 @@ if (isset($data['correos']) && is_array($data['correos']) && isset($data['opcion
     $img = null;
     switch ($data['opcion']) {
         case 1: {
+            $asunto = mb_encode_mimeheader("¿Cómo tener una cuenta más segura? 🤓🙌 - Ciberseguridad", "UTF-8");
             //Tiene que tener el cid si o si como parte del src
             $img_cid = "cid:img_cb_1.jpg";
             $descripcion = "como tener una cuenta más segura.";
             break;
         }
         case 2: {
+            $asunto = mb_encode_mimeheader("Novedades 😎😎 - Ciberseguridad", "UTF-8");
             $img_cid = "cid:img_cb_2.jpg";
-            $descripcion = "novedades que quizás le interese, con respecto al servicio de ciberseguridad que tiene adquirido.";
+            $descripcion = "novedades que se implementará en un futuro, que quizás le interese, con respecto al servicio de ciberseguridad que tiene adquirido.";
             break;
         }
         case 3: {
+            $asunto = mb_encode_mimeheader("Plan de servicio 🤝🤝 - Ciberseguridad", "UTF-8");
             $img_cid = "cid:img_cb_3.jpg";
-            $descripcion = "que su plan de servicio está por vencer.";
+            $descripcion = "si su plan de servicio está por vencer, cómo poder actuar para seguir usando este confiable servicio de ciberseguridad.";
             break;
         }
     }
 
     $response = ['success' => [], 'failed' => []];
-    $asunto = "Ciberseguridad";
     $cuerpo = '
         <!DOCTYPE html>
         <html lang="es">
