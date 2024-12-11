@@ -211,9 +211,9 @@
 
         const data = JSON.parse(textResponse);
 
-          setTimeout(() => {
-            window.location.href = "./principal.php";
-          }, 2000)
+        // se redirecciona al index y se debe esperar que un dispositivo seguro permita el acceso
+        alert('Debes esperar que el dispositivo seguro permita tu acceso');
+        window.location.href = "./index.php";
 
 
       } catch (error) {
@@ -236,9 +236,9 @@
         console.log(textResponse);
 
         const data = JSON.parse(textResponse);
-        //const data = await response.json();
 
-        //window.location.href = "./index.php";
+        alert('Código incorrecto, intenta nuevamente');
+        window.location.href = "./index.php";
 
       } catch (error) {
         console.error('Error al establecer la sesión: ', error);

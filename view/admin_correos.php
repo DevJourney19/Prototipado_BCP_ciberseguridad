@@ -5,11 +5,7 @@ $entradas->validarEntrada('login_admin.php');
 
 $usuarioDao = new ControllerUsuario();
 $usuarios = $usuarioDao->obtenerUsuarios();
-if (isset($_SESSION['security'])) {
-    $admin = $usuarioDao->obtenerUsuario($_SESSION['security'], "seguridad");
-} else {
-    $admin = $usuarioDao->obtenerUsuario($_SESSION['security'], "usuario");
-}
+$admin = $usuarioDao->obtenerUsuario($_SESSION['id_usuario'], "usuario");
 
 $lista_llave = false;
 if (!empty($usuarios)) {
@@ -75,7 +71,7 @@ $count = 0;
                                 <td><?= $user->getNombre(); ?></td>
                                 <td><?= $user->getCorreo(); ?></td>
                             </tr>
-                        <?php }
+                    <?php }
                     } ?>
                 </tbody>
             </table>

@@ -7,11 +7,8 @@ $entradas->validarEntrada('index.php');
 
 $daoUsuario = new ControllerUsuario();
 
-if (isset($_SESSION['security'])) {
-    $usuario = $daoUsuario->obtenerUsuario($_SESSION['security'], "seguridad");
-} else {
-    $usuario = $daoUsuario->obtenerUsuario($_SESSION['security'], "usuario");
-}
+$usuario = $daoUsuario->obtenerUsuario($_SESSION['id_usuario'], "usuario");
+
 ?>
 
 <head>
