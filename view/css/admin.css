@@ -354,6 +354,14 @@ main {
     scale: 1.08;
 }
 
+.icono_cargando {
+    position: absolute;
+    top: 35%;
+    left: 49.2%;
+    transform: translate(-50%, -50%);
+    color: gray;
+}
+
 @media (max-width:374px) {
     .modal-content {
         height: fit-content;

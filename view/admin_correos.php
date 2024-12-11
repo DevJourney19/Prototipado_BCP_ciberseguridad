@@ -89,7 +89,7 @@ $count = 0;
             <h2>Seleccione el contenido a enviar de manera masiva</h2>
             <hr style="border: 1px solid lightgray;" />
             <br />
-            <h3 style="color:#ff7900">Mensajes específicos</h3>
+            <h3 style="color:#ff7900" class="msg_especifico_correo">Mensajes específicos</h3>
             <div class="mensaje_especifico_correo">
                 <div class="col_mensaje_especifico">
                     <h2>Direcciones configuradas</h2>
