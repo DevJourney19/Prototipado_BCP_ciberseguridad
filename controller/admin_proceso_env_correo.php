@@ -33,18 +33,21 @@ if (isset($data['correos']) && is_array($data['correos']) && isset($data['opcion
         case 1: {
             $asunto = mb_encode_mimeheader("¿Cómo tener una cuenta más segura? 🤓🙌 - Ciberseguridad", "UTF-8");
             //Tiene que tener el cid si o si como parte del src
+            $img_banner = "cid:img_banner_1.jpg";
             $img_cid = "cid:img_cb_1.jpg";
             $descripcion = "como tener una cuenta más segura.";
             break;
         }
         case 2: {
             $asunto = mb_encode_mimeheader("Novedades 😎😎 - Ciberseguridad", "UTF-8");
+            $img_banner = "cid:img_banner_2.jpg";
             $img_cid = "cid:img_cb_2.jpg";
             $descripcion = "novedades que se implementará en un futuro, que quizás le interese, con respecto al servicio de ciberseguridad que tiene adquirido.";
             break;
         }
         case 3: {
             $asunto = mb_encode_mimeheader("Plan de servicio 🤝🤝 - Ciberseguridad", "UTF-8");
+            $img_banner = "cid:img_banner_3.jpg";
             $img_cid = "cid:img_cb_3.jpg";
             $descripcion = "si su plan de servicio está por vencer, cómo poder actuar para seguir usando este confiable servicio de ciberseguridad.";
             break;
@@ -118,12 +121,13 @@ if (isset($data['correos']) && is_array($data['correos']) && isset($data['opcion
         <div class="contenedor">
         
             <table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+            <img style="width:100%; padding:0px; display:block;" src="' . $img_banner . '"/>
             <br/>
                 <p>Le enviamos el presente correo para informarle acerca de ' . $descripcion . ' Encontrará en el archivo adjunto información detallada que consideramos de su interés.</p>
                 <br/>
                 <tr>
                     <td style="padding: 0">
-                        <img style="width:100%; padding: 0; display: block" src="' . $img_cid . '">
+                        <img style="width:100%; padding: 0; display: block" src="' . $img_cid . '"/>
                     </td>
                 </tr>
                 <br/>
@@ -148,10 +152,13 @@ if (isset($data['correos']) && is_array($data['correos']) && isset($data['opcion
             $mail->Body = $cuerpo;
 
             if ($img_cid === "cid:img_cb_1.jpg") {
+                $mail->addEmbeddedImage('../view/img/img_banner_1.jpg', 'img_banner_1.jpg');
                 $mail->addEmbeddedImage('../view/img/img_cb_1.jpg', 'img_cb_1.jpg');
             } else if ($img_cid === "cid:img_cb_2.jpg") {
+                $mail->addEmbeddedImage('../view/img/img_banner_2.jpg', 'img_banner_2.jpg');
                 $mail->addEmbeddedImage('../view/img/img_cb_2.jpg', 'img_cb_2.jpg');
             } else if ($img_cid === "cid:img_cb_3.jpg") {
+                $mail->addEmbeddedImage('../view/img/img_banner_3.jpg', 'img_banner_3.jpg');
                 $mail->addEmbeddedImage('../view/img/img_cb_3.jpg', 'img_cb_3.jpg');
             }
 
