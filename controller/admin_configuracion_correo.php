@@ -82,7 +82,7 @@ class AdminConfiguracionCorreo
                 </table>';
         return $cierre;
     }
-    function contenido_enviar_correo($mail, $emailCliente, $asunto, $cuerpo)
+    function contenido_enviar_correo($mail, $emailCliente, $asunto, $cuerpo, $img_asuntos)
     {
         try {
             //Para
@@ -92,6 +92,7 @@ class AdminConfiguracionCorreo
             $mail->isHTML(true);
             $mail->Subject = $asunto;
             $mail->Body = $cuerpo;
+            $mail->addEmbeddedImage($img_asuntos[1], $img_asuntos[2]);
 
             if (!$mail->send()) {
                 $mail->clearAddresses();

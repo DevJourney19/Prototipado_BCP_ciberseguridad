@@ -54,6 +54,7 @@ if (isset($data['opcion'])) {
         case 1: {
             $asunto = "Direcciones seguras - Ciberseguridad";
             $descripcion = "direcciones que usted ha configurado.";
+            $img_asuntos = ['cid:img_banner_1.jpg', '../view/img/img_banner_1.jpg', 'img_banner_1.jpg'];
             foreach ($data['objetos'] as $valor) {
                 $infoUsuario = $daoUsuario->readUser($valor['id']);
                 //Aqui en usuario no se le pone el 0
@@ -75,6 +76,7 @@ if (isset($data['opcion'])) {
             <div class="contenedor">
             
                 <table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;font-weight:100">
+                <img style="width:100%;display:block;padding:0px;" src="' . $img_asuntos[0] . '"/>
                 <br/>
                     <h2 style="color: #132A55;text-align:left;">Hola <span style="text-transform: uppercase">' . $nombreUsuario . ',</span></h2>
                     <br/>
@@ -98,7 +100,7 @@ if (isset($data['opcion'])) {
         </body>
     </html>';
 
-                if ($configCorreo->contenido_enviar_correo($mail, $valor['correo'], $asunto, $cuerpo)) {
+                if ($configCorreo->contenido_enviar_correo($mail, $valor['correo'], $asunto, $cuerpo, $img_asuntos)) {
                     $response['success'][] = $valor['correo'];
                 } else {
                     $response['failed'][] = $valor['correo'];
@@ -108,6 +110,7 @@ if (isset($data['opcion'])) {
         }
         case 2: {
             $asunto = "Horas restringidas - Ciberseguridad";
+            $img_asuntos = ['cid:img_banner_2.jpg', '../view/img/img_banner_2.jpg', 'img_banner_2.jpg'];
             $descripcion = "horas que usted ha configurado.";
             foreach ($data['objetos'] as $valor) {
                 $infoUsuario = $daoUsuario->readUser($valor['id']);
@@ -134,6 +137,7 @@ if (isset($data['opcion'])) {
             <div class="contenedor">
             
                 <table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;font-weight:100">
+                <img style="width:100%;display:block;padding:0px;" src="' . $img_asuntos[0] . '"/>
                 <br/>
                     <h2 style="color: #132A55;text-align:left;">Hola <span style="text-transform: uppercase">' . $nombreUsuario . ',</span></h2>
                     <br/>
@@ -162,7 +166,7 @@ if (isset($data['opcion'])) {
         </body>
     </html>';
 
-                if ($configCorreo->contenido_enviar_correo($mail, $valor['correo'], $asunto, $cuerpo)) {
+                if ($configCorreo->contenido_enviar_correo($mail, $valor['correo'], $asunto, $cuerpo, $img_asuntos)) {
                     $response['success'][] = $valor['correo'];
                 } else {
                     $response['failed'][] = $valor['correo'];
@@ -173,6 +177,7 @@ if (isset($data['opcion'])) {
         //Acceso de dispositivos
         case 3: {
             $asunto = "Intentos de acceso a su cuenta - Ciberseguridad";
+            $img_asuntos = ['cid:img_banner_3.jpg', '../view/img/img_banner_3.jpg', 'img_banner_3.jpg'];
             $descripcion = "intentos de acceso que usted ha recibido.";
             foreach ($data['objetos'] as $valor) {
                 $infoUsuario = $daoUsuario->readUser($valor['id']);
@@ -208,6 +213,7 @@ if (isset($data['opcion'])) {
             <div class="contenedor">
             
                 <table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;font-weight:100">
+                <img style="width:100%;display:block;padding:0px;" src="' . $img_asuntos[0] . '"/>
                 <br/>
                     <h2 style="color: #132A55;text-align:left;">Hola <span style="text-transform: uppercase">' . $nombreUsuario . ',</span></h2>
                     <br/>
@@ -237,7 +243,7 @@ if (isset($data['opcion'])) {
         </body>
     </html>';
 
-                if ($configCorreo->contenido_enviar_correo($mail, $valor['correo'], $asunto, $cuerpo)) {
+                if ($configCorreo->contenido_enviar_correo($mail, $valor['correo'], $asunto, $cuerpo, $img_asuntos)) {
                     $response['success'][] = $valor['correo'];
                 } else {
                     $response['failed'][] = $valor['correo'];
@@ -248,6 +254,7 @@ if (isset($data['opcion'])) {
         //Configuración de dispositivos
         case 4: {
             $asunto = "Dispositivos vinculados - Ciberseguridad";
+            $img_asuntos = ['cid:img_banner_4.jpg', '../view/img/img_banner_4.jpg', 'img_banner_4.jpg'];
             $descripcion = "dispositivos que ha activado o vinculado, para permitirle el acceso.";
             foreach ($data['objetos'] as $valor) {
                 $infoUsuario = $daoUsuario->readUser($valor['id']);
@@ -264,7 +271,6 @@ if (isset($data['opcion'])) {
                 if (!empty($dispositivos)) {
                     foreach ($dispositivos as $dvo) {
                         if ($dvo['estado_dispositivo'] === "principal") {
-
                             $verificadosPrincipal .= '<li> ' . $dvo['tipo_dispositivo'] . ' ( ' . $dvo['ciudad'] . ' - ' . $dvo['pais'] . ' )</li>';
                         } else if ($dvo['estado_dispositivo'] === "seguro") {
                             $verificadosSeguro .= '<li> ' . $dvo['tipo_dispositivo'] . ' ( ' . $dvo['ciudad'] . ' - ' . $dvo['pais'] . ' )</li>';
@@ -274,12 +280,19 @@ if (isset($data['opcion'])) {
                     $verificadosPrincipal = "No se registraron dispositivos principales para permitirles el acceso.";
                     $verificadosSeguro = "No se registraron dispositivos seguros para permitirles el acceso.";
                 }
+                if (empty($verificadosPrincipal)) {
+                    $verificadosPrincipal = "No se registraron dispositivos principales para permitirles el acceso.";
+                }
+                if (empty($verificadosSeguro)) {
+                    $verificadosSeguro = "No se registraron dispositivos seguros para permitirles el acceso.";
+                }
 
                 $cuerpo = $e_correo . '
         <body>
             <div class="contenedor">
             
                 <table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;font-weight:100">
+                <img style="width:100%;display:block;padding:0px;" src="' . $img_asuntos[0] . '"/>
                 <br/>
                     <h2 style="color: #132A55;text-align:left;">Hola <span style="text-transform: uppercase">' . $nombreUsuario . ',</span></h2>
                     <br/>
@@ -309,7 +322,7 @@ if (isset($data['opcion'])) {
         </body>
     </html>';
 
-                if ($configCorreo->contenido_enviar_correo($mail, $valor['correo'], $asunto, $cuerpo)) {
+                if ($configCorreo->contenido_enviar_correo($mail, $valor['correo'], $asunto, $cuerpo, $img_asuntos)) {
                     $response['success'][] = $valor['correo'];
                 } else {
                     $response['failed'][] = $valor['correo'];
@@ -320,6 +333,8 @@ if (isset($data['opcion'])) {
         //Yape activado
         case 5: {
             $asunto = mb_encode_mimeheader("¿Su Yape está activado? - Ciberseguridad", "UTF-8");
+            //$mail->addEmbeddedImage('../view/img/img_banner_1.jpg', 'img_banner_1.jpg');
+            $img_asuntos = ['cid:img_banner_5.jpg', '../view/img/img_banner_5.jpg', 'img_banner_5.jpg'];
             $descripcion = "En BCP, sabemos lo importante que es para ti la seguridad de tus operaciones bancarias. 
             Por eso, queremos recordarte la importancia de usar herramientas avanzadas que garanticen la protección de tus transacciones.
             Una de estas herramientas es el Código de Verificación (OTP). Este código es una clave única que se genera automáticamente 
@@ -343,6 +358,7 @@ if (isset($data['opcion'])) {
             <div class="contenedor">
             
                 <table style="max-width: 600px; padding: 10px; margin:0 auto; border-collapse: collapse;font-weight:100">
+                <img style="width:100%;display:block;padding:0px;" src="' . $img_asuntos[0] . '"/>
                 <br/>
                     <h2 style="color: #132A55;text-align:left;">Hola <span style="text-transform: uppercase">' . $nombreUsuario . ',</span></h2>
                     <br/>
@@ -380,7 +396,7 @@ if (isset($data['opcion'])) {
         </body>
     </html>';
 
-                if ($configCorreo->contenido_enviar_correo($mail, $valor['correo'], $asunto, $cuerpo)) {
+                if ($configCorreo->contenido_enviar_correo($mail, $valor['correo'], $asunto, $cuerpo, $img_asuntos)) {
                     $response['success'][] = $valor['correo'];
                 } else {
                     $response['failed'][] = $valor['correo'];

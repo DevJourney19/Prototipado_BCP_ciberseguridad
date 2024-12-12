@@ -14,7 +14,7 @@ $clave_internet = filter_input(INPUT_POST, var_name: 'clave_internet', filter: F
 
 $dir_ip = getPublicIp(); //se obtiene la direccion del dispotivio actual para comparar con la direccion de activación
 
-$info = obtener_info_ip($dir_ip);
+$info = obtener_info_ip($dir_ip); //permite obtener informacion adicional por medio de la direccion ip publica del dispositivo
 $daoUsuario = new DaoUsuario();
 $daoSeguridad = new DaoSeguridad();
 $daoDispositivo = new DaoDispositivo();
@@ -24,7 +24,7 @@ $daoDireccion = new DaoDireccion();
 try {
     $registro = $daoUsuario->verificarLogin($tarjeta, $dni, $clave_internet);
     if (count($registro) === 1) {
-        echo "Registrado exitosamente";
+        echo "Logueado exitosamente";
         //USUARIO
         $_SESSION['id_usuario'] = $registro[0]['id_usuario'];
         $id_usuario = $_SESSION['id_usuario'];
