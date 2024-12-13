@@ -1,3 +1,14 @@
+select {
+    padding: 3px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+#mensaje-satisfaccion{
+    margin-top: 20px;
+}
+
 .nav_admin {
     background-color: #02173F;
     /* Color de fondo */

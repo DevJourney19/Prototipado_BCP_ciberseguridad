@@ -1,59 +1,87 @@
 const getDataSatisfaccion = async () => {
   const date = new Date();
+  const mesSelect = document.getElementById("satisfaccion-mes");
+const mes = mesSelect ? mesSelect.value : (new Date().getMonth() + 1);
   const response = await fetch(
     `../controller/ControllerEstadisticas.php?action=emocion&mes=${
-      date.getMonth() + 1
-    }&anio=${date.getFullYear()}`
+      mes}&anio=${date.getFullYear()}`
   );
   const data = await response.json();
   return data;
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-  const lista = await getDataSatisfaccion();
-  const grafico_1 = document.getElementById("grafico_1").getContext("2d");
-  const satisfaccion = [];
-  const numeros = [];
-  for (const i of lista) {
-    satisfaccion.push(i.estado);
-    numeros.push(i.cantidad);
-  }
-  const myChart = new Chart(grafico_1, {
-    type: "pie",
-    data: {
-      labels: satisfaccion,
-      datasets: [
-        {
-          //label: "buenas",
-          data: numeros,
-          backgroundColor: [
-            "rgba(224, 132, 22, 0.2)",
-            "rgba(98, 175, 125, 0.2)",
-            "rgba(49, 172, 196, 0.2)",
-            "rgba(152, 70, 255, 0.2)",
-            "rgba(209, 59, 59, 0.2)",
+  const mesSelect = document.getElementById("satisfaccion-mes");
+  const mensajeNoData = document.getElementById("mensaje-satisfaccion");
+  let myChart;
+
+  const updateChart = async () => {
+    try {
+      const lista = await getDataSatisfaccion(mesSelect.value);
+      const grafico_1 = document.getElementById("grafico_1").getContext("2d");
+      const satisfaccion = [];
+      const numeros = [];
+      for (const i of lista) {
+        satisfaccion.push(i.estado);
+        numeros.push(i.cantidad);
+      }
+
+      if (myChart) {
+        myChart.destroy();
+      }
+
+      if (lista.length === 0) {
+        mensajeNoData.style.display = "block";
+        mensajeNoData.innerHTML = "No hay datos para mostrar";
+        return;
+      } else {
+        mensajeNoData.style.display = "none";
+      }
+
+      myChart = new Chart(grafico_1, {
+        type: "pie",
+        data: {
+          labels: satisfaccion,
+          datasets: [
+            {
+              data: numeros,
+              backgroundColor: [
+                "rgba(224, 132, 22, 0.2)",
+                "rgba(98, 175, 125, 0.2)",
+                "rgba(49, 172, 196, 0.2)",
+                "rgba(152, 70, 255, 0.2)",
+                "rgba(209, 59, 59, 0.2)",
+              ],
+              borderColor: [
+                "rgba(224, 132, 22, 1)",
+                "rgba(98, 175, 125, 1)",
+                "rgba(49, 172, 196, 1)",
+                "rgba(152, 70, 255, 1)",
+                "rgba(209, 59, 59, 1)",
+              ],
+              borderWidth: 1.5,
+            },
           ],
-          borderColor: [
-            "rgba(224, 132, 22, 1)",
-            "rgba(98, 175, 125, 1)",
-            "rgba(49, 172, 196, 1)",
-            "rgba(152, 70, 255, 1)",
-            "rgba(209, 59, 59, 1)",
-          ],
-          borderWidth: 1.5,
         },
-      ],
-    },
-    options: {
-      plugins: {
-        legend: {
-          labels: {
-            color: "#ffffff", // Color del texto de la leyenda
+        options: {
+          plugins: {
+            legend: {
+              labels: {
+                color: "#ffffff", // Color del texto de la leyenda
+              },
+            },
           },
         },
-      },
-    },
-  });
+      });
+    } catch (error) {
+      console.error("Error updating chart:", error);
+    }
+  };
+
+  mesSelect.addEventListener("change", updateChart);
+
+  // Inicializar el gráfico con el mes seleccionado por defecto
+  updateChart();
 });
 
 const getRegistros = async () => {
@@ -334,4 +362,9 @@ for (const m of mes) {
 
 for (const a of anio) {
   a.innerHTML = currentYear;
+}
+
+let mesSelect = document.getElementById("satisfaccion-mes");
+if (mesSelect) {
+  mesSelect.value = new Date().getMonth() + 1;
 }

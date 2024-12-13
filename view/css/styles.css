@@ -449,12 +449,8 @@ div>button:hover {
   color: white;
 }
 
-.col>div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.col .grafico {
   height: 90%;
-  width: 500px;
 }
 
 .col {
@@ -462,10 +458,16 @@ div>button:hover {
   position: relative;
 }
 
-.col>h5 {
+.col h5 {
   margin-bottom: 10px;
   color: gray;
   font-weight: 500;
+}
+
+.col .encabezado-admi{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .fila_gr {
@@ -483,8 +485,8 @@ div>button:hover {
   position: relative;
 }
 
-.fila_gr .col>div {
-  width: 90%;
+.fila_gr .col>div>canvas {
+  width: 90% !important;
   margin: 0 auto;
   position: relative;
 }

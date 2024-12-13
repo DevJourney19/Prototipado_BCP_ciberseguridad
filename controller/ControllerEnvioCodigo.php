@@ -17,12 +17,6 @@ use Infobip\Model\SmsAdvancedTextualRequest;
 $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-require __DIR__ . '/../vendor/autoload.php';
-include_once '../dao/DaoUsuario.php';
-
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
-
 try {
   $response = [];
   $data = json_decode(file_get_contents('php://input'), true);
