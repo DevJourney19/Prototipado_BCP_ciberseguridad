@@ -120,7 +120,6 @@ $error = null;
                         src="https://www.openstreetmap.org/export/embed.html?bbox=-77.009679,-11.983784,-77.006679,-11.981784&layer=mapnik"
                         width="600" height="250" style="border:0;" allowfullscreen loading="lazy"></iframe>
                 </div>
-                <small>* Puedes ingresar varias ubicaciones, pero solo 2 al día</small>
                 <div class="botones">
                     <button id="boton-registrar-direccion" class="boton-naranja" name="btnRegistrarDireccion"
                         type="submit" <?php if ($datosActivados == 0) { ?>disabled<?php } ?>>Guardar</button>
@@ -139,7 +138,7 @@ $error = null;
         crossorigin="anonymous"></script>
     <script src="js/validacionhora.js"></script>
     <script src="js/ubicacion_direccion.js"></script>
-
+    <script src="js/index.js"></script>
 </body>
 
 </html>

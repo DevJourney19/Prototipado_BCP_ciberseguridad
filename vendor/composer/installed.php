@@ -4,10 +4,14 @@
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
 <<<<<<< HEAD
+<<<<<<< HEAD
         'reference' => '5816950e805d447cfe9d300a24e39689c70bc901',
 =======
         'reference' => '6d8268779119ee0b731e49248a49c55190ee5cfd',
 >>>>>>> 73c87be9ad04ec102c9ad64713d6930bde9330cc
+=======
+        'reference' => '9c2104dcf775b0b95d36754e488b45c69d837b52',
+>>>>>>> e2de0c2db029c76a8facc27fbe3f0b9c3d9eddcf
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -18,10 +22,14 @@
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
 <<<<<<< HEAD
+<<<<<<< HEAD
             'reference' => '5816950e805d447cfe9d300a24e39689c70bc901',
 =======
             'reference' => '6d8268779119ee0b731e49248a49c55190ee5cfd',
 >>>>>>> 73c87be9ad04ec102c9ad64713d6930bde9330cc
+=======
+            'reference' => '9c2104dcf775b0b95d36754e488b45c69d837b52',
+>>>>>>> e2de0c2db029c76a8facc27fbe3f0b9c3d9eddcf
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -37,9 +45,9 @@
             'dev_requirement' => false,
         ),
         'doctrine/deprecations' => array(
-            'pretty_version' => '1.1.3',
-            'version' => '1.1.3.0',
-            'reference' => 'dfbaa3c2d2e9a9df1118213f3b8b0c597bb99fab',
+            'pretty_version' => '1.1.4',
+            'version' => '1.1.4.0',
+            'reference' => '31610dbb31faa98e6b5447b62340826f54fbc4e9',
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/deprecations',
             'aliases' => array(),
@@ -199,9 +207,9 @@
             'dev_requirement' => false,
         ),
         'phpoffice/phpspreadsheet' => array(
-            'pretty_version' => '3.5.0',
-            'version' => '3.5.0.0',
-            'reference' => 'fb74dcdfa5b538763ab980e977529bc783039aec',
+            'pretty_version' => '3.6.0',
+            'version' => '3.6.0.0',
+            'reference' => 'bce5db99872f9613121c3ad033c43318a3789396',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpoffice/phpspreadsheet',
             'aliases' => array(),
@@ -433,9 +441,9 @@
             'dev_requirement' => false,
         ),
         'symfony/property-info' => array(
-            'pretty_version' => 'v7.2.0',
-            'version' => '7.2.0.0',
-            'reference' => 'b00580d9d7c9654e1df95df85105d0da67418b3f',
+            'pretty_version' => 'v7.2.1',
+            'version' => '7.2.1.0',
+            'reference' => '65fb9be15380f949d72ff405473cce733364b8b4',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/property-info',
             'aliases' => array(),
@@ -478,9 +486,9 @@
             'dev_requirement' => false,
         ),
         'symfony/type-info' => array(
-            'pretty_version' => 'v7.2.0',
-            'version' => '7.2.0.0',
-            'reference' => 'e0bfd95bceb3886c59487828537691aecb7d9c6b',
+            'pretty_version' => 'v7.2.1',
+            'version' => '7.2.1.0',
+            'reference' => '4f402070b08ad0b87e9cadbb07b87fb36061e6e4',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/type-info',
             'aliases' => array(),

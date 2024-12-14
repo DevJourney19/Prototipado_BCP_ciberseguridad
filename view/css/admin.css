@@ -1,3 +1,14 @@
+select {
+    padding: 3px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+#mensaje-satisfaccion{
+    margin-top: 20px;
+}
+
 .nav_admin {
     background-color: #02173F;
     /* Color de fondo */
@@ -154,7 +165,7 @@ body {
     cursor: pointer;
     text-transform: uppercase;
     font-weight: bold;
-    display: none;
+    display: block;
 }
 
 .ver_btn_enviar_email {
@@ -239,6 +250,7 @@ main {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     text-align: center;
     color: black;
+    height: 100%;
 }
 
 .modal button {
@@ -264,7 +276,7 @@ main {
 .eleccion_contenido_correo {
     display: flex;
     flex-direction: row;
-    margin: 18px auto;
+    margin: 10px auto;
     gap: 5%;
     justify-content: center;
 }
@@ -310,6 +322,68 @@ main {
 
 .fullscreen-modal:target {
     display: flex;
+}
+
+.mensaje_especifico_correo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr auto;
+    padding: 10px;
+    width: 100%;
+    font-size: 0.6rem;
+    gap: 4px;
+}
+
+.col_mensaje_especifico {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.mensaje_especifico_correo .col_mensaje_especifico:last-child {
+    grid-column: span 2;
+}
+
+.col_mensaje_especifico button {
+    background: #ff7900;
+    transition: 0.3s all;
+}
+
+.col_mensaje_especifico button:hover {
+    background: #ba5701;
+    scale: 1.08;
+}
+
+.mensaje_predeterminado button {
+    transition: 0.3s all;
+
+}
+
+.mensaje_predeterminado button:hover {
+    scale: 1.08;
+}
+
+.icono_cargando {
+    position: absolute;
+    top: 35%;
+    left: 49.2%;
+    transform: translate(-50%, -50%);
+    color: gray;
+}
+
+@media (max-width:374px) {
+    .modal-content {
+        height: fit-content;
+
+    }
+}
+
+@media (min-width: 380px) {
+    .modal-content {
+        height: fit-content;
+    }
 }
 
 @media (min-width: 572px) {
