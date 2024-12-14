@@ -1,7 +1,7 @@
 <?php
-require __DIR__ . '/../vendor/autoload.php';
-include_once '../dao/DaoUsuario.php';
-include_once '../model/Usuario.php';
+require '/app/vendor/autoload.php';
+include_once '/app/dao/DaoUsuario.php';
+include_once '/app/model/Usuario.php';
 
 use PHPMailer\PHPMailer\Exception;
 

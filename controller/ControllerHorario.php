@@ -1,18 +1,21 @@
 <?php
 session_start();
-require_once '../dao/DaoHorario.php';
-require_once '../dao/DaoSeguridad.php';
+require_once '/app/dao/DaoHorario.php';
+require_once '/app/dao/DaoSeguridad.php';
 
-class ControllerHorario {
+class ControllerHorario
+{
     private $daoHorario;
     private $daoSeguridad;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->daoHorario = new DaoHorario();
         $this->daoSeguridad = new DaoSeguridad();
     }
 
-    public function registrar() {
+    public function registrar()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnRegistrar'])) {
             $id_seguridad = $_POST["id_seguridad"] ?? null;
             $hora_inicio = $_POST['txtHoraInicio'] ?? '';
@@ -46,10 +49,11 @@ class ControllerHorario {
         }
     }
 
-    public function obtenerHorarios() {
+    public function obtenerHorarios()
+    {
         // Obtener id_seguridad de la sesión o de donde corresponda
         $idSeguridad = $_SESSION['id_seguridad'] ?? null;
-    
+
         if ($idSeguridad) {
             // Llamar al método de DaoHorario para obtener horarios restringidos
             return $this->daoHorario->obtenerHorariosRestringidos($idSeguridad); // Llama correctamente al método
@@ -59,7 +63,8 @@ class ControllerHorario {
             return [];
         }
     }
-    public function modificar() {
+    public function modificar()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['btnModificar'])) {
             $seguridad = $_SESSION['id_seguridad'] ?? null;
             $id_hora = $_POST['txtId'] ?? null;
@@ -76,7 +81,8 @@ class ControllerHorario {
         }
     }
 
-    public function eliminar($id_hora) {
+    public function eliminar($id_hora)
+    {
         if ($id_hora) {
             $resultado = $this->daoHorario->eliminarHorario($id_hora);
             $this->redireccionar($resultado, 'Eliminación');
@@ -85,7 +91,8 @@ class ControllerHorario {
         }
     }
 
-    private function redireccionar($resultado, $accion) {
+    private function redireccionar($resultado, $accion)
+    {
         if ($resultado) {
             header("Location: ../view/horario_ubicacion.php?msg={$accion}_exitosa");
         } else {
@@ -94,7 +101,8 @@ class ControllerHorario {
         exit;
     }
 
-    private function mensajeError($id_seguridad, $hora_inicio, $hora_fin) {
+    private function mensajeError($id_seguridad, $hora_inicio, $hora_fin)
+    {
         if (!$id_seguridad) {
             echo "Error: No se ha encontrado la sesión de seguridad.";
         } elseif (!$this->daoSeguridad->existeSeguridad($id_seguridad)) {

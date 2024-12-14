@@ -1,5 +1,5 @@
 <?php
-include_once '../controller/ControllerEntradas.php';
+include_once '/app/controller/ControllerEntradas.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('login_admin.php');
 ?>
@@ -8,15 +8,15 @@ $entradas->validarEntrada('login_admin.php');
 <html lang="es">
 
 <head>
-    <?php include '../view/fragmentos/head.php' ?>
-    <link href="../view/css/admin.css" rel="stylesheet" />
+    <?php include '/app/view/fragmentos/head.php' ?>
+    <link href="/app/view/css/admin.css" rel="stylesheet" />
     <title>Dashboard</title>
 </head>
 
 <body class="body_dashboard">
     <header>
-        <?php include_once '../view/fragmentos/nav_close_admin.php' ?>
-        <?php include_once '../view/fragmentos/nav_admin.php' ?>
+        <?php include_once '/app/view/fragmentos/nav_close_admin.php' ?>
+        <?php include_once '/app/view/fragmentos/nav_admin.php' ?>
     </header>
 
     <main class="main_dashboard" style="
@@ -95,7 +95,7 @@ $entradas->validarEntrada('login_admin.php');
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script src="../view/js/charts.js"></script>
+    <script src="/app/view/js/charts.js"></script>
 </body>
 
 </html>

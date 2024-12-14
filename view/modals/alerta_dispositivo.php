@@ -21,7 +21,7 @@
   <div class="modal codigo close">
     <div>
       <i class="fa-solid fa-vault"></i>
-      <h2>Ingresa el código que se te envió al correo o SMS</h2>
+      <h2>Ingrese el código que se envió a su correo o SMS</h2>
     </div>
     <div>
       <div class="description">
@@ -52,7 +52,7 @@
       d="M638-80 468-250l56-56 114 114 226-226 56 56L638-80ZM480-520l320-200H160l320 200Zm0 80L160-640v400h206l80
    80H160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v174l-80 80v-174L480-440Zm0 0Zm0-80Zm0 80Z" />
   </svg>
-  <p>Código enviado, revise su bandeja de entrada</p>
+  <p>Código enviado, revise su bandeja de entrada o su celular</p>
 </div>
 
 <div id="modalExito" class="modal advertencia exito close">
@@ -60,7 +60,7 @@
     <path
       d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
   </svg>
-  <p>Código correcto. ¡Acceso autorizado!</p>
+  <p>Código correcto.</p>
 </div>
 
 <div id="modalError" class="modal advertencia error close">
@@ -69,7 +69,7 @@
       d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 
     28.5T480-280Zm-40-160h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
   </svg>
-  <p>Código incorrecto. Intenta nuevamente.</p>
+  <p>Código incorrecto. Intente nuevamente.</p>
 </div>
 
 <script src="https://unpkg.com/@otplib/preset-browser@^12.0.0/buffer.js"></script>
@@ -82,7 +82,7 @@
   const inputs = document.querySelectorAll('input[type=number]');
 
   inputs.forEach((input, index) => {
-    input.addEventListener('input', function() {
+    input.addEventListener('input', function () {
       // Si la longitud del valor del input es igual a su máximo
       if (this.value.length >= this.max) {
         // Mueve el foco al siguiente input
@@ -118,7 +118,7 @@
     document.getElementById("envioCodigo").disabled = true; //Evitar hacer multiples clics en el botón
     token = generarToken(); //Se va a enviar el token al ControllerEnvioCodigo.php
     try {
-      const response = await fetch("../controller/ControllerEnvioCodigo.php", {
+      const response = await fetch("/app/controller/ControllerEnvioCodigo.php", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -195,7 +195,7 @@
 
       mostrarModalExito('modalExito');
       try {
-        const response = await fetch('../controller/ControllerDispositivo.php?action=getUsuario&cambio=true', {
+        const response = await fetch('/app/controller/ControllerDispositivo.php?action=getUsuario&cambio=true', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -213,7 +213,7 @@
 
         // se redirecciona al index y se debe esperar que un dispositivo seguro permita el acceso
         alert('Debes esperar que el dispositivo seguro permita tu acceso');
-        window.location.href = "./index.php";
+        window.location.href = "/app/view/index.php";
 
 
       } catch (error) {
@@ -223,7 +223,7 @@
     } else {
       mostrarModalError('modalError');
       try {
-        const response = await fetch('../controller/ControllerDispositivo.php?action=getUsuario&cambio=true', {
+        const response = await fetch('/app/controller/ControllerDispositivo.php?action=getUsuario&cambio=true', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -238,7 +238,7 @@
         const data = JSON.parse(textResponse);
 
         alert('Código incorrecto, intenta nuevamente');
-        window.location.href = "./index.php";
+        window.location.href = "/app/view/index.php";
 
       } catch (error) {
         console.error('Error al establecer la sesión: ', error);
@@ -247,11 +247,11 @@
     resetTimeout();
   }
 
-  document.getElementById('bloquear').addEventListener('click', function() {
+  document.getElementById('bloquear').addEventListener('click', function () {
     document.getElementById('modal').classList.add('close');
   });
 
-  document.getElementById('cancelar').addEventListener('click', function() {
+  document.getElementById('cancelar').addEventListener('click', function () {
     document.getElementById('modal').classList.add('close');
   });
 </script>

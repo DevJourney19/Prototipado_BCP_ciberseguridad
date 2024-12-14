@@ -1,9 +1,9 @@
 <?php
 
 header('Content-Type: application/json');
-require __DIR__ . '/../vendor/autoload.php';
-include_once '../dao/DaoUsuario.php';
-include_once '../model/Usuario.php';
+require '/app/vendor/autoload.php';
+include_once '/app/dao/DaoUsuario.php';
+include_once '/app/model/Usuario.php';
 
 use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -23,7 +23,7 @@ class EnvioMensaje
 
     public function __construct()
     {
-        $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+        $dotenv = Dotenv::createImmutable('/app');
         $dotenv->load();
 
         if (session_status() == PHP_SESSION_NONE) {

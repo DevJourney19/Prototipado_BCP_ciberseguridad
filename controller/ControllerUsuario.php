@@ -1,7 +1,7 @@
 <?php
 
-require_once '../dao/DaoUsuario.php';
-require_once '../model/Usuario.php';
+require_once '/app/dao/DaoUsuario.php';
+require_once '/app/model/Usuario.php';
 class ControllerUsuario
 {
     private $daoUsuario;

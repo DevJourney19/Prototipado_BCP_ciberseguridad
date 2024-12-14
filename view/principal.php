@@ -1,6 +1,6 @@
 <?php
-include_once '../controller/ControllerEntradas.php';
-include_once '../controller/ControllerUsuario.php';
+include_once '/app/controller/ControllerEntradas.php';
+include_once '/app/controller/ControllerUsuario.php';
 
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
@@ -18,13 +18,13 @@ if (isset($_SESSION['id_seguridad'])) {
 <html lang="es">
 
 <head>
-    <?php include '../view/fragmentos/head.php' ?>
+    <?php include '/app/view/fragmentos/head.php' ?>
     <title>Principal</title>
 </head>
 
 <body>
     <header>
-        <?php include '../view/fragmentos/nav.php' ?>
+        <?php include '/app/view/fragmentos/nav.php' ?>
     </header>
     <div id="alerta_intruso" class="notificacion close">
         <div class="bcp_alerta">
@@ -112,9 +112,9 @@ if (isset($_SESSION['id_seguridad'])) {
         </div>
     </section>
     <footer>
-        <?php include '../view/fragmentos/menubar.php' ?>
+        <?php include '/app/view/fragmentos/menubar.php' ?>
     </footer>
-    <script src="../view/js/index.js"></script>
+    <script src="/app/view/js/index.js"></script>
 </body>
 
 </html>

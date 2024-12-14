@@ -1,7 +1,7 @@
 <?php
-include_once '../model/Dispositivo.php';
-include_once '../config/Connection.php';
-include_once 'interfaces/DaoInterfaceDispositivo.php';
+include_once '/app/model/Dispositivo.php';
+include_once '/app/config/Connection.php';
+include_once '/app/dao/interfaces/DaoInterfaceDispositivo.php';
 
 class DaoDispositivo implements DaoInterfaceDispositivo
 {

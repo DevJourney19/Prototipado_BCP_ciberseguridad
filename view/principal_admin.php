@@ -1,6 +1,6 @@
 <?php
-include_once '../controller/ControllerEntradas.php';
-include_once '../controller/ControllerUsuario.php';
+include_once '/app/controller/ControllerEntradas.php';
+include_once '/app/controller/ControllerUsuario.php';
 
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
@@ -12,7 +12,7 @@ $usuario = $daoUsuario->obtenerUsuario($_SESSION['id_usuario'], "usuario");
 ?>
 
 <head>
-    <?php include '../view/fragmentos/head.php' ?>
+    <?php include '/app/view/fragmentos/head.php' ?>
     <style>
         .derecha {
             padding-top: 30px;
@@ -86,8 +86,8 @@ $usuario = $daoUsuario->obtenerUsuario($_SESSION['id_usuario'], "usuario");
 
 <body>
     <header>
-        <link href="../view/css/admin.css" rel="stylesheet" />
-        <?php include_once '../view/fragmentos/nav_close_admin.php' ?>
+        <link href="/app/view/css/admin.css" rel="stylesheet" />
+        <?php include_once '/app/view/fragmentos/nav_close_admin.php' ?>
     </header>
 
     <div class="cuadro_superior">
@@ -101,7 +101,7 @@ $usuario = $daoUsuario->obtenerUsuario($_SESSION['id_usuario'], "usuario");
         </div>
 
     </div>
-    <?php include '../view/fragmentos/nav_admin.php' ?>
+    <?php include '/app/view/fragmentos/nav_admin.php' ?>
     <div class="table-container">
         <div class="derecha">
             <span><i class="fa-solid fa-users"></i> Contactos</span>

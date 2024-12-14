@@ -1,11 +1,11 @@
 <?php
-include '../dao/DaoUsuario.php';
-include '../dao/DaoSeguridad.php';
-include '../dao/DaoDispositivo.php';
-include '../dao/DaoHorario.php';
-include '../dao/DaoDireccion.php';
-include 'direccion_ip.php';
-include 'envio_mensaje.php';
+include '/app/dao/DaoUsuario.php';
+include '/app/dao/DaoSeguridad.php';
+include '/app/dao/DaoDispositivo.php';
+include '/app/dao/DaoHorario.php';
+include '/app/dao/DaoDireccion.php';
+include '/app/controller/direccion_ip.php';
+include '/app/controller/envio_mensaje.php';
 
 //Evitar ataque SQL INJECTION
 $tarjeta = filter_input(INPUT_POST, 'tarjeta', FILTER_SANITIZE_NUMBER_INT);
@@ -24,7 +24,7 @@ $daoDireccion = new DaoDireccion();
 try {
     $registro = $daoUsuario->verificarLogin($tarjeta, $dni, $clave_internet);
     if (count($registro) === 1) {
-        echo "Logueado exitosamente";
+
         //USUARIO
         $_SESSION['id_usuario'] = $registro[0]['id_usuario'];
         $id_usuario = $_SESSION['id_usuario'];
@@ -51,7 +51,7 @@ try {
             if (!empty($direccion_ip_deseada) && $_SESSION['direccion_ip'] === $direccion_ip_deseada) {
                 //VERIFICAR SI FUNCIONALIDAD DE BLOQUEO POR HORA ESTA ACTIVADA
                 $horario = $registro2[0]['estado_hora_direccion'];
-                echo "horario: " . $horario;
+
                 if ($horario) {
                     //OBTENER HORARIO DE BLOQUEO
                     $horario_restringido = $daoHorario->obtenerHorariosRestringidos($id_seguridad);
@@ -70,7 +70,7 @@ try {
                                 die();
                             }
                         }
-                        echo "No se encuentra ninguna ubicacion segura";
+
                         // si a la hora de recorrer no se encuentra ninguna ubicacion segura, enviar mensaje y no dejar ingresar
                         if (!$verificar) {
                             //enviar mensaje y no dejar ingresar

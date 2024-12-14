@@ -36,7 +36,7 @@ const controlarFormulario = async (event) => {
 
   console.log(latitud, longitud);
 
-  await fetch("../controller/ControllerVerifySession.php")
+  await fetch("/app/controller/ControllerVerifySession.php")
     .then((response) => response.json())
     .then(async (data) => {
       //Si la sesion esta activa
@@ -44,7 +44,7 @@ const controlarFormulario = async (event) => {
         // obtener el id del usuario
         const userId = data.id;
         // enviar los datos al servidor
-        await fetch("../controller/ControllerActivarSeguridad.php", {
+        await fetch("/app/controller/ControllerActivarSeguridad.php", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

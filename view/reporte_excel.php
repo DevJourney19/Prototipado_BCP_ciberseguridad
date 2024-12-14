@@ -1,7 +1,7 @@
 <?php
-require '../vendor/autoload.php';
-include("../config/Connection.php");
-include_once '../controller/ControllerEstadisticas.php';
+require '/app/vendor/autoload.php';
+include("/app/config/Connection.php");
+include_once '/app/controller/ControllerEstadisticas.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Style\Border;

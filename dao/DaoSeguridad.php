@@ -1,8 +1,8 @@
 <?php
 
-include_once '../model/Seguridad.php';
-include_once '../config/Connection.php';
-include_once 'interfaces/DaoInterfaceSeguridad.php';
+include_once '/app/model/Seguridad.php';
+include_once '/app/config/Connection.php';
+include_once '/app/dao/interfaces/DaoInterfaceSeguridad.php';
 
 class DaoSeguridad implements DaoInterfaceSeguridad
 {

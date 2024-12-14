@@ -1,8 +1,8 @@
 <?php
-include_once '../controller/ControllerEntradas.php';
-include_once '../controller/ControllerSeguridad.php';
-include_once '../controller/ControllerHorario.php';
-include_once '../controller/ControllerDireccion.php';
+include_once '/app/controller/ControllerEntradas.php';
+include_once '/app/controller/ControllerSeguridad.php';
+include_once '/app/controller/ControllerHorario.php';
+include_once '/app/controller/ControllerDireccion.php';
 
 $controllerEntradas = new ControllerEntradas();
 $controllerSeguridad = new ControllerSeguridad();
@@ -31,8 +31,8 @@ $error = null;
 
 <body>
     <header>
-        <?php include 'fragmentos/nav.php'; ?>
-        <?php include 'fragmentos/tabs.php'; ?>
+        <?php include '/app/view/fragmentos/nav.php'; ?>
+        <?php include '/app/view/fragmentos/tabs.php'; ?>
     </header>
 
     <main class="contenedor">
@@ -42,7 +42,7 @@ $error = null;
 
             <?php if (empty($horarios)): ?>
                 <h4>No se han encontrado horarios restringidos. Puedes registrar uno nuevo.</h4>
-                <form action="../controller/ControllerHorario.php?action=registrar" method="POST">
+                <form action="/app/controller/ControllerHorario.php?action=registrar" method="POST">
                     <div class="formulario">
                         <input type="hidden" name="id_seguridad" value="<?= $_SESSION['id_seguridad'] ?>">
                         <div class="grupo-formulario-horario">
@@ -65,7 +65,7 @@ $error = null;
                 </form>
             <?php else: ?>
                 <?php foreach ($horarios as $datos): ?>
-                    <form action="../controller/ControllerHorario.php?action=modificar" method="post">
+                    <form action="/app/controller/ControllerHorario.php?action=modificar" method="post">
                         <div class="formulario">
                             <input type="hidden" name="txtId" value="<?php echo htmlspecialchars($datos['id_hora']); ?>">
                             <div class="grupo-formulario-horario">
@@ -92,7 +92,7 @@ $error = null;
         </div>
 
         <div class="secciones">
-            <form action="../controller/ControllerDireccion.php?action=registrar" method="post">
+            <form action="/app/controller/ControllerDireccion.php?action=registrar" method="post">
                 <div id="avisoError" style="color: red; <?php echo $error ? 'background-color: red;' : ''; ?>">
                     <?php
                     if (isset($_SESSION['mensaje'])) {
@@ -123,8 +123,8 @@ $error = null;
                 <div class="botones">
                     <button id="boton-registrar-direccion" class="boton-naranja" name="btnRegistrarDireccion"
                         type="submit" <?php if ($datosActivados == 0) { ?>disabled<?php } ?>>Guardar</button>
-                    <button <?php if ($datosActivados == 0) { ?>disabled<?php } ?> id="boton-editar-rango" type="button" class="boton-azul"
-                        onclick="window.location.href='ver_direcciones.php'">Ver direcciones</button>
+                    <button <?php if ($datosActivados == 0) { ?>disabled<?php } ?> id="boton-editar-rango" type="button"
+                        class="boton-azul" onclick="window.location.href='ver_direcciones.php'">Ver direcciones</button>
                 </div>
             </form>
         </div>

@@ -1,23 +1,23 @@
 <?php
-include '../dao/DaoUsuario.php';
-include '../dao/DaoHorario.php';
-include '../dao/DaoSeguridad.php';
-include '../dao/DaoDireccion.php';
-include '../dao/DaoDispositivo.php';
-include '../controller/envio_mensaje.php';
-include '../controller/admin_configuracion_correo.php';
+include '/app/dao/DaoUsuario.php';
+include '/app/dao/DaoHorario.php';
+include '/app/dao/DaoSeguridad.php';
+include '/app/dao/DaoDireccion.php';
+include '/app/dao/DaoDispositivo.php';
+include '/app/controller/envio_mensaje.php';
+include '/app/controller/admin_configuracion_correo.php';
 
 $configCorreo = new AdminConfiguracionCorreo();
 $e_correo = $configCorreo->entrada();
 
-require __DIR__ . '/../vendor/autoload.php';
+require '/app/vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\PHPMailer;
 
 header('Content-Type: application/json');
 
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv = Dotenv::createImmutable('/app');
 $dotenv->load();
 
 $mail = new PHPMailer(true);
@@ -41,7 +41,6 @@ $cierre = $configCorreo->cierre($data);
 $response = ['success' => [], 'failed' => []];
 
 if (isset($data['opcion'])) {
-
 
     $daoDireccion = new DaoDireccion();
     $daoSeguridad = new DaoSeguridad();

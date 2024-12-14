@@ -1,7 +1,7 @@
 <?php
-include_once '../controller/ControllerEntradas.php';
-include_once '../controller/ControllerEntradas.php';
-include_once '../controller/ControllerDispositivo.php';
+include_once '/app/controller/ControllerEntradas.php';
+include_once '/app/controller/ControllerEntradas.php';
+include_once '/app/controller/ControllerDispositivo.php';
 $entradas = new ControllerEntradas();
 $dispositivosEnProceso = new ControllerDispositivo();
 $entradas->validarEntrada('index.php');
@@ -17,8 +17,8 @@ if ($listaDisposEnProceso === null or !isset($listaDisposEnProceso)) {
 <html lang="es">
 
 <head>
-    <?php include '../view/fragmentos/head.php' ?>
-    <link href="css/dispositivos.css" rel="stylesheet">
+    <?php include '/app/view/fragmentos/head.php' ?>
+    <link href="/css/dispositivos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -30,7 +30,7 @@ if ($listaDisposEnProceso === null or !isset($listaDisposEnProceso)) {
 
 <body>
     <header>
-        <?php include '../view/fragmentos/nav.php' ?>
+        <?php include '/app/view/fragmentos/nav.php' ?>
         <div id="resultado"></div>
     </header>
 
@@ -97,11 +97,11 @@ if ($listaDisposEnProceso === null or !isset($listaDisposEnProceso)) {
         <a class="botoncito" href="dispositivos.php">Regresar</a>
     </main>
     <footer>
-        <?php include '../view/fragmentos/menubar.php' ?>
+        <?php include '/app/view/fragmentos/menubar.php' ?>
     </footer>
-    <script src="../view/js/index.js"></script>
-    <script src="../view/js/utils.js"></script>
-    <script src="../view/js/dispositivos.js"></script>
+    <script src="/app/view/js/index.js"></script>
+    <script src="/app/view/js/utils.js"></script>
+    <script src="/app/view/js/dispositivos.js"></script>
 </body>
 
 </html>

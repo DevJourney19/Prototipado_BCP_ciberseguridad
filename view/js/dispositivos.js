@@ -35,7 +35,7 @@ const dispositivo_principal = async () => {
 
         if (caja) {
             try {
-                const response = await fetch("../controller/ControllerDispositivo.php?action=acciones", {
+                const response = await fetch("/app/controller/ControllerDispositivo.php?action=acciones", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -85,7 +85,7 @@ async function eliminarCajaSeleccionada() {
             caja.remove(); // Eliminar la caja del DOM
 
             try {
-                const response = await fetch("../controller/ControllerDispositivo.php?action=deleteDispo", {
+                const response = await fetch("/app/controller/ControllerDispositivo.php?action=deleteDispo", {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -121,7 +121,7 @@ async function manejadorBoton() {
             const accion = this.getAttribute('data-accion');
             try {
                 // Realizar la solicitud AJAX usando fetch
-                const response = await fetch('../controller/ControllerDispositivo.php?action=acciones', {
+                const response = await fetch('/app/controller/ControllerDispositivo.php?action=acciones', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',

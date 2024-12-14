@@ -41,7 +41,7 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
     <main>
         <!-- Despues de darle clic en ingresar y los datos sean correctos-->
         <?php if ($error_ubicacion) {
-            include('../view/modals/alerta_dispositivo.php');
+            include('/app/view/modals/alerta_dispositivo.php');
             ?>
         <?php }
         unset($_SESSION['error_ubicacion']);
@@ -53,7 +53,7 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
             <div class="iniciar_sesion">
 
                 <h1>Ingresa a tu banca en línea</h1>
-                <form action="../controller/ControllerUserLogin.php" method="POST" autocomplete="off">
+                <form action="/app/controller/ControllerUserLogin.php" method="POST" autocomplete="off">
                     <div>
                         <input type="text" placeholder="Número de tarjeta de débito o crédito" name="tarjeta"
                             autocomplete="off">
@@ -76,8 +76,8 @@ if (isset($_SESSION['error_ubicacion']) && $_SESSION['error_ubicacion']) {
         </div>
     </main>
 
-    <script src="../view/keyboard/keyboard.js"></script>
-    <script src="../view/js/limite_clave_internet.js"></script>
+    <script src="/app/view/keyboard/keyboard.js"></script>
+    <script src="/app/view/js/limite_clave_internet.js"></script>
 
 </body>
 

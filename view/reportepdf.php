@@ -1,7 +1,7 @@
 <?php
 // session_start();
 // if (!isset($_SESSION['usuario'])) {
-// header("Location:../index.php");
+// header("Location:/../index.php");
 // }else{
 //     if ($_SESSION['usuario']=="ok") {
 //     $nombreUsuario=$_SESSION["nombreUsuario"];
@@ -11,8 +11,8 @@
 ob_start();
 
 // Incluir archivos necesarios para la conexión y el controlador
-include("../config/Connection.php");
-include_once '../controller/ControllerEstadisticas.php';
+include("/app/config/Connection.php");
+include_once '/app/controller/ControllerEstadisticas.php';
 
 // Conexión a la base de datos
 $conexion = new Connection();
@@ -72,10 +72,11 @@ $mensaje = "No se encontraron resultados.";
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <link rel="stylesheet"
         href="http://<?php echo $_SERVER['HTTP_HOST']; ?>/Prototipado_BCP_ciberseguridad/view/css/tablapdf.css">
-    <?php include '../view/fragmentos/head.php'; ?>
+    <?php include '/app/view/fragmentos/head.php'; ?>
     <title>Reporte</title>
     <?php date_default_timezone_set('America/Lima'); ?>
 </head>
+
 <body>
     <div class="imagenLogo">
         <div>
@@ -248,7 +249,7 @@ $mensaje = "No se encontraron resultados.";
 <?php
 $html = ob_get_clean();
 // echo $html;
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once '/app/vendor/autoload.php';
 use Dompdf\Dompdf;
 $dompdf = new Dompdf();
 $options = $dompdf->getOptions();

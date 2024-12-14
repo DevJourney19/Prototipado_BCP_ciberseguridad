@@ -1,5 +1,5 @@
 <?php
-require_once '../dao/DaoDispositivo.php';
+require_once '/app/dao/DaoDispositivo.php';
 session_start();
 
 $controller = new ControllerCloseSession();

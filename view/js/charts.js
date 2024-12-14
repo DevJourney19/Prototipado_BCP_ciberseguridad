@@ -1,10 +1,9 @@
 const getDataSatisfaccion = async () => {
   const date = new Date();
   const mesSelect = document.getElementById("satisfaccion-mes");
-const mes = mesSelect ? mesSelect.value : (new Date().getMonth() + 1);
+  const mes = mesSelect ? mesSelect.value : (new Date().getMonth() + 1);
   const response = await fetch(
-    `../controller/ControllerEstadisticas.php?action=emocion&mes=${
-      mes}&anio=${date.getFullYear()}`
+    `/app/controller/ControllerEstadisticas.php?action=emocion&mes=${mes}&anio=${date.getFullYear()}`
   );
   const data = await response.json();
   return data;
@@ -183,8 +182,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 const getGanacias = async () => {
   const date = new Date();
   const response = await fetch(
-    `../controller/ControllerEstadisticas.php?action=ganancias&mes=${
-      date.getMonth() + 1
+    `/app/controller/ControllerEstadisticas.php?action=ganancias&mes=${date.getMonth() + 1
     }&anio=${date.getFullYear()}`
   );
   const data = await response.json();
@@ -238,7 +236,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 const getReportes = async (year) => {
   const response = await fetch(
-    `../controller/ControllerEstadisticas.php?action=reportes&anio=${year}`
+    `/app/controller/ControllerEstadisticas.php?action=reportes&anio=${year}`
   );
   const data = await response.json();
   return data;

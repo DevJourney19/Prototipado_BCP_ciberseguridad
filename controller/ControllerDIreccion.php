@@ -1,8 +1,8 @@
 <?php
 
-require_once '../dao/DaoDireccion.php';
-require_once '../dao/DaoSeguridad.php';
-include_once '../controller/ControllerEntradas.php';
+require_once '/app/dao/DaoDireccion.php';
+require_once '/app/dao/DaoSeguridad.php';
+include_once '/app/controller/ControllerEntradas.php';
 
 class ControllerDireccion
 {

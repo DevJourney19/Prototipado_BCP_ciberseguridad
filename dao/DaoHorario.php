@@ -2,19 +2,20 @@
 // Habilitar la visualización de errores
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include_once '../config/Connection.php';
-include_once 'interfaces/DaoInterfaceHorario.php';
-// include_once '/DaoSeguridad.php';
+include_once '/app/config/Connection.php';
+include_once '/app/dao/interfaces/DaoInterfaceHorario.php';
 
-
-class DaoHorario implements DaoInterfaceHorario {
+class DaoHorario implements DaoInterfaceHorario
+{
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new Connection();
     }
 
-    public function registrarHorario($idSeguridad, $horaInicio, $horaFin) {
+    public function registrarHorario($idSeguridad, $horaInicio, $horaFin)
+    {
         try {
             $query = "INSERT INTO hora_restringida (id_seguridad, hora_inicio, hora_final, created_at, updated_at) 
                       VALUES (:idSeguridad, :horaInicio, :horaFin, NOW(), NOW())";
@@ -30,7 +31,8 @@ class DaoHorario implements DaoInterfaceHorario {
         }
     }
 
-    public function obtenerHorariosRestringidos($idSeguridad) {
+    public function obtenerHorariosRestringidos($idSeguridad)
+    {
         try {
             $query = "SELECT * FROM hora_restringida WHERE id_seguridad = :idSeguridad AND DATE(CREATED_AT) = CURDATE()";
             return $this->db->consultar($query, ['idSeguridad' => $idSeguridad]);
@@ -39,7 +41,8 @@ class DaoHorario implements DaoInterfaceHorario {
             return [];
         }
     }
-    public function obtenerTodosLosHorarios() {
+    public function obtenerTodosLosHorarios()
+    {
         try {
             $query = "SELECT * FROM hora_restringida";
             return $this->db->consultar($query);
@@ -49,7 +52,8 @@ class DaoHorario implements DaoInterfaceHorario {
         }
     }
 
-    public function modificarHorario($id, $idSeguridad, $horaInicio, $horaFin, $fecha) {
+    public function modificarHorario($id, $idSeguridad, $horaInicio, $horaFin, $fecha)
+    {
         try {
             $query = "UPDATE hora_restringida SET id_seguridad = :idSeguridad, hora_inicio = :horaInicio, 
                       hora_final = :horaFin, updated_at = NOW() WHERE id_hora = :id";
@@ -65,7 +69,8 @@ class DaoHorario implements DaoInterfaceHorario {
         }
     }
 
-    public function eliminarHorario($id) {
+    public function eliminarHorario($id)
+    {
         try {
             $query = "DELETE FROM hora_restringida WHERE id_hora = :id";
             return $this->db->ejecutar($query, ['id' => $id]);

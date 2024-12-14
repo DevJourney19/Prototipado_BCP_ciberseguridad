@@ -1,6 +1,6 @@
 <?php
-include_once '../controller/ControllerEntradas.php';
-include_once '../controller/ControllerSeguridad.php';
+include_once '/app/controller/ControllerEntradas.php';
+include_once '/app/controller/ControllerSeguridad.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 ?>
@@ -9,13 +9,13 @@ $entradas->validarEntrada('index.php');
 <html lang="es">
 
 <head>
-  <?php include '../view/fragmentos/head.php' ?>
+  <?php include '/app/view/fragmentos/head.php' ?>
   <title>Configuración</title>
 </head>
 
 <body>
   <header>
-    <?php include '../view/fragmentos/nav.php' ?>
+    <?php include '/app/view/fragmentos/nav.php' ?>
     <div class="head-config">
       <h2>Configuración</h2>
     </div>
@@ -33,23 +33,28 @@ $entradas->validarEntrada('index.php');
           <div class="config options">
             <div>
               <input type="radio" name="emotion" value="Muy insatisfecho" id="muyInsatisfecho">
-              <label for="muyInsatisfecho"><span><i class="fa-regular fa-face-tired" style="color: red;"></i></span>Muy insatisfecho</label>
+              <label for="muyInsatisfecho"><span><i class="fa-regular fa-face-tired" style="color: red;"></i></span>Muy
+                insatisfecho</label>
             </div>
             <div>
               <input type="radio" name="emotion" value="Insatisfecho" id="insatisfecho">
-              <label for="insatisfecho"><span><i class="fa-regular fa-face-frown-open" style="color: orange;"></i></span>Insatisfecho</label>
+              <label for="insatisfecho"><span><i class="fa-regular fa-face-frown-open"
+                    style="color: orange;"></i></span>Insatisfecho</label>
             </div>
             <div>
               <input type="radio" name="emotion" value="Neutral" id="neutral">
-              <label for="neutral"><span><i class="fa-regular fa-face-meh" style="color: #dbca00;"></i></span>Neutral</label>
+              <label for="neutral"><span><i class="fa-regular fa-face-meh"
+                    style="color: #dbca00;"></i></span>Neutral</label>
             </div>
             <div>
               <input type="radio" name="emotion" value="Satisfecho" id="satisfecho">
-              <label for="satisfecho"><span><i class="fa-regular fa-face-smile" style="color: #3aca00;"></i></span>Satisfecho</label>
+              <label for="satisfecho"><span><i class="fa-regular fa-face-smile"
+                    style="color: #3aca00;"></i></span>Satisfecho</label>
             </div>
             <div>
               <input type="radio" name="emotion" value="Muy satisfecho" id="muySatisfecho" checked>
-              <label for="muySatisfecho"><span><i class="fa-regular fa-face-grin-hearts" style="color: #175200;"></i></span>Muy satisfecho</label>
+              <label for="muySatisfecho"><span><i class="fa-regular fa-face-grin-hearts"
+                    style="color: #175200;"></i></span>Muy satisfecho</label>
             </div>
           </div>
           <div class="config button_modal">
@@ -78,17 +83,20 @@ $entradas->validarEntrada('index.php');
                 </div>
                 <div>
                   <input type="radio" name="reporte" value="Sospecha" id="sospecha">
-                  <label for="sospecha"><span><i class="fa-solid fa-exclamation" style="color: orange;"></i></span>Sospecha</label>
+                  <label for="sospecha"><span><i class="fa-solid fa-exclamation"
+                        style="color: orange;"></i></span>Sospecha</label>
                 </div>
                 <div>
                   <input type="radio" name="reporte" value="Otro" id="otro">
-                  <label for="otro"><span><i class="fa-solid fa-question" style="color: #dbca00;"></i></span>Otro</label>
+                  <label for="otro"><span><i class="fa-solid fa-question"
+                        style="color: #dbca00;"></i></span>Otro</label>
                 </div>
               </div>
             </div>
             <div class="form_report">
               <input type="text" name="titulo" placeholder="Ingresa el asunto">
-              <textarea rows="5" name="descripcion" id="descripcion" placeholder="Ingresa la descripcion de lo sucedido"></textarea>
+              <textarea rows="5" name="descripcion" id="descripcion"
+                placeholder="Ingresa la descripcion de lo sucedido"></textarea>
             </div>
           </div>
           <div class="config button_modal">
@@ -160,9 +168,9 @@ $entradas->validarEntrada('index.php');
     <?php } ?>
   </section>
   <footer>
-    <?php include '../view/fragmentos/menubar.php' ?>
+    <?php include '/app/view/fragmentos/menubar.php' ?>
   </footer>
-  <script src="../view/js/index.js"></script>
+  <script src="/app/view/js/index.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const modal = document.querySelector('#modal');
@@ -187,12 +195,12 @@ $entradas->validarEntrada('index.php');
       const boton = document.querySelector('#envioEmocion');
       boton.addEventListener('click', async () => {
         const estado = document.querySelector('input[name="emotion"]:checked').value;
-        await fetch("../controller/ControllerEmocion.php", {
-            method: "POST",
-            body: JSON.stringify({
-              estado: estado
-            }),
-          })
+        await fetch("/app/controller/ControllerEmocion.php", {
+          method: "POST",
+          body: JSON.stringify({
+            estado: estado
+          }),
+        })
           .then((response) => response.json())
           .then((data) => {
             console.log("Resultado:", data);
@@ -207,20 +215,20 @@ $entradas->validarEntrada('index.php');
             console.error("Error al enviar los datos:", error);
           });
       })
-      
+
       const boton2 = document.querySelector('#envioReporte');
       boton2.addEventListener('click', async () => {
         const tipo = document.querySelector('input[name="reporte"]:checked').value;
         const titulo = document.querySelector('input[name="titulo"]').value;
         const descripcion = document.querySelector('textarea[name="descripcion"]').value;
-        await fetch("../controller/ControllerReportes.php?action=registrar", {
-            method: "POST",
-            body: JSON.stringify({
-              tipo: tipo,
-              titulo: titulo,
-              descripcion: descripcion
-            }),
-          })
+        await fetch("/app/controller/ControllerReportes.php?action=registrar", {
+          method: "POST",
+          body: JSON.stringify({
+            tipo: tipo,
+            titulo: titulo,
+            descripcion: descripcion
+          }),
+        })
           .then((response) => response.json())
           .then((data) => {
             console.log("Resultado:", data);

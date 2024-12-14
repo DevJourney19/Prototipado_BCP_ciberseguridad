@@ -93,10 +93,10 @@ function verificarUbicacionSegura($latDispositivo, $lonDispositivo, $latDireccio
 {
     $distancia = calcularDistancia($latDispositivo, $lonDispositivo, $latDireccion, $lonDireccion);
     if ($distancia <= $rango) { 
-        echo "El dispositivo está dentro del rango permitido.";
+        
         return true;
     } else {
-        echo "El dispositivo está fuera del rango permitido.";
+        
         return false;
     }
 }
