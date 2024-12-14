@@ -3,15 +3,7 @@
         'name' => 'danie/prototipado_bcp_ciberseguridad',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-<<<<<<< HEAD
-<<<<<<< HEAD
-        'reference' => '5816950e805d447cfe9d300a24e39689c70bc901',
-=======
-        'reference' => '6d8268779119ee0b731e49248a49c55190ee5cfd',
->>>>>>> 73c87be9ad04ec102c9ad64713d6930bde9330cc
-=======
-        'reference' => '9c2104dcf775b0b95d36754e488b45c69d837b52',
->>>>>>> e2de0c2db029c76a8facc27fbe3f0b9c3d9eddcf
+        'reference' => 'cf4160ad239407053d8d254dda44ce67d842ffd1',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -21,15 +13,7 @@
         'danie/prototipado_bcp_ciberseguridad' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-<<<<<<< HEAD
-<<<<<<< HEAD
-            'reference' => '5816950e805d447cfe9d300a24e39689c70bc901',
-=======
-            'reference' => '6d8268779119ee0b731e49248a49c55190ee5cfd',
->>>>>>> 73c87be9ad04ec102c9ad64713d6930bde9330cc
-=======
-            'reference' => '9c2104dcf775b0b95d36754e488b45c69d837b52',
->>>>>>> e2de0c2db029c76a8facc27fbe3f0b9c3d9eddcf
+            'reference' => 'cf4160ad239407053d8d254dda44ce67d842ffd1',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
