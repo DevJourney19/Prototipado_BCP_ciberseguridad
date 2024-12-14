@@ -128,9 +128,9 @@ function obtenerIdUsuariosServicioActivado() {
 async function enviarCorreo(event) {
     event.preventDefault();
     let nombre = document.getElementById("admin_nombre").dataset.value;
-    console.log(nombre);
+
     let correos = obtenerCorreosSeleccionados();
-    console.log(correos);
+
 
     let opcion = event.target.getAttribute("data-opcion");
 
@@ -153,14 +153,12 @@ async function enviarCorreo(event) {
 
     icono_carga.classList.remove('fa-solid', 'fa-spinner', 'fa-spin', 'fa-xl');
     const data = await response.json();
-    console.log(data);
-    console.log("Correos es " + correos);
+
     if (data.success && data.success.length > 0) {
         alert("Operación exitosa");
     } else {
         alert("Operación fallida");
     }
-
     document.getElementById('customModal').style.display = 'none';
 }
 
@@ -170,20 +168,18 @@ let opcionn = document.querySelectorAll("[data-especifico]");
 
 opcionn.forEach(t => {
     t.addEventListener("click", async function (event) {
-        console.log("helloo ;)");
+
         let opcion = event.target.getAttribute("data-especifico");
         let correos = obtenerCorreosSeleccionados();
         let nombre = document.getElementById("admin_nombre").dataset.value;
         let ids = obtenerIdUsuariosServicioActivado();
-        console.log(ids);
-
         let posicion_icono = document.querySelector(".msg_especifico_correo");
         let icono_carga = document.createElement("div");
         icono_carga.classList.add('fa-solid', 'fa-spinner', 'fa-spin', 'fa-xl', 'icono_cargando');
 
         posicion_icono.appendChild(icono_carga);
 
-        let response = await fetch("../controller/admin_proceso_env_especific_correo.php", {
+        let response = await fetch("/app/controller/admin_proceso_env_especific_correo.php", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
@@ -200,14 +196,12 @@ opcionn.forEach(t => {
         //el response.text() puede generar que de el alert de operación fallida
         icono_carga.classList.remove('fa-solid', 'fa-spinner', 'fa-spin', 'fa-xl');
         const data = await response.json();
-        console.log(data);
-        console.log("Los correos son: " + correos);
+
         if (data.success && data.success.length > 0) {
             alert("Operación exitosa");
         } else {
             alert("Operación fallida");
         }
-
 
     });
 });

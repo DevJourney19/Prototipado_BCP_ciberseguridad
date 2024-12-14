@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once '../dao/DaoDispositivo.php';
-require_once '../dao/DaoUsuario.php';
-require_once '../dao/DaoSeguridad.php';
-require_once '../model/Dispositivo.php';
+require_once '/app/dao/DaoDispositivo.php';
+require_once '/app/dao/DaoUsuario.php';
+require_once '/app/dao/DaoSeguridad.php';
+require_once '/app/model/Dispositivo.php';
 class ControllerDispositivo
 {
     private $daoUsuario;
@@ -13,7 +13,7 @@ class ControllerDispositivo
         $this->daoUsuario = new DaoUsuario();
         $this->daoDispositivo = new DaoDispositivo();
     }
-    
+
     public function crearDispositivo()//JSON
     {
         header('Content-Type: application/json');
@@ -124,7 +124,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'getUsuario' && isset($_GET['c
     // si el dispotivio no existe crear otro
     if (isset($_SESSION['noExiste']) && $_SESSION['noExiste'] === true) {
         $controller->crearDispositivo();
-    }else{
+    } else {
         echo json_encode(['mensaje' => 'No cambio']);
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
 header('Content-Type: application/json');
-include_once '../dao/DaoUsuario.php';
-include_once '../model/Usuario.php';
+include_once '/app/dao/DaoUsuario.php';
+include_once '/app/model/Usuario.php';
 session_start();
-require __DIR__ . '/../vendor/autoload.php';
+require '/app/vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -14,7 +14,7 @@ use Infobip\Model\SmsDestination;
 use Infobip\Model\SmsTextualMessage;
 use Infobip\Model\SmsAdvancedTextualRequest;
 
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv = Dotenv::createImmutable('/app');
 $dotenv->load();
 
 try {
@@ -66,7 +66,7 @@ try {
   $mail->Body = 'Alguien está tratando de ingresar a tu cuenta!<br>El código de verificación es: ' . $codigo . '<br>Si no fuiste tú, por favor contacta a soporte técnico e ignora este mensaje.';
 
   $mail->send();
-  
+
   $base_url = $_ENV['URL'];
   $api_key = $_ENV['API_KEY'];
 

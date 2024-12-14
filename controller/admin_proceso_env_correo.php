@@ -1,13 +1,13 @@
 <?php
 session_start();
-require __DIR__ . '/../vendor/autoload.php';
+require '/app/vendor/autoload.php';
 
 use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\PHPMailer;
 
 header('Content-Type: application/json');
 
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv = Dotenv::createImmutable('/app');
 $dotenv->load();
 
 $mail = new PHPMailer(true);

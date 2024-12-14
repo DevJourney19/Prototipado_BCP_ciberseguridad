@@ -1,5 +1,5 @@
-<?php include_once '../controller/ControllerEntradas.php';
-include_once '../controller/ControllerUsuario.php';
+<?php include_once '/app/controller/ControllerEntradas.php';
+include_once '/app/controller/ControllerUsuario.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('login_admin.php');
 
@@ -18,15 +18,15 @@ $count = 0;
 <html lang="es">
 
 <head>
-    <?php include '../view/fragmentos/head.php' ?>
-    <link href="../view/css/admin.css" rel="stylesheet" />
+    <?php include '/app/view/fragmentos/head.php' ?>
+    <link href="/app/view/css/admin.css" rel="stylesheet" />
     <title>Enviar correos - Admin</title>
 </head>
 
 <body class="body_dashboard" style="background: white;">
     <header>
-        <?php include_once '../view/fragmentos/nav_close_admin.php' ?>
-        <?php include_once '../view/fragmentos/nav_admin.php' ?>
+        <?php include_once '/app/view/fragmentos/nav_close_admin.php' ?>
+        <?php include_once '/app/view/fragmentos/nav_admin.php' ?>
     </header>
 
     <main class="main_dashboard" style="
@@ -71,7 +71,7 @@ $count = 0;
                                 <td><?= $user->getNombre(); ?></td>
                                 <td><?= $user->getCorreo(); ?></td>
                             </tr>
-                    <?php }
+                        <?php }
                     } ?>
                 </tbody>
             </table>
@@ -115,7 +115,7 @@ $count = 0;
                 <div class="mensaje_predeterminado">
                     <h2>Consejos</h2>
                     <div class="image-container" onclick="showFullscreen(event)">
-                        <img src="../view/img/img_cb_1.jpg" alt="img_1" style="width:100%">
+                        <img src="/app/view/img/img_cb_1.jpg" alt="img_1" style="width:100%">
                     </div>
                     <button type="submit" style="background: #ff7900;color:white" onclick="enviarCorreo(event)"
                         data-opcion="1">Enviar</button>
@@ -123,7 +123,7 @@ $count = 0;
                 <div class="mensaje_predeterminado">
                     <h2>Novedades</h2>
                     <div class="image-container" onclick="showFullscreen(event)">
-                        <img src="../view/img/img_cb_2.jpg" alt="img_2" style="width:100%">
+                        <img src="/app/view/img/img_cb_2.jpg" alt="img_2" style="width:100%">
                     </div>
                     <button type="submit" style="background: #ff7900;color:white" onclick="enviarCorreo(event)"
                         data-opcion="2">Enviar</button>
@@ -131,7 +131,7 @@ $count = 0;
                 <div class="mensaje_predeterminado">
                     <h2>Recordatorio</h2>
                     <div class="image-container" onclick="showFullscreen(event)">
-                        <img src="../view/img/img_cb_3.jpg" alt="img_3" style="width:100%">
+                        <img src="/app/view/img/img_cb_3.jpg" alt="img_3" style="width:100%">
                     </div>
                     <button type="submit" style="background: #ff7900;color:white" onclick="enviarCorreo(event) "
                         data-opcion="3">Enviar</button>
@@ -144,7 +144,7 @@ $count = 0;
             </div>
         </div>
     </div>
-    <script src="../view/js/admin_correo.js"></script>
+    <script src="/app/view/js/admin_correo.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 <?php
 
 header('Content-Type: application/json');
-include '../dao/DaoSeguridad.php';
+include '/app/dao/DaoSeguridad.php';
 session_start();
 
 try {

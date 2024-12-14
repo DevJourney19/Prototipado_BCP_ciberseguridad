@@ -1,6 +1,6 @@
 <?php
 
-require_once '../dao/DaoEntrada.php';
+require_once '/app/dao/DaoEntrada.php';
 
 class ControllerEntradas
 {

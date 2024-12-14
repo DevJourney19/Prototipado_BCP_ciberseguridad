@@ -1,7 +1,7 @@
 <?php
 
-include_once '../dao/DaoEmocion.php';
-include_once '../model/Emocion.php';
+include_once '/app/dao/DaoEmocion.php';
+include_once '/app/model/Emocion.php';
 header('Content-Type: application/json');
 session_start();
 
@@ -16,9 +16,9 @@ try {
   $emocion->setTipoEmocion($estado);
   $result = $daoEmocion->guardarResultado($emocion);
   if ($result) {
-      $response = ['status' => 'registrado'];
+    $response = ['status' => 'registrado'];
   } else {
-      $response = ['status' => 'no registrado'];
+    $response = ['status' => 'no registrado'];
   }
 } catch (Exception $e) {
   $response = ['status' => 'error', 'message' => $e->getMessage()];

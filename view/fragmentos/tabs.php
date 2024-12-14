@@ -1,6 +1,6 @@
 <?php
 
-include_once '../controller/ControllerSeguridad.php';
+include_once '/app/controller/ControllerSeguridad.php';
 
 $controllerSeguridad = new ControllerSeguridad();
 

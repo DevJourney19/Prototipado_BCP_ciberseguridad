@@ -1,7 +1,7 @@
 <?php
 
-include_once '../controller/ControllerEntradas.php';
-include_once '../controller/ControllerDispositivo.php';
+include_once '/app/controller/ControllerEntradas.php';
+include_once '/app/controller/ControllerDispositivo.php';
 $entradas = new ControllerEntradas();
 $dispositivoCtler = new ControllerDispositivo();
 $entradas->validarEntrada('index.php');
@@ -25,7 +25,7 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
 <html lang="es">
 
 <head>
-    <?php include_once '../view/fragmentos/head.php' ?>
+    <?php include_once '/app/view/fragmentos/head.php' ?>
     <link href="css/dispositivos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,8 +38,8 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
 
 <body>
     <header>
-        <?php include_once '../view/fragmentos/nav.php' ?>
-        <?php include_once '../view/fragmentos/tabs.php' ?>
+        <?php include_once '/app/view/fragmentos/nav.php' ?>
+        <?php include_once '/app/view/fragmentos/tabs.php' ?>
     </header>
 
     <main>
@@ -80,34 +80,34 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
                                         case 'Ordenador de escritorio': ?>
                                             <img src="img/computadora.png" alt="Imagen de celular">
 
-                                        <?php break;
+                                            <?php break;
                                         case 'Portátil': ?>
                                             <img src="img/icono_portatil.png" alt="Imagen de portátil">
-                                        <?php break;
+                                            <?php break;
 
                                         case 'Tableta': ?>
                                             <img src="img/icono_tableta.png" alt="Imagen de tableta">
-                                        <?php break;
+                                            <?php break;
 
                                         case 'Teléfono móvil': ?>
                                             <img src="img/icono_cel.png" alt="Imagen de teléfono móvil">
-                                        <?php break;
+                                            <?php break;
 
                                         case 'Smartwatch': ?>
                                             <img src="img/icono_smartwatch.png" alt="Imagen de smartwatch">
-                                        <?php break;
+                                            <?php break;
 
                                         case 'Televisor inteligente': ?>
                                             <img src="img/icono_televisor.png" alt="Imagen de televisor inteligente">
-                                        <?php break;
+                                            <?php break;
 
                                         case 'Consola de videojuegos': ?>
                                             <img src="img/icono_consola.png" alt="Imagen de consola de videojuegos">
-                                        <?php break;
+                                            <?php break;
 
                                         case 'Dispositivo IoT': ?>
                                             <img src="img/icono_iot.png" alt="Imagen de dispositivo IoT">
-                                        <?php break;
+                                            <?php break;
 
                                         default: ?>
                                             <p>Tipo de dispositivo no reconocido.</p>
@@ -117,12 +117,12 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
                                 <div class="seccion">
                                     <div class="titulo-caja">
                                         <h4 <?php if ($dispo['estado_dispositivo'] === "principal") { ?>
-                                            style="color: darkorange; font-weight: 800;<?php } else { ?> style=" color: #001843;
-                                            font-weight: 600;<?php } ?> ">
-                                            <?= $dispo['tipo_dispositivo'] ?>
-                                            </h4>
-                                        </div>
-                                        <div class="descripcion-caja">
+                                                style="color: darkorange; font-weight: 800;<?php } else { ?> style=" color: #001843;
+                                                font-weight: 600;<?php } ?> ">
+                                                        <?= $dispo['tipo_dispositivo'] ?>
+                                                        </h4>
+                                                    </div>
+                                                    <div class=" descripcion-caja">
                                             <p>
                                                 Lugar: <?= $dispo['ciudad'] ?>- <?= $dispo['pais'] ?>
                                                 <br />
@@ -139,7 +139,7 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
                                 <label for="<?= $dispo['id_dispositivo'] ?>"><span class="radio-button"></span></label>
                             </div>
                         </div>
-            <?php }
+                    <?php }
                 }
             } ?>
         </div>
@@ -162,7 +162,7 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
 
     </main>
     <footer>
-        <?php include_once '../view/fragmentos/menubar.php' ?>
+        <?php include_once '/app/view/fragmentos/menubar.php' ?>
     </footer>
     <dialog class="dispositivo-vinculados" id="vinculo">
         <div class="imagen">
@@ -198,9 +198,9 @@ if ($listaDispositivos === null or !isset($listaDispositivos)) {
             </div>
         </div>
     </dialog>
-    <script src="../view/js/index.js"></script>
-    <script src="../view/js/utils.js"></script>
-    <script src="js/dispositivos.js"></script>
+    <script src="/app/view/js/index.js"></script>
+    <script src="/app/view/js/utils.js"></script>
+    <script src="/app/view/js/dispositivos.js"></script>
 </body>
 
 </html>

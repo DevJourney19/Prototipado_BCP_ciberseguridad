@@ -1,6 +1,6 @@
 <?php
 
-include_once '../dao/DaoDashboard.php';
+include_once '/app/dao/DaoDashboard.php';
 
 class ControllerEstadisticas
 {

@@ -1,7 +1,7 @@
 <?php
 
-include_once '../config/Connection.php';
-include_once 'interfaces/DaoInterfaceEntrada.php';
+include_once '/app/config/Connection.php';
+include_once '/app/dao/interfaces/DaoInterfaceEntrada.php';
 
 class DaoEntrada implements DaoInterfaceEntrada
 {

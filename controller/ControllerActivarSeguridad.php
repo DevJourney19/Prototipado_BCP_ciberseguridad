@@ -1,12 +1,12 @@
 <?php
 session_start();
 header('Content-Type: application/json');
-include_once '../dao/DaoSeguridad.php';
-include_once '../dao/DaoDispositivo.php';
-include_once '../model/Dispositivo.php';
-include_once '../model/Usuario.php';
-include_once '../dao/DaoUsuario.php';
-include 'direccion_ip.php';
+include_once '/app/dao/DaoSeguridad.php';
+include_once '/app/dao/DaoDispositivo.php';
+include_once '/app/model/Dispositivo.php';
+include_once '/app/model/Usuario.php';
+include_once '/app/dao/DaoUsuario.php';
+include '/app/controller/direccion_ip.php';
 
 header('Content-Type: application/json');
 $data = json_decode(file_get_contents('php://input'), true);

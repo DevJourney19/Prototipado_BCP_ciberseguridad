@@ -4,8 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 
-include_once '../config/Connection.php';
-include_once 'interfaces/DaoInterfaceDireccion.php';
+include_once '/app/config/Connection.php';
+include_once '/app/dao/interfaces/DaoInterfaceDireccion.php';
 
 class DaoDireccion implements DaoInterfaceDireccion
 {

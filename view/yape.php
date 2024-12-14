@@ -1,6 +1,6 @@
 <?php
 
-include_once '../controller/ControllerEntradas.php';
+include_once '/app/controller/ControllerEntradas.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
@@ -11,7 +11,7 @@ $estado = $entradas->validarYape('principal.php', $_SESSION['id_seguridad']);
 <html lang="es">
 
 <head>
-    <?php include '../view/fragmentos/head.php' ?>
+    <?php include '/app/view/fragmentos/head.php' ?>
     <title>Simulación de Yapeo</title>
 </head>
 

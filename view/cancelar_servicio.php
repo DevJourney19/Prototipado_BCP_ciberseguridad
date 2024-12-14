@@ -1,6 +1,6 @@
 <?php
-include_once '../controller/ControllerEntradas.php';
-include_once '../controller/ControllerSeguridad.php';
+include_once '/app/controller/ControllerEntradas.php';
+include_once '/app/controller/ControllerSeguridad.php';
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
 $entradas->validarServicio('principal.php', $_SESSION['id_seguridad']);
@@ -13,15 +13,15 @@ $datos2 = $seguridad->verificarSeguridad($_SESSION['id_usuario'])[0];
 <html lang="es">
 
 <head>
-  <?php include_once '../view/fragmentos/head.php' ?>
+  <?php include_once '/app/view/fragmentos/head.php' ?>
   <title>Cancelar Servicio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 
 <body>
   <header>
-    <?php include_once '../view/fragmentos/nav.php' ?>
-    <?php include_once '../view/fragmentos/tabs.php' ?>
+    <?php include_once '/app/view/fragmentos/nav.php' ?>
+    <?php include_once '/app/view/fragmentos/tabs.php' ?>
   </header>
   <main class="contenedor-cancelar">
     <div>
@@ -47,14 +47,14 @@ $datos2 = $seguridad->verificarSeguridad($_SESSION['id_usuario'])[0];
   </main>
 
   <footer>
-    <?php include_once '../view/fragmentos/menubar.php' ?>
+    <?php include_once '/app/view/fragmentos/menubar.php' ?>
   </footer>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const boton = document.querySelector('#cancelarSubscripcion');
       const estado = <?php echo $datos2["activacion_seguridad"] ? 'false' : 'true' ?>;
       boton.addEventListener('click', async () => {
-        await fetch("../controller/ControllerEstadoFunciones.php", {
+        await fetch("/app/controller/ControllerEstadoFunciones.php", {
           method: "POST",
           body: JSON.stringify({
             estado: estado,
@@ -74,8 +74,8 @@ $datos2 = $seguridad->verificarSeguridad($_SESSION['id_usuario'])[0];
       })
     })
   </script>
-  <script src="../view/js/utils.js"></script>
-  <script src="../view/js/index.js"></script>
+  <script src="/app/view/js/utils.js"></script>
+  <script src="/app/view/js/index.js"></script>
 </body>
 
 </html>

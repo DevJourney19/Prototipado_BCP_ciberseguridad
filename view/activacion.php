@@ -1,6 +1,6 @@
 <?php
-include_once '../controller/ControllerEntradas.php';
-include_once '../controller/ControllerSeguridad.php';
+include_once '/app/controller/ControllerEntradas.php';
+include_once '/app/controller/ControllerSeguridad.php';
 
 $entradas = new ControllerEntradas();
 $seguridad = new ControllerSeguridad();
@@ -14,13 +14,13 @@ $datos = $seguridad->verificarSeguridad($_SESSION['id_usuario']);
 <html lang="es">
 
 <head>
-    <?php include '../view/fragmentos/head.php' ?>
+    <?php include '/app/view/fragmentos/head.php' ?>
     <title>Activacion</title>
 </head>
 
 <body>
     <header>
-        <?php include '../view/fragmentos/nav.php' ?>
+        <?php include '/app/view/fragmentos/nav.php' ?>
     </header>
     <div id="alerta_exito_activacion" class="notificacion close">
         <i class="fa-solid fa-circle-check" style="color: #63E6BE;"></i>
@@ -72,12 +72,10 @@ $datos = $seguridad->verificarSeguridad($_SESSION['id_usuario']);
         </div>
     </main>
     <footer>
-        <?php include '../view/fragmentos/menubar.php' ?>
+        <?php include '/app/view/fragmentos/menubar.php' ?>
     </footer>
-    <script src="../view/js/index.js"></script>
-    <script src="../view/js/utils.js"></script>
-
+    <script src="/app/view/js/index.js"></script>
+    <script src="/app/view/js/utils.js"></script>
 </body>
-
 
 </html>

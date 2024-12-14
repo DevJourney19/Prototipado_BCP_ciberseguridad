@@ -1,6 +1,6 @@
 <?php
 
-require_once '../dao/DaoSeguridad.php';
+require_once '/app/dao/DaoSeguridad.php';
 
 class ControllerSeguridad
 {

@@ -1,7 +1,7 @@
 <?php
 
-include_once '../dao/DaoReporte.php';
-include_once '../model/Reporte.php';
+include_once '/app/dao/DaoReporte.php';
+include_once '/app/model/Reporte.php';
 header('Content-Type: application/json');
 session_start();
 
@@ -29,9 +29,9 @@ class ControllerReportes
     $result = $this->daoReportes->insertarReporte($this->reporte);
     if ($result) {
       $response = ['status' => 'registrado'];
-  } else {
+    } else {
       $response = ['status' => 'no registrado'];
-  }
+    }
     return $response;
   }
 }

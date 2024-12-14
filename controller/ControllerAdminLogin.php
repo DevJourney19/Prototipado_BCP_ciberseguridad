@@ -1,6 +1,6 @@
 <?php
-include '../dao/DaoUsuario.php';
-include '../dao/DaoSeguridad.php';
+include '/app/dao/DaoUsuario.php';
+include '/app/dao/DaoSeguridad.php';
 //Evitar ataque SQL INJECTION
 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 $nombre = filter_input(INPUT_POST, 'nombre', FILTER_SANITIZE_SPECIAL_CHARS);

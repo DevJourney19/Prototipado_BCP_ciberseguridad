@@ -1,7 +1,7 @@
 <?php
 
-include_once '../controller/ControllerEntradas.php';
-include_once '../controller/ControllerDireccion.php';
+include_once '/app/controller/ControllerEntradas.php';
+include_once '/app/controller/ControllerDireccion.php';
 
 $entradas = new ControllerEntradas();
 $entradas->validarEntrada('index.php');
@@ -62,7 +62,7 @@ $direcciones = $daoDireccion->obtenerTodasDirecciones($_SESSION['id_seguridad'])
                                                 class="btn btn-editar me-3">
                                                 <i class="fa-solid fa-pen-to-square"></i> Editar
                                             </a>
-                                            <a href="../controller/ControllerDireccion.php?action=eliminar&id=<?= $datos['id_direccion'] ?>"
+                                            <a href="/app/controller/ControllerDireccion.php?action=eliminar&id=<?= $datos['id_direccion'] ?>"
                                                 onclick="return confirmar()" class="btn btn-danger">
                                                 <i class="fa-solid fa-trash"></i> Eliminar
                                             </a>
@@ -89,7 +89,7 @@ $direcciones = $daoDireccion->obtenerTodasDirecciones($_SESSION['id_seguridad'])
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="../controller/ControllerDireccion.php?action=modificar" method="post">
+                            <form action="/app/controller/ControllerDireccion.php?action=modificar" method="post">
                                 <input type="hidden" name="txtId" value="<?= $datos['id_direccion'] ?>">
                                 <input type="hidden" name="longitud" id="longitud" value="<?= $datos['longitud'] ?>">
                                 <input type="hidden" name="latitud" id="latitud" value="<?= $datos['latitud'] ?>">
